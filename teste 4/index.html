@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Funcionários</title>
+</head>
+<body>
+    <h1>Cadastro de Funcionários</h1>
+    <form id="cadastroFuncionario">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div>
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" required>
+        </div>
+        <button type="button" onclick="confirmarCadastro()">Confirmar</button>
+    </form>
+    <div id="listaFuncionarios"></div>
+
+    <script>
+        function confirmarCadastro() {
+            const nome = document.getElementById('nome').value;
+            const matricula = document.getElementById('matricula').value;
+
+            fetch('http://localhost:3000/funcionarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nome, matricula })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('listaFuncionarios').innerHTML = '<h2>Lista de Funcionários</h2>' + 
+                    data.map(func => `<p>${func.nome} - Matrícula: ${func.matricula}</p>`).join('');
+            });
+        }
+    </script>
+</body>
+</html>

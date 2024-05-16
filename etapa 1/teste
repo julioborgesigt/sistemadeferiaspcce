@@ -1,0 +1,45 @@
+const XLSX = require('xlsx');
+const readlineSync = require('readline-sync');
+
+// Função para organizar as férias dos funcionários
+function organizarFerias() {
+    const database = [];
+
+    // Pergunta sobre cada funcionário
+    while (true) {
+        const funcionario = {};
+        funcionario.nome = readlineSync.question('Qual é o seu nome? ');
+        funcionario.filho = readlineSync.keyInYNStrict('Você tem filhos em idade escolar? ');
+        funcionario.idade = parseInt(readlineSync.question('Qual é a sua idade em dias? '));
+        funcionario.antiguidade = parseInt(readlineSync.question('Quantos dias faz desde que você entrou na empresa? '));
+        funcionario.ferias = new Date(readlineSync.question('Qual é a data das suas férias? (AAAA-MM-DD) '));
+
+        database.push(funcionario);
+
+        if (!readlineSync.keyInYNStrict('Deseja adicionar outro funcionário? ')) {
+            break;
+        }
+    }
+
+    // Organiza os funcionários com base nas prioridades
+    const funcionariosOrdenados = database.sort((a, b) => {
+        if (a.filho !== b.filho) {
+            return b.filho - a.filho;
+        } else if (a.idade !== b.idade) {
+            return b.idade - a.idade;
+        } else {
+            return b.antiguidade - a.antiguidade;
+        }
+    });
+
+    // Cria uma planilha com os dados dos funcionários
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(funcionariosOrdenados);
+    XLSX.utils.book_append_sheet(wb, ws, 'Funcionários');
+    XLSX.writeFile(wb, 'ferias_funcionarios.xlsx');
+
+    console.log('Planilha gerada com sucesso: ferias_funcionarios.xlsx');
+}
+
+// Executa a função principal
+organizarFerias();

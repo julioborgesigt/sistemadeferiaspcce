@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Cadastro</title>
+</head>
+<body>
+    <h1>Formulário de Informações</h1>
+    <form id="dadosForm">
+        <div>
+            <label for="matricula">Qual sua matrícula?</label>
+            <input type="text" id="matricula" name="matricula">
+        </div>
+        <div>
+            <label for="idade">Qual sua data de nascimento?</label>
+            <input type="date" id="idade" name="idade">
+        </div>
+        <div>
+            <label for="filhos">Você tem filhos em idade escolar?</label>
+            <select id="filhos" name="filhos">
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+            </select>
+        </div>
+        <div>
+            <label for="antiguidade">Qual sua data de ingresso na instituição?</label>
+            <input type="date" id="antiguidade" name="antiguidade">
+        </div>
+        <button type="button" onclick="enviarDados()">Enviar</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        function enviarDados() {
+            const matricula = document.getElementById('matricula').value;
+            const idade = document.getElementById('idade').value;
+            const filhos = document.getElementById('filhos').value;
+            const antiguidade = document.getElementById('antiguidade').value;
+
+            fetch('http://localhost:3000/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ matricula, idade, filhos, antiguidade })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('resultado').innerHTML = data.result.map(d => 
+                    `<p>Matrícula: ${d.matricula}, Idade: ${d.idade}, Filhos: ${d.filhos}, Antiguidade: ${d.antiguidade}`).join('<br>');
+            });
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
