@@ -391,7 +391,6 @@ function exibirListaFinalFerias() {
 }
 
 
-// Exibe os 6 cadastros selecionados para ferias escolar
 function exibirListaFinalFeriasSelecionados() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table class='styled-table'>";
@@ -418,12 +417,24 @@ function exibirListaFinalFeriasSelecionados() {
     
     // Gerar a tabela HTML
     seisPrimeiros.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td><td>${dados.periodo11}</td><td>${dados.periodo12}</td><td>${dados.periodo21}</td><td>${dados.periodo22}</td><td>${dados.periodo31}</td><td>${dados.periodo32}</td></tr>`;
+        html += `<tr>
+            <td data-label="Matrícula">${dados.matricula}</td>
+            <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+            <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+            <td data-label="Idade">${dados.idade}</td>
+            <td data-label="Intenção de Férias P1 (início)">${dados.periodo11}</td>
+            <td data-label="Intenção de Férias P1 (Fim)">${dados.periodo12}</td>
+            <td data-label="Intenção de Férias P2 (início)">${dados.periodo21}</td>
+            <td data-label="Intenção de Férias P2 (Fim)">${dados.periodo22}</td>
+            <td data-label="Intenção de Férias P3 (início)">${dados.periodo31}</td>
+            <td data-label="Intenção de Férias P3 (Fim)">${dados.periodo32}</td>
+        </tr>`;
     });
     
     html += "</tbody></table>";
     document.getElementById("dados2").innerHTML = html;
 }
+
 
 
 // Function to display vacations not chosen for school holiday
