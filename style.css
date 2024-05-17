@@ -221,14 +221,14 @@ tr:nth-child(even) {
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 50%;
+        padding-left: 70%;
     }
 
     td::before {
         content: attr(data-label);
         position: absolute;
         left: 10px;
-        width: calc(50% - 20px);
+        width: calc(70% - 20px);
         padding-right: 10px;
         white-space: nowrap;
         font-weight: bold;
