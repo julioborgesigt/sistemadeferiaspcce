@@ -1,3 +1,4 @@
+/* Reset básico */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -16,24 +17,22 @@ body {
 
 .container {
     width: 90%;
-    max-width: 600px;
-    padding: 10px;
+    max-width: 800px;
+    padding: 20px;
     background: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 20px;
 }
 
-h1 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
+h1, h3 {
     text-align: center;
     color: #007aff;
 }
 
-h2, h3 {
-    font-size: 1.4em;
-    margin-bottom: 10px;
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
     color: #007aff;
 }
 
@@ -75,22 +74,33 @@ button:hover {
     background-color: #005bb5;
 }
 
-/* Estilo para tabelas */
+/* Ajustar tamanho da fonte nas tabelas */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    font-size: 0.9em; /* Ajuste este valor conforme necessário */
 }
 
 th, td {
-    padding: 8px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    font-size: 0.9em; /* Ajuste este valor conforme necessário */
 }
 
 th {
     background-color: #f2f2f2;
+    color: #333;
+    font-size: 0.9em; /* Ajuste este valor conforme necessário */
 }
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+    font-size: 0.9em; /* Ajuste este valor conforme necessário */
+}
+
+
 
 /* Estilo para os cabeçalhos das tabelas */
 h3 {
@@ -221,14 +231,14 @@ tr:nth-child(even) {
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 70%;
+        padding-left: 50%;
     }
 
     td::before {
         content: attr(data-label);
         position: absolute;
         left: 10px;
-        width: calc(70% - 20px);
+        width: calc(50% - 20px);
         padding-right: 10px;
         white-space: nowrap;
         font-weight: bold;
