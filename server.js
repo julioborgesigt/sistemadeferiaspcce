@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs'); // Módulo file system para trabalhar com arquivos
 const path = require('path');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Banco de dados fictício
 //let database = {};
