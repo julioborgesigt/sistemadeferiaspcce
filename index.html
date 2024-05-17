@@ -25,6 +25,8 @@
 <script>   
 // Simula uma base de dados
 let database = {};
+const baseUrl = window.location.origin;
+
 
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim) {
@@ -513,7 +515,7 @@ function carregarBancoDados() {
         });
 }
 
-const baseUrl = window.location.origin;
+
 function salvarBancoDados() {
     // URL para salvar os dados
     //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
