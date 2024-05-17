@@ -398,10 +398,7 @@ function exibirListaFinalFeriasSelecionados() {
     html += "<tbody>";
 
     // Simulação de dados para teste, substitua isto com seus dados reais
-    let database = {
-        1: { matricula: "12345678", numeroDePeriodos: 2, pontuacaoferiasescolar: 10, idade: 30, periodo11: "01/01/2024", periodo12: "15/01/2024", periodo21: "01/07/2024", periodo22: "15/07/2024", periodo31: "", periodo32: "" },
-        2: { matricula: "87654321", numeroDePeriodos: 1, pontuacaoferiasescolar: 8, idade: 40, periodo11: "01/12/2024", periodo12: "15/12/2024", periodo21: "", periodo22: "", periodo31: "", periodo32: "" }
-    };
+    
 
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -639,7 +636,12 @@ function salvarBancoDados() {
             <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
         </div>
 
-        <div id="dados2"></div>
+        <div class="container">
+            <h1>Cadastro e Consulta de Férias</h1>
+            <!-- Seu formulário e outros conteúdos aqui -->
+            <div id="dados2"></div>
+            <button onclick="exibirListaFinalFeriasSelecionados()">Exibir Lista Final de Férias Escolar</button>
+        </div>
     </div>
 </body>
 </html>
