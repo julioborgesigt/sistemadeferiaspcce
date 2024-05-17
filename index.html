@@ -27,10 +27,14 @@
     });
 </script>
 
+
+
+
 <script>   
 // Simula uma base de dados
 let database = {};
 const baseUrl = window.location.origin;
+
 
 
 // Função para verificar conflitos de datas
@@ -376,14 +380,14 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
 function exibirListaFinalFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Qtd Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th><th>intenção de férias P1(início)</th><th>intenção de férias P1(Fim)</th><th>intenção de férias P2(início)</th><th>intenção de férias P2(Fim)</th><th>intenção de férias P3(início)</th><th>intenção de férias P3(Fim)</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Qtd Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
     
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td><td>${dados.periodo11}</td><td>${dados.periodo12}</td><td>${dados.periodo21}</td><td>${dados.periodo22}</td><td>${dados.periodo31}</td><td>${dados.periodo32}</td></tr>`;
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
     });
     
     html += "</table>";
@@ -391,15 +395,13 @@ function exibirListaFinalFerias() {
 }
 
 
+
+// Exibe os 6 cadastros selecionados para ferias escolar
 function exibirListaFinalFeriasSelecionados() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
-    html += "<table class='styled-table'>";
-    html += "<thead><tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Idade (desempate)</th><th>Intenção de Férias P1 (início)</th><th>Intenção de Férias P1 (Fim)</th><th>Intenção de Férias P2 (início)</th><th>Intenção de Férias P2 (Fim)</th><th>Intenção de Férias P3 (início)</th><th>Intenção de Férias P3 (Fim)</th></tr></thead>";
-    html += "<tbody>";
-
-    // Simulação de dados para teste, substitua isto com seus dados reais
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Idade(desempate)</th></tr>";
     
-
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
     
@@ -420,21 +422,10 @@ function exibirListaFinalFeriasSelecionados() {
     
     // Gerar a tabela HTML
     seisPrimeiros.forEach(dados => {
-        html += `<tr>
-            <td data-label="Matrícula">${dados.matricula}</td>
-            <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-            <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-            <td data-label="Idade">${dados.idade}</td>
-            <td data-label="Intenção de Férias P1 (início)">${dados.periodo11}</td>
-            <td data-label="Intenção de Férias P1 (Fim)">${dados.periodo12}</td>
-            <td data-label="Intenção de Férias P2 (início)">${dados.periodo21}</td>
-            <td data-label="Intenção de Férias P2 (Fim)">${dados.periodo22}</td>
-            <td data-label="Intenção de Férias P3 (início)">${dados.periodo31}</td>
-            <td data-label="Intenção de Férias P3 (Fim)">${dados.periodo32}</td>
-        </tr>`;
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
     });
     
-    html += "</tbody></table>";
+    html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
 
@@ -445,7 +436,7 @@ function exibirListaFinalFeriasSelecionados() {
 function exibirListaFinalFeriasNaoEscolar() {
     let html = "<h3>Lista Final de Férias Não Escolar em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Qtd Antiguidade</th><th>Pontuação Férias Nao Escolar(desempate)</th><th>intenção de férias P1(início)</th><th>intenção de férias P1(Fim)</th><th>intenção de férias P2(início)</th><th>intenção de férias P2(Fim)</th><th>intenção de férias P3(início)</th><th>intenção de férias P3(Fim)</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Qtd Antiguidade</th><th>Pontuação Férias Nao Escolar(desempate)</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -480,7 +471,7 @@ function exibirListaFinalFeriasNaoEscolar() {
     
     // Gerar a tabela HTML
     naoEscolhidos.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td><td>${dados.periodo11}</td><td>${dados.periodo12}</td><td>${dados.periodo21}</td><td>${dados.periodo22}</td><td>${dados.periodo31}</td><td>${dados.periodo32}</td></tr>`;
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
     });
     
     html += "</table>";
@@ -636,12 +627,12 @@ function salvarBancoDados() {
             <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
         </div>
 
-        <div class="container">
-            <h1>Cadastro e Consulta de Férias</h1>
-            <!-- Seu formulário e outros conteúdos aqui -->
-            <div id="dados2"></div>
-            <button onclick="exibirListaFinalFeriasSelecionados()">Exibir Lista Final de Férias Escolar</button>
+        <div id="dados2">
+
+            
         </div>
+
+        
     </div>
 </body>
 </html>

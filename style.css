@@ -75,50 +75,58 @@ button:hover {
     background-color: #005bb5;
 }
 
-.styled-table {
+
+/* Estilo para tabelas */
+table {
     width: 100%;
     border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 1em;
-    font-family: sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
 }
 
-.styled-table thead {
-    display: none;
-}
-
-.styled-table, .styled-table tbody, .styled-table tr, .styled-table td {
-    display: block;
-    width: 100%;
-}
-
-.styled-table tr {
-    margin-bottom: 15px;
-}
-
-.styled-table td {
+th, td {
+    padding: 8px;
     text-align: left;
-    padding: 12px 15px;
-    position: relative;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+th {
+    background-color: #f2f2f2;
 }
 
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #007aff;
+/* Estilo para os cabeçalhos das tabelas */
+h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-.styled-table td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    width: 100%;
+/* Estilo para a seção de dados */
+#dados2 {
+    margin-top: 20px;
+}
+
+/* Estilo específico para a tabela vertical */
+.vertical-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-table .table-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.vertical-table .table-row:last-child {
+    margin-bottom: 0;
+}
+
+.vertical-table .table-cell {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.vertical-table .table-cell strong {
     display: block;
-    color: #007aff;
     margin-bottom: 5px;
+    color: #333;
 }
