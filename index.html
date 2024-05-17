@@ -379,6 +379,40 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
 }
 
 
+// Consulta pelo número da matricula
+function exibirDados() {
+    let matricula = document.getElementById("matriculaConsulta").value;
+    let dados = database[matricula];
+    if (dados) {
+        let html = `<table border="1">
+            <tr><th>Matrícula</th><td>${dados.matricula}</td></tr>
+            <tr><th>Qtd Períodos</th><td>${dados.numeroDePeriodos}</td></tr>
+            <tr><th>Férias Escolar</th><td>${dados.feriasescolarounao}</td></tr>
+            <tr><th>Pontuação Férias Escolar</th><td>${dados.pontuacaoferiasescolar || 'não'}</td></tr>
+            <tr><th>Pontuação Férias Nao Escolar(desempate)</th><td>${dados.pontuacaoferiasNaoescolar || 'não'}</td></tr>
+            <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
+            
+        // Verificar se os períodos de férias estão definidos
+        if (dados.periodo11) {
+            html += `<tr><th>intenção de férias P1(início)</th><td>${dados.periodo11}</td></tr>`;
+            html += `<tr><th>intenção de férias P1(Fim)</th><td>${dados.periodo12}</td></tr>`;
+        }
+        if (dados.periodo21) {
+            html += `<tr><th>intenção de férias P2(início)</th><td>${dados.periodo21}</td></tr>`;
+            html += `<tr><th>intenção de férias P2(Fim)</th><td>${dados.periodo22}</td></tr>`;
+        }
+        if (dados.periodo31) {
+            html += `<tr><th>intenção de férias P3(início)</th><td>${dados.periodo31}</td></tr>`;
+            html += `<tr><th>intenção de férias P3(Fim)</th><td>${dados.periodo32}</td></tr>`;
+        }
+
+        html += `</table>`;
+        document.getElementById("dados2").innerHTML = html;
+    } else {
+        alert("Dados inexistentes.");
+    }
+}
+
 // Exibe todos os cadastros
 function exibirListaFinalFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros</h3>";
@@ -501,7 +535,7 @@ function exibirListaFinalFeriasNaoEscolar() {
                 <td data-label="Idade">${dados.idade}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
                 <td data-label="Antiguidade">${dados.antiguidade}</td>
-                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 
             </tr>`;
     });
@@ -514,6 +548,9 @@ function exibirListaFinalFeriasNaoEscolar() {
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
+
+
+
 
 function calcularIdade(dataNascimento) {
     let [dia, mes, ano] = dataNascimento.split('/').map(Number);
@@ -533,6 +570,8 @@ function calcularAntiguidade(dataIngresso) {
     let hoje = new Date();
     return Math.floor((hoje - ingresso) / (1000 * 60 * 60 * 24));
 }
+
+
 
 
 carregarBancoDados(); //função correta para carregar o banco de dados
