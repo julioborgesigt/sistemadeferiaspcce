@@ -433,10 +433,21 @@ function exibirListaFinalFeriasSelecionados() {
     let seisPrimeiros = selecionados.slice(0, 6);
     
     // Gerar a tabela HTML
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Idade">${dados.idade}</td>
+              
+            </tr>`;
+    });
+/*
     seisPrimeiros.forEach(dados => {
         html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
     });
-    
+    */
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
@@ -481,10 +492,24 @@ function exibirListaFinalFeriasNaoEscolar() {
         return b.idade - a.idade;
     });
     
-    // Gerar a tabela HTML
-    naoEscolhidos.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
+
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+                <td data-label="Idade">${dados.idade}</td>
+                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
+                <td data-label="Antiguidade">${dados.antiguidade}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                
+            </tr>`;
     });
+
+    // Gerar a tabela HTML
+    /*naoEscolhidos.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
+    });*/
     
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
