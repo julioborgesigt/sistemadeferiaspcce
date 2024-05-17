@@ -488,6 +488,7 @@ carregarBancoDados(); //função correta para carregar o banco de dados
 function carregarBancoDados() {
     // URL do arquivo remoto
     //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    const PORT = process.env.PORT || 3000;
     const url = `${PORT}/banco_dados.json`;
 
     // Faz uma requisição GET para obter o arquivo JSON
@@ -516,6 +517,7 @@ function carregarBancoDados() {
 function salvarBancoDados() {
     // URL para salvar os dados
     //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    const PORT = process.env.PORT || 3000;
     const url = `${PORT}/banco_dados.json`;
 
     // Realiza uma requisição POST para enviar os dados atualizados para o servidor
