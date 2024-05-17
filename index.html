@@ -385,25 +385,25 @@ function exibirDados() {
     let dados = database[matricula];
     if (dados) {
         let html = `<table border="1">
-            <tr><th>Matrícula</th><td>${dados.matricula}</td></tr>
-            <tr><th>Qtd Períodos</th><td>${dados.numeroDePeriodos}</td></tr>
-            <tr><th>Férias Escolar</th><td>${dados.feriasescolarounao}</td></tr>
-            <tr><th>Pontuação Férias Escolar</th><td>${dados.pontuacaoferiasescolar || 'não'}</td></tr>
-            <tr><th>Pontuação Férias Nao Escolar(desempate)</th><td>${dados.pontuacaoferiasNaoescolar || 'não'}</td></tr>
-            <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
+            <tr><th>Matrícula</th><td data-label="Matrícula">${dados.matricula}</td></tr>
+            <tr><th>Qtd Períodos</th><td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td></tr>
+            <tr><th>Férias Escolar</th><td data-label="Férias Escolar">${dados.feriasescolarounao}</td></tr>
+            <tr><th>Pontuação Férias Escolar</th><td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 'não'}</td></tr>
+            <tr><th>Pontuação Férias Nao Escolar(desempate)</th><td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 'não'}</td></tr>
+            <tr><th>Idade</th><td data-label="Idade">${dados.idade}</td></tr>`;
             
         // Verificar se os períodos de férias estão definidos
         if (dados.periodo11) {
-            html += `<tr><th>intenção de férias P1(início)</th><td>${dados.periodo11}</td></tr>`;
-            html += `<tr><th>intenção de férias P1(Fim)</th><td>${dados.periodo12}</td></tr>`;
+            html += `<tr><th>Intenção de Férias P1 (Início)</th><td data-label="Intenção de Férias P1 (Início)">${dados.periodo11}</td></tr>`;
+            html += `<tr><th>Intenção de Férias P1 (Fim)</th><td data-label="Intenção de Férias P1 (Fim)">${dados.periodo12}</td></tr>`;
         }
         if (dados.periodo21) {
-            html += `<tr><th>intenção de férias P2(início)</th><td>${dados.periodo21}</td></tr>`;
-            html += `<tr><th>intenção de férias P2(Fim)</th><td>${dados.periodo22}</td></tr>`;
+            html += `<tr><th>Intenção de Férias P2 (Início)</th><td data-label="Intenção de Férias P2 (Início)">${dados.periodo21}</td></tr>`;
+            html += `<tr><th>Intenção de Férias P2 (Fim)</th><td data-label="Intenção de Férias P2 (Fim)">${dados.periodo22}</td></tr>`;
         }
         if (dados.periodo31) {
-            html += `<tr><th>intenção de férias P3(início)</th><td>${dados.periodo31}</td></tr>`;
-            html += `<tr><th>intenção de férias P3(Fim)</th><td>${dados.periodo32}</td></tr>`;
+            html += `<tr><th>Intenção de Férias P3 (Início)</th><td data-label="Intenção de Férias P3 (Início)">${dados.periodo31}</td></tr>`;
+            html += `<tr><th>Intenção de Férias P3 (Fim)</th><td data-label="Intenção de Férias P3 (Fim)">${dados.periodo32}</td></tr>`;
         }
 
         html += `</table>`;
@@ -412,6 +412,7 @@ function exibirDados() {
         alert("Dados inexistentes.");
     }
 }
+
 
 // Exibe todos os cadastros
 function exibirListaFinalFerias() {
