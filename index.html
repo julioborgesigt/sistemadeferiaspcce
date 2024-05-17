@@ -390,7 +390,16 @@ function exibirListaFinalFerias() {
     
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+                <td data-label="Idade">${dados.idade}</td>
+                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
+                <td data-label="Antiguidade">${dados.antiguidade}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+            </tr>`;
     });
     
     html += "</table>";
