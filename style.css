@@ -31,7 +31,7 @@ h1 {
     color: #007aff;
 }
 
-h2 {
+h2, h3 {
     font-size: 1.4em;
     margin-bottom: 10px;
     color: #007aff;
@@ -75,19 +75,50 @@ button:hover {
     background-color: #005bb5;
 }
 
-@media (max-width: 600px) {
-    .container {
-        width: 100%;
-        margin: 10px;
-    }
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 
-    h1, h2 {
-        font-size: 1.5em;
-    }
+.styled-table thead {
+    display: none;
+}
 
-    input[type="text"],
-    input[type="checkbox"],
-    button {
-        font-size: 1em;
-    }
+.styled-table, .styled-table tbody, .styled-table tr, .styled-table td {
+    display: block;
+    width: 100%;
+}
+
+.styled-table tr {
+    margin-bottom: 15px;
+}
+
+.styled-table td {
+    text-align: left;
+    padding: 12px 15px;
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #007aff;
+}
+
+.styled-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 100%;
+    display: block;
+    color: #007aff;
+    margin-bottom: 5px;
 }

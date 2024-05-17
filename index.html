@@ -394,8 +394,9 @@ function exibirListaFinalFerias() {
 // Exibe os 6 cadastros selecionados para ferias escolar
 function exibirListaFinalFeriasSelecionados() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
-    html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Idade(desempate)</th><th>intenção de férias P1(início)</th><th>intenção de férias P1(Fim)</th><th>intenção de férias P2(início)</th><th>intenção de férias P2(Fim)</th><th>intenção de férias P3(início)</th><th>intenção de férias P3(Fim)</th></tr>";
+    html += "<table class='styled-table'>";
+    html += "<thead><tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Idade (desempate)</th><th>Intenção de Férias P1 (início)</th><th>Intenção de Férias P1 (Fim)</th><th>Intenção de Férias P2 (início)</th><th>Intenção de Férias P2 (Fim)</th><th>Intenção de Férias P3 (início)</th><th>Intenção de Férias P3 (Fim)</th></tr></thead>";
+    html += "<tbody>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -420,9 +421,10 @@ function exibirListaFinalFeriasSelecionados() {
         html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td><td>${dados.periodo11}</td><td>${dados.periodo12}</td><td>${dados.periodo21}</td><td>${dados.periodo22}</td><td>${dados.periodo31}</td><td>${dados.periodo32}</td></tr>`;
     });
     
-    html += "</table>";
+    html += "</tbody></table>";
     document.getElementById("dados2").innerHTML = html;
 }
+
 
 // Function to display vacations not chosen for school holiday
 function exibirListaFinalFeriasNaoEscolar() {
