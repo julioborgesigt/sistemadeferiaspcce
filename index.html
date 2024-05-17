@@ -2,7 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cadastro de Férias</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro e Consulta de Férias</title>
+<link rel="stylesheet" href="style.css">
+
+
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -546,86 +551,78 @@ function salvarBancoDados() {
 
 
 </script>
-</head>
+
 <body>
-    <div style="text-align:center">
-    <h1>Cadastro e Consulta de Férias ok</h1>
-    </div>
-     
-    
-     
-    <!-- <input type="file" id="inputFile" accept=".json" onchange="carregarBancoDados(event)"> -->
-    <!-- <button onclick="carregarBancoDados()">Carregar Arquivo JSON Remoto</button> -->
-    
-    
-    <div>
-        <h2>Cadastre-se abaixo:</h2>
-        <form id="cadastroForm">
-    
-            <label for="matriculaCadastro">Matrícula:</label>
-            <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)"><br><br>
-    
-            <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
-            <input type="text" id="dataIngresso" name="dataIngresso"><br><br>
-    
-            <label for="paquisitivoinicio">Início do seu período aquisitivo (formato DD/MM/AAAA):</label>
-            <input type="text" id="paquisitivoinicio" name="paquisitivoinicio"><br><br>
-    
-            <label for="paquisitivofim">Fim do seu período aquisitivo (formato DD/MM/AAAA):</label>
-            <input type="text" id="paquisitivofim" name="paquisitivofim"><br><br>
-    
-            <label for="seraferiasEscolar">Algum dos períodos será em dezembro, janeiro ou julho? Marque caso sim</label>
-            <input type="checkbox" id="seraferiasEscolar" name="seraferiasEscolar"><br><br>
-            
-            <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
-            <input type="text" id="qtdperiodos" name="qtdperiodos"><br><br>
-    
-            <label for="dataNascimento">Qual sua data de nacimento? (formato DD/MM/AAAA)</label>
-            <input type="text" id="dataNascimento" name="dataNascimento"><br><br>
-    
-            <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possuia, deixar em branco</label>
-            <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores"><br><br>
-    
-            <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
-            <input type="text" id="periodo11" name="periodo11"><br><br>
-    
-            <label for="periodo12">Qual o fim do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
-            <input type="text" id="periodo12" name="periodo12"><br><br>
-    
-            <label for="periodo11">Qual o início do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
-            <input type="text" id="periodo21" name="periodo21"><br><br>
-    
-            <label for="periodo12">Qual o fim do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
-            <input type="text" id="periodo22" name="periodo22"><br><br>
-    
-            <label for="periodo11">Qual o início do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
-            <input type="text" id="periodo31" name="periodo31"><br><br>
-    
-            <label for="periodo12">Qual o fim do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
-            <input type="text" id="periodo32" name="periodo32"><br><br>
-    
+    <div class="container">
+        <h1>Cadastro e Consulta de Férias</h1>
         
-            <button type="button" onclick="cadastroInicial()">Cadastrar</button>
-        </form>
+        <div class="form-container">
+            <h2>Cadastre-se abaixo:</h2>
+            <form id="cadastroForm">
+
+                <label for="matriculaCadastro">Matrícula:</label>
+                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)">
+
+                <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
+                <input type="text" id="dataIngresso" name="dataIngresso">
+
+                <label for="paquisitivoinicio">Início do seu período aquisitivo (formato DD/MM/AAAA):</label>
+                <input type="text" id="paquisitivoinicio" name="paquisitivoinicio">
+
+                <label for="paquisitivofim">Fim do seu período aquisitivo (formato DD/MM/AAAA):</label>
+                <input type="text" id="paquisitivofim" name="paquisitivofim">
+
+                <label for="seraferiasEscolar">
+                    <input type="checkbox" id="seraferiasEscolar" name="seraferiasEscolar">
+                    Algum dos períodos será em dezembro, janeiro ou julho? Marque caso sim
+                </label>
+
+                <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
+                <input type="text" id="qtdperiodos" name="qtdperiodos">
+
+                <label for="dataNascimento">Qual sua data de nacimento? (formato DD/MM/AAAA)</label>
+                <input type="text" id="dataNascimento" name="dataNascimento">
+
+                <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possua, deixar em branco</label>
+                <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">
+
+                <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
+                <input type="text" id="periodo11" name="periodo11">
+
+                <label for="periodo12">Qual o fim do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
+                <input type="text" id="periodo12" name="periodo12">
+
+                <label for="periodo21">Qual o início do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
+                <input type="text" id="periodo21" name="periodo21">
+
+                <label for="periodo22">Qual o fim do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
+                <input type="text" id="periodo22" name="periodo22">
+
+                <label for="periodo31">Qual o início do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
+                <input type="text" id="periodo31" name="periodo31">
+
+                <label for="periodo32">Qual o fim do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
+                <input type="text" id="periodo32" name="periodo32">
+
+                <button type="button" onclick="cadastroInicial()">Cadastrar</button>
+            </form>
+        </div>
+
+        <div id="dados"></div>
+
+        <div class="consulta-container">
+            <h2>Consultas</h2>
+            <input type="text" id="matriculaConsulta" placeholder="Matrícula">
+            <button onclick="exibirDados()">Consulta por matrícula</button>  
+            <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
+            <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para férias escolar</button>
+            <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
+        </div>
+
+        <div id="dados2"></div>
     </div>
+</body>
+</html>
+
     
-    <div id="dados">
-    </div>
-    
-    
-    <div>
-        <h2>Consultas</h2>
-        <input type="text" id="matriculaConsulta" placeholder="Matrícula">
-        <button onclick="exibirDados()">Consulta por matrícula</button>  
-        <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
-        <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para ferias escolar</button>
-        <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de ferias não escolar</button>
-    
-    </div>
-    
-    
-    <div id="dados2">
-    </div>
-    </body>
-    </html>
     
