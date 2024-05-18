@@ -177,22 +177,6 @@ function cadastroInicial() {
         antiguidade: calcularAntiguidade(dataIngresso),
     };
 
-    const novosDados = {
-        //matricula: matricula,
-        numeroDePeriodos: qtdperiodos,
-        feriasescolarounao: seraferiasEscolar,
-        idade: calcularIdade(dataNascimento),
-        qtdfilhosmenores: qtdfilhosmenores,
-        periodo11: periodo11,
-        periodo12: periodo12,
-        periodo21: periodo21,
-        periodo22: periodo22,
-        periodo31: periodo31,
-        periodo32: periodo32,
-        antiguidade: calcularAntiguidade(dataIngresso),
-    };
-
-
     if (seraferiasEscolar === 1) {
         feriasEscolar(matricula, qtdperiodos);
     } else {
@@ -323,7 +307,7 @@ function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
 
     database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
     
-    salvarBancoDados(novosDados); // Salvar o banco de dados após calcular a pontuação
+    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
    
     alert("Cadastro concluído.");
     console.log(database[matricula]);
@@ -400,7 +384,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
     
-    salvarBancoDados(novosDados); // Salvar o banco de dados após calcular a pontuação
+    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
   
      alert("Cadastro concluído.");
     console.log(database[matricula]);
@@ -607,63 +591,60 @@ function calcularAntiguidade(dataIngresso) {
 
 carregarBancoDados(); //função correta para carregar o banco de dados
 
-
-
 function carregarBancoDados() {
+    // URL do arquivo remoto
+    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    //const PORT = process.env.PORT || 3000;
     const url = `${baseUrl}/banco_dados.json`;
 
+    // Faz uma requisição GET para obter o arquivo JSON
     fetch(url)
         .then(response => {
+            // Verifica se a resposta da requisição foi bem-sucedida
             if (!response.ok) {
                 throw new Error('Erro ao carregar o arquivo.');
             }
-            return response.json();
+            // Retorna o conteúdo do arquivo JSON como texto
+            return response.text();
         })
         .then(jsonData => {
-            database = jsonData;
+            // Converte o JSON de volta para o objeto database
+            database = JSON.parse(jsonData);
             console.log("Banco de dados carregado:", database);
+            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
         })
         .catch(error => {
+            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
             console.error('Erro:', error);
         });
 }
 
 
-
-function salvarBancoDados(novosDados) {
+function salvarBancoDados() {
+    // URL para salvar os dados
+    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    //const PORT = process.env.PORT || 3000;
     const url = `${baseUrl}/banco_dados.json`;
 
-    // Carregar os dados existentes antes de salvar
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            // Atualiza o banco de dados com os novos dados
-            Object.assign(database, jsonData);
-            database.users.push(novosDados); // Supondo que os dados de usuários estejam em uma array chamada 'users'
-            
-            // Envia os dados atualizados para o servidor
-            return fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(database),
-            });
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao salvar os dados.');
-            }
-            alert("Dados salvos com sucesso!");
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
+    // Realiza uma requisição POST para enviar os dados atualizados para o servidor
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(database),
+    })
+    .then(response => {
+        // Verifica se a resposta da requisição foi bem-sucedida
+        if (!response.ok) {
+            throw new Error('Erro ao salvar os dados.');
+        }
+        alert("Dados salvos com sucesso!");
+    })
+    .catch(error => {
+        // Trata qualquer erro que ocorrer durante o salvamento dos dados
+        console.error('Erro:', error);
+    });
 }
 
 
