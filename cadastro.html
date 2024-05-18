@@ -81,19 +81,12 @@ function verificarConflito(dataInicio, dataFim) {
 }
 
 function cadastroInicial() {
-
-    
-
-
-
-
     const matricula = document.getElementById("matriculaCadastro").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
     const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
     const paquisitivofim = document.getElementById("paquisitivofim").value;
     const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
     const qtdperiodos = parseInt(document.getElementById("qtdperiodos").value, 10);
-    let numeroDePeriodos = parseInt(qtdperiodos, 10);
     const dataNascimento = document.getElementById("dataNascimento").value;
     const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
 
@@ -124,28 +117,19 @@ function cadastroInicial() {
     let diferenca3 = dataInicio3 ? Math.abs(dataFim3 - dataInicio3) : null;
 
     // Converta a diferença para dias
-    let diferencaEmDias1 = diferenca1 ? diferenca1/ (1000 * 60 * 60 * 24) : null;
+    let diferencaEmDias1 = diferenca1 / (1000 * 60 * 60 * 24);
     let diferencaEmDias2 = diferenca2 ? diferenca2 / (1000 * 60 * 60 * 24) : null;
     let diferencaEmDias3 = diferenca3 ? diferenca3 / (1000 * 60 * 60 * 24) : null;
 
-    console.log('a diferença em  dias 1 é:');
-    console.log(diferencaEmDias1);
-    
-    console.log('a diferença em  dias 2 é:');
-    console.log(diferencaEmDias2);
-    
-    console.log('a diferença em  dias 3 é:');
-    console.log(diferencaEmDias3    );
-
-    if ( diferencaEmDias1 !== 29 && qtdperiodos == 1 ) {
+    if (diferencaEmDias1 !== 29 && qtdperiodos == 1) {
         alert("O intervalo entre as datas de início e fim do período 1 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 2 && diferencaEmDias2 === null  && (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14)  && qtdperiodos < 3 ) {
+    if (qtdperiodos === 2 && (diferencaEmDias2 === null || (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14))) {
         alert("O intervalo entre as datas de início e fim do período 1 e 2 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN)  && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
+    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null) && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
         alert("O intervalo entre as datas de início e fim do período 1, 2 e 3 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
@@ -167,8 +151,7 @@ function cadastroInicial() {
         return;
     }
 
-    // Salvar os dados no banco de dados
-    database[matricula] = {
+    const novosDados = {
         matricula: matricula,
         numeroDePeriodos: qtdperiodos,
         feriasescolarounao: seraferiasEscolar,
@@ -182,38 +165,21 @@ function cadastroInicial() {
         periodo32: periodo32,
         antiguidade: calcularAntiguidade(dataIngresso),
     };
-    
-    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    const novosDados = {
-        //matricula: matricula,
-        numeroDePeriodos: qtdperiodos,
-        feriasescolarounao: seraferiasEscolar,
-        idade: calcularIdade(dataNascimento),
-        qtdfilhosmenores: qtdfilhosmenores,
-        periodo11: periodo11,
-        periodo12: periodo12,
-        periodo21: periodo21,
-        periodo22: periodo22,
-        periodo31: periodo31,
-        periodo32: periodo32,
-        antiguidade: calcularAntiguidade(dataIngresso),
-    };
 
+    // Carregar e salvar dados no banco de dados
+    carregarBancoDados().then(() => {
+        if (seraferiasEscolar === 1) {
+            feriasEscolar(matricula, qtdperiodos, novosDados);
+        } else {
+            feriasNaoEscolar(matricula, qtdperiodos, novosDados);
+        }
 
-        });
-
-    if (seraferiasEscolar === 1) {
-        feriasEscolar(matricula, qtdperiodos), novosDados;
-    } else {
-        feriasNaoEscolar(matricula, qtdperiodos, novosDados);
-    }
-
-
-
-    
+        salvarBancoDados(novosDados);
+    }).catch(error => {
+        console.error('Erro ao carregar e salvar os dados:', error);
+    });
 }
+
 
 
 let alertaExibido = false;
