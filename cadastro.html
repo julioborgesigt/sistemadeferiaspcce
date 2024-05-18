@@ -182,6 +182,7 @@ function cadastroInicial() {
 
 
 
+
 let alertaExibido = false;
 
 function validarMatricula(input) {
@@ -591,10 +592,12 @@ carregarBancoDados(); //função correta para carregar o banco de dados
 
 
 
+
+
 function carregarBancoDados() {
     const url = `${baseUrl}/banco_dados.json`;
 
-    fetch(url)
+    return fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao carregar o arquivo.');
@@ -607,46 +610,40 @@ function carregarBancoDados() {
         })
         .catch(error => {
             console.error('Erro:', error);
+            throw error;
         });
 }
+
 
 
 
 function salvarBancoDados(novosDados) {
     const url = `${baseUrl}/banco_dados.json`;
 
-    // Carregar os dados existentes antes de salvar
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            // Atualiza o banco de dados com os novos dados
-            Object.assign(database, jsonData);
-            database.users.push(novosDados); // Supondo que os dados de usuários estejam em uma array chamada 'users'
-            
-            // Envia os dados atualizados para o servidor
-            return fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(database),
-            });
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao salvar os dados.');
-            }
-            alert("Dados salvos com sucesso!");
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
+    // Atualiza o banco de dados com os novos dados
+    database.users = database.users || []; // Garante que a propriedade users exista
+    database.users.push(novosDados); // Adiciona os novos dados
+
+    // Envia os dados atualizados para o servidor
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(database),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao salvar os dados.');
+        }
+        alert("Dados salvos com sucesso!");
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        throw error;
+    });
 }
+
 
 
 
