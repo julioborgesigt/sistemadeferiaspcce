@@ -376,3 +376,33 @@ body.dark-mode .login-container h2 {
         font-size: 1.5em;
     }
 }
+/* Estilo para a imagem de fundo da página de login */
+.login-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('path/to/your/background-image.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Mantém a imagem de fundo atrás do conteúdo */
+}
+
+.login-container {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+/* Estilo para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        margin: 10px auto;
+    }
+}
