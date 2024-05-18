@@ -60,14 +60,52 @@
         });
 
         function salvarBancoDados(novosDados) {
-            // Lógica para salvar os dados no banco de dados
-            // ...
-        }
+const url = `${baseUrl}/banco_dados.json`;
+
+// Carregar os dados existentes antes de salvar
+fetch(url)
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao carregar o arquivo.');
+    }
+    return response.json();
+})
+.then(jsonData => {
+    // Atualiza o banco de dados com os novos dados
+    Object.assign(database, jsonData);
+    database.users.push(novosDados); // Supondo que os dados de usuários estejam em uma array chamada 'users'
+    
+    // Envia os dados atualizados para o servidor
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(database),
+    });
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao salvar os dados.');
+    }
+    alert("Dados salvos com sucesso!");
+})
+.catch(error => {
+    console.error('Erro:', error);
+});
+}
 
         function login() {
-            // Lógica para o login
-            // ...
-        }
+    const matricula = document.getElementById('loginMatricula').value;
+    const senha = document.getElementById('loginSenha').value;
+
+    if (database[matricula] && database[matricula].senha === senha) {
+        alert("Login bem-sucedido!");
+        window.location.href = 'cadastro.html';
+    } else {
+        alert("Matrícula ou senha incorreta.");
+    }
+}
     </script>
 </body>
 </html>
