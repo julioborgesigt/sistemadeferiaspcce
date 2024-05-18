@@ -196,9 +196,9 @@ function cadastroInicial() {
     };
 
     if (seraferiasEscolar === 1) {
-        feriasEscolar(matricula, qtdperiodos);
+        feriasEscolar(matricula, qtdperiodos), novosDados;
     } else {
-        feriasNaoEscolar(matricula, qtdperiodos);
+        feriasNaoEscolar(matricula, qtdperiodos, novosDados);
     }
 
 
@@ -265,7 +265,7 @@ function calcularIdade(dataNascimento) {
     return diferencaAnos;
 }
 
-function feriasEscolar(matricula, numeroDePeriodos) {
+function feriasEscolar(matricula, numeroDePeriodos, novosDados) {
 
      // Cria um formulário para a opção de possuir filho em idade escolar
      let formulario = `
@@ -309,7 +309,7 @@ function feriasEscolar(matricula, numeroDePeriodos) {
 }
 
 
-function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
+function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos, novosDados) {
     // Obtém o valor selecionado pelo usuário
     let possuiFilho = document.querySelector('input[name="possuiFilho"]:checked').value;
     let ecasadoComPofessor = document.querySelector('input[name="ecasadoComPofessor"]:checked').value;
