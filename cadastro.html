@@ -87,6 +87,7 @@ function cadastroInicial() {
     const paquisitivofim = document.getElementById("paquisitivofim").value;
     const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
     const qtdperiodos = parseInt(document.getElementById("qtdperiodos").value, 10);
+    let numeroDePeriodos = parseInt(qtdperiodos, 10);
     const dataNascimento = document.getElementById("dataNascimento").value;
     const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
 
@@ -117,19 +118,28 @@ function cadastroInicial() {
     let diferenca3 = dataInicio3 ? Math.abs(dataFim3 - dataInicio3) : null;
 
     // Converta a diferença para dias
-    let diferencaEmDias1 = diferenca1 / (1000 * 60 * 60 * 24);
+    let diferencaEmDias1 = diferenca1 ? diferenca1/ (1000 * 60 * 60 * 24) : null;
     let diferencaEmDias2 = diferenca2 ? diferenca2 / (1000 * 60 * 60 * 24) : null;
     let diferencaEmDias3 = diferenca3 ? diferenca3 / (1000 * 60 * 60 * 24) : null;
 
-    if (diferencaEmDias1 !== 29 && qtdperiodos == 1) {
+    console.log('a diferença em  dias 1 é:');
+    console.log(diferencaEmDias1);
+    
+    console.log('a diferença em  dias 2 é:');
+    console.log(diferencaEmDias2);
+    
+    console.log('a diferença em  dias 3 é:');
+    console.log(diferencaEmDias3    );
+
+    if ( diferencaEmDias1 !== 29 && qtdperiodos == 1 ) {
         alert("O intervalo entre as datas de início e fim do período 1 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 2 && (diferencaEmDias2 === null || (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14))) {
+    if (qtdperiodos === 2 && diferencaEmDias2 === null  && (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14)  && qtdperiodos < 3 ) {
         alert("O intervalo entre as datas de início e fim do período 1 e 2 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null) && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
+    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN)  && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
         alert("O intervalo entre as datas de início e fim do período 1, 2 e 3 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
@@ -151,7 +161,8 @@ function cadastroInicial() {
         return;
     }
 
-    const novosDados = {
+    // Salvar os dados no banco de dados
+    database[matricula] = {
         matricula: matricula,
         numeroDePeriodos: qtdperiodos,
         feriasescolarounao: seraferiasEscolar,
@@ -166,22 +177,12 @@ function cadastroInicial() {
         antiguidade: calcularAntiguidade(dataIngresso),
     };
 
-    // Carregar e salvar dados no banco de dados
-    carregarBancoDados().then(() => {
-        if (seraferiasEscolar === 1) {
-            feriasEscolar(matricula, qtdperiodos, novosDados);
-        } else {
-            feriasNaoEscolar(matricula, qtdperiodos, novosDados);
-        }
-
-        salvarBancoDados(novosDados);
-    }).catch(error => {
-        console.error('Erro ao carregar e salvar os dados:', error);
-    });
+    if (seraferiasEscolar === 1) {
+        feriasEscolar(matricula, qtdperiodos);
+    } else {
+        feriasNaoEscolar(matricula, qtdperiodos);
+    }
 }
-
-
-
 
 let alertaExibido = false;
 
@@ -240,7 +241,7 @@ function calcularIdade(dataNascimento) {
     return diferencaAnos;
 }
 
-function feriasEscolar(matricula, numeroDePeriodos, novosDados) {
+function feriasEscolar(matricula, numeroDePeriodos) {
 
      // Cria um formulário para a opção de possuir filho em idade escolar
      let formulario = `
@@ -284,7 +285,7 @@ function feriasEscolar(matricula, numeroDePeriodos, novosDados) {
 }
 
 
-function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos, novosDados) {
+function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
     // Obtém o valor selecionado pelo usuário
     let possuiFilho = document.querySelector('input[name="possuiFilho"]:checked').value;
     let ecasadoComPofessor = document.querySelector('input[name="ecasadoComPofessor"]:checked').value;
@@ -306,7 +307,7 @@ function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos, novosDados)
 
     database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
     
-    salvarBancoDados(novosDados); // Salvar o banco de dados após calcular a pontuação
+    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
    
     alert("Cadastro concluído.");
     console.log(database[matricula]);
@@ -359,7 +360,7 @@ function feriasNaoEscolar(matricula, numeroDePeriodos) {
 }
 
 
-function calcularPontuacaoFeriasNaoEscolar(matricula, novosDados) {
+function calcularPontuacaoFeriasNaoEscolar(matricula) {
     // Obtém o valor selecionado pelo usuário
     let DoisEmpregos = document.querySelector('input[name="DoisEmpregos"]:checked').value;
     let ConjugeMesmoPeriodo = document.querySelector('input[name="ConjugeMesmoPeriodo"]:checked').value;
@@ -383,7 +384,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula, novosDados) {
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
     
-    salvarBancoDados(novosDados); // Salvar o banco de dados após calcular a pontuação
+    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
   
      alert("Cadastro concluído.");
     console.log(database[matricula]);
@@ -590,42 +591,43 @@ function calcularAntiguidade(dataIngresso) {
 
 carregarBancoDados(); //função correta para carregar o banco de dados
 
-
-
-
-
 function carregarBancoDados() {
+    // URL do arquivo remoto
+    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    //const PORT = process.env.PORT || 3000;
     const url = `${baseUrl}/banco_dados.json`;
 
-    return fetch(url)
+    // Faz uma requisição GET para obter o arquivo JSON
+    fetch(url)
         .then(response => {
+            // Verifica se a resposta da requisição foi bem-sucedida
             if (!response.ok) {
                 throw new Error('Erro ao carregar o arquivo.');
             }
-            return response.json();
+            // Retorna o conteúdo do arquivo JSON como texto
+            return response.text();
         })
         .then(jsonData => {
-            database = jsonData;
+            // Converte o JSON de volta para o objeto database
+            database = JSON.parse(jsonData);
             console.log("Banco de dados carregado:", database);
+            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
         })
         .catch(error => {
+            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
             console.error('Erro:', error);
-            throw error;
         });
 }
 
 
-
-
-function salvarBancoDados(novosDados) {
+function salvarBancoDados() {
+    // URL para salvar os dados
+    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    //const PORT = process.env.PORT || 3000;
     const url = `${baseUrl}/banco_dados.json`;
 
-    // Atualiza o banco de dados com os novos dados
-    database.users = database.users || []; // Garante que a propriedade users exista
-    database.users.push(novosDados); // Adiciona os novos dados
-
-    // Envia os dados atualizados para o servidor
-    return fetch(url, {
+    // Realiza uma requisição POST para enviar os dados atualizados para o servidor
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -633,17 +635,17 @@ function salvarBancoDados(novosDados) {
         body: JSON.stringify(database),
     })
     .then(response => {
+        // Verifica se a resposta da requisição foi bem-sucedida
         if (!response.ok) {
             throw new Error('Erro ao salvar os dados.');
         }
         alert("Dados salvos com sucesso!");
     })
     .catch(error => {
+        // Trata qualquer erro que ocorrer durante o salvamento dos dados
         console.error('Erro:', error);
-        throw error;
     });
 }
-
 
 
 
@@ -738,7 +740,6 @@ function salvarBancoDados(novosDados) {
     </div>
 
 <script>
-
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
