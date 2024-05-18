@@ -52,7 +52,41 @@ let database = {};
 const baseUrl = window.location.origin;
 
 
+function preencherCampos(matricula) {
+    let dados = database[matricula];
+    if (dados) {
+        // Preencher os campos do formulário com os dados correspondentes
+        document.getElementById("matriculaCadastro").value = dados.matricula;
+        document.getElementById("dataIngresso").value = dados.dataIngresso;
+        document.getElementById("paquisitivoinicio").value = dados.paquisitivoinicio;
+        document.getElementById("paquisitivofim").value = dados.paquisitivofim;
+        document.getElementById("seraferiasEscolar").checked = dados.feriasescolarounao === 1;
+        document.getElementById("qtdperiodos").value = dados.numeroDePeriodos;
+        document.getElementById("dataNascimento").value = dados.dataNascimento;
+        document.getElementById("qtdfilhosmenores").value = dados.qtdfilhosmenores;
+        document.getElementById("periodo11").value = dados.periodo11;
+        document.getElementById("periodo12").value = dados.periodo12;
+        document.getElementById("periodo21").value = dados.periodo21;
+        document.getElementById("periodo22").value = dados.periodo22;
+        document.getElementById("periodo31").value = dados.periodo31;
+        document.getElementById("periodo32").value = dados.periodo32;
+    } else {
+        alert("Dados da matrícula não encontrados.");
+    }
+}
 
+// Carregar os dados do banco de dados
+carregarBancoDados();
+
+// Função para carregar os dados do banco de dados e preencher os campos do formulário ao carregar a página
+function carregarBancoDados() {
+    // Aqui você coloca a lógica para carregar os dados do banco de dados (exemplo: fetch, AJAX, etc.)
+    // Após carregar os dados, chame a função para preencher os campos do formulário com os dados correspondentes
+    // Exemplo:
+    // Suponha que você tenha uma matrícula específica que deseja preencher automaticamente ao carregar a página
+    let matriculaParaPreencher = "30109511"; // Substitua "12345678" pela matrícula desejada
+    preencherCampos(matriculaParaPreencher);
+}
 
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim) {
