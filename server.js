@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 // Caminho para o arquivo banco_dados.json
 const arquivoBancoDados = path.join(__dirname, 'banco_dados.json');
+const arquivoBancoDadosCadastros = path.join(__dirname, 'banco_dados_cadastros.json');
 
 // Middleware para lidar com solicitações JSON
 app.use(express.json());
@@ -24,6 +25,26 @@ app.post('/banco_dados.json', (req, res) => {
 
    // Escrever os novos dados diretamente no arquivo banco_dados.json
    fs.writeFile(arquivoBancoDados, JSON.stringify(novosDados), (err) => {
+    if (err) {
+      // Se houver erro ao escrever no arquivo, enviar uma resposta de erro
+      console.error('Erro ao salvar os dados:', err);
+      res.status(500).send('Erro ao salvar os dados');
+    } else {
+      // Se os dados foram escritos com sucesso, enviar uma resposta de sucesso
+      console.log('Dados salvos com sucesso');
+      res.send('Solicitação POST recebida com sucesso');
+    }
+  });
+
+});
+
+app.post('/banco_dados_cadastros.json', (req, res) => {
+  // Extrair os dados recebidos da solicitação
+  const novosDados = req.body;
+  console.log(novosDados);
+
+   // Escrever os novos dados diretamente no arquivo banco_dados.json
+   fs.writeFile(arquivoBancoDadosCadastros, JSON.stringify(novosDados), (err) => {
     if (err) {
       // Se houver erro ao escrever no arquivo, enviar uma resposta de erro
       console.error('Erro ao salvar os dados:', err);
