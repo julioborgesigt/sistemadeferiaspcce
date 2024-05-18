@@ -49,14 +49,14 @@ label {
 }
 
 input[type="text"],
+input[type="date"],
 input[type="checkbox"],
 button {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 1px;
-    margin-top: 25px;
+    padding: 15px; /* Aumenta o tamanho dos inputs */
+    margin-bottom: 25px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px; /* Bordas mais arredondadas */
     font-size: 1em;
 }
 
@@ -70,6 +70,7 @@ button {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    border-radius: 10px; /* Bordas mais arredondadas */
 }
 
 button:hover {
@@ -97,10 +98,6 @@ th {
 
 tr:nth-child(even) {
     background-color: #f9f9f9;
-}
-
-tr:nth-child(odd) {
-    background-color: #fff;
 }
 
 /* Estilo para os cabeçalhos das tabelas */
@@ -132,11 +129,13 @@ body.dark-mode h3 {
 }
 
 body.dark-mode input[type="text"],
+body.dark-mode input[type="date"],
 body.dark-mode input[type="checkbox"],
 body.dark-mode button {
     background-color: #333;
     color: #ffffff;
     border: 1px solid #555;
+    border-radius: 10px; /* Bordas mais arredondadas no modo escuro */
 }
 
 body.dark-mode button:hover {
@@ -154,15 +153,24 @@ body.dark-mode th {
 
 body.dark-mode td {
     border-bottom-color: #444;
-    color: #ffffff; /* Garante que o texto das células seja branco */
 }
 
-body.dark-mode tr:nth-child(even) {
-    background-color: #1e1e1e; /* Cor de fundo das linhas pares no modo escuro */
+/* Estilos específicos para input de data no modo claro */
+input[type="date"] {
+    padding: 15px;
+    border-radius: 10px; /* Bordas mais arredondadas */
 }
 
-body.dark-mode tr:nth-child(odd) {
-    background-color: #2e2e2e; /* Cor de fundo das linhas ímpares no modo escuro */
+/* Estilos específicos para input de data no modo escuro */
+body.dark-mode input[type="date"] {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 10px; /* Bordas mais arredondadas */
+}
+
+body.dark-mode input[type="date"]::placeholder {
+    color: #999;
 }
 
 /* Estilo para o botão de modo escuro */
@@ -243,6 +251,7 @@ body.dark-mode .flatpickr-calendar {
     background: #333;
     color: #fff;
     border: 1px solid #777;
+    border-radius: 10px; /* Borda arredondada para o calendário */
 }
 
 body.dark-mode .flatpickr-months {
