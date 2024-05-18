@@ -28,6 +28,7 @@ body {
 h1, h3 {
     text-align: center;
     color: #007aff;
+    
 }
 
 h2 {
@@ -43,7 +44,8 @@ h2 {
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 25px;
     font-weight: bold;
 }
 
