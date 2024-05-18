@@ -15,6 +15,7 @@ body {
     color: #333;
 }
 
+/* Container padrão */
 .container {
     width: 90%;
     max-width: 800px;
@@ -25,6 +26,7 @@ body {
     margin: 20px;
 }
 
+/* Cabeçalhos */
 h1, h3 {
     text-align: center;
     color: #007aff;
@@ -36,6 +38,7 @@ h2 {
     color: #007aff;
 }
 
+/* Formulário */
 .form-container,
 .consulta-container {
     margin-bottom: 20px;
@@ -296,4 +299,77 @@ body.dark-mode .flatpickr-day {
 body.dark-mode .flatpickr-day.today {
     background: #007aff;
     color: #fff;
+}
+
+/* Estilos específicos para a página de login */
+.login-background {
+    background: url('your-background-image.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.login-container {
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: 20px;
+}
+
+body.dark-mode .login-container {
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.login-container h2 {
+    color: #007aff;
+    text-align: center;
+}
+
+body.dark-mode .login-container h2 {
+    color: #ffffff;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px; /* Bordas mais arredondadas */
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.login-container button {
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #005bb5;
+}
+
+/* Ajustes para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"],
+    .login-container button {
+        padding: 10px;
+        font-size: 0.9em;
+    }
 }
