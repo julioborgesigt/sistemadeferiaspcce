@@ -13,6 +13,7 @@ body {
     min-height: 100vh;
     background-color: #f5f5f5;
     color: #333;
+    position: relative;
 }
 
 /* Container padrão */
@@ -303,7 +304,7 @@ body.dark-mode .flatpickr-day.today {
 
 /* Estilos específicos para a página de login */
 .login-background {
-    background: url('your-background-image.jpg') no-repeat center center fixed;
+    background: url('policiacivil-10422477.jpg') no-repeat center center fixed;
     background-size: cover;
     position: absolute;
     top: 0;
@@ -361,15 +362,17 @@ body.dark-mode .login-container h2 {
 
 /* Ajustes para dispositivos móveis */
 @media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
     .login-container {
         width: 90%;
         padding: 15px;
+        margin-bottom: 20px;
     }
 
-    .login-container input[type="text"],
-    .login-container input[type="password"],
-    .login-container button {
-        padding: 10px;
-        font-size: 0.9em;
+    .login-container h2 {
+        font-size: 1.5em;
     }
 }
