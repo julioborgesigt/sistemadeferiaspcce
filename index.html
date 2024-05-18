@@ -1,762 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro e Consulta de Férias</title>
-<link rel="stylesheet" href="style.css">
-
-
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- jQuery UI -->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
-
-<!-- Inclua o CSS do flatpickr -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-<!-- Inclua o JavaScript do flatpickr -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#dataIngresso, #paquisitivoinicio, #paquisitivofim, #dataNascimento, #periodo11, #periodo12, #periodo21, #periodo22, #periodo31, #periodo32", {
-        dateFormat: "d/m/Y", // Define o formato da data como DD/MM/AAAA
-        altInput: true,     // Cria um input alternativo para exibir a data de forma amigável
-        altFormat: "d/m/Y", // Define o formato alternativo da data
-        allowInput: true,    // Permite que o usuário insira a data manualmente
-        locale: "pt"
-    });
-});
-
-</script>
-
-<!-- Inclua o arquivo de localização do idioma Português -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-
-
-
-
-<script>   
-// Simula uma base de dados
-let database = {};
-const baseUrl = window.location.origin;
-
-
-
-
-// Função para verificar conflitos de datas
-function verificarConflito(dataInicio, dataFim) {
-    for (let matricula in database) {
-        let funcionario = database[matricula];
-        let periodos = [
-            { inicio: funcionario.periodo11, fim: funcionario.periodo12 },
-            { inicio: funcionario.periodo21, fim: funcionario.periodo22 },
-            { inicio: funcionario.periodo31, fim: funcionario.periodo32 }
-        ];
-
-        for (let periodo of periodos) {
-            if (periodo.inicio && periodo.fim) {
-                let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
-                let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
-
-                if ((dataInicio <= fimExistente && dataInicio >= inicioExistente) ||
-                    (dataFim <= fimExistente && dataFim >= inicioExistente) ||
-                    (dataInicio <= inicioExistente && dataFim >= fimExistente)) {
-                    return true;
-                }
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <style>
+        /* Estilos básicos para a página */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         }
-    }
-    return false;
-}
-
-function cadastroInicial() {
-    const matricula = document.getElementById("matriculaCadastro").value;
-    const dataIngresso = document.getElementById("dataIngresso").value;
-    const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
-    const paquisitivofim = document.getElementById("paquisitivofim").value;
-    const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
-    const qtdperiodos = parseInt(document.getElementById("qtdperiodos").value, 10);
-    let numeroDePeriodos = parseInt(qtdperiodos, 10);
-    const dataNascimento = document.getElementById("dataNascimento").value;
-    const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
-
-    let periodo11 = document.getElementById("periodo11").value;
-    let periodo12 = document.getElementById("periodo12").value;
-    let periodo21 = document.getElementById("periodo21").value;
-    let periodo22 = document.getElementById("periodo22").value;
-    let periodo31 = document.getElementById("periodo31").value;
-    let periodo32 = document.getElementById("periodo32").value;
-
-    // Converte as datas para objetos Date
-    let dataInicio1 = new Date(periodo11.split('/').reverse().join('-'));
-    let dataFim1 = new Date(periodo12.split('/').reverse().join('-'));
-    let dataInicio2 = periodo21 ? new Date(periodo21.split('/').reverse().join('-')) : null;
-    let dataFim2 = periodo22 ? new Date(periodo22.split('/').reverse().join('-')) : null;
-    let dataInicio3 = periodo31 ? new Date(periodo31.split('/').reverse().join('-')) : null;
-    let dataFim3 = periodo32 ? new Date(periodo32.split('/').reverse().join('-')) : null;
-
-    // Verifica conflitos para cada período
-    if (verificarConflito(dataInicio1, dataFim1) || (dataInicio2 && verificarConflito(dataInicio2, dataFim2)) || (dataInicio3 && verificarConflito(dataInicio3, dataFim3))) {
-        alert("Os períodos de férias escolhidos se sobrepõem a períodos já selecionados por outros funcionários.");
-        return;
-    }
-
-    // Calcule a diferença em milissegundos entre as datas
-    let diferenca1 = Math.abs(dataFim1 - dataInicio1);
-    let diferenca2 = dataInicio2 ? Math.abs(dataFim2 - dataInicio2) : null;
-    let diferenca3 = dataInicio3 ? Math.abs(dataFim3 - dataInicio3) : null;
-
-    // Converta a diferença para dias
-    let diferencaEmDias1 = diferenca1 ? diferenca1/ (1000 * 60 * 60 * 24) : null;
-    let diferencaEmDias2 = diferenca2 ? diferenca2 / (1000 * 60 * 60 * 24) : null;
-    let diferencaEmDias3 = diferenca3 ? diferenca3 / (1000 * 60 * 60 * 24) : null;
-
-    console.log('a diferença em  dias 1 é:');
-    console.log(diferencaEmDias1);
-    
-    console.log('a diferença em  dias 2 é:');
-    console.log(diferencaEmDias2);
-    
-    console.log('a diferença em  dias 3 é:');
-    console.log(diferencaEmDias3    );
-
-    if ( diferencaEmDias1 !== 29 && qtdperiodos == 1 ) {
-        alert("O intervalo entre as datas de início e fim do período 1 de férias deve ser de 10 ou 15 ou 30 dias.");
-        return;
-    }
-    if (qtdperiodos === 2 && diferencaEmDias2 === null  && (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14)  && qtdperiodos < 3 ) {
-        alert("O intervalo entre as datas de início e fim do período 1 e 2 de férias deve ser de 10 ou 15 ou 30 dias.");
-        return;
-    }
-    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN)  && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
-        alert("O intervalo entre as datas de início e fim do período 1, 2 e 3 de férias deve ser de 10 ou 15 ou 30 dias.");
-        return;
-    }
-
-    let dataFimAquisitivo = new Date(paquisitivofim.split('/').reverse().join('-'));
-
-    if (dataInicio1 <= dataFimAquisitivo) {
-        alert("A data de início do período 1 de férias deve ser posterior à data final do período aquisitivo.");
-        return;
-    }
-
-    if (dataInicio2 && dataInicio2 <= dataFim1) {
-        alert("A data de início do período 2 de férias deve ser posterior à data final do período 1.");
-        return;
-    }
-
-    if (dataInicio3 && dataInicio3 <= dataFim2) {
-        alert("A data de início do período 3 de férias deve ser posterior à data final do período 2.");
-        return;
-    }
-
-    // Salvar os dados no banco de dados
-    database[matricula] = {
-        matricula: matricula,
-        numeroDePeriodos: qtdperiodos,
-        feriasescolarounao: seraferiasEscolar,
-        idade: calcularIdade(dataNascimento),
-        qtdfilhosmenores: qtdfilhosmenores,
-        periodo11: periodo11,
-        periodo12: periodo12,
-        periodo21: periodo21,
-        periodo22: periodo22,
-        periodo31: periodo31,
-        periodo32: periodo32,
-        antiguidade: calcularAntiguidade(dataIngresso),
-    };
-
-    if (seraferiasEscolar === 1) {
-        feriasEscolar(matricula, qtdperiodos);
-    } else {
-        feriasNaoEscolar(matricula, qtdperiodos);
-    }
-}
-
-let alertaExibido = false;
-
-function validarMatricula(input) {
-    if (input.value.length < 8 && !alertaExibido) {
-        alertaExibido = true;
-        alert("A matrícula deve ter pelo menos 8 caracteres.");
-        input.focus();
-    } else {
-        alertaExibido = false;
-    }
-}
-
-function finalizarCadastro() {
-    document.getElementById("matriculaCadastro").value = "";
-    document.getElementById("dataIngresso").value = "";
-    document.getElementById("paquisitivoinicio").value = "";
-    document.getElementById("paquisitivofim").value = "";
-    document.getElementById("seraferiasEscolar").checked = false;
-    document.getElementById("qtdperiodos").value = "";
-    document.getElementById("dataNascimento").value = "";
-    document.getElementById("qtdfilhosmenores").value = "";
-    document.getElementById("periodo11").value = "";
-    document.getElementById("periodo12").value = "";
-    document.getElementById("periodo21").value = "";
-    document.getElementById("periodo22").value = "";
-    document.getElementById("periodo31").value = "";
-    document.getElementById("periodo32").value = "";
-}
-
-function calcularAntiguidade(dataIngresso) {
-    const dataAtual = new Date();
-    const [dia, mes, ano] = dataIngresso.split('/');
-    const dataIngressoFormatada = new Date(`${ano}-${mes}-${dia}`);
-    const diferencaAnos = dataAtual.getFullYear() - dataIngressoFormatada.getFullYear();
-
-    if (dataAtual.getMonth() < dataIngressoFormatada.getMonth() ||
-        (dataAtual.getMonth() === dataIngressoFormatada.getMonth() && dataAtual.getDate() < dataIngressoFormatada.getDate())) {
-        return diferencaAnos - 1;
-    }
-
-    return diferencaAnos;
-}
-
-function calcularIdade(dataNascimento) {
-    const dataAtual = new Date();
-    const [dia, mes, ano] = dataNascimento.split('/');
-    const dataNascimentoFormatada = new Date(`${ano}-${mes}-${dia}`);
-    const diferencaAnos = dataAtual.getFullYear() - dataNascimentoFormatada.getFullYear();
-
-    if (dataAtual.getMonth() < dataNascimentoFormatada.getMonth() ||
-        (dataAtual.getMonth() === dataNascimentoFormatada.getMonth() && dataAtual.getDate() < dataNascimentoFormatada.getDate())) {
-        return diferencaAnos - 1;
-    }
-
-    return diferencaAnos;
-}
-
-function feriasEscolar(matricula, numeroDePeriodos) {
-
-     // Cria um formulário para a opção de possuir filho em idade escolar
-     let formulario = `
-        <form id="formFeriasEscolar">
-            <label for="possuiFilho">Possui filho em idade escolar?</label><br>
-            <input type="radio" id="sim" name="possuiFilho" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="possuiFilho" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario2 = `
-        <form id="formFeriasEscolar">
-            <label for="ecasadoComPofessor">É casado com professor?</label><br>
-            <input type="radio" id="sim" name="ecasadoComPofessor" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="ecasadoComPofessor" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario3 = `
-        <form id="formFeriasEscolar">
-            <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
-            <input type="radio" id="sim" name="estudanteOUaluno" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="estudanteOUaluno" value="nao">
-            <label for="nao">Não</label><br>
-            <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
-            <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
-
-        </form>
-    `;
-    
-    // Adiciona o formulário à div "dados"
-    document.getElementById("dados").innerHTML = formulario + formulario2 + formulario3;
-    console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
-}
-
-
-function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
-    // Obtém o valor selecionado pelo usuário
-    let possuiFilho = document.querySelector('input[name="possuiFilho"]:checked').value;
-    let ecasadoComPofessor = document.querySelector('input[name="ecasadoComPofessor"]:checked').value;
-    let estudanteOUaluno = document.querySelector('input[name="estudanteOUaluno"]:checked').value;
-
-    // Calcula a pontuação com base na resposta do usuário
-    let pontuacaoferiasescolar = 0;
-    if (possuiFilho === "sim") {
-        pontuacaoferiasescolar += 5;
-    }
-
-    if (ecasadoComPofessor === "sim") {
-        pontuacaoferiasescolar += 2;
-    }
-
-    if (estudanteOUaluno === "sim") {
-        pontuacaoferiasescolar += 1;
-    }
-
-    database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
-    
-    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
-   
-    alert("Cadastro concluído.");
-    console.log(database[matricula]);
-           
-}
-
-
-
-
-function feriasNaoEscolar(matricula, numeroDePeriodos) {
-     // Cria um formulário para a opção de possuir filho em idade escolar
-     let formulario4 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo periodo?</label><br>
-            <input type="radio" id="sim" name="DoisEmpregos" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="DoisEmpregos" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario5 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="ConjugeMesmoPeriodo">Possui conjuge com o mesmo periodo de férias desejado?</label><br>
-            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario6 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="estudante">Você é estudante?</label><br>
-            <input type="radio" id="sim" name="estudante" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="estudante" value="nao">
-            <label for="nao">Não</label><br>
-            <button type="button" onclick="calcularPontuacaoFeriasNaoEscolar('${matricula}')">Finalizar cadastro</button>
-            <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
-        </form>
-    `;
-    
-    // Adiciona o formulário à div "dados"
-    document.getElementById("dados").innerHTML = formulario4 + formulario5 + formulario6;
-    console.log(database[matricula]);
-    console.log(`Funcionário ${matricula} escolheu férias não escolares em ${numeroDePeriodos} período(s).`);
-}
-
-
-function calcularPontuacaoFeriasNaoEscolar(matricula) {
-    // Obtém o valor selecionado pelo usuário
-    let DoisEmpregos = document.querySelector('input[name="DoisEmpregos"]:checked').value;
-    let ConjugeMesmoPeriodo = document.querySelector('input[name="ConjugeMesmoPeriodo"]:checked').value;
-    let estudante = document.querySelector('input[name="estudante"]:checked').value;
-
-    // Calcula a pontuação com base na resposta do usuário
-    let pontuacaoferiasNaoescolar = 0;
-    if (DoisEmpregos === "sim") {
-        pontuacaoferiasNaoescolar += 5;
-    }
-
-    if (ConjugeMesmoPeriodo === "sim") {
-        pontuacaoferiasNaoescolar += 2;
-    }
-
-    if (estudante === "sim") {
-        pontuacaoferiasNaoescolar += 1;
-    }
-    console.log(pontuacaoferiasNaoescolar);
-    
-
-    database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    
-    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
-  
-     alert("Cadastro concluído.");
-    console.log(database[matricula]);
-    
-           
-}
-
-
-// Consulta pelo número da matricula
-function exibirDados() {
-    let matricula = document.getElementById("matriculaConsulta").value;
-    let dados = database[matricula];
-    if (dados) {
-        let html = `<table border="1">
-            <tr><th>Matrícula</th><td>${dados.matricula}</td></tr>
-            <tr><th>Qtd Períodos</th><td>${dados.numeroDePeriodos}</td></tr>
-            <tr><th>Férias Escolar</th><td >${dados.feriasescolarounao}</td></tr>
-            <tr><th>Pontuação Férias Escolar</th><td >${dados.pontuacaoferiasescolar || 'não'}</td></tr>
-            <tr><th>Pontuação Férias Nao Escolar(desempate)</th><td >${dados.pontuacaoferiasNaoescolar || 'não'}</td></tr>
-            <tr><th>Idade</th><td >${dados.idade}</td></tr>`;
-            
-        // Verificar se os períodos de férias estão definidos
-        if (dados.periodo11) {
-            html += `<tr><th>Intenção de Férias P1 (Início)</th><td >${dados.periodo11}</td></tr>`;
-            html += `<tr><th>Intenção de Férias P1 (Fim)</th><td >${dados.periodo12}</td></tr>`;
+        .container {
+            width: 300px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
-        if (dados.periodo21) {
-            html += `<tr><th>Intenção de Férias P2 (Início)</th><td >${dados.periodo21}</td></tr>`;
-            html += `<tr><th>Intenção de Férias P2 (Fim)</th><td>${dados.periodo22}</td></tr>`;
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007aff;
         }
-        if (dados.periodo31) {
-            html += `<tr><th>Intenção de Férias P3 (Início)</th><td>${dados.periodo31}</td></tr>`;
-            html += `<tr><th>Intenção de Férias P3 (Fim)</th><td >${dados.periodo32}</td></tr>`;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
-
-        html += `</table>`;
-        document.getElementById("dados2").innerHTML = html;
-    } else {
-        alert("Dados inexistentes.");
-    }
-}
-
-
-// Exibe todos os cadastros
-function exibirListaFinalFerias() {
-    let html = "<h3>Lista de Férias com todos os cadastros</h3>";
-    html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
-    
-    // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
-    
-    // Gerar a tabela HTML
-    dataArray.forEach(dados => {
-        html += `
-            <tr>
-                <td data-label="Matrícula">${dados.matricula}</td>
-                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-                <td data-label="Idade">${dados.idade}</td>
-                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
-                <td data-label="Antiguidade">${dados.antiguidade}</td>
-                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-            </tr>`;
-    });
-    
-    html += "</table>";
-    document.getElementById("dados2").innerHTML = html;
-}
-
-
-
-// Exibe os 6 cadastros selecionados para ferias escolar
-function exibirListaFinalFeriasSelecionados() {
-    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
-    html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Idade(desempate)</th></tr>";
-    
-    // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
-    
-    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
-    let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
-    
-    // Ordenar os registros filtrados
-    selecionados.sort((a, b) => {
-        if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
-            return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
-        } else {
-            return b.idade - a.idade;
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
         }
-    });
-    
-    // Limitar a exibição aos 6 primeiros resultados
-    let seisPrimeiros = selecionados.slice(0, 6);
-    
-    // Gerar a tabela HTML
-    dataArray.forEach(dados => {
-        html += `
-            <tr>
-                <td data-label="Matrícula">${dados.matricula}</td>
-                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-                <td data-label="Idade">${dados.idade}</td>
-              
-            </tr>`;
-    });
-/*
-    seisPrimeiros.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
-    });
-    */
-    html += "</table>";
-    document.getElementById("dados2").innerHTML = html;
-}
-
-
-
-
-// Function to display vacations not chosen for school holiday
-function exibirListaFinalFeriasNaoEscolar() {
-    let html = "<h3>Lista Final de Férias Não Escolar em ordem de Preferências</h3>";
-    html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Nao Escolar(desempate)</th></tr>";
-    
-    // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
-    
-
-    dataArray.sort((a, b) => {
-        // Ordenar por pontuação de férias escolar em ordem decrescente
-        if (b.idade !== a.idade) {
-            return b.idade - a.idade;
-        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
-            // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
-            return b.qtdfilhosmenores - a.qtdfilhosmenores;
-        } else if (b.antiguidade !== a.antiguidade) {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.antiguidade - a.antiguidade;
-            t
-        } else if (b.pontuacaoferiasNaoescolar !== a.pontuacaoferiasNaoescolar) {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.pontuacaoferiasNaoescolar - a.pontuacaoferiasNaoescolar;
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007aff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
         }
-    });
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+    <script>
+        let database = {};
 
-
-
-    // Filtrar apenas os registros sem pontuação de férias escolar ou com pontuação zero
-    let naoEscolhidos = dataArray.filter(dados => !dados.pontuacaoferiasescolar || dados.pontuacaoferiasescolar === 0);
-    
-    // Ordenar os registros filtrados por idade
-    naoEscolhidos.sort((a, b) => {
-        return b.idade - a.idade;
-    });
-    
-
-    dataArray.forEach(dados => {
-        html += `
-            <tr>
-                <td data-label="Matrícula">${dados.matricula}</td>
-                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-                <td data-label="Idade">${dados.idade}</td>
-                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
-                <td data-label="Antiguidade">${dados.antiguidade}</td>
-                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                
-            </tr>`;
-    });
-
-    // Gerar a tabela HTML
-    /*naoEscolhidos.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
-    });*/
-    
-    html += "</table>";
-    document.getElementById("dados2").innerHTML = html;
-}
-
-
-
-
-function calcularIdade(dataNascimento) {
-    let [dia, mes, ano] = dataNascimento.split('/').map(Number);
-    let nascimento = new Date(ano, mes - 1, dia);
-    let hoje = new Date();
-    let idade = hoje.getFullYear() - nascimento.getFullYear();
-    if (hoje.getMonth() < nascimento.getMonth() || 
-        (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate())) {
-        idade--;
-    }
-    return idade;
-}
-
-function calcularAntiguidade(dataIngresso) {
-    let [dia, mes, ano] = dataIngresso.split('/').map(Number);
-    let ingresso = new Date(ano, mes - 1, dia);
-    let hoje = new Date();
-    return Math.floor((hoje - ingresso) / (1000 * 60 * 60 * 24));
-}
-
-
-
-
-carregarBancoDados(); //função correta para carregar o banco de dados
-
-function carregarBancoDados() {
-    // URL do arquivo remoto
-    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    //const PORT = process.env.PORT || 3000;
-    const url = `${baseUrl}/banco_dados.json`;
-
-    // Faz uma requisição GET para obter o arquivo JSON
-    fetch(url)
-        .then(response => {
-            // Verifica se a resposta da requisição foi bem-sucedida
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            // Retorna o conteúdo do arquivo JSON como texto
-            return response.text();
-        })
-        .then(jsonData => {
-            // Converte o JSON de volta para o objeto database
-            database = JSON.parse(jsonData);
-            console.log("Banco de dados carregado:", database);
-            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
-        })
-        .catch(error => {
-            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
-            console.error('Erro:', error);
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarBancoDados();
         });
-}
 
+        function carregarBancoDados() {
+            const url = 'banco_dados.json';
 
-function salvarBancoDados() {
-    // URL para salvar os dados
-    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    //const PORT = process.env.PORT || 3000;
-    const url = `${baseUrl}/banco_dados.json`;
-
-    // Realiza uma requisição POST para enviar os dados atualizados para o servidor
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(database),
-    })
-    .then(response => {
-        // Verifica se a resposta da requisição foi bem-sucedida
-        if (!response.ok) {
-            throw new Error('Erro ao salvar os dados.');
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo.');
+                    }
+                    return response.text();
+                })
+                .then(jsonData => {
+                    database = JSON.parse(jsonData);
+                    console.log("Banco de dados carregado:", database);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
         }
-        alert("Dados salvos com sucesso!");
-    })
-    .catch(error => {
-        // Trata qualquer erro que ocorrer durante o salvamento dos dados
-        console.error('Erro:', error);
-    });
-}
 
+        function salvarBancoDados() {
+            const url = 'banco_dados.json';
 
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(database),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao salvar os dados.');
+                }
+                alert("Dados salvos com sucesso!");
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
 
+        function login() {
+            const matricula = document.getElementById('loginMatricula').value;
+            const senha = document.getElementById('loginSenha').value;
 
-</script>
+            if (database[matricula] && database[matricula].senha === senha) {
+                alert("Login bem-sucedido!");
+                window.location.href = 'cadastro.html';
+            } else {
+                alert("Matrícula ou senha incorreta.");
+            }
+        }
 
+        function cadastrar() {
+            const matricula = document.getElementById('cadastroMatricula').value;
+            const senha = document.getElementById('cadastroSenha').value;
+
+            if (database[matricula]) {
+                alert("Matrícula já cadastrada.");
+            } else {
+                database[matricula] = { senha };
+                salvarBancoDados();
+                alert("Cadastro bem-sucedido!");
+            }
+        }
+    </script>
 </head>
-
-
 <body>
     <div class="container">
-
-       
-        <h1>Cadastro e Consulta de Férias</h1>
-
-
-         <!-- Botão para alternar entre modos claro e escuro -->
-   <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
-    <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
-</div>
-   
-        
-        <div class="form-container">
-            <h2>Cadastre-se abaixo:</h2>
-            <form id="cadastroForm">
-
-                <label for="matriculaCadastro">Matrícula:</label>
-                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)">
-
-                <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
-                <input type="text" id="dataIngresso" name="dataIngresso">
-
-                <label for="paquisitivoinicio">Início do seu período aquisitivo (formato DD/MM/AAAA):</label>
-                <input type="text" id="paquisitivoinicio" name="paquisitivoinicio">
-
-                <label for="paquisitivofim">Fim do seu período aquisitivo (formato DD/MM/AAAA):</label>
-                <input type="text" id="paquisitivofim" name="paquisitivofim">
-
-                <label for="seraferiasEscolar">
-                    <input type="checkbox" id="seraferiasEscolar" name="seraferiasEscolar">
-                    Algum dos períodos será em dezembro, janeiro ou julho? Marque caso sim
-                </label>
-
-                <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
-                <input type="text" id="qtdperiodos" name="qtdperiodos">
-
-                <label for="dataNascimento">Qual sua data de nacimento? (formato DD/MM/AAAA)</label>
-                <input type="text" id="dataNascimento" name="dataNascimento">
-
-                <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possua, deixar em branco</label>
-                <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">
-
-                <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo11" name="periodo11">
-
-                <label for="periodo12">Qual o fim do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo12" name="periodo12">
-
-                <label for="periodo21">Qual o início do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo21" name="periodo21">
-
-                <label for="periodo22">Qual o fim do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo22" name="periodo22">
-
-                <label for="periodo31">Qual o início do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo31" name="periodo31">
-
-                <label for="periodo32">Qual o fim do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo32" name="periodo32">
-
-                <button type="button" onclick="cadastroInicial()">Cadastrar</button>
-            </form>
-        </div>
-
-        <div id="dados"></div>
-
-        <div class="consulta-container">
-            <h2>Consultas</h2>
-            <input type="text" id="matriculaConsulta" placeholder="Matrícula">
-            <button onclick="exibirDados()">Consulta por matrícula</button>  
-            <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
-            <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para férias escolar</button>
-            <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
-        </div>
-
-        <div id="dados2">
-
-            
-        </div>
-
-        
+        <h2>Login</h2>
+        <label for="loginMatricula">Matrícula:</label>
+        <input type="text" id="loginMatricula" name="loginMatricula" required>
+        <label for="loginSenha">Senha:</label>
+        <input type="password" id="loginSenha" name="loginSenha" required>
+        <button onclick="login()">Entrar</button>
     </div>
-
-<script>
-document.getElementById('toggle-dark-mode').addEventListener('click', function () {
-    document.body.classList.toggle('dark-mode');
-    const icon = this.querySelector('i');
-    if (document.body.classList.contains('dark-mode')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
-});
-
-</script>
-
-
+    <div class="container">
+        <h2>Cadastro</h2>
+        <label for="cadastroMatricula">Matrícula:</label>
+        <input type="text" id="cadastroMatricula" name="cadastroMatricula" required>
+        <label for="cadastroSenha">Senha:</label>
+        <input type="password" id="cadastroSenha" name="cadastroSenha" required>
+        <button onclick="cadastrar()">Cadastrar</button>
+    </div>
 </body>
 </html>
-
-    
-    
