@@ -53,10 +53,10 @@
         }
 
         function login() {
-            const matriculaSenha = document.getElementById('loginMatricula').value;
+            const matricula = document.getElementById('loginMatricula').value;
             const senha = document.getElementById('loginSenha').value;
 
-            if (database[matriculaSenha] && database[matriculaSenha].senha === senha) {
+            if (database[matricula] && database[matricula].senha === senha) {
                 alert("Login bem-sucedido!");
                 window.location.href = 'cadastro.html';
             } else {
@@ -65,7 +65,7 @@
         }
 
         function cadastrar() {
-            const matriculaSenha = document.getElementById('cadastroMatricula').value;
+            const matricula = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
             const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
@@ -74,10 +74,10 @@
                 return;
             }
 
-            if (database[matriculaSenha]) {
+            if (database[matricula]) {
                 alert("Matrícula já cadastrada.");
             } else {
-                database[matriculaSenha] = { senha };
+                database[matricula] = { senha };
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
             }

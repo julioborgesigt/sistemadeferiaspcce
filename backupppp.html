@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    
+      
+ 
+</head>
+<body>
+    <div class="login-background"></div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <label for="loginMatricula">Matrícula:</label>
+        <input type="text" id="loginMatricula" name="loginMatricula" required>
+        <label for="loginSenha">Senha:</label>
+        <input type="password" id="loginSenha" name="loginSenha" required>
+        <button onclick="login()">Entrar</button>
+    </div>
+    <div class="login-container">
+        <h2>Cadastro</h2>
+        <form id="cadastroForm">
+            <label for="cadastroMatricula">Matrícula:</label>
+            <input type="text" id="cadastroMatricula" name="cadastroMatricula" required>
+            <label for="cadastroSenha">Senha:</label>
+            <input type="password" id="cadastroSenha" name="cadastroSenha" required>
+            <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
+            <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+          let database = {};
+
+          document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const matricula = document.getElementById('cadastroMatricula').value;
+    const senha = document.getElementById('cadastroSenha').value;
+    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+});
+
+    function cadastrar() {
+    const matricula = document.getElementById('cadastroMatricula').value;
+    const senha = document.getElementById('cadastroSenha').value;
+    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+
+    if (senha !== confirmacaoSenha) {
+        alert("As senhas não coincidem.");
+        return;
+    }
+
+    if (database[matricula]) {
+        alert("Matrícula já cadastrada.");
+    } else {
+        database[matricula] = { senha };
+        salvarBancoDados(novosDados);
+        alert("Cadastro bem-sucedido!");
+    }
+}
+
+
+
+
+
+
+function carregarBancoDados() {
+const url = `${baseUrl}/banco_dados.json`;
+
+fetch(url)
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao carregar o arquivo.');
+    }
+    return response.json();
+})
+.then(jsonData => {
+    database = jsonData;
+    console.log("Banco de dados carregado:", database);
+})
+.catch(error => {
+    console.error('Erro:', error);
+});
+}
+
+
+function salvarBancoDados(novosDados) {
+const url = `${baseUrl}/banco_dados.json`;
+
+// Carregar os dados existentes antes de salvar
+fetch(url)
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao carregar o arquivo.');
+    }
+    return response.json();
+})
+.then(jsonData => {
+    // Atualiza o banco de dados com os novos dados
+    Object.assign(database, jsonData);
+    database.users.push(novosDados); // Supondo que os dados de usuários estejam em uma array chamada 'users'
+    
+    // Envia os dados atualizados para o servidor
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(database),
+    });
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao salvar os dados.');
+    }
+    alert("Dados salvos com sucesso!");
+})
+.catch(error => {
+    console.error('Erro:', error);
+});
+}
+
+
+function login() {
+    const matricula = document.getElementById('loginMatricula').value;
+    const senha = document.getElementById('loginSenha').value;
+
+    if (database[matricula] && database[matricula].senha === senha) {
+        alert("Login bem-sucedido!");
+        window.location.href = 'cadastro.html';
+    } else {
+        alert("Matrícula ou senha incorreta.");
+    }
+}
+
+
+    </script>
+</body>
+</html>

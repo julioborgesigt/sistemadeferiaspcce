@@ -82,6 +82,24 @@ function verificarConflito(dataInicio, dataFim) {
 
 function cadastroInicial() {
     const matricula = document.getElementById("matriculaCadastro").value;
+    // Verifique se já existe uma entrada para a matrícula fornecida
+    if (database.hasOwnProperty(matricula)) {
+        // Se existir, obtenha os dados existentes
+        const dadosExistente = database[matricula];
+        // Mesclar os dados existentes com os novos dados antes de salvar
+        Object.assign(dadosExistente, {
+            // Inclua todas as novas informações aqui
+        });
+        // Salve os dados mesclados
+        database[matricula] = dadosExistente;
+    } else {
+        // Se não existir, simplesmente salve os novos dados
+        database[matricula] = {
+            // Inclua todas as informações do novo cadastro aqui
+        };
+    }
+    
+    
     const dataIngresso = document.getElementById("dataIngresso").value;
     const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
     const paquisitivofim = document.getElementById("paquisitivofim").value;
