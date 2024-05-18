@@ -18,15 +18,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
+
+<!-- Inclua o CSS do flatpickr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Inclua o JavaScript do flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+
 <script>
-    $(function() {
-        // Inicializa o Datepicker e o vincula aos campos de entrada de data
-        $("#dataIngresso, #paquisitivoinicio, #paquisitivofim, #dataNascimento, #periodo11, #periodo12, #periodo21, #periodo22, #periodo31, #periodo32").datepicker({
-            dateFormat: "dd/mm/yy", // Define o formato da data como DD/MM/AAAA
-            changeYear: true, // Permite alterar o ano
-            yearRange: "c-100:c+100" // Define o intervalo de anos disponíveis
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#dataIngresso, #paquisitivoinicio, #paquisitivofim, #dataNascimento, #periodo11, #periodo12, #periodo21, #periodo22, #periodo31, #periodo32", {
+        dateFormat: "d/m/Y", // Define o formato da data como DD/MM/AAAA
+        altInput: true,     // Cria um input alternativo para exibir a data de forma amigável
+        altFormat: "d/m/Y", // Define o formato alternativo da data
+        allowInput: true    // Permite que o usuário insira a data manualmente
     });
+});
+
 </script>
 
 
@@ -637,6 +647,9 @@ function salvarBancoDados() {
 
 
 </script>
+
+</head>
+
 
 <body>
     <div class="container">
