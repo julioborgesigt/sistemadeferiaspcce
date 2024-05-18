@@ -13,7 +13,7 @@
         });
 
         function carregarBancoDados() {
-            const url = 'banco_dados.json';
+            const url = 'banco_dados_cadastros.json';
 
             fetch(url)
                 .then(response => {
@@ -32,7 +32,7 @@
         }
 
         function salvarBancoDados() {
-            const url = 'banco_dados.json';
+            const url = 'banco_dados_cadastros.json';
 
             fetch(url, {
                 method: 'POST',
