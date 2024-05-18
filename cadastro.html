@@ -82,8 +82,10 @@ function verificarConflito(dataInicio, dataFim) {
 
 function cadastroInicial() {
 
-    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    
+
+
+
 
     const matricula = document.getElementById("matriculaCadastro").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
@@ -180,7 +182,10 @@ function cadastroInicial() {
         periodo32: periodo32,
         antiguidade: calcularAntiguidade(dataIngresso),
     };
-
+    
+    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
     const novosDados = {
         //matricula: matricula,
         numeroDePeriodos: qtdperiodos,
@@ -196,13 +201,15 @@ function cadastroInicial() {
         antiguidade: calcularAntiguidade(dataIngresso),
     };
 
+
+        });
+
     if (seraferiasEscolar === 1) {
         feriasEscolar(matricula, qtdperiodos), novosDados;
     } else {
         feriasNaoEscolar(matricula, qtdperiodos, novosDados);
     }
 
-});
 
 
     
