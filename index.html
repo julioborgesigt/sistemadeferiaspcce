@@ -67,6 +67,12 @@
         function cadastrar() {
             const matricula = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
+            const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+
+            if (senha !== confirmacaoSenha) {
+                alert("As senhas não coincidem.");
+                return;
+            }
 
             if (database[matricula]) {
                 alert("Matrícula já cadastrada.");
@@ -94,6 +100,8 @@
         <input type="text" id="cadastroMatricula" name="cadastroMatricula" required>
         <label for="cadastroSenha">Senha:</label>
         <input type="password" id="cadastroSenha" name="cadastroSenha" required>
+        <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
+        <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
         <button onclick="cadastrar()">Cadastrar</button>
     </div>
 </body>
