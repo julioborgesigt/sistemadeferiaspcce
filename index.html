@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login e Cadastro</title>
     <link rel="stylesheet" href="style.css">
+    
+      
+ 
 </head>
 <body>
     <div class="login-background"></div>
@@ -30,36 +33,60 @@
     </div>
 
     <script>
-        let database = {};
+           let database = {};
 
-        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            const matricula = document.getElementById('cadastroMatricula').value;
-            const senha = document.getElementById('cadastroSenha').value;
-            const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+    const matricula = document.getElementById('cadastroMatricula').value;
+    const senha = document.getElementById('cadastroSenha').value;
+    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
-            if (senha !== confirmacaoSenha) {
-                alert("As senhas não coincidem.");
-                return;
-            }
+    if (senha !== confirmacaoSenha) {
+        alert("As senhas não coincidem.");
+        return;
+    }
 
-            if (database[matricula]) {
-                alert("Matrícula já cadastrada.");
-                return;
-            }
+    if (database[matricula]) {
+        alert("Matrícula já cadastrada.");
+        return;
+    }
 
-            // Crie os novos dados para salvar no banco de dados
-            const novosDados = {
-                matricula: matricula,
-                senha: senha
-            };
+    // Crie os novos dados para salvar no banco de dados
+    const novosDados = {
+        matricula: matricula,
+        senha: senha
+    };
 
-            salvarBancoDados(novosDados);
-            alert("Cadastro bem-sucedido!");
-        });
+    salvarBancoDados(novosDados);
+    alert("Cadastro bem-sucedido!");
+});
 
-        function salvarBancoDados(novosDados) {
+
+
+ 
+
+function carregarBancoDados() {
+const url = `${baseUrl}/banco_dados.json`;
+
+fetch(url)
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao carregar o arquivo.');
+    }
+    return response.json();
+})
+.then(jsonData => {
+    database = jsonData;
+    console.log("Banco de dados carregado:", database);
+})
+.catch(error => {
+    console.error('Erro:', error);
+});
+}
+
+
+function salvarBancoDados(novosDados) {
 const url = `${baseUrl}/banco_dados.json`;
 
 // Carregar os dados existentes antes de salvar
@@ -95,6 +122,7 @@ fetch(url)
 });
 }
 
+
 function login() {
     const matricula = document.getElementById('loginMatricula').value;
     const senha = document.getElementById('loginSenha').value;
@@ -106,6 +134,8 @@ function login() {
         alert("Matrícula ou senha incorreta.");
     }
 }
+
+
     </script>
 </body>
 </html>
