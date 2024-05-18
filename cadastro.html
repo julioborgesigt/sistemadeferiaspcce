@@ -81,6 +81,10 @@ function verificarConflito(dataInicio, dataFim) {
 }
 
 function cadastroInicial() {
+
+    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
     const matricula = document.getElementById("matriculaCadastro").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
     const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
@@ -192,7 +196,7 @@ function cadastroInicial() {
         antiguidade: calcularAntiguidade(dataIngresso),
     };
 
-
+});
     if (seraferiasEscolar === 1) {
         feriasEscolar(matricula, qtdperiodos);
     } else {
@@ -759,6 +763,7 @@ function salvarBancoDados(novosDados) {
     </div>
 
 <script>
+
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
