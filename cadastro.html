@@ -196,13 +196,18 @@ function cadastroInicial() {
         antiguidade: calcularAntiguidade(dataIngresso),
     };
 
-});
     if (seraferiasEscolar === 1) {
         feriasEscolar(matricula, qtdperiodos);
     } else {
         feriasNaoEscolar(matricula, qtdperiodos);
     }
+
+
+});
+
+    
 }
+
 
 let alertaExibido = false;
 
