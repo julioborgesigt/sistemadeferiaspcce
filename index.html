@@ -41,8 +41,26 @@
     const matricula = document.getElementById('cadastroMatricula').value;
     const senha = document.getElementById('cadastroSenha').value;
     const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+});
 
-    // Restante do código para cadastrar o usuário...
+    function cadastrar() {
+    const matricula = document.getElementById('cadastroMatricula').value;
+    const senha = document.getElementById('cadastroSenha').value;
+    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+
+    if (senha !== confirmacaoSenha) {
+        alert("As senhas não coincidem.");
+        return;
+    }
+
+    if (database[matricula]) {
+        alert("Matrícula já cadastrada.");
+    } else {
+        database[matricula] = { senha };
+        salvarBancoDados(novosDados);
+        alert("Cadastro bem-sucedido!");
+    }
+}
 
 
 
@@ -118,26 +136,7 @@ function login() {
     }
 }
 
-function cadastrar() {
-    const matricula = document.getElementById('cadastroMatricula').value;
-    const senha = document.getElementById('cadastroSenha').value;
-    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
-    if (senha !== confirmacaoSenha) {
-        alert("As senhas não coincidem.");
-        return;
-    }
-
-    if (database[matricula]) {
-        alert("Matrícula já cadastrada.");
-    } else {
-        database[matricula] = { senha };
-        salvarBancoDados(novosDados);
-        alert("Cadastro bem-sucedido!");
-    }
-}
-
-});
     </script>
 </body>
 </html>
