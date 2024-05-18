@@ -13,7 +13,7 @@
         });
 
         function carregarBancoDados() {
-            const url = 'banco_dados_cadastros.json';
+            const url = 'banco_dados.json';
 
             fetch(url)
                 .then(response => {
@@ -32,7 +32,7 @@
         }
 
         function salvarBancoDados() {
-            const url = 'banco_dados_cadastros.json';
+            const url = 'banco_dados.json';
 
             fetch(url, {
                 method: 'POST',
@@ -53,10 +53,10 @@
         }
 
         function login() {
-            const matricula = document.getElementById('loginMatricula').value;
+            const matriculaSenha = document.getElementById('loginMatricula').value;
             const senha = document.getElementById('loginSenha').value;
 
-            if (database[matricula] && database[matricula].senha === senha) {
+            if (database[matriculaSenha] && database[matriculaSenha].senha === senha) {
                 alert("Login bem-sucedido!");
                 window.location.href = 'cadastro.html';
             } else {
@@ -65,7 +65,7 @@
         }
 
         function cadastrar() {
-            const matricula = document.getElementById('cadastroMatricula').value;
+            const matriculaSenha = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
             const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
@@ -74,10 +74,10 @@
                 return;
             }
 
-            if (database[matricula]) {
+            if (database[matriculaSenha]) {
                 alert("Matrícula já cadastrada.");
             } else {
-                database[matricula] = { senha };
+                database[matriculaSenha] = { senha };
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
             }
