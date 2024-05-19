@@ -207,22 +207,7 @@ function cadastroInicial() {
     }
 
 
-    function preencherFormulario(dados) {
-    document.getElementById("matriculaCadastro").value = dados.matricula;
-    document.getElementById("dataIngresso").value = dados.dataIngresso;
-    document.getElementById("paquisitivoinicio").value = dados.paquisitivoinicio;
-    document.getElementById("paquisitivofim").value = dados.paquisitivofim;
-    document.getElementById("seraferiasEscolar").checked = dados.feriasescolarounao === 1;
-    document.getElementById("qtdperiodos").value = dados.numeroDePeriodos;
-    document.getElementById("dataNascimento").value = dados.dataNascimento;
-    document.getElementById("qtdfilhosmenores").value = dados.qtdfilhosmenores;
-    document.getElementById("periodo11").value = dados.periodo11;
-    document.getElementById("periodo12").value = dados.periodo12;
-    document.getElementById("periodo21").value = dados.periodo21;
-    document.getElementById("periodo22").value = dados.periodo22;
-    document.getElementById("periodo31").value = dados.periodo31;
-    document.getElementById("periodo32").value = dados.periodo32;
-}
+    
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
@@ -264,6 +249,26 @@ function cadastroInicial() {
         feriasNaoEscolar(matricula, qtdperiodos);
     }
 }
+
+
+
+function preencherFormulario(dados) {
+    document.getElementById("matriculaCadastro").value = dados.matricula;
+    document.getElementById("dataIngresso").value = dados.dataIngresso;
+    document.getElementById("paquisitivoinicio").value = dados.paquisitivoinicio;
+    document.getElementById("paquisitivofim").value = dados.paquisitivofim;
+    document.getElementById("seraferiasEscolar").checked = dados.feriasescolarounao === 1;
+    document.getElementById("qtdperiodos").value = dados.numeroDePeriodos;
+    document.getElementById("dataNascimento").value = dados.dataNascimento;
+    document.getElementById("qtdfilhosmenores").value = dados.qtdfilhosmenores;
+    document.getElementById("periodo11").value = dados.periodo11;
+    document.getElementById("periodo12").value = dados.periodo12;
+    document.getElementById("periodo21").value = dados.periodo21;
+    document.getElementById("periodo22").value = dados.periodo22;
+    document.getElementById("periodo31").value = dados.periodo31;
+    document.getElementById("periodo32").value = dados.periodo32;
+}
+
 
 let alertaExibido = false;
 
