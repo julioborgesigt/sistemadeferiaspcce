@@ -47,7 +47,7 @@
 
 
 <script>   
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const matricula = params.get('matricula');
             if (matricula) {
@@ -76,9 +76,6 @@
                 document.getElementById('periodo32').value = database[matricula].periodo32 || '';
             }
         }
-
-
-
 
 
 // Simula uma base de dados
@@ -242,9 +239,6 @@ function validarMatricula(input) {
     }
 }
 
-document.getElementById("matriculaCadastro").addEventListener("input", function () {
-    validarMatricula(this);
-});
 
 function calcularAntiguidade(dataIngresso) {
     const hoje = new Date();

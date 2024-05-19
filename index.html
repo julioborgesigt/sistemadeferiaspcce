@@ -53,16 +53,17 @@
         }
 
         function login() {
-            const matricula = document.getElementById('loginMatricula').value;
-            const senha = document.getElementById('loginSenha').value;
+    const matricula = document.getElementById('loginMatricula').value;
+    const senha = document.getElementById('loginSenha').value;
 
-            if (database[matricula] && database[matricula].senha === senha) {
-                alert("Login bem-sucedido!");
-                window.location.href = 'cadastro.html';
-            } else {
-                alert("Matrícula ou senha incorreta.");
-            }
-        }
+    if (database[matricula] && database[matricula].senha === senha) {
+        alert("Login bem-sucedido!");
+        window.location.href = `cadastro.html?matricula=${matricula}`;
+    } else {
+        alert("Matrícula ou senha incorreta.");
+    }
+}
+
 
         function cadastrar() {
             const matricula = document.getElementById('cadastroMatricula').value;
