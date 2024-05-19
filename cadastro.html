@@ -58,12 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('matriculaCadastro').value = matricula;
                 // Chamar a função para carregar os dados, se necessário
                 carregarDadosMatricula(matricula);
+                console.log('ireicarregar o banco de dados dessa matricula')
             }
         });
 
         function carregarDadosMatricula(matricula) {
             // Aqui você pode carregar os dados da matrícula do banco de dados e preencher o formulário
             if (database[matricula]) {
+                console.log('estou carregando o banco de dados dessa matricula')
                 // Preencher os campos do formulário com os dados do banco
                 document.getElementById('dataIngresso').value = database[matricula].dataIngresso || '';
                 document.getElementById('paquisitivoinicio').value = database[matricula].paquisitivoinicio || '';
