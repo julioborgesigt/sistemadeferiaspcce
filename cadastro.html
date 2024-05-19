@@ -47,6 +47,40 @@
 
 
 <script>   
+ document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const matricula = params.get('matricula');
+            if (matricula) {
+                document.getElementById('matriculaCadastro').value = matricula;
+                // Chamar a função para carregar os dados, se necessário
+                carregarDadosMatricula(matricula);
+            }
+        });
+
+        function carregarDadosMatricula(matricula) {
+            // Aqui você pode carregar os dados da matrícula do banco de dados e preencher o formulário
+            if (database[matricula]) {
+                // Preencher os campos do formulário com os dados do banco
+                document.getElementById('dataIngresso').value = database[matricula].dataIngresso || '';
+                document.getElementById('paquisitivoinicio').value = database[matricula].paquisitivoinicio || '';
+                document.getElementById('paquisitivofim').value = database[matricula].paquisitivofim || '';
+                document.getElementById('seraferiasEscolar').checked = database[matricula].feriasescolarounao === 1;
+                document.getElementById('qtdperiodos').value = database[matricula].numeroDePeriodos || '';
+                document.getElementById('dataNascimento').value = database[matricula].dataNascimento || '';
+                document.getElementById('qtdfilhosmenores').value = database[matricula].qtdfilhosmenores || '';
+                document.getElementById('periodo11').value = database[matricula].periodo11 || '';
+                document.getElementById('periodo12').value = database[matricula].periodo12 || '';
+                document.getElementById('periodo21').value = database[matricula].periodo21 || '';
+                document.getElementById('periodo22').value = database[matricula].periodo22 || '';
+                document.getElementById('periodo31').value = database[matricula].periodo31 || '';
+                document.getElementById('periodo32').value = database[matricula].periodo32 || '';
+            }
+        }
+
+
+
+
+
 // Simula uma base de dados
 // Simula uma base de dados
 let database = {};
