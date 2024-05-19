@@ -181,11 +181,11 @@ function cadastroInicial() {
     }
 
     // Verificar se a matrícula já existe no banco de dados
-    if (matricula in database) {
-        alert("Já existe um cadastro para esta matrícula. Os dados serão exibidos no formulário.");
-        preencherFormulario(database[matricula]);
-        return;
-    }
+   // if (matricula in database) {
+   //     alert("Já existe um cadastro para esta matrícula. Os dados serão exibidos no formulário.");
+   //     preencherFormulario(database[matricula]);
+    //    return;
+   // }
 
     // Salvar os dados no banco de dados
     database[matricula] = {
