@@ -57,13 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (matricula) {
                 document.getElementById('matriculaCadastro').value = matricula;
                 // Chamar a função para carregar os dados, se necessário
-                carregarDadosMatricula(matricula);
+               // carregarDadosMatricula(matricula);
                 console.log('ireicarregar o banco de dados dessa matricula')
-                console.log(matricula);
+                console.log(matricula);  
             }
         });
 
-        function carregarDadosMatricula(matricula) {
+
+
+       /* function carregarDadosMatricula(matricula) {
             console.log('estou tentando carregar o banco de dados dessa matricula');
             console.log(matricula);
             // Aqui você pode carregar os dados da matrícula do banco de dados e preencher o formulário
@@ -85,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('periodo32').value = database[matricula].periodo32 || '';
             }
         }
+
+*/
+
 
 
 // Função para verificar conflitos de datas
@@ -197,7 +202,27 @@ function cadastroInicial() {
     // Verificar se a matrícula já existe no banco de dados
     if (matricula in database) {
         alert("Já existe um cadastro para esta matrícula. Os dados serão adicionados aos dados já existentes.");
+        preencherFormulario(database[matricula]);
+        return;
     }
+
+
+    function preencherFormulario(dados) {
+    document.getElementById("matriculaCadastro").value = dados.matricula;
+    document.getElementById("dataIngresso").value = dados.dataIngresso;
+    document.getElementById("paquisitivoinicio").value = dados.paquisitivoinicio;
+    document.getElementById("paquisitivofim").value = dados.paquisitivofim;
+    document.getElementById("seraferiasEscolar").checked = dados.feriasescolarounao === 1;
+    document.getElementById("qtdperiodos").value = dados.numeroDePeriodos;
+    document.getElementById("dataNascimento").value = dados.dataNascimento;
+    document.getElementById("qtdfilhosmenores").value = dados.qtdfilhosmenores;
+    document.getElementById("periodo11").value = dados.periodo11;
+    document.getElementById("periodo12").value = dados.periodo12;
+    document.getElementById("periodo21").value = dados.periodo21;
+    document.getElementById("periodo22").value = dados.periodo22;
+    document.getElementById("periodo31").value = dados.periodo31;
+    document.getElementById("periodo32").value = dados.periodo32;
+}
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
