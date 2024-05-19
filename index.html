@@ -79,6 +79,7 @@
                 alert("Matrícula já cadastrada.");
             } else {
                 database[matricula] = { senha };
+                database[matricula] = { matricula };
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
             }
