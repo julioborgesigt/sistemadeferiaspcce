@@ -78,8 +78,12 @@
             if (database[matricula]) {
                 alert("Matrícula já cadastrada.");
             } else {
-                database[matricula] = { senha };
-                database[matricula] = { matricula };
+                database[matricula] = 
+                {   
+                    senha,
+                    matricula
+                 };
+               
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
             }
