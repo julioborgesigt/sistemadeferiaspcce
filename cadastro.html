@@ -118,15 +118,6 @@ function verificarConflito(dataInicio, dataFim) {
     return false;
 }
 
-
-// Verificar se a matrícula já existe no banco de dados
-if (matricula in database) {
-        alert("Já existe um cadastro para esta matrícula. Os dados serão adicionados aos dados já existentes.");
-        preencherFormulario(database[matricula]);
-        
-    }
-
-    
 function cadastroInicial() {
     const matricula = document.getElementById("matriculaCadastro").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
@@ -208,7 +199,12 @@ function cadastroInicial() {
         return;
     }
 
-    
+    // Verificar se a matrícula já existe no banco de dados
+    if (matricula in database) {
+        alert("Já existe um cadastro para esta matrícula. Os dados serão adicionados aos dados já existentes.");
+        preencherFormulario(database[matricula]);
+        
+    }
 
 
     
