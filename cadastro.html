@@ -47,6 +47,10 @@
 
 
 <script>   
+// Simula uma base de dados
+let database = {};
+const baseUrl = window.location.origin;
+
 document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const matricula = params.get('matricula');
@@ -77,11 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-
-// Simula uma base de dados
-// Simula uma base de dados
-let database = {};
-const baseUrl = window.location.origin;
 
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim) {
@@ -116,6 +115,7 @@ function cadastroInicial() {
     const paquisitivofim = document.getElementById("paquisitivofim").value;
     const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
     const qtdperiodos = parseInt(document.getElementById("qtdperiodos").value, 10);
+    let numeroDePeriodos = parseInt(qtdperiodos, 10);
     const dataNascimento = document.getElementById("dataNascimento").value;
     const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
 
@@ -146,19 +146,28 @@ function cadastroInicial() {
     let diferenca3 = dataInicio3 ? Math.abs(dataFim3 - dataInicio3) : null;
 
     // Converta a diferença para dias
-    let diferencaEmDias1 = diferenca1 ? diferenca1 / (1000 * 60 * 60 * 24) : null;
+    let diferencaEmDias1 = diferenca1 ? diferenca1/ (1000 * 60 * 60 * 24) : null;
     let diferencaEmDias2 = diferenca2 ? diferenca2 / (1000 * 60 * 60 * 24) : null;
     let diferencaEmDias3 = diferenca3 ? diferenca3 / (1000 * 60 * 60 * 24) : null;
 
-    if (diferencaEmDias1 !== 29 && qtdperiodos == 1) {
+    console.log('a diferença em  dias 1 é:');
+    console.log(diferencaEmDias1);
+    
+    console.log('a diferença em  dias 2 é:');
+    console.log(diferencaEmDias2);
+    
+    console.log('a diferença em  dias 3 é:');
+    console.log(diferencaEmDias3);
+
+    if ( diferencaEmDias1 !== 29 && qtdperiodos == 1 ) {
         alert("O intervalo entre as datas de início e fim do período 1 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 2 && diferencaEmDias2 === null && (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14) && qtdperiodos < 3) {
+    if (qtdperiodos === 2 && diferencaEmDias2 === null  && (diferencaEmDias2 !== 14 || diferencaEmDias1 !== 14)  && qtdperiodos < 3 ) {
         alert("O intervalo entre as datas de início e fim do período 1 e 2 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN) && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
+    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN)  && (diferencaEmDias3 !== 9 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
         alert("O intervalo entre as datas de início e fim do período 1, 2 e 3 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
@@ -181,27 +190,43 @@ function cadastroInicial() {
     }
 
     // Verificar se a matrícula já existe no banco de dados
-   // if (matricula in database) {
-   //     alert("Já existe um cadastro para esta matrícula. Os dados serão exibidos no formulário.");
-   //     preencherFormulario(database[matricula]);
-    //    return;
-   // }
+    if (matricula in database) {
+        alert("Já existe um cadastro para esta matrícula. Os dados serão adicionados aos dados já existentes.");
+    }
 
     // Salvar os dados no banco de dados
-    database[matricula] = {
-        matricula: matricula,
-        numeroDePeriodos: qtdperiodos,
-        feriasescolarounao: seraferiasEscolar,
-        idade: calcularIdade(dataNascimento),
-        qtdfilhosmenores: qtdfilhosmenores,
-        periodo11: periodo11,
-        periodo12: periodo12,
-        periodo21: periodo21,
-        periodo22: periodo22,
-        periodo31: periodo31,
-        periodo32: periodo32,
-        antiguidade: calcularAntiguidade(dataIngresso)
-    };
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            numeroDePeriodos: qtdperiodos,
+            feriasescolarounao: seraferiasEscolar,
+            idade: calcularIdade(dataNascimento),
+            qtdfilhosmenores: qtdfilhosmenores,
+            periodo11: periodo11,
+            periodo12: periodo12,
+            periodo21: periodo21,
+            periodo22: periodo22,
+            periodo31: periodo31,
+            periodo32: periodo32,
+            antiguidade: calcularAntiguidade(dataIngresso)
+        });
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            matricula: matricula,
+            numeroDePeriodos: qtdperiodos,
+            feriasescolarounao: seraferiasEscolar,
+            idade: calcularIdade(dataNascimento),
+            qtdfilhosmenores: qtdfilhosmenores,
+            periodo11: periodo11,
+            periodo12: periodo12,
+            periodo21: periodo21,
+            periodo22: periodo22,
+            periodo31: periodo31,
+            periodo32: periodo32,
+            antiguidade: calcularAntiguidade(dataIngresso)
+        };
+    }
 
     if (seraferiasEscolar === 1) {
         feriasEscolar(matricula, qtdperiodos);
@@ -210,78 +235,17 @@ function cadastroInicial() {
     }
 }
 
-function preencherFormulario(dados) {
-    document.getElementById("matriculaCadastro").value = dados.matricula;
-    document.getElementById("dataIngresso").value = dados.dataIngresso;
-    document.getElementById("paquisitivoinicio").value = dados.paquisitivoinicio;
-    document.getElementById("paquisitivofim").value = dados.paquisitivofim;
-    document.getElementById("seraferiasEscolar").checked = dados.feriasescolarounao === 1;
-    document.getElementById("qtdperiodos").value = dados.numeroDePeriodos;
-    document.getElementById("dataNascimento").value = dados.dataNascimento;
-    document.getElementById("qtdfilhosmenores").value = dados.qtdfilhosmenores;
-    document.getElementById("periodo11").value = dados.periodo11;
-    document.getElementById("periodo12").value = dados.periodo12;
-    document.getElementById("periodo21").value = dados.periodo21;
-    document.getElementById("periodo22").value = dados.periodo22;
-    document.getElementById("periodo31").value = dados.periodo31;
-    document.getElementById("periodo32").value = dados.periodo32;
-}
-
 let alertaExibido = false;
 
 function validarMatricula(input) {
     if (input.value.length < 8 && !alertaExibido) {
         alertaExibido = true;
-        alert("A matrícula deve ter pelo menos 8 dígitos.");
-    }
-    if (input.value.length >= 8) {
+        alert("A matrícula deve ter pelo menos 8 caracteres.");
+        input.focus();
+    } else {
         alertaExibido = false;
     }
 }
-
-
-function calcularAntiguidade(dataIngresso) {
-    const hoje = new Date();
-    const [ano, mes, dia] = dataIngresso.split("-");
-    const dataIngressoDate = new Date(ano, mes - 1, dia);
-    const diferenca = hoje - dataIngressoDate;
-    const anosDeServico = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
-    return anosDeServico;
-}
-
-function calcularIdade(dataNascimento) {
-    const hoje = new Date();
-    const [ano, mes, dia] = dataNascimento.split("-");
-    const dataNascimentoDate = new Date(ano, mes - 1, dia);
-    const diferenca = hoje - dataNascimentoDate;
-    const idade = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
-    return idade;
-}
-
-function feriasEscolar(matricula, qtdperiodos) {
-    const maxPeriodo = qtdperiodos * 15;
-    let totalFeriasEscolares = 0;
-
-    for (let i = 1; i <= qtdperiodos; i++) {
-        const periodoInicio = document.getElementById(`periodo${i}1`).value;
-        const periodoFim = document.getElementById(`periodo${i}2`).value;
-
-        if (periodoInicio && periodoFim) {
-            const dataInicio = new Date(periodoInicio.split('/').reverse().join('-'));
-            const dataFim = new Date(periodoFim.split('/').reverse().join('-'));
-            const diferenca = (dataFim - dataInicio) / (1000 * 60 * 60 * 24);
-
-            totalFeriasEscolares += diferenca;
-        }
-    }
-
-    if (totalFeriasEscolares > maxPeriodo) {
-        alert("Os períodos de férias escolares excedem o limite permitido.");
-    } else {
-        alert("Cadastro realizado com sucesso.");
-    }
-}
-
 
 function finalizarCadastro() {
     document.getElementById("matriculaCadastro").value = "";
