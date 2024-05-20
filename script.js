@@ -62,6 +62,47 @@ function verificarConflito(dataInicio, dataFim) {
     return false;
 }
 
+
+function preCadastro() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+    const dataIngresso = document.getElementById("dataIngresso").value;
+    const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
+    const paquisitivofim = document.getElementById("paquisitivofim").value;
+    const dataNascimento = document.getElementById("dataNascimento").value;
+    
+    
+    
+
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            numeroDePeriodos: qtdperiodos,
+            feriasescolarounao: seraferiasEscolar,
+            idade: calcularIdade(dataNascimento),
+            paquisitivoinicio: paquisitivoinicio,
+            paquisitivofim: paquisitivofim,
+            antiguidade: calcularAntiguidade(dataIngresso)
+            
+        });
+        alert("Pre Cadastro concluído com suscesso");
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            matricula: matricula,
+            numeroDePeriodos: qtdperiodos,
+            feriasescolarounao: seraferiasEscolar,
+            idade: calcularIdade(dataNascimento),
+            paquisitivoinicio: paquisitivoinicio,
+            paquisitivofim: paquisitivofim,
+            antiguidade: calcularAntiguidade(dataIngresso)
+        };
+        alert("Pre Cadastro concluído com suscesso 2");
+    }
+
+    
+}
+
 function cadastroInicial() {
     const matricula = document.getElementById("matriculaCadastro").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
