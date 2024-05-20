@@ -21,6 +21,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const period1Checkbox = document.getElementById('periodo1');
+    const period2Checkbox = document.getElementById('periodo2');
+    const period3Checkbox = document.getElementById('periodo3');
+
+    const period1Container = document.getElementById('periodo1-container');
+    const period2Container = document.getElementById('periodo2-container');
+    const period3Container = document.getElementById('periodo3-container');
+
+    function updatePeriodVisibility() {
+        period1Container.style.display = period1Checkbox.checked || period2Checkbox.checked || period3Checkbox.checked ? 'block' : 'none';
+        period2Container.style.display = period2Checkbox.checked || period3Checkbox.checked ? 'block' : 'none';
+        period3Container.style.display = period3Checkbox.checked ? 'block' : 'none';
+    }
+
+    function handleCheckboxChange() {
+        if (this.checked) {
+            period1Checkbox.checked = this === period1Checkbox;
+            period2Checkbox.checked = this === period2Checkbox;
+            period3Checkbox.checked = this === period3Checkbox;
+        } else {
+            period1Checkbox.checked = false;
+            period2Checkbox.checked = false;
+            period3Checkbox.checked = false;
+        }
+        updatePeriodVisibility();
+    }
+
+    period1Checkbox.addEventListener('change', handleCheckboxChange);
+    period2Checkbox.addEventListener('change', handleCheckboxChange);
+    period3Checkbox.addEventListener('change', handleCheckboxChange);
+
+    updatePeriodVisibility();
+});
+
+
+
+
 // Simula uma base de dados
 let database = {};
 const baseUrl = window.location.origin;
