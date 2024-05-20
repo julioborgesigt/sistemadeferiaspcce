@@ -119,11 +119,11 @@
             if (database[matricula]) {
                 alert("Matrícula já cadastrada.");
             } else {
-                database[matricula] = {
+                Object.assign(databasedatabase[matricula] = {
                     senha,
                     matricula,
                     cargo
-                };
+                });
 
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
