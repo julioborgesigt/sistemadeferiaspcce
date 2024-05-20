@@ -18,25 +18,24 @@ body {
 
 /* Container padrão */
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 800px;
     padding: 20px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     margin: 20px;
 }
 
 /* Cabeçalhos */
-h1, h3 {
+h1, h2 {
     text-align: center;
     color: #007aff;
 }
 
-h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #007aff;
+h3 {
+    text-align: left;
 }
 
 /* Formulário */
@@ -47,39 +46,44 @@ h2 {
 
 label {
     display: block;
-    margin-bottom: 15px;
-    margin-top: 20px;
-    font-weight: bold;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #555;
 }
 
 input[type="text"],
-input[type="date"],
-input[type="checkbox"],
-button {
+input[type="password"] {
     width: 100%;
-    padding: 15px; /* Aumenta o tamanho dos inputs */
-    margin-bottom: 25px;
+    padding: 10px;
+    margin: 5px 0 10px;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Bordas mais arredondadas */
-    font-size: 1em;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
 }
 
 input[type="checkbox"] {
-    width: auto;
+    margin-right: 5px;
 }
 
 button {
-    background-color: #007aff;
-    color: #fff;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
     transition: background-color 0.3s;
-    border-radius: 10px; /* Bordas mais arredondadas */
 }
 
 button:hover {
-    background-color: #005bb5;
+    background-color: #0056b3;
 }
+
+
+
 
 /* Ajustar tamanho da fonte nas tabelas */
 table {
@@ -135,6 +139,59 @@ h3 {
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+/* Tabela responsiva */
+@media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr {
+        margin-bottom: 15px;
+    }
+
+    tr:last-child {
+        margin-bottom: 0;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    th::before, th::after {
+        display: none;
+    }
+
+    tr:nth-child(even) {
+        background-color: transparent;
+    }
+}
+
+
 
 /* Estilo para a seção de dados */
 #dados2 {
@@ -221,67 +278,16 @@ body.dark-mode #toggle-dark-mode {
     color: #ffffff;
 }
 
-/* Tabela responsiva */
-@media screen and (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        background-color: #f2f2f2;
-        color: #333;
-    }
-
-    tr {
-        margin-bottom: 15px;
-    }
-
-    tr:last-child {
-        margin-bottom: 0;
-    }
-
-    td {
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-    }
-
-    td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        width: calc(50% - 20px);
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-    }
-
-    th::before, th::after {
-        display: none;
-    }
-
-    tr:nth-child(even) {
-        background-color: transparent;
-    }
-}
 
 /* Ajustes específicos para o flatpickr */
 .flatpickr-calendar {
-    z-index: 1000; /* Garante que o flatpickr esteja acima de outros elementos */
+    z-index: 1000;
 }
 
 body.dark-mode .flatpickr-calendar {
     background: #333;
     color: #fff;
     border: 1px solid #777;
-    border-radius: 10px; /* Borda arredondada para o calendário */
 }
 
 body.dark-mode .flatpickr-months {
@@ -316,13 +322,16 @@ body.dark-mode .flatpickr-day.today {
 }
 
 .login-container {
-    max-width: 250px;
+    max-width: 300px;
+    width: 300px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin: 20px;
 }
+
+
 
 body.dark-mode .login-container {
     background: rgba(30, 30, 30, 0.8);
@@ -342,7 +351,8 @@ body.dark-mode .login-container h2 {
 .login-container button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     border-radius: 10px; /* Bordas mais arredondadas */
     border: 1px solid #ccc;
     font-size: 1em;
@@ -366,13 +376,23 @@ body.dark-mode .login-container h2 {
         flex-direction: column;
     }
 
-    .login-container {
-        width: 90%;
+    .container {
         padding: 15px;
-        margin-bottom: 20px;
     }
 
-    .login-container h2 {
+    h1, h2 {
         font-size: 1.5em;
     }
+}
+
+/* Estilo adicional */
+.checkbox-container {
+    display: flex;
+    gap: 10px;
+}
+
+#periodo1-container,
+#periodo2-container,
+#periodo3-container {
+    display: none;
 }

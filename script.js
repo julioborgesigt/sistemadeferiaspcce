@@ -21,6 +21,52 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const period1Checkbox = document.getElementById('periodo1');
+    const period2Checkbox = document.getElementById('periodo2');
+    const period3Checkbox = document.getElementById('periodo3');
+
+    const period1Container = document.getElementById('periodo1-container');
+    const period2Container = document.getElementById('periodo2-container');
+    const period3Container = document.getElementById('periodo3-container');
+
+    function updatePeriodVisibility() {
+        period1Container.style.display = (period1Checkbox.checked || period2Checkbox.checked || period3Checkbox.checked) ? 'block' : 'none';
+        period2Container.style.display = (period2Checkbox.checked || period3Checkbox.checked) ? 'block' : 'none';
+        period3Container.style.display = period3Checkbox.checked ? 'block' : 'none';
+    }
+
+    function handleCheckboxChange() {
+        if (this.checked) {
+            if (this === period1Checkbox) {
+                period2Checkbox.checked = false;
+                period3Checkbox.checked = false;
+            } else if (this === period2Checkbox) {
+                period1Checkbox.checked = true;
+                period3Checkbox.checked = false;
+            } else if (this === period3Checkbox) {
+                period1Checkbox.checked = true;
+                period2Checkbox.checked = true;
+            }
+        } else {
+            period1Checkbox.checked = false;
+            period2Checkbox.checked = false;
+            period3Checkbox.checked = false;
+        }
+        updatePeriodVisibility();
+    }
+
+    period1Checkbox.addEventListener('change', handleCheckboxChange);
+    period2Checkbox.addEventListener('change', handleCheckboxChange);
+    period3Checkbox.addEventListener('change', handleCheckboxChange);
+
+    updatePeriodVisibility();
+});
+
+
+
+
 // Simula uma base de dados
 let database = {};
 const baseUrl = window.location.origin;
@@ -62,15 +108,50 @@ function verificarConflito(dataInicio, dataFim) {
     return false;
 }
 
-function cadastroInicial() {
+
+function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
     const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
     const paquisitivofim = document.getElementById("paquisitivofim").value;
-    const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
-    const qtdperiodos = parseInt(document.getElementById("qtdperiodos").value, 10);
-    let numeroDePeriodos = parseInt(qtdperiodos, 10);
     const dataNascimento = document.getElementById("dataNascimento").value;
+    
+    
+    
+
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            matricula: matricula,
+            idade: calcularIdade(dataNascimento),
+            paquisitivoinicio: paquisitivoinicio,
+            paquisitivofim: paquisitivofim,
+            antiguidade: calcularAntiguidade(dataIngresso)
+            
+        });
+        alert("Pre Cadastro concluído com suscesso");
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            matricula: matricula,
+            idade: calcularIdade(dataNascimento),
+            paquisitivoinicio: paquisitivoinicio,
+            paquisitivofim: paquisitivofim,
+            antiguidade: calcularAntiguidade(dataIngresso)
+        };
+        alert("Pre Cadastro concluído com suscesso 2");
+    }
+
+    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
+}
+
+function cadastroInicial() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+    const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
+
+    const qtdperiodos = document.querySelectorAll('input[name="qtdperiodos"]:checked').length;
+
     const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
 
     let periodo11 = document.getElementById("periodo11").value;
@@ -79,6 +160,16 @@ function cadastroInicial() {
     let periodo22 = document.getElementById("periodo22").value;
     let periodo31 = document.getElementById("periodo31").value;
     let periodo32 = document.getElementById("periodo32").value;
+
+    // Suas validações e lógica de cadastro aqui
+    console.log("Matrícula:", matricula);
+    console.log("Será férias escolar:", seraferiasEscolar);
+    console.log("Quantidade de períodos:", qtdperiodos);
+    console.log("Filhos menores em idade escolar:", qtdfilhosmenores);
+    console.log("Período 1:", periodo11, "a", periodo12);
+    console.log("Período 2:", periodo21, "a", periodo22);
+    console.log("Período 3:", periodo31, "a", periodo32);
+
 
     // Converte as datas para objetos Date
     let dataInicio1 = new Date(periodo11.split('/').reverse().join('-'));
