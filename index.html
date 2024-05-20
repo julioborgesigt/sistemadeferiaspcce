@@ -58,14 +58,11 @@
             const isAdmin = document.getElementById('adminCheckbox').checked;
 
             if (isAdmin) {
-                carregarBancoDados();
-                if (matricula === '35109511') {
+                if (database[matricula] && matricula === '35109511' && database[matricula].senha === senha) {
                     alert("Bem-vindo, Administrador!");
                     window.location.href = 'adm.html';
                 } else {
                     alert("Você não é um administrador.");
-                    console.log(matricula);
-                    console.log(senha);
                 }
                 return;
             }
