@@ -316,7 +316,7 @@ body.dark-mode .flatpickr-day.today {
 }
 
 .login-container {
-    max-width: 400px;
+    max-width: 250px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -341,8 +341,8 @@ body.dark-mode .login-container h2 {
 .login-container input[type="password"],
 .login-container button {
     width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
     border-radius: 10px; /* Bordas mais arredondadas */
     border: 1px solid #ccc;
     font-size: 1em;

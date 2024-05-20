@@ -64,16 +64,46 @@
     }
 }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.cargo-checkbox');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        checkboxes.forEach(box => {
+                            if (box !== this) {
+                                box.checked = false;
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+
+
+
 
         function cadastrar() {
             const matricula = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
             const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+            
+                
 
             if (senha !== confirmacaoSenha) {
                 alert("As senhas não coincidem.");
                 return;
             }
+
+            const cargoIpc = document.getElementById("cargoIpc").checked;
+            const cargoEpc = document.getElementById("cargoEpc").checked;
+
+            let cargo = "";
+            if (cargoIpc) cargo = "IPC";
+            if (cargoEpc) cargo = "EPC";
+
+
 
             if (database[matricula]) {
                 alert("Matrícula já cadastrada.");
@@ -81,7 +111,8 @@
                 database[matricula] = 
                 {   
                     senha,
-                    matricula
+                    matricula,
+                    cargo
                  };
                
                 salvarBancoDados();
@@ -108,6 +139,14 @@
         <input type="password" id="cadastroSenha" name="cadastroSenha" required>
         <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
         <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
+        <label for="cargoIpc">
+            <input type="checkbox" id="cargoIpc" name="cargo" class="cargo-checkbox">
+            IPC
+        </label>
+        <label for="cargoEpc">
+            <input type="checkbox" id="cargoEpc" name="cargo" class="cargo-checkbox">
+            EPC
+        </label>
         <button onclick="cadastrar()">Cadastrar</button>
     </div>
 </body>
