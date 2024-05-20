@@ -151,8 +151,6 @@
 </head>
 <body>
     <div class="login-background"></div>
-
-    
     <div class="login-container">
         <h2>Login</h2>
         <label for="loginMatricula">Matrícula:</label>
@@ -166,7 +164,6 @@
         <button onclick="login()">Entrar</button>
     </div>
     <div class="login-container">
-        
         <h2>Cadastro</h2>
         <label for="cadastroMatricula">Matrícula:</label>
         <input type="text" id="cadastroMatricula" name="cadastroMatricula" required>
@@ -174,17 +171,14 @@
         <input type="password" id="cadastroSenha" name="cadastroSenha" required>
         <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
         <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
-        <div class="checkbox-container">
-            <label for="cargoIpc">
-                <input type="checkbox" id="cargoIpc" name="cargo" class="cargo-checkbox">
-                IPC
-            </label>
-            <label for="cargoEpc">
-                <input type="checkbox" id="cargoEpc" name="cargo" class="cargo-checkbox">
-                EPC
-            </label>
-            
-        </div>
+        <label for="cargoIpc">
+            <input type="checkbox" id="cargoIpc" name="cargo" class="cargo-checkbox">
+            IPC
+        </label>
+        <label for="cargoEpc">
+            <input type="checkbox" id="cargoEpc" name="cargo" class="cargo-checkbox">
+            EPC
+        </label>
         <button onclick="cadastrar()">Cadastrar</button>
     </div>
 </body>
