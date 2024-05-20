@@ -78,10 +78,6 @@
             }
         }
 
-
-            
-        
-
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.cargo-checkbox');
 
@@ -110,6 +106,11 @@
 
             const cargoIpc = document.getElementById("cargoIpc").checked;
             const cargoEpc = document.getElementById("cargoEpc").checked;
+
+            if (!cargoIpc && !cargoEpc) {
+                alert("Por favor, selecione pelo menos uma opção de cargo.");
+                return;
+            }
 
             let cargo = "";
             if (cargoIpc) cargo = "IPC";
