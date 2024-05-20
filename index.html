@@ -59,8 +59,10 @@
 
             if (isAdmin) {
                 if (database[matricula] && database[matricula].senha === senha) {
+                    if (matricula === '35109511') {
                     alert("Bem-vindo, Administrador!");
                     window.location.href = 'adm.html';
+                    }
                 } else {
                     alert("Você não é um administrador.");
                 }
