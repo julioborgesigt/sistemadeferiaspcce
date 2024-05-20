@@ -134,10 +134,9 @@
         }
     } else {
         // Cria um novo cadastro
-        database[matricula] = {
-            senha: senha,
-            cargo: cargo
-        };
+       // Atualiza apenas a senha e o cargo, mantendo os outros dados
+       database[matricula].senha = senha;
+            database[matricula].cargo = cargo;
         alert("Cadastro bem-sucedido!");
     }
 
