@@ -78,7 +78,6 @@ function preCadastro() {
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], {
             numeroDePeriodos: qtdperiodos,
-            feriasescolarounao: seraferiasEscolar,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
@@ -90,8 +89,6 @@ function preCadastro() {
         // Se a matrícula não existir, crie um novo registro
         database[matricula] = {
             matricula: matricula,
-            numeroDePeriodos: qtdperiodos,
-            feriasescolarounao: seraferiasEscolar,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
