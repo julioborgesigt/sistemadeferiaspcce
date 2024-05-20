@@ -53,32 +53,31 @@
         }
 
         function login() {
-            const matricula = document.getElementById('loginMatricula').value;
-            const senha = document.getElementById('loginSenha').value;
-            const isAdmin = document.getElementById('adminCheckbox').checked;
+    const matricula = document.getElementById('loginMatricula').value;
+    const senha = document.getElementById('loginSenha').value;
+    const isAdmin = document.getElementById('adminCheckbox').checked;
 
-            if (isAdmin) {
-                if (database[matricula] && database[matricula].senha === senha) {
-                    if (matricula === '35109511') {
-                    alert("Bem-vindo, Administrador!");
-                    window.location.href = 'adm.html';
-                    }
-                    } else {
-                    alert("Você não é um administrador.");
-                    }
-                    return;
-            }
-            
-                if (database[matricula] && database[matricula].senha === senha) {
-                alert("Login bem-sucedido!");
-                window.location.href = `cadastro.html?matricula=${matricula}`;
+    // Verificação se a matrícula e senha estão no banco de dados
+    if (database[matricula] && database[matricula].senha === senha) {
+        // Verificação de Admin
+        if (isAdmin) {
+            if (matricula === '35109511') {
+                alert("Bem-vindo, Administrador!");
+                window.location.href = 'adm.html';
             } else {
-                alert("Matrícula ou senha incorreta.");
+                alert("Você não é um administrador.");
             }
-            
-            
-            
-            }
+        } else {
+            // Login comum bem-sucedido
+            alert("Login bem-sucedido!");
+            window.location.href = `cadastro.html?matricula=${matricula}`;
+        }
+    } else {
+        // Credenciais incorretas
+        alert("Matrícula ou senha incorreta.");
+    }
+}
+
 
             
         
