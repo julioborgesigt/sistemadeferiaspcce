@@ -10,6 +10,13 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             carregarBancoDados();
+            // Se houver parâmetro de matrícula na URL, preencha o campo de matrícula e torne-o readonly
+            const urlParams = new URLSearchParams(window.location.search);
+            const matricula = urlParams.get('matricula');
+            if (matricula) {
+                document.getElementById('cadastroMatricula').value = matricula;
+                document.getElementById('cadastroMatricula').readOnly = true;
+            }
         });
 
         function carregarBancoDados() {
@@ -117,24 +124,23 @@
             if (cargoEpc) cargo = "EPC";
 
             if (database[matricula]) {
-                alert("Matrícula já cadastrada e atualizada.");
-                Object.assign(database[matricula] = {
-                    senha,
-                    matricula,
-                    cargo
-                });
-                salvarBancoDados();
-                alert("Cadastro bem-sucedido!");
+                if (!database[matricula].senha) {
+                    database[matricula].senha = senha;
+                    database[matricula].cargo = cargo;
+                    alert("Senha adicionada ao cadastro existente!");
+                } else {
+                    alert("Matrícula já cadastrada com uma senha.");
+                }
             } else {
-                Object.assign(database[matricula] = {
+                database[matricula] = {
                     senha,
                     matricula,
                     cargo
-                });
-
-                salvarBancoDados();
+                };
                 alert("Cadastro bem-sucedido!");
             }
+
+            salvarBancoDados();
         }
     </script>
 </head>
