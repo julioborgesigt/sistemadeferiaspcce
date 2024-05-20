@@ -18,7 +18,7 @@ body {
 
 /* Container padrão */
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 800px;
     padding: 20px;
     background: #fff;
@@ -39,6 +39,8 @@ h2 {
     color: #007aff;
 }
 
+
+
 /* Formulário */
 .form-container,
 .consulta-container {
@@ -47,38 +49,38 @@ h2 {
 
 label {
     display: block;
-    margin-bottom: 15px;
-    margin-top: 20px;
-    font-weight: bold;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #555;
 }
 
 input[type="text"],
-input[type="date"],
-input[type="checkbox"],
-button {
+input[type="password"] {
     width: 100%;
-    padding: 15px; /* Aumenta o tamanho dos inputs */
-    margin-bottom: 25px;
+    padding: 10px;
+    margin: 5px 0 10px;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Bordas mais arredondadas */
-    font-size: 1em;
+    border-radius: 5px;
 }
+
 
 input[type="checkbox"] {
-    width: auto;
+    margin-right: 5px;
 }
 
 button {
-    background-color: #007aff;
-    color: #fff;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 10px; /* Bordas mais arredondadas */
+    width: 100%;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #005bb5;
+    background-color: #0056b3;
 }
 
 /* Ajustar tamanho da fonte nas tabelas */
@@ -316,13 +318,16 @@ body.dark-mode .flatpickr-day.today {
 }
 
 .login-container {
-    max-width: 250px;
+    max-width: 300px;
+    width: 300px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     margin: 20px;
 }
+
+
 
 body.dark-mode .login-container {
     background: rgba(30, 30, 30, 0.8);
@@ -342,7 +347,8 @@ body.dark-mode .login-container h2 {
 .login-container button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     border-radius: 10px; /* Bordas mais arredondadas */
     border: 1px solid #ccc;
     font-size: 1em;
@@ -375,4 +381,20 @@ body.dark-mode .login-container h2 {
     .login-container h2 {
         font-size: 1.5em;
     }
+}
+.checkbox-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.checkbox-container label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-container input {
+    margin-right: 5px;
 }
