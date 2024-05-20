@@ -59,6 +59,8 @@
 
     // Verificação se a matrícula e senha estão no banco de dados
     if (database[matricula] && database[matricula].senha === senha) {
+        console.log(isAdmin);
+        console.log(matricula);
         // Verificação de Admin
         if (isAdmin) {
             if (matricula === '35109511') {
