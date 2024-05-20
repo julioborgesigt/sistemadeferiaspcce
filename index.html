@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login e Cadastro</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Seu script personalizado -->
+    <script src="script.js"></script>
+
     <script>
         let database = {};
 
@@ -19,46 +22,7 @@
             }
         });
 
-        function carregarBancoDados() {
-            const url = 'banco_dados.json';
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.text();
-                })
-                .then(jsonData => {
-                    database = JSON.parse(jsonData);
-                    console.log("Banco de dados carregado:", database);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
-
-        function salvarBancoDados() {
-            const url = 'banco_dados.json';
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(database),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao salvar os dados.');
-                }
-                alert("Dados salvos com sucesso!");
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-        }
-
+       
         function login() {
             const matricula = document.getElementById('loginMatricula').value;
             const senha = document.getElementById('loginSenha').value;
