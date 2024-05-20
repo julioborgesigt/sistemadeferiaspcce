@@ -125,8 +125,12 @@
 
             if (database[matricula]) {
                 if (!database[matricula].senha) {
-                    database[matricula].senha = senha;
-                    database[matricula].cargo = cargo;
+
+                    Object.assign(database[matricula], {
+            senha: senha,
+            cargo: cargo
+                    })
+                    salvarBancoDados();
                     alert("Senha adicionada ao cadastro existente!");
                 } else {
                     alert("Matrícula já cadastrada com uma senha.");
@@ -137,10 +141,11 @@
                     matricula,
                     cargo
                 };
-                alert("Cadastro bem-sucedido!");
+                alert("Cadastro inicial bem-sucedido!");
+                salvarBancoDados();
             }
 
-            salvarBancoDados();
+            
         }
     </script>
 </head>
