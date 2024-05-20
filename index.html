@@ -53,20 +53,31 @@
         }
 
         function login() {
-    const matricula = document.getElementById('loginMatricula').value;
-    const senha = document.getElementById('loginSenha').value;
+            const matricula = document.getElementById('loginMatricula').value;
+            const senha = document.getElementById('loginSenha').value;
+            const isAdmin = document.getElementById('adminCheckbox').checked;
 
-    if (database[matricula] && database[matricula].senha === senha) {
-        alert("Login bem-sucedido!");
-        window.location.href = `cadastro.html?matricula=${matricula}`;
-    } else {
-        alert("Matrícula ou senha incorreta.");
-    }
-}
+            if (isAdmin) {
+                if (matricula === '35109511' && database[matricula] && database[matricula].senha === senha) {
+                    alert("Bem-vindo, Administrador!");
+                    window.location.href = 'adm.html';
+                } else {
+                    alert("Você não é um administrador.");
+                }
+                return;
+            }
+
+            if (database[matricula] && database[matricula].senha === senha) {
+                alert("Login bem-sucedido!");
+                window.location.href = `cadastro.html?matricula=${matricula}`;
+            } else {
+                alert("Matrícula ou senha incorreta.");
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.cargo-checkbox');
-            
+
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
                     if (this.checked) {
@@ -80,16 +91,10 @@
             });
         });
 
-
-
-
-
         function cadastrar() {
             const matricula = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
             const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
-            
-                
 
             if (senha !== confirmacaoSenha) {
                 alert("As senhas não coincidem.");
@@ -103,18 +108,15 @@
             if (cargoIpc) cargo = "IPC";
             if (cargoEpc) cargo = "EPC";
 
-
-
             if (database[matricula]) {
                 alert("Matrícula já cadastrada.");
             } else {
-                database[matricula] = 
-                {   
+                database[matricula] = {
                     senha,
                     matricula,
                     cargo
-                 };
-               
+                };
+
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
             }
@@ -129,6 +131,10 @@
         <input type="text" id="loginMatricula" name="loginMatricula" required>
         <label for="loginSenha">Senha:</label>
         <input type="password" id="loginSenha" name="loginSenha" required>
+        <label for="adminCheckbox">
+            <input type="checkbox" id="adminCheckbox" name="admin">
+            Sou Administrador
+        </label>
         <button onclick="login()">Entrar</button>
     </div>
     <div class="login-container">
