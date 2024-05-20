@@ -136,11 +136,11 @@
                     alert("Matrícula já cadastrada com uma senha.");
                 }
             } else {
-                database[matricula] = {
+                Object.assign(database[matricula] = {
                     senha,
                     matricula,
                     cargo
-                };
+                });
                 alert("Cadastro inicial bem-sucedido!");
                 salvarBancoDados();
             }
