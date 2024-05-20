@@ -12,46 +12,73 @@
 <body>
     <div class="container">
         <h1>Cadastro e Consulta de Férias</h1>
+
         <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
             <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
         </div>
+
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
-                <label for="matriculaCadastro">Matrícula:</label>
-                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
-
+                <h3>Matrícula:</h3>
+                    <label for="matriculaCadastro"></label>
+                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8"  onblur="validarMatricula(this)" readonly>
+                
+                
+                <h3>Algum dos períodos será em dezembro, janeiro ou julho? Marque caso sim</h3>
                 <label for="seraferiasEscolar">
                     <input type="checkbox" id="seraferiasEscolar" name="seraferiasEscolar">
-                    Algum dos períodos será em dezembro, janeiro ou julho? Marque caso sim
+                    sim
+                    
                 </label>
 
-                <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
-                <input type="checkbox" id="periodo1" name="qtdperiodos" value="1"> 1
-                <input type="checkbox" id="periodo2" name="qtdperiodos" value="2"> 2
-                <input type="checkbox" id="periodo3" name="qtdperiodos" value="3"> 3
 
-                <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possua, deixar em branco</label>
-                <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">
+                <h3>Possui filhos menores em idade escolar? Quantos? Caso não possua, deixar em branco</h3>
+                <label for="qtdfilhosmenores"></label>
+                <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">  
+
+                <h3> Quantos períodos de férias (1, 2 ou 3)?</h3>
+                    
+                <label></label>
+                <div class="checkbox-container">
+                    <label for="periodo1">
+                        <input type="checkbox" id="periodo1" name="periodo" value="1">
+                        1
+                    </label>
+                    <label for="periodo2">
+                        <input type="checkbox" id="periodo2" name="periodo" value="2">
+                        2
+                    </label>
+                    <label for="periodo3">
+                        <input type="checkbox" id="periodo3" name="periodo" value="3">
+                        3
+                    </label>
+                </div>
+
+
+                
 
                 <div id="periodo1-container">
-                    <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
+                    <label for="periodo11">Qual o início do seu primeiro período de férias? (formato DD/MM/AAAA)</label>
                     <input type="text" id="periodo11" name="periodo11">
-                    <label for="periodo12">Qual o fim do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
+
+                    <label for="periodo12">Qual o fim do seu primeiro período de férias? (formato DD/MM/AAAA)</label>
                     <input type="text" id="periodo12" name="periodo12">
                 </div>
 
                 <div id="periodo2-container">
-                    <label for="periodo21">Qual o início do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
+                    <label for="periodo21">Qual o início do seu segundo período de férias? (formato DD/MM/AAAA)</label>
                     <input type="text" id="periodo21" name="periodo21">
-                    <label for="periodo22">Qual o fim do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
+
+                    <label for="periodo22">Qual o fim do seu segundo período de férias? (formato DD/MM/AAAA)</label>
                     <input type="text" id="periodo22" name="periodo22">
                 </div>
 
                 <div id="periodo3-container">
-                    <label for="periodo31">Qual o início do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
+                    <label for="periodo31">Qual o início do seu terceiro período de férias? (formato DD/MM/AAAA)</label>
                     <input type="text" id="periodo31" name="periodo31">
-                    <label for="periodo32">Qual o fim do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
+
+                    <label for="periodo32">Qual o fim do seu terceiro período de férias? (formato DD/MM/AAAA)</label>
                     <input type="text" id="periodo32" name="periodo32">
                 </div>
 
@@ -60,7 +87,7 @@
         </div>
 
         <div id="dados"></div>
-
+            
         <div class="consulta-container">
             <h2>Consultas</h2>
             <input type="text" id="matriculaConsulta" placeholder="Matrícula">

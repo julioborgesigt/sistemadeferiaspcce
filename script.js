@@ -32,23 +32,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const period3Container = document.getElementById('periodo3-container');
 
     function updatePeriodVisibility() {
-        period1Container.style.display = (period1Checkbox.checked || period2Checkbox.checked || period3Checkbox.checked) ? 'block' : 'none';
-        period2Container.style.display = (period2Checkbox.checked || period3Checkbox.checked) ? 'block' : 'none';
+        period1Container.style.display = period1Checkbox.checked || period2Checkbox.checked || period3Checkbox.checked ? 'block' : 'none';
+        period2Container.style.display = period2Checkbox.checked || period3Checkbox.checked ? 'block' : 'none';
         period3Container.style.display = period3Checkbox.checked ? 'block' : 'none';
     }
 
     function handleCheckboxChange() {
         if (this.checked) {
-            if (this === period1Checkbox) {
-                period2Checkbox.checked = false;
-                period3Checkbox.checked = false;
-            } else if (this === period2Checkbox) {
-                period1Checkbox.checked = true;
-                period3Checkbox.checked = false;
-            } else if (this === period3Checkbox) {
-                period1Checkbox.checked = true;
-                period2Checkbox.checked = true;
-            }
+            period1Checkbox.checked = this === period1Checkbox;
+            period2Checkbox.checked = this === period2Checkbox;
+            period3Checkbox.checked = this === period3Checkbox;
         } else {
             period1Checkbox.checked = false;
             period2Checkbox.checked = false;
@@ -148,10 +141,13 @@ function preCadastro() {
 
 function cadastroInicial() {
     const matricula = document.getElementById("matriculaCadastro").value;
+    const dataIngresso = document.getElementById("dataIngresso").value;
+    const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
+    const paquisitivofim = document.getElementById("paquisitivofim").value;
     const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
-
-    const qtdperiodos = document.querySelectorAll('input[name="qtdperiodos"]:checked').length;
-
+    const qtdperiodos = parseInt(document.getElementById("qtdperiodos").value, 10);
+    let numeroDePeriodos = parseInt(qtdperiodos, 10);
+    const dataNascimento = document.getElementById("dataNascimento").value;
     const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
 
     let periodo11 = document.getElementById("periodo11").value;
@@ -160,16 +156,6 @@ function cadastroInicial() {
     let periodo22 = document.getElementById("periodo22").value;
     let periodo31 = document.getElementById("periodo31").value;
     let periodo32 = document.getElementById("periodo32").value;
-
-    // Suas validações e lógica de cadastro aqui
-    console.log("Matrícula:", matricula);
-    console.log("Será férias escolar:", seraferiasEscolar);
-    console.log("Quantidade de períodos:", qtdperiodos);
-    console.log("Filhos menores em idade escolar:", qtdfilhosmenores);
-    console.log("Período 1:", periodo11, "a", periodo12);
-    console.log("Período 2:", periodo21, "a", periodo22);
-    console.log("Período 3:", periodo31, "a", periodo32);
-
 
     // Converte as datas para objetos Date
     let dataInicio1 = new Date(periodo11.split('/').reverse().join('-'));
