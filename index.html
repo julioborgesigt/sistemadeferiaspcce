@@ -138,9 +138,9 @@
             } else {
                 // Cria um novo cadastro
                 database[matricula] = {
-                    senha,
-                    matricula,
-                    cargo
+                        ...database[matricula],
+                        senha: senha,
+                        cargo: cargo
                 };
                 alert("Cadastro bem-sucedido!");
             }
