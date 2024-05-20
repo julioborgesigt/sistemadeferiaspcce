@@ -126,20 +126,22 @@
             if (database[matricula]) {
                 if (!database[matricula].senha) {
                     // Atualiza apenas a senha e o cargo, mantendo os outros dados
-                    Object.assign(database[matricula] = {
+                    database[matricula] = {
+                        ...database[matricula],
                         senha: senha,
                         cargo: cargo
-                    });
+                    };
                     alert("Senha adicionada ao cadastro existente!");
                 } else {
                     alert("Matrícula já cadastrada com uma senha.");
                 }
             } else {
                 // Cria um novo cadastro
-                Object.assign(database[matricula] = {
-                        senha: senha,
-                        cargo: cargo
-                });
+                database[matricula] = {
+                    senha,
+                    matricula,
+                    cargo
+                };
                 alert("Cadastro bem-sucedido!");
             }
 
