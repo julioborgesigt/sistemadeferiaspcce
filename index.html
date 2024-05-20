@@ -71,15 +71,20 @@
                     alert("Você não é um administrador.");
                 }
                 return;
-            }
-
-            if (database[matricula] && database[matricula].senha === senha) {
+            
+                if (database[matricula] && database[matricula].senha === senha) {
                 alert("Login bem-sucedido!");
                 window.location.href = `cadastro.html?matricula=${matricula}`;
             } else {
                 alert("Matrícula ou senha incorreta.");
             }
-        }
+            
+            
+            
+            }
+
+            
+        
 
         document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('.cargo-checkbox');
