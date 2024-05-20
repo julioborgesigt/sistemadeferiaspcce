@@ -118,7 +118,7 @@
 
             if (database[matricula]) {
                 alert("Matrícula já cadastrada e atualizada.");
-                Object.assign(databasedatabase[matricula] = {
+                Object.assign(database[matricula] = {
                     senha,
                     matricula,
                     cargo
@@ -126,7 +126,7 @@
                 salvarBancoDados();
                 alert("Cadastro bem-sucedido!");
             } else {
-                databasedatabase[matricula] = {
+                database[matricula] = {
                     senha,
                     matricula,
                     cargo
