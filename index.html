@@ -53,32 +53,30 @@
         }
 
         function login() {
-    const matricula = document.getElementById('loginMatricula').value;
-    const senha = document.getElementById('loginSenha').value;
-    const isAdmin = document.getElementById('adminCheckbox').checked;
+            const matricula = document.getElementById('loginMatricula').value;
+            const senha = document.getElementById('loginSenha').value;
+            const isAdmin = document.getElementById('adminCheckbox').checked;
 
-    // Verificação se a matrícula e senha estão no banco de dados
-    if (database[matricula] && database[matricula].senha === senha) {
-        console.log(isAdmin);
-        console.log(matricula);
-        // Verificação de Admin
-        if (isAdmin) {
-            if (matricula === 35109511) {
-                alert("Bem-vindo, Administrador!");
-                window.location.href = 'adm.html';
+            console.log("Tentando login:", { matricula, senha, isAdmin });
+
+            if (database[matricula] && database[matricula].senha === senha) {
+                console.log("Credenciais verificadas no banco de dados.");
+
+                if (isAdmin) {
+                    if (matricula === '35109511') {
+                        alert("Bem-vindo, Administrador!");
+                        window.location.href = 'adm.html';
+                    } else {
+                        alert("Você não é um administrador.");
+                    }
+                } else {
+                    alert("Login bem-sucedido!");
+                    window.location.href = `cadastro.html?matricula=${matricula}`;
+                }
             } else {
-                alert("Você não é um administrador.");
+                alert("Matrícula ou senha incorreta.");
             }
-        } else {
-            // Login comum bem-sucedido
-            alert("Login bem-sucedido!");
-            window.location.href = `cadastro.html?matricula=${matricula}`;
         }
-    } else {
-        // Credenciais incorretas
-        alert("Matrícula ou senha incorreta.");
-    }
-}
 
 
             
