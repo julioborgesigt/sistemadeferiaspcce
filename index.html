@@ -20,10 +20,10 @@
                     if (!response.ok) {
                         throw new Error('Erro ao carregar o arquivo.');
                     }
-                    return response.text();
+                    return response.json();
                 })
                 .then(jsonData => {
-                    database = JSON.parse(jsonData);
+                    database = jsonData;
                     console.log("Banco de dados carregado:", database);
                 })
                 .catch(error => {
@@ -58,7 +58,7 @@
             const isAdmin = document.getElementById('adminCheckbox').checked;
 
             if (isAdmin) {
-                if (matricula === '35109511' &&  database[matricula].senha === senha) {
+                if (database[matricula] && matricula === '35109511' && database[matricula].senha === senha) {
                     alert("Bem-vindo, Administrador!");
                     window.location.href = 'adm.html';
                 } else {
