@@ -97,7 +97,7 @@ function preCadastro() {
         alert("Pre Cadastro concluído com suscesso 2");
     }
 
-    
+    salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
 }
 
 function cadastroInicial() {
