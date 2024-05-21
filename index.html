@@ -134,11 +134,11 @@
             alert("Matrícula já cadastrada com uma senha.");
         }
     } else {
-        if (database[matricula]) {
+        if (!database[matricula]) {
             // Atualiza apenas a senha e o cargo, mantendo os outros dados
             database[matricula].senha = senha;
             database[matricula].cargo = cargo;
-            alert("Senha adicionada ao cadastro existente!");
+            alert("cadastro criado!");
         } else {
             alert("Matrícula já cadastrada com uma senha.");
         }
