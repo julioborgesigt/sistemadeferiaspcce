@@ -39,25 +39,25 @@
         }
 
         function salvarBancoDados() {
-    const url = 'banco_dados.json';
+            const url = 'banco_dados.json';
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(database),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro ao salvar os dados.');
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(database),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao salvar os dados.');
+                }
+                alert("Dados salvos com sucesso!");
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
         }
-        alert("Dados salvos com sucesso!");
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
-}
 
         function login() {
             const matricula = document.getElementById('loginMatricula').value;
@@ -123,22 +123,21 @@
     if (cargoIpc) cargo = "IPC";
     if (cargoEpc) cargo = "EPC";
 
-    // Verifica se a matrícula já está presente e se a senha coincide
-    if (database[matricula] && database[matricula].senha === senha) {
-        alert("Matrícula já cadastrada com a mesma senha.");
-    } else {
-        // Atualiza a senha e o cargo ou cria um novo cadastro
-        database[matricula] = {
-            senha: senha,
-            cargo: cargo
-        };
-        alert("Cadastro bem-sucedido!");
-    }
-
+    if (database[matricula]) {
+        if (!database[matricula].senha) {
+            console.log(matricula);
+            console.log(senha);
+            console.log('veja');
+            // Atualiza apenas a senha e o cargo, mantendo os outros dados
+            database[matricula].senha = senha;
+            database[matricula].cargo = cargo;
+            alert("Senha adicionada ao cadastro existente!");
+        } else {
+            alert("Matrícula já cadastrada com uma senha.");
+        }
+    } 
     salvarBancoDados();
 }
-
-
 
     </script>
 </head>
