@@ -130,13 +130,17 @@
             database[matricula].cargo = cargo;
             alert("Senha adicionada ao cadastro existente!");
         } else {
-            alert("Matrícula já cadastrada com uma senha.");
             database[matricula].senha = senha;
             database[matricula].cargo = cargo;
-            alert("Cadastro bem-sucedido!");
+            alert("Matrícula já cadastrada com uma senha.");
         }
-    
-       
+    } else {
+        // Cria um novo cadastro
+        database[matricula] = {
+            senha: senha,
+            cargo: cargo
+        };
+        alert("Cadastro bem-sucedido!");
     }
 
     salvarBancoDados();
