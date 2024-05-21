@@ -123,23 +123,20 @@
     if (cargoIpc) cargo = "IPC";
     if (cargoEpc) cargo = "EPC";
 
-    if (database[matricula]) {
-    // Atualiza a senha e o cargo
-    database[matricula].senha = senha;
-    database[matricula].cargo = cargo;
-    alert("Senha e cargo atualizados!");
-} else {
-    // Cria um novo cadastro
-    database[matricula] = {
-        senha: senha,
-        cargo: cargo
-    };
-    alert("Cadastro bem-sucedido!");
-}
-
+    if (database[matricula] && database[matricula].senha !== undefined) {
+        alert("Matrícula já cadastrada com uma senha.");
+    } else {
+        // Atualiza a senha e o cargo
+        database[matricula] = {
+            senha: senha,
+            cargo: cargo
+        };
+        alert("Cadastro bem-sucedido!");
+    }
 
     salvarBancoDados();
 }
+
 
     </script>
 </head>
