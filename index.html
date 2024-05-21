@@ -102,53 +102,55 @@
         });
 
         function cadastrar() {
-            carregarBancoDados();
-    const matricula = document.getElementById('cadastroMatricula').value;
-    const senha = document.getElementById('cadastroSenha').value;
-    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+            const matricula = document.getElementById('cadastroMatricula').value;
+            const senha = document.getElementById('cadastroSenha').value;
+            const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
-    if (senha !== confirmacaoSenha) {
-        alert("As senhas não coincidem.");
-        return;
-    }
+            if (senha !== confirmacaoSenha) {
+                alert("As senhas não coincidem.");
+                return;
+            }
 
-    const cargoIpc = document.getElementById("cargoIpc").checked;
-    const cargoEpc = document.getElementById("cargoEpc").checked;
+            const cargoIpc = document.getElementById("cargoIpc").checked;
+            const cargoEpc = document.getElementById("cargoEpc").checked;
 
-    if (!cargoIpc && !cargoEpc) {
-        alert("Por favor, selecione pelo menos uma opção de cargo.");
-        return;
-    }
+            if (!cargoIpc && !cargoEpc) {
+                alert("Por favor, selecione pelo menos uma opção de cargo.");
+                return;
+            }
 
-    let cargo = "";
-    if (cargoIpc) cargo = "IPC";
-    if (cargoEpc) cargo = "EPC";
+            let cargo = "";
+            if (cargoIpc) cargo = "IPC";
+            if (cargoEpc) cargo = "EPC";
 
-    if (database[matricula]) {
-        if (!database[matricula].senha) {
-            // Atualiza apenas a senha e o cargo, mantendo os outros dados
-            database[matricula].senha = senha;
-            database[matricula].cargo = cargo;
-            alert("Senha adicionada ao cadastro existente!");
-        } else {
-            alert("Matrícula já cadastrada com uma senha.");
+            if (database[matricula]) {
+                if (!database[matricula].senha) {
+                    console.log(' essa é a matricula');
+                    console.log(matricula);
+                    // Atualiza apenas a senha e o cargo, mantendo os outros dados
+                    database[matricula] = {
+                        ...database[matricula],
+                        senha: senha,
+                        cargo: cargo
+                    };
+                    alert("Senha adicionada ao cadastro existente!");
+                } else {
+                    alert("Matrícula já cadastrada com uma senha.");
+                }
+            } else {
+                // Cria um novo cadastro
+                console.log(' essa é a matricula2');
+                    console.log(matricula);
+                database[matricula] = {
+                    senha,
+                    matricula,
+                    cargo
+                };
+                alert("Cadastro bem-sucedido!");
+            }
+
+            salvarBancoDados();
         }
-    } else {
-        if (!database[matricula]) {
-             // Cria um novo cadastro
-        database[matricula] = {
-        senha: senha,
-        cargo: cargo
-    };
-    alert("Cadastro bem-sucedido!");
-        } else {
-            alert("Matrícula já cadastrada com uma senha.");
-        }
-    }
-
-    salvarBancoDados();
-}
-
     </script>
 </head>
 <body>
