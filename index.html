@@ -7,17 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <script>
         let database = {};
-        carregarBancoDados();
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // Se houver parâmetro de matrícula na URL, preencha o campo de matrícula e torne-o readonly
-            const urlParams = new URLSearchParams(window.location.search);
-            const matricula = urlParams.get('matricula');
-            if (matricula) {
-                document.getElementById('cadastroMatricula').value = matricula;
-                document.getElementById('cadastroMatricula').readOnly = true;
-            }
-        });
+        
+        
 
         function carregarBancoDados() {
             const url = 'banco_dados.json';
@@ -37,6 +28,8 @@
                     console.error('Erro:', error);
                 });
         }
+
+        carregarBancoDados();
 
         function salvarBancoDados() {
             const url = 'banco_dados.json';
@@ -139,13 +132,13 @@
         console.log('pre cad');
     } else {
         // Se a matrícula não existir, crie um novo registro
-        Object.assign(database[matricula], {
-           
-           senha: senha,
-           cargo: cargo
-           
-           
-       });
+        database[matricula] = 
+                {   
+                    senha,
+                    matricula,
+                    cargo
+                 };
+
         console.log('novo cad');
     }
 
