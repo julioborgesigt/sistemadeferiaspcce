@@ -123,10 +123,11 @@
     if (cargoIpc) cargo = "IPC";
     if (cargoEpc) cargo = "EPC";
 
-    if (database[matricula] && database[matricula].senha !== undefined) {
-        alert("Matrícula já cadastrada com uma senha.");
+    // Verifica se a matrícula já está presente e se a senha coincide
+    if (database[matricula] && database[matricula].senha === senha) {
+        alert("Matrícula já cadastrada com a mesma senha.");
     } else {
-        // Atualiza a senha e o cargo
+        // Atualiza a senha e o cargo ou cria um novo cadastro
         database[matricula] = {
             senha: senha,
             cargo: cargo
@@ -136,6 +137,7 @@
 
     salvarBancoDados();
 }
+
 
 
     </script>
