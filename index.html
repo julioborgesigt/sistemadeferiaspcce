@@ -123,31 +123,27 @@
             if (cargoIpc) cargo = "IPC";
             if (cargoEpc) cargo = "EPC";
 
-            if (database[matricula]) {
-                if (!database[matricula].senha) {
-                    console.log(' essa é a matricula');
-                    console.log(matricula);
-                    // Atualiza apenas a senha e o cargo, mantendo os outros dados
-                    database[matricula] = {
-                        ...database[matricula],
-                        senha: senha,
-                        cargo: cargo
-                    };
-                    alert("Senha adicionada ao cadastro existente!");
-                } else {
-                    alert("Matrícula já cadastrada com uma senha.");
-                }
-            } else {
-                // Cria um novo cadastro
-                console.log(' essa é a matricula2');
-                    console.log(matricula);
-                    database[matricula] = {
-                        ...database[matricula],
-                        senha: senha,
-                        cargo: cargo
-                    };
-                alert("Cadastro bem-sucedido! 2");
-            }
+            if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+           
+            senha: senha,
+            cargo: cargo
+            
+            
+        });
+
+        console.log('pre cad');
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            matricula: matricula,
+            senha: senha,
+            cargo: cargo
+        };
+        console.log('novo cad');
+    }
+
 
             salvarBancoDados();
         }
