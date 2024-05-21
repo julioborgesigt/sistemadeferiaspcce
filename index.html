@@ -139,11 +139,13 @@
         console.log('pre cad');
     } else {
         // Se a matrícula não existir, crie um novo registro
-        database[matricula] = {
-            matricula: matricula,
-            senha: senha,
-            cargo: cargo
-        };
+        Object.assign(database[matricula], {
+           
+           senha: senha,
+           cargo: cargo
+           
+           
+       });
         console.log('novo cad');
     }
 
