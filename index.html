@@ -124,24 +124,19 @@
     if (cargoEpc) cargo = "EPC";
 
     if (database[matricula]) {
-        if (!database[matricula].senha) {
-            // Atualiza apenas a senha e o cargo, mantendo os outros dados
-            database[matricula].senha = senha;
-            database[matricula].cargo = cargo;
-            alert("Senha adicionada ao cadastro existente!");
-        } else {
-            database[matricula].senha = senha;
-            database[matricula].cargo = cargo;
-            alert("Matrícula já cadastrada com uma senha.");
-        }
-    } else {
-        // Cria um novo cadastro
-        database[matricula] = {
-            senha: senha,
-            cargo: cargo
-        };
-        alert("Cadastro bem-sucedido!");
-    }
+    // Atualiza a senha e o cargo
+    database[matricula].senha = senha;
+    database[matricula].cargo = cargo;
+    alert("Senha e cargo atualizados!");
+} else {
+    // Cria um novo cadastro
+    database[matricula] = {
+        senha: senha,
+        cargo: cargo
+    };
+    alert("Cadastro bem-sucedido!");
+}
+
 
     salvarBancoDados();
 }
