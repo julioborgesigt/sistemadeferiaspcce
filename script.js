@@ -127,7 +127,8 @@ function preCadastro() {
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
-            antiguidade: calcularAntiguidade(dataIngresso)
+            antiguidade: calcularAntiguidade(dataIngresso),
+            senha: senha
             
         });
         alert("Pre Cadastro concluído com suscesso");
@@ -138,7 +139,8 @@ function preCadastro() {
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
-            antiguidade: calcularAntiguidade(dataIngresso)
+            antiguidade: calcularAntiguidade(dataIngresso),
+            senha: senha
         };
         alert("Pre Cadastro concluído com suscesso 2");
     }
