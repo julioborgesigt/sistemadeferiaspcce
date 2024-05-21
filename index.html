@@ -39,25 +39,25 @@
         }
 
         function salvarBancoDados() {
-            const url = 'banco_dados.json';
+    const url = 'banco_dados.json';
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(database),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao salvar os dados.');
-                }
-                alert("Dados salvos com sucesso!");
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(database),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao salvar os dados.');
         }
+        alert("Dados salvos com sucesso!");
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+    });
+}
 
         function login() {
             const matricula = document.getElementById('loginMatricula').value;
