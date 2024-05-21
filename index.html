@@ -119,8 +119,8 @@
             let cargo = "";
             if (cargoIpc) cargo = "IPC";
             if (cargoEpc) cargo = "EPC";
-            console.log(database[matricula].senha);
-            if (!database[matricula].senha) {
+            
+            if (!database[matricula].senha || database[matricula].senha === undefined) {
 
                  // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], {
