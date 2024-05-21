@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <script>
         let database = {};
-
+        carregarBancoDados();
         document.addEventListener('DOMContentLoaded', () => {
-            carregarBancoDados();
+            
             // Se houver parâmetro de matrícula na URL, preencha o campo de matrícula e torne-o readonly
             const urlParams = new URLSearchParams(window.location.search);
             const matricula = urlParams.get('matricula');
@@ -101,10 +101,10 @@
             });
         });
 
-        function carregarBancoDados();
+        
         
         function cadastrar() {
-            function carregarBancoDados();
+        
             const matricula = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
             const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
