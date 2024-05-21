@@ -141,12 +141,12 @@
                 // Cria um novo cadastro
                 console.log(' essa é a matricula2');
                     console.log(matricula);
-                database[matricula] = {
-                    senha,
-                    matricula,
-                    cargo
-                };
-                alert("Cadastro bem-sucedido!");
+                    database[matricula] = {
+                        ...database[matricula],
+                        senha: senha,
+                        cargo: cargo
+                    };
+                alert("Cadastro bem-sucedido! 2");
             }
 
             salvarBancoDados();
