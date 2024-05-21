@@ -248,7 +248,7 @@ function cadastroInicial() {
         Object.assign(database[matricula], {
             numeroDePeriodos: qtdperiodos,
             feriasescolarounao: seraferiasEscolar,
-            idade: calcularIdade(dataNascimento),
+            
             qtdfilhosmenores: qtdfilhosmenores,
             periodo11: periodo11,
             periodo12: periodo12,
@@ -256,7 +256,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-            antiguidade: calcularAntiguidade(dataIngresso)
+            
         });
     } else {
         // Se a matrícula não existir, crie um novo registro
@@ -264,7 +264,7 @@ function cadastroInicial() {
             matricula: matricula,
             numeroDePeriodos: qtdperiodos,
             feriasescolarounao: seraferiasEscolar,
-            idade: calcularIdade(dataNascimento),
+            
             qtdfilhosmenores: qtdfilhosmenores,
             periodo11: periodo11,
             periodo12: periodo12,
@@ -272,7 +272,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-            antiguidade: calcularAntiguidade(dataIngresso)
+            
         };
     }
 
