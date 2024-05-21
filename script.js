@@ -220,6 +220,8 @@ function cadastroInicial() {
         return;
     }
 
+    paquisitivofim = database[matricula].paquisitivofim;
+
     let dataFimAquisitivo = new Date(paquisitivofim.split('/').reverse().join('-'));
 
     if (dataInicio1 <= dataFimAquisitivo) {
