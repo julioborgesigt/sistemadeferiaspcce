@@ -97,8 +97,7 @@
         
         
         function cadastrar() {
-            let database = {};
-            carregarBancoDados();
+           
             console.log('banco carregado novamente');
             const matricula = document.getElementById('cadastroMatricula').value;
             const senha = document.getElementById('cadastroSenha').value;
@@ -121,18 +120,7 @@
             if (cargoIpc) cargo = "IPC";
             if (cargoEpc) cargo = "EPC";
 
-            if (matricula in database) {
-        // Se a matrícula já existir, adicione os dados aos existentes
-        Object.assign(database[matricula], {
-           
-            senha: senha,
-            cargo: cargo
-            
-            
-        });
-
-        console.log('pre cad');
-    } else {
+            if (matricula.senha in database) {
         // Se a matrícula não existir, crie um novo registro
         database[matricula] = 
                 {   
@@ -142,6 +130,19 @@
                  };
 
         console.log('novo cad');
+
+        
+    } else {
+
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+           
+           senha: senha,
+           cargo: cargo
+           
+           
+       });
+       console.log('pre cad');
     }
 
 
