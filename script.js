@@ -120,6 +120,7 @@ function preCadastro() {
     
 
     // Salvar os dados no banco de dados
+    let senha = '';
     if (matricula in database) {
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], {
