@@ -125,19 +125,25 @@
 
     if (database[matricula]) {
         if (!database[matricula].senha) {
-            console.log(matricula);
-            console.log(senha);
-            console.log('veja');
             // Atualiza apenas a senha e o cargo, mantendo os outros dados
             database[matricula].senha = senha;
             database[matricula].cargo = cargo;
             alert("Senha adicionada ao cadastro existente!");
-            salvarBancoDados();
         } else {
             alert("Matrícula já cadastrada com uma senha.");
         }
-    } 
-    
+    } else {
+        if (database[matricula]) {
+            // Atualiza apenas a senha e o cargo, mantendo os outros dados
+            database[matricula].senha = senha;
+            database[matricula].cargo = cargo;
+            alert("Senha adicionada ao cadastro existente!");
+        } else {
+            alert("Matrícula já cadastrada com uma senha.");
+        }
+    }
+
+    salvarBancoDados();
 }
 
     </script>
