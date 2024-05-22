@@ -82,14 +82,9 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Formulário */
-
-.logout-container {
-    margin-bottom: 20px;
-}
 
 
-button {
+button.logout-container {
     background-color: #ff0000;
     color: white;
     padding: 10px;
