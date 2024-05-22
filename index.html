@@ -13,6 +13,13 @@
         });
 
 
+        // Verifica se a página foi carregada a partir do cache do navegador
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.href = 'index.html';
+            }
+        });
+
         function carregarBancoDados() {
             const url = 'banco_dados.json';
 
