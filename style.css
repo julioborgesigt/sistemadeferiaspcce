@@ -79,25 +79,32 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #06b300;
 }
 
 
 
-button.logout-container {
-    background-color: #ff0000;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+.logout-container {
+    text-align: center; /* Centraliza o conteúdo */
+    margin-top: 20px;   /* Espaçamento superior */
+    padding: 10px;      /* Espaçamento interno */
+    background-color: #f8f9fa; /* Cor de fundo */
+    border: 1px solid #ddd;    /* Borda */
+    border-radius: 5px;        /* Bordas arredondadas */
 }
 
-button:hover {
-    background-color: #da3131;
+.logout-container button {
+    padding: 10px 20px;    /* Espaçamento interno do botão */
+    font-size: 16px;       /* Tamanho da fonte */
+    background-color: #ff0000; /* Cor de fundo do botão */
+    color: #fff;           /* Cor do texto do botão */
+    border: none;          /* Sem borda */
+    border-radius: 5px;    /* Bordas arredondadas */
+    cursor: pointer;       /* Cursor de ponteiro */
+}
+
+.logout-container button:hover {
+    background-color: #b60303; /* Cor de fundo do botão ao passar o mouse */
 }
 
 
