@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
      
 
 // Função para verificar conflitos de datas
-// Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPC = 0;
     let conflitoCountEPC = 0;
