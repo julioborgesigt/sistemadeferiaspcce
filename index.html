@@ -72,10 +72,11 @@
             if (database[matricula] && database[matricula].senha === senha) {
                 console.log("Credenciais verificadas no banco de dados.");
             
-            // Set authentication token
-            localStorage.setItem('isAuthenticated', 'true');
-
-            console.log('Token salvo:', localStorage.getItem('isAuthenticated'));
+                const token = generateToken();
+        const expirationTime = new Date().getTime() + 1 * 60 * 1000; // 10 minutos em milissegundos
+        const loginData = { token, expirationTime };
+        
+        localStorage.setItem('loginToken', JSON.stringify(loginData));
 
             
 

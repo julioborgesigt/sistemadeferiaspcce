@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const token = localStorage.getItem('isAuthenticated');
-            console.log('Verificando token na página protegida:', token);
-            if (!token) {
-                window.location.href = 'index.html';
-            }
-        });
+       document.addEventListener('DOMContentLoaded', function() {
+    const loginData = JSON.parse(localStorage.getItem('loginToken'));
+
+    if (!loginData || new Date().getTime() > loginData.expirationTime) {
+        // Redirecionar para a página de login se o token não existir ou estiver expirado
+        alert("Sua sessão expirou. Faça login novamente.");
+        window.location.href = 'index.html';
+    }
+});
     </script>
     
     
