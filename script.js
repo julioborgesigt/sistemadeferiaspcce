@@ -83,9 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
      
 
 // Função para verificar conflitos de datas
+// Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
-    let conflitoCount = 0;
-    const maxConflitos = cargo === 'IPC' ? 2 : 1;
+    let conflitoCountIPC = 0;
+    let conflitoCountEPC = 0;
 
     for (let matricula in database) {
         let funcionario = database[matricula];
@@ -103,14 +104,22 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 if ((dataInicio <= fimExistente && dataInicio >= inicioExistente) ||
                     (dataFim <= fimExistente && dataFim >= inicioExistente) ||
                     (dataInicio <= inicioExistente && dataFim >= fimExistente)) {
-                    conflitoCount++;
-                    if (conflitoCount >= maxConflitos) {
-                        return true;
+                    if (funcionario.cargo === 'IPC') {
+                        conflitoCountIPC++;
+                    } else if (funcionario.cargo === 'EPC') {
+                        conflitoCountEPC++;
                     }
                 }
             }
         }
     }
+
+    if (cargo === 'IPC' && conflitoCountIPC >= 2) {
+        return true;
+    } else if (cargo === 'EPC' && conflitoCountEPC >= 1) {
+        return true;
+    }
+
     return false;
 }
 
