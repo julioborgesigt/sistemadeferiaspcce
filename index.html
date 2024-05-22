@@ -62,6 +62,11 @@
             });
         }
 
+
+        function generateToken() {
+            return Math.random().toString(36).substr(2);
+        }
+
         function login() {
             const matricula = document.getElementById('loginMatricula').value;
             const senha = document.getElementById('loginSenha').value;
@@ -73,10 +78,10 @@
                 console.log("Credenciais verificadas no banco de dados.");
             
                 const token = generateToken();
-        const expirationTime = new Date().getTime() + 1 * 60 * 1000; // 10 minutos em milissegundos
-        const loginData = { token, expirationTime };
-        
-        localStorage.setItem('loginToken', JSON.stringify(loginData));
+                const expirationTime = new Date().getTime() + 1 * 60 * 1000; // 10 minutos em milissegundos
+                const loginData = { token, expirationTime };
+
+                localStorage.setItem('loginToken', JSON.stringify(loginData));
 
             
 
