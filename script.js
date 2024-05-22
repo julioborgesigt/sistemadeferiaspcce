@@ -747,3 +747,11 @@ function salvarBancoDados() {
         console.error('Erro:', error);
     });
 }
+
+
+function logout() {
+    // Remove authentication token
+    localStorage.removeItem('isAuthenticated');
+    // Redireciona para a página de login
+    window.location.href = 'index.html';
+}

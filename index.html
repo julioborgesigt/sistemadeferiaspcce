@@ -71,6 +71,9 @@
 
             if (database[matricula] && database[matricula].senha === senha) {
                 console.log("Credenciais verificadas no banco de dados.");
+            
+            localStorage.setItem('authenticated', 'true');
+            
 
                 if (isAdmin) {
                     if (senha === '25081990') {
