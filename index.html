@@ -116,7 +116,7 @@
                 return;
             }
 
-            if (database[matricula] && database[matricula].senha !== " ") {
+            if (database[matricula] && database[matricula].senha === "") {
                 alert("Matrícula já cadastrada com uma senha.");
                 return;
             }
