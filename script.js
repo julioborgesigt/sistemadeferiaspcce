@@ -83,7 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
      
 
 // Função para verificar conflitos de datas
-function verificarConflito(dataInicio, dataFim) {
+function verificarConflito(dataInicio, dataFim, cargo) {
+    let conflitoCount = 0;
+    const maxConflitos = cargo === 'IPC' ? 2 : 1;
+
     for (let matricula in database) {
         let funcionario = database[matricula];
         let periodos = [
@@ -100,7 +103,10 @@ function verificarConflito(dataInicio, dataFim) {
                 if ((dataInicio <= fimExistente && dataInicio >= inicioExistente) ||
                     (dataFim <= fimExistente && dataFim >= inicioExistente) ||
                     (dataInicio <= inicioExistente && dataFim >= fimExistente)) {
-                    return true;
+                    conflitoCount++;
+                    if (conflitoCount >= maxConflitos) {
+                        return true;
+                    }
                 }
             }
         }
