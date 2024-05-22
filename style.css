@@ -82,6 +82,28 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Formulário */
+.form-container,
+.logout-container {
+    margin-bottom: 20px;
+}
+
+
+button {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #da3131;
+}
 
 
 
@@ -396,3 +418,5 @@ body.dark-mode .login-container h2 {
 #periodo3-container {
     display: none;
 }
+
+
