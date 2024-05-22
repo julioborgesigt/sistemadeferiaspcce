@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Verifica se o usuário está autenticado
+            console.log('Verificando token:', localStorage.getItem('isAuthenticated'));
             if (!localStorage.getItem('isAuthenticated')) {
                 // Redireciona para a página de login se não estiver autenticado
                 window.location.href = 'index.html';
             }
         });
     </script>
+    
 </head>
 <body>
     <div class="container">
