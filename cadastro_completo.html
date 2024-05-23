@@ -3,127 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Completo</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+    <title>Cadastro Finalizado</title>
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <script>// Carrega o banco de dados
+        function carregarBancoDados() {
+            const url = 'banco_dados.json'; // Defina a URL correta do seu arquivo JSON
+        
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo.');
+                    }
+                    return response.json();
+                })
+                .then(jsonData => {
+                    database = jsonData;
+                    console.log("Banco de dados carregado:", database);
+                    // Chama a função exibirDados após carregar o banco de dados
+                    exibirDados();
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Cadastro Completo</h1>
-    <table id="cadastroTable">
-        <tr>
-            <th>Matrícula</th>
-            <td id="matricula"></td>
-        </tr>
-        <tr>
-            <th>Cargo</th>
-            <td id="cargo"></td>
-        </tr>
-        <tr>
-            <th>Número de Períodos</th>
-            <td id="numeroDePeriodos"></td>
-        </tr>
-        <tr>
-            <th>Férias Escolar ou Não</th>
-            <td id="feriasescolarounao"></td>
-        </tr>
-        <tr>
-            <th>Quantidade de Filhos Menores</th>
-            <td id="qtdfilhosmenores"></td>
-        </tr>
-        <tr>
-            <th>Período 1</th>
-            <td id="periodo1"></td>
-        </tr>
-        <tr>
-            <th>Período 2</th>
-            <td id="periodo2"></td>
-        </tr>
-        <tr>
-            <th>Período 3</th>
-            <td id="periodo3"></td>
-        </tr>
-    </table>
-
-    <button class="btn" onclick="generatePDF()">Gerar PDF</button>
-
-    <script>
-        // Função para carregar dados do cadastro na tabela
-        function loadCadastroData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const matricula = urlParams.get('matricula');
-            console.log('Matrícula:', matricula); // Log para depuração
-
-            if (!matricula) {
-                console.error('Matrícula não especificada na URL');
-                return;
-            }
-
-            const database = JSON.parse(localStorage.getItem('database')) || {};
-            console.log('Banco de dados:', database); // Log para depuração
-
-            if (database.hasOwnProperty(matricula)) {
-                const dados = database[matricula];
-                console.log('Dados do cadastro:', dados); // Log para depuração
-                document.getElementById('matricula').innerText = dados.matricula || '-';
-                document.getElementById('cargo').innerText = dados.cargo || '-';
-                document.getElementById('numeroDePeriodos').innerText = dados.numeroDePeriodos || '-';
-                document.getElementById('feriasescolarounao').innerText = dados.feriasescolarounao ? 'Sim' : 'Não';
-                document.getElementById('qtdfilhosmenores').innerText = dados.qtdfilhosmenores || '-';
-                document.getElementById('periodo1').innerText = dados.periodo11 && dados.periodo12 ? `${dados.periodo11} a ${dados.periodo12}` : '-';
-                document.getElementById('periodo2').innerText = dados.periodo21 && dados.periodo22 ? `${dados.periodo21} a ${dados.periodo22}` : '-';
-                document.getElementById('periodo3').innerText = dados.periodo31 && dados.periodo32 ? `${dados.periodo31} a ${dados.periodo32}` : '-';
+        
+        // Função para exibir os dados na tabela
+        function exibirDados() {
+            let matricula = localStorage.getItem('matricula');
+            let dados = database[matricula];
+        
+            if (dados) {
+                let html = `<table border="1">
+                    <tr><th>Matrícula</th><td>${dados.matricula}</td></tr>
+                    <tr><th>Qtd Períodos</th><td>${dados.numeroDePeriodos}</td></tr>
+                    <tr><th>Férias Escolar</th><td>${dados.feriasescolarounao}</td></tr>
+                    <tr><th>Pontuação Férias Escolar</th><td>${dados.pontuacaoferiasescolar || 'não'}</td></tr>
+                    <tr><th>Pontuação Férias Não Escolar</th><td>${dados.pontuacaoferiasNaoescolar || 'não'}</td></tr>
+                    <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
+        
+                // Verificar se os períodos de férias estão definidos
+                if (dados.periodo11) {
+                    html += `<tr><th>Intenção de Férias P1 (Início)</th><td>${dados.periodo11}</td></tr>
+                             <tr><th>Intenção de Férias P1 (Fim)</th><td>${dados.periodo12}</td></tr>`;
+                }
+                if (dados.periodo21) {
+                    html += `<tr><th>Intenção de Férias P2 (Início)</th><td>${dados.periodo21}</td></tr>
+                             <tr><th>Intenção de Férias P2 (Fim)</th><td>${dados.periodo22}</td></tr>`;
+                }
+                if (dados.periodo31) {
+                    html += `<tr><th>Intenção de Férias P3 (Início)</th><td>${dados.periodo31}</td></tr>
+                             <tr><th>Intenção de Férias P3 (Fim)</th><td>${dados.periodo32}</td></tr>`;
+                }
+        
+                html += `</table>`;
+                document.getElementById("dados2").innerHTML = html;
             } else {
-                console.log('Matrícula não encontrada no banco de dados'); // Log para depuração
+                alert("Dados inexistentes.");
             }
         }
-
-        // Função para gerar o PDF
-        async function generatePDF() {
+        
+        // Função para gerar PDF
+        function gerarPDF() {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const elementHTML = document.querySelector('body');
-            
-            await html2canvas(elementHTML).then(canvas => {
+        
+            html2canvas(document.querySelector("#dados2")).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', 10, 10);
-                doc.save('cadastro.pdf');
+                const pdf = new jsPDF();
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save("dados_cadastro.pdf");
             });
         }
+        
+        // Chama a função carregarBancoDados ao carregar a página
+        window.onload = carregarBancoDados;</script>
 
-        // Carregar dados ao iniciar a página
-        window.onload = loadCadastroData;
-    </script>
 
+</head>
+<body>
+    <h1>Dados do Cadastro</h1>
+    <div id="dados2"></div>
+    <button onclick="gerarPDF()">Gerar PDF</button>
 </body>
 </html>
