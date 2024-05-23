@@ -203,19 +203,19 @@ function cadastroInicial() {
     console.log("Período 3:", periodo31, "a", periodo32);
 
 
-    // Converte as datas para objetos Date
-    let dataInicio1 = new Date(periodo11.split('/').reverse().join('-'));
-    let dataFim1 = new Date(periodo12.split('/').reverse().join('-'));
-    let dataInicio2 = periodo21 ? new Date(periodo21.split('/').reverse().join('-')) : null;
-    let dataFim2 = periodo22 ? new Date(periodo22.split('/').reverse().join('-')) : null;
-    let dataInicio3 = periodo31 ? new Date(periodo31.split('/').reverse().join('-')) : null;
-    let dataFim3 = periodo32 ? new Date(periodo32.split('/').reverse().join('-')) : null;
+   // Converte as datas para objetos Date
+   let dataInicio1 = new Date(periodo11.split('/').reverse().join('-') + 'T00:00:00');
+   let dataFim1 = new Date(periodo12.split('/').reverse().join('-') + 'T00:00:00');
+   let dataInicio2 = periodo21 ? new Date(periodo21.split('/').reverse().join('-') + 'T00:00:00') : null;
+   let dataFim2 = periodo22 ? new Date(periodo22.split('/').reverse().join('-') + 'T00:00:00') : null;
+   let dataInicio3 = periodo31 ? new Date(periodo31.split('/').reverse().join('-') + 'T00:00:00') : null;
+   let dataFim3 = periodo32 ? new Date(periodo32.split('/').reverse().join('-') + 'T00:00:00') : null;
 
 
     // Verifica se as datas de início caem em um fim de semana
-    if (verificarFimDeSemana(periodo11) || 
-        (periodo12 && verificarFimDeSemana(periodo12)) || 
-        (periodo13 && verificarFimDeSemana(periodo13))) {
+    if (verificarFimDeSemana(dataInicio1) || 
+        (dataInicio2 && verificarFimDeSemana(dataInicio2)) || 
+        (dataInicio3 && verificarFimDeSemana(dataInicio3))) {
         alert("Os períodos de férias escolhidos não podem começar em um fim de semana.");
         return;
     }
