@@ -83,20 +83,26 @@
             const urlParams = new URLSearchParams(window.location.search);
             const matricula = urlParams.get('matricula');
             console.log('Matrícula:', matricula); // Log para depuração
+
+            if (!matricula) {
+                console.error('Matrícula não especificada na URL');
+                return;
+            }
+
             const database = JSON.parse(localStorage.getItem('database')) || {};
             console.log('Banco de dados:', database); // Log para depuração
 
-            if (matricula in database) {
+            if (database.hasOwnProperty(matricula)) {
                 const dados = database[matricula];
                 console.log('Dados do cadastro:', dados); // Log para depuração
-                document.getElementById('matricula').innerText = dados.matricula;
-                document.getElementById('cargo').innerText = dados.cargo;
-                document.getElementById('numeroDePeriodos').innerText = dados.numeroDePeriodos;
+                document.getElementById('matricula').innerText = dados.matricula || '-';
+                document.getElementById('cargo').innerText = dados.cargo || '-';
+                document.getElementById('numeroDePeriodos').innerText = dados.numeroDePeriodos || '-';
                 document.getElementById('feriasescolarounao').innerText = dados.feriasescolarounao ? 'Sim' : 'Não';
-                document.getElementById('qtdfilhosmenores').innerText = dados.qtdfilhosmenores;
-                document.getElementById('periodo1').innerText = dados.periodo11 + ' a ' + dados.periodo12;
-                document.getElementById('periodo2').innerText = dados.periodo21 ? dados.periodo21 + ' a ' + dados.periodo22 : '-';
-                document.getElementById('periodo3').innerText = dados.periodo31 ? dados.periodo31 + ' a ' + dados.periodo32 : '-';
+                document.getElementById('qtdfilhosmenores').innerText = dados.qtdfilhosmenores || '-';
+                document.getElementById('periodo1').innerText = dados.periodo11 && dados.periodo12 ? `${dados.periodo11} a ${dados.periodo12}` : '-';
+                document.getElementById('periodo2').innerText = dados.periodo21 && dados.periodo22 ? `${dados.periodo21} a ${dados.periodo22}` : '-';
+                document.getElementById('periodo3').innerText = dados.periodo31 && dados.periodo32 ? `${dados.periodo31} a ${dados.periodo32}` : '-';
             } else {
                 console.log('Matrícula não encontrada no banco de dados'); // Log para depuração
             }
