@@ -82,10 +82,13 @@
         function loadCadastroData() {
             const urlParams = new URLSearchParams(window.location.search);
             const matricula = urlParams.get('matricula');
+            console.log('Matrícula:', matricula); // Log para depuração
             const database = JSON.parse(localStorage.getItem('database')) || {};
+            console.log('Banco de dados:', database); // Log para depuração
 
             if (matricula in database) {
                 const dados = database[matricula];
+                console.log('Dados do cadastro:', dados); // Log para depuração
                 document.getElementById('matricula').innerText = dados.matricula;
                 document.getElementById('cargo').innerText = dados.cargo;
                 document.getElementById('numeroDePeriodos').innerText = dados.numeroDePeriodos;
@@ -94,6 +97,8 @@
                 document.getElementById('periodo1').innerText = dados.periodo11 + ' a ' + dados.periodo12;
                 document.getElementById('periodo2').innerText = dados.periodo21 ? dados.periodo21 + ' a ' + dados.periodo22 : '-';
                 document.getElementById('periodo3').innerText = dados.periodo31 ? dados.periodo31 + ' a ' + dados.periodo32 : '-';
+            } else {
+                console.log('Matrícula não encontrada no banco de dados'); // Log para depuração
             }
         }
 
