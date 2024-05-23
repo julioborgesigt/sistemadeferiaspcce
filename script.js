@@ -114,9 +114,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     }
 
     // Verifica os limites de conflitos para cada cargo
-    if (cargo === 'IPC' && conflitoCountIPC >= 2) {
+    if (conflitoCountIPC >= 2) {
         return true;
-    } else if (cargo === 'EPC' && conflitoCountEPC >= 1) {
+    } else if (conflitoCountEPC >= 1) {
         return true;
     }
     
