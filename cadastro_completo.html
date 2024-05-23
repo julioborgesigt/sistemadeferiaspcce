@@ -14,7 +14,8 @@
 
 
     document.addEventListener('DOMContentLoaded', () => {
-            exibirDados();
+        carregarBancoDados();   
+        exibirDados(matricula);
         });
 
 /*
@@ -55,7 +56,7 @@
     <div class="container">
 
        
-        <h1>Cadastro e Consulta de Férias</h1>
+        
         
 
 
@@ -74,7 +75,7 @@
         
 
         <div class="consulta-container">
-            <h2>Consultas</h2>
+            
             <label for="matriculaCadastro">Matrícula:</label>
                 
             <input type="text" id="matriculaConsulta" placeholder="Matrícula" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)">
