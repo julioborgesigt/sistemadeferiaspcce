@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Completo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -97,17 +98,15 @@
         }
 
         // Função para gerar o PDF
-        function generatePDF() {
+        async function generatePDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const elementHTML = document.querySelector('body');
-
-            doc.html(elementHTML, {
-                callback: function (doc) {
-                    doc.save('cadastro.pdf');
-                },
-                x: 10,
-                y: 10
+            
+            await html2canvas(elementHTML).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                doc.addImage(imgData, 'PNG', 10, 10);
+                doc.save('cadastro.pdf');
             });
         }
 
