@@ -9,7 +9,11 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <script>
-    carregarBancoDados();
+    let database = {};
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarBancoDados();
+        });
         
         
         // Função para gerar PDF
