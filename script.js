@@ -119,8 +119,12 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     } else if (cargo === 'EPC' && conflitoCountEPC >= 1) {
         return true;
     }
-
+    
+    console.log("retornou falso veja abaixo os contadores")
+    console.log(conflitoCountEPC);
+    console.log(conflitoCountIPC);
     return false;
+    
 }
 
 
