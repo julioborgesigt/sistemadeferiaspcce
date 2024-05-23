@@ -213,9 +213,9 @@ function cadastroInicial() {
 
 
     // Verifica se as datas de início caem em um fim de semana
-    if (verificarFimDeSemana(dataInicio1) || 
-        (dataInicio2 && verificarFimDeSemana(dataInicio2)) || 
-        (dataInicio3 && verificarFimDeSemana(dataInicio3))) {
+    if (verificarFimDeSemana(periodo11) || 
+        (periodo12 && verificarFimDeSemana(periodo12)) || 
+        (periodo13 && verificarFimDeSemana(periodo13))) {
         alert("Os períodos de férias escolhidos não podem começar em um fim de semana.");
         return;
     }
