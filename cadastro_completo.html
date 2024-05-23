@@ -33,6 +33,8 @@ window.onload = carregarBancoDados;
 window.onload = exibirDados;
 
 
+
+
         </script>
         
         
@@ -117,47 +119,4 @@ window.onload = exibirDados;
     </body>
     </html>
     
-    <script>
-    //let database = {};
-        
-       // Chama a função carregarBancoDados ao carregar a página
-       window.onload = carregarBancoDados;
-         
-        
-        // Função para gerar PDF
-        function gerarPDF() {
-            const { jsPDF } = window.jspdf;
-        
-            html2canvas(document.querySelector("#dados2")).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF();
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save("dados_cadastro.pdf");
-            });
-        }
-        
-    </script>
-
-</head>
-<body>
-
-    <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
-        <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
-    </div>
-    <div class="consulta-container">
-        <h2>Consultas</h2>
-        <input type="text" id="matriculaConsulta" placeholder="Matrícula">
-        <button onclick="exibirDados()">Consulta por matrícula</button>  
-        <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
-        <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para férias escolar</button>
-        <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
-    </div>
-    <h1>Dados do Cadastro</h1>
-    <div id="dados2"></div>
-    <button onclick="gerarPDF()">Gerar PDF</button>
-</body>
-</html>
+    
