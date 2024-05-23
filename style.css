@@ -86,7 +86,7 @@ button:hover {
 
 .logout-container {
     text-align: center; /* Centraliza o conteúdo */
-    margin-top: 20px;   /* Espaçamento superior */
+    margin-top: 10px;   /* Espaçamento superior */
     padding: 10px;      /* Espaçamento interno */
     background-color: #f8f9fa; /* Cor de fundo */
     border: 1px solid #ddd;    /* Borda */

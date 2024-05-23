@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Função para verificar se uma data é um fim de semana
 function verificarFimDeSemana(data) {
     const diaSemana = data.getDay();
+    console.log("data apontadaaaaaa");
+    console.log(data);
     // 0 = Domingo, 6 = Sábado
     return diaSemana === 0 || diaSemana === 6;
 }
