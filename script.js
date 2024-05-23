@@ -82,6 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
      
 
+// Função para verificar se uma data é um fim de semana
+function verificarFimDeSemana(data) {
+    const diaSemana = data.getDay();
+    // 0 = Domingo, 6 = Sábado
+    return diaSemana === 0 || diaSemana === 6;
+}
+
+
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPC = 0;
@@ -200,6 +208,15 @@ function cadastroInicial() {
     let dataFim2 = periodo22 ? new Date(periodo22.split('/').reverse().join('-')) : null;
     let dataInicio3 = periodo31 ? new Date(periodo31.split('/').reverse().join('-')) : null;
     let dataFim3 = periodo32 ? new Date(periodo32.split('/').reverse().join('-')) : null;
+
+
+    // Verifica se as datas de início caem em um fim de semana
+    if (verificarFimDeSemana(dataInicio1) || 
+        (dataInicio2 && verificarFimDeSemana(dataInicio2)) || 
+        (dataInicio3 && verificarFimDeSemana(dataInicio3))) {
+        alert("Os períodos de férias escolhidos não podem começar em um fim de semana.");
+        return;
+    }
 
     // Verifica conflitos para cada período
     if (verificarConflito(dataInicio1, dataFim1) || (dataInicio2 && verificarConflito(dataInicio2, dataFim2)) || (dataInicio3 && verificarConflito(dataInicio3, dataFim3))) {
