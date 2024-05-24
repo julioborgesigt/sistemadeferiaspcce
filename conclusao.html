@@ -21,35 +21,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get('matricula');
-            
-            if (!matricula) {
-                document.getElementById('info').innerHTML = "<p>Erro: Matrícula não fornecida.</p>";
-                return;
-            }
-
             fetch('banco_dados.json')
                 .then(response => response.json())
                 .then(database => {
-                    const dadosUsuario = database[matricula];
-                    if (dadosUsuario) {
-                        const infoDiv = document.getElementById('info');
-                        infoDiv.innerHTML = `
-                            <p>Matrícula: ${dadosUsuario.matricula}</p>
-                            <p>Idade: ${dadosUsuario.idade}</p>
-                            <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
-                            <p>Antiguidade: ${dadosUsuario.antiguidade}</p>
-                            <p>Senha: ${dadosUsuario.senha}</p>
-                            <p>Cargo: ${dadosUsuario.cargo}</p>
-                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
-                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
-                            <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>
-                        `;
-                        criarCalendario(dadosUsuario);
-                    } else {
-                        document.getElementById('info').innerHTML = "<p>Erro: Matrícula não encontrada.</p>";
-                    }
+                    const infoDiv = document.getElementById('info');
+                    infoDiv.innerHTML = '<p>Todas as informações dos usuários cadastrados foram carregadas.</p>';
+                    criarCalendario(database);
                 })
                 .catch(error => {
                     console.error('Erro ao carregar o banco de dados:', error);
@@ -57,32 +34,33 @@
                 });
         });
 
-        function criarCalendario(dadosUsuario) {
+        function criarCalendario(database) {
             const container = document.getElementById('calendario');
             const anoAtual = new Date().getFullYear();
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-            // Obter períodos de férias
-            const periodos = [
-                { inicio: dadosUsuario.periodo11, fim: dadosUsuario.periodo12 },
-                { inicio: dadosUsuario.periodo21, fim: dadosUsuario.periodo22 },
-                { inicio: dadosUsuario.periodo31, fim: dadosUsuario.periodo32 }
-            ];
-
-            // Converter datas de férias para o formato ISO (YYYY-MM-DD)
+            // Obter todas as datas de férias
             const datasFerias = [];
-            periodos.forEach(periodo => {
-                if (periodo.inicio && periodo.fim) {
-                    const [inicioDia, inicioMes, inicioAno] = periodo.inicio.split('/');
-                    const [fimDia, fimMes, fimAno] = periodo.fim.split('/');
-                    const inicio = new Date(`${inicioAno}-${inicioMes}-${inicioDia}`);
-                    const fim = new Date(`${fimAno}-${fimMes}-${fimDia}`);
+            for (const usuario in database) {
+                const periodos = [
+                    { inicio: database[usuario].periodo11, fim: database[usuario].periodo12 },
+                    { inicio: database[usuario].periodo21, fim: database[usuario].periodo22 },
+                    { inicio: database[usuario].periodo31, fim: database[usuario].periodo32 }
+                ];
 
-                    for (let d = new Date(inicio); d <= fim; d.setDate(d.getDate() + 1)) {
-                        datasFerias.push(new Date(d).toISOString().split('T')[0]);
+                periodos.forEach(periodo => {
+                    if (periodo.inicio && periodo.fim) {
+                        const [inicioDia, inicioMes, inicioAno] = periodo.inicio.split('/');
+                        const [fimDia, fimMes, fimAno] = periodo.fim.split('/');
+                        const inicio = new Date(`${inicioAno}-${inicioMes}-${inicioDia}`);
+                        const fim = new Date(`${fimAno}-${fimMes}-${fimDia}`);
+
+                        for (let d = new Date(inicio); d <= fim; d.setDate(d.getDate() + 1)) {
+                            datasFerias.push(new Date(d).toISOString().split('T')[0]);
+                        }
                     }
-                }
-            });
+                });
+            }
 
             for (let mes = 0; mes < 12; mes++) {
                 const table = document.createElement('table');
