@@ -1,0 +1,44 @@
+/* conclusao.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha o conteúdo no topo */
+}
+
+.container {
+    margin: 20px auto; /* Centraliza a container horizontalmente */
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    text-align: left;
+}
+
+#info {
+    margin-bottom: 20px;
+}
+
+button {
+    margin-top: 20px;
+}
+
+@media print {
+    body, html {
+        height: auto; /* Permite que o conteúdo ocupe toda a página na impressão */
+    }
+    .container {
+        box-shadow: none; /* Remove sombra na impressão */
+        width: 100%; /* Ocupa toda a largura na impressão */
+        max-width: none;
+        padding: 0;
+        margin: 0;
+    }
+    button {
+        display: none; /* Oculta o botão na impressão */
+    }
+}
