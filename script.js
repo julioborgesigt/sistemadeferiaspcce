@@ -451,7 +451,7 @@ function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
     alert("Cadastro concluído.");
     console.log(database[matricula]);
     // Redireciona para a página de conclusão do cadastro
-    window.location.href = `conclusao.html?matricula=${matricula}&senha=${senha}&cargo=${cargo}`;
+    window.location.href = `conclusao.html?matricula=${matricula}`;
            
 }
 
@@ -530,7 +530,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
      alert("Cadastro concluído.");
     console.log(database[matricula]);
     // Redireciona para a página de conclusão do cadastro
-    window.location.href = `conclusao.html?matricula=${matricula}&senha=${senha}&cargo=${cargo}`;
+    window.location.href = `conclusao.html?matricula=${matricula}`;
            
 }
 

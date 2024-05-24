@@ -19,15 +19,31 @@
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const matricula = params.get('matricula');
-            const senha = params.get('senha');
-            const cargo = params.get('cargo');
+            
+            if (!matricula) {
+                document.getElementById('info').innerHTML = "<p>Erro: Matrícula não fornecida.</p>";
+                return;
+            }
 
-            const infoDiv = document.getElementById('info');
-            infoDiv.innerHTML = `
-                <p>Matrícula: ${matricula}</p>
-                <p>Senha: ${senha}</p>
-                <p>Cargo: ${cargo}</p>
-            `;
+            fetch('banco_dados.json')
+                .then(response => response.json())
+                .then(database => {
+                    const dadosUsuario = database[matricula];
+                    if (dadosUsuario) {
+                        const infoDiv = document.getElementById('info');
+                        infoDiv.innerHTML = `
+                            <p>Matrícula: ${dadosUsuario.matricula}</p>
+                            <p>Senha: ${dadosUsuario.senha}</p>
+                            <p>Cargo: ${dadosUsuario.cargo}</p>
+                        `;
+                    } else {
+                        document.getElementById('info').innerHTML = "<p>Erro: Matrícula não encontrada.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o banco de dados:', error);
+                    document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
+                });
         });
     </script>
 </body>
