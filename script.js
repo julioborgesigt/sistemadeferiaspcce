@@ -124,24 +124,17 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     }
 
     // Verifica os limites de conflitos para cada cargo
-    if (conflitoCountIPC >= 2 ) {
-        if (conflitoCountIPC >= 2 && conflitoCountEPC >= 1) {
-            return true;
-        } 
-        
-        else if (conflitoCountIPC >= 2 && conflitoCountEPC < 1) {
-            return false;
+    if (cargo === 'IPC') {
+        if (conflitoCountIPC >= 2) {
+            return true; // Não permite mais de 2 IPC no mesmo período
+        } else {
+            return false; // Permite até 2 IPC no mesmo período
         }
-        
-    } 
-    
-    else if (conflitoCountEPC >= 1) {
-        if (conflitoCountEPC >= 1 && conflitoCountIPC >= 2) {
-            return true;
-        } 
-        
-        else if (conflitoCountEPC >= 1 && conflitoCountIPC < 2) {
-            return false;
+    } else if (cargo === 'EPC') {
+        if (conflitoCountEPC >= 1) {
+            return true; // Não permite mais de 1 EPC no mesmo período
+        } else {
+            return false; // Permite até 1 EPC no mesmo período
         }
     }
     
