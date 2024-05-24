@@ -123,6 +123,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
         }
     }
 
+    console.log("este é o cargoooooo")
+    console.log(cargo);
+    console.log(funcionario.cargo);
     // Verifica os limites de conflitos para cada cargo
     if (cargo === 'IPC') {
         if (conflitoCountIPC >= 2) {
