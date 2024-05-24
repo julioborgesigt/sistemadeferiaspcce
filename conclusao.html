@@ -64,9 +64,17 @@
             const anoAtual = new Date().getFullYear();
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
+            // Predefinir um conjunto de cores
+            const cores = ['#FF6347', '#FFD700', '#90EE90', '#1E90FF', '#9370DB', '#FF69B4', '#FFA500', '#00CED1', '#8B4513', '#00FF7F'];
+            const corUsuario = {};
+
             // Obter todas as datas de férias
             const datasFerias = [];
+            let corIndex = 0;
             for (const usuario in database) {
+                corUsuario[usuario] = cores[corIndex % cores.length];
+                corIndex++;
+
                 const periodos = [
                     { inicio: database[usuario].periodo11, fim: database[usuario].periodo12 },
                     { inicio: database[usuario].periodo21, fim: database[usuario].periodo22 },
@@ -81,7 +89,7 @@
                         const fim = new Date(`${fimAno}-${fimMes}-${fimDia}`);
 
                         for (let d = new Date(inicio); d <= fim; d.setDate(d.getDate() + 1)) {
-                            datasFerias.push(new Date(d).toISOString().split('T')[0]);
+                            datasFerias.push({ data: new Date(d).toISOString().split('T')[0], usuario });
                         }
                     }
                 });
@@ -108,8 +116,12 @@
                     celula.textContent = dia;
 
                     const data = new Date(anoAtual, mes, dia).toISOString().split('T')[0];
-                    if (datasFerias.includes(data)) {
-                        celula.classList.add('ferias');
+                    const feriasUsuario = datasFerias.filter(f => f.data === data);
+
+                    if (feriasUsuario.length > 0) {
+                        const cor = corUsuario[feriasUsuario[0].usuario];
+                        celula.style.backgroundColor = cor;
+                        celula.title = feriasUsuario[0].usuario; // Exibir a matrícula como dica
                     }
 
                     linha.appendChild(celula);

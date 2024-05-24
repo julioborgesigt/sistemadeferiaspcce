@@ -43,10 +43,6 @@ button {
     background: #f0f0f0;
 }
 
-.ferias {
-    background: yellow; /* Destaca os dias de férias */
-}
-
 @media print {
     body, html {
         height: auto; /* Permite que o conteúdo ocupe toda a página na impressão */
