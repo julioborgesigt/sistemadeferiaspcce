@@ -119,39 +119,47 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                         conflitoCountEPC++;
                     }
                 }
+               
+            }
+        }
+    }
 
+
+    for (let matricula in database) {
+        let funcionario = database[matricula];
+        let periodos = [
+            { inicio: funcionario.periodo11, fim: funcionario.periodo12 },
+            { inicio: funcionario.periodo21, fim: funcionario.periodo22 },
+            { inicio: funcionario.periodo31, fim: funcionario.periodo32 }
+        ];
+
+        for (let periodo of periodos) {
+            if (periodo.inicio && periodo.fim) {
                 
-
-
-
-
+                    console.log("este é o cargoooooo")
+                    console.log(cargo);
+                    console.log(funcionario.cargo);
+                    // Verifica os limites de conflitos para cada cargo
+                    if (cargo === 'IPC') {
+                        if (conflitoCountIPC >= 2) {
+                            return true; // Conflito se houver 2 ou mais IPC
+                        } else {
+                            return false; // Permite até 2 IPC
+                        }
+                    } else if (cargo === 'EPC') {
+                        if (conflitoCountEPC >= 1) {
+                            return true; // Conflito se houver 1 ou mais EPC
+                        } else {
+                            return false; // Permite até 1 EPC
+                        }
+                    }
+                    
+                    console.log("retornou falso veja abaixo os contadores")
+                    console.log(conflitoCountEPC);
+                    console.log(conflitoCountIPC);
+                    return false;
+               
             }
-
-            console.log("este é o cargoooooo")
-            console.log(cargo);
-            console.log(funcionario.cargo);
-            // Verifica os limites de conflitos para cada cargo
-            if (funcionario.cargo === 'IPC') {
-                if (conflitoCountIPC >= 2) {
-                    return true; // Conflito se houver 2 ou mais IPC
-                } else {
-                    return false; // Permite até 2 IPC
-                }
-            } else if (funcionario.cargo === 'EPC') {
-                if (conflitoCountEPC >= 1) {
-                    return true; // Conflito se houver 1 ou mais EPC
-                } else {
-                    return false; // Permite até 1 EPC
-                }
-            }
-            
-            console.log("retornou falso veja abaixo os contadores")
-            console.log(conflitoCountEPC);
-            console.log(conflitoCountIPC);
-            return false;
-
-
-
         }
     }
 
