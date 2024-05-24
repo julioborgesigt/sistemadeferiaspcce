@@ -119,32 +119,38 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                         conflitoCountEPC++;
                     }
                 }
+
+                console.log("este é o cargoooooo")
+                console.log(cargo);
+                console.log(funcionario.cargo);
+                // Verifica os limites de conflitos para cada cargo
+                if (cargo === 'IPC') {
+                    if (conflitoCountIPC >= 2) {
+                        return true; // Conflito se houver 2 ou mais IPC
+                    } else {
+                        return false; // Permite até 2 IPC
+                    }
+                } else if (cargo === 'EPC') {
+                    if (conflitoCountEPC >= 1) {
+                        return true; // Conflito se houver 1 ou mais EPC
+                    } else {
+                        return false; // Permite até 1 EPC
+                    }
+                }
+                
+                console.log("retornou falso veja abaixo os contadores")
+                console.log(conflitoCountEPC);
+                console.log(conflitoCountIPC);
+                return false;
+
+
+
+
             }
         }
     }
 
-    console.log("este é o cargoooooo")
-    console.log(cargo);
-    console.log(funcionario.cargo);
-    // Verifica os limites de conflitos para cada cargo
-    if (cargo === 'IPC') {
-        if (conflitoCountIPC >= 2) {
-            return true; // Conflito se houver 2 ou mais IPC
-        } else {
-            return false; // Permite até 2 IPC
-        }
-    } else if (cargo === 'EPC') {
-        if (conflitoCountEPC >= 1) {
-            return true; // Conflito se houver 1 ou mais EPC
-        } else {
-            return false; // Permite até 1 EPC
-        }
-    }
     
-    console.log("retornou falso veja abaixo os contadores")
-    console.log(conflitoCountEPC);
-    console.log(conflitoCountIPC);
-    return false;
     
 }
 
