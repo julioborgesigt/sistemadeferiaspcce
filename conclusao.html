@@ -122,6 +122,13 @@
                         const cor = corUsuario[feriasUsuario[0].usuario];
                         celula.style.backgroundColor = cor;
                         celula.title = feriasUsuario[0].usuario; // Exibir a matrícula como dica
+
+                        // Adicionar a matrícula abaixo do dia
+                        const matriculaDiv = document.createElement('div');
+                        matriculaDiv.textContent = feriasUsuario[0].usuario;
+                        matriculaDiv.style.fontSize = '0.8em';
+                        celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e a matrícula
+                        celula.appendChild(matriculaDiv);
                     }
 
                     linha.appendChild(celula);
