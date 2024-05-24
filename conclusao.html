@@ -21,11 +21,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const matricula = urlParams.get('matricula');
+
+            if (!matricula) {
+                document.getElementById('info').innerHTML = "<p>Erro: matrícula não fornecida.</p>";
+                return;
+            }
+
             fetch('banco_dados.json')
                 .then(response => response.json())
                 .then(database => {
-                    const infoDiv = document.getElementById('info');
-                    infoDiv.innerHTML = '<p>Todas as informações dos usuários cadastrados foram carregadas.</p>';
+                    const dadosUsuario = database[matricula];
+
+                    if (dadosUsuario) {
+                        const infoDiv = document.getElementById('info');
+                        infoDiv.innerHTML = `
+                            <p>Matrícula: ${dadosUsuario.matricula}</p>
+                            <p>Idade: ${dadosUsuario.idade}</p>
+                            <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
+                            <p>Antiguidade: ${dadosUsuario.antiguidade}</p>
+                            <p>Senha: ${dadosUsuario.senha}</p>
+                            <p>Cargo: ${dadosUsuario.cargo}</p>
+                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
+                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
+                            <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>
+                        `;
+                    } else {
+                        document.getElementById('info').innerHTML = "<p>Erro: usuário não encontrado.</p>";
+                    }
+
                     criarCalendario(database);
                 })
                 .catch(error => {
