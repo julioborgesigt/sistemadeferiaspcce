@@ -83,7 +83,16 @@ button:hover {
 }
 
 
+/* Estilo para a seção de dados */
+#logout {
+    margin-top: 20px;
+}
 
+/* Estilo para modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
 .logout-container {
     width: 100%;
     max-width: 800px;
