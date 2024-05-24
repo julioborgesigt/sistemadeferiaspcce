@@ -13,6 +13,10 @@
             <!-- As informações do cadastro serão exibidas aqui -->
         </div>
         <button onclick="window.print()">Imprimir</button>
+        <h2>Calendário de Férias</h2>
+        <div id="calendario">
+            <!-- A tabela de calendário será inserida aqui -->
+        </div>
     </div>
 
     <script>
@@ -33,31 +37,16 @@
                         const infoDiv = document.getElementById('info');
                         infoDiv.innerHTML = `
                             <p>Matrícula: ${dadosUsuario.matricula}</p>
+                            <p>Idade: ${dadosUsuario.idade}</p>
+                            <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
+                            <p>Antiguidade: ${dadosUsuario.antiguidade}</p>
                             <p>Senha: ${dadosUsuario.senha}</p>
                             <p>Cargo: ${dadosUsuario.cargo}</p>
-                            
-                            <p>idade: ${dadosUsuario.idade}</p>
-                            <p>paquisitivoinicio: ${dadosUsuario.paquisitivoinicio}</p>
-                            <p>paquisitivofim: ${dadosUsuario.paquisitivofim}</p>
-                            <p>antiguidade: ${dadosUsuario.antiguidade}</p>
-                            <p>numeroDePeriodos: ${dadosUsuario.numeroDePeriodos}</p>
-                            <p>feriasescolarounao: ${dadosUsuario.feriasescolarounao}</p>
-                            <p>qtdfilhosmenores: ${dadosUsuario.qtdfilhosmenores}</p>
-                            <p>periodo11: ${dadosUsuario.periodo11}</p>
-                            <p>periodo12: ${dadosUsuario.periodo12}</p>
-                            <p>periodo21: ${dadosUsuario.periodo21}</p>
-                            <p>periodo22: ${dadosUsuario.periodo22}</p>
-                            <p>periodo31: ${dadosUsuario.periodo31}</p>
-                            <p>periodo32: ${dadosUsuario.periodo32}</p>
-                            <p>pontuacaoferiasNaoescolar: ${dadosUsuario.pontuacaoferiasNaoescolar}</p>
-                            <p>pontuacaoferiasescolar: ${dadosUsuario.pontuacaoferiasescolar}</p>
-
-
-
-
-
-
+                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
+                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
+                            <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>
                         `;
+                        criarCalendario(dadosUsuario);
                     } else {
                         document.getElementById('info').innerHTML = "<p>Erro: Matrícula não encontrada.</p>";
                     }
@@ -67,6 +56,74 @@
                     document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
                 });
         });
+
+        function criarCalendario(dadosUsuario) {
+            const container = document.getElementById('calendario');
+            const anoAtual = new Date().getFullYear();
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+            // Obter períodos de férias
+            const periodos = [
+                { inicio: dadosUsuario.periodo11, fim: dadosUsuario.periodo12 },
+                { inicio: dadosUsuario.periodo21, fim: dadosUsuario.periodo22 },
+                { inicio: dadosUsuario.periodo31, fim: dadosUsuario.periodo32 }
+            ];
+
+            // Converter datas de férias para o formato ISO (YYYY-MM-DD)
+            const datasFerias = [];
+            periodos.forEach(periodo => {
+                if (periodo.inicio && periodo.fim) {
+                    const [inicioDia, inicioMes, inicioAno] = periodo.inicio.split('/');
+                    const [fimDia, fimMes, fimAno] = periodo.fim.split('/');
+                    const inicio = new Date(`${inicioAno}-${inicioMes}-${inicioDia}`);
+                    const fim = new Date(`${fimAno}-${fimMes}-${fimDia}`);
+
+                    for (let d = new Date(inicio); d <= fim; d.setDate(d.getDate() + 1)) {
+                        datasFerias.push(new Date(d).toISOString().split('T')[0]);
+                    }
+                }
+            });
+
+            for (let mes = 0; mes < 12; mes++) {
+                const table = document.createElement('table');
+                table.classList.add('calendario');
+                const thead = document.createElement('thead');
+                thead.innerHTML = `<tr><th colspan="7">${meses[mes]}</th></tr><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>`;
+                table.appendChild(thead);
+
+                const tbody = document.createElement('tbody');
+                const primeiroDia = new Date(anoAtual, mes, 1).getDay();
+                const ultimoDia = new Date(anoAtual, mes + 1, 0).getDate();
+
+                let linha = document.createElement('tr');
+                for (let i = 0; i < primeiroDia; i++) {
+                    linha.appendChild(document.createElement('td'));
+                }
+
+                for (let dia = 1; dia <= ultimoDia; dia++) {
+                    const celula = document.createElement('td');
+                    celula.textContent = dia;
+
+                    const data = new Date(anoAtual, mes, dia).toISOString().split('T')[0];
+                    if (datasFerias.includes(data)) {
+                        celula.classList.add('ferias');
+                    }
+
+                    linha.appendChild(celula);
+                    if ((primeiroDia + dia) % 7 === 0) {
+                        tbody.appendChild(linha);
+                        linha = document.createElement('tr');
+                    }
+                }
+
+                if (linha.children.length > 0) {
+                    tbody.appendChild(linha);
+                }
+
+                table.appendChild(tbody);
+                container.appendChild(table);
+            }
+        }
     </script>
 </body>
 </html>
