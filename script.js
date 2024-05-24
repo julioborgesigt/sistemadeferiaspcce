@@ -126,15 +126,15 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     // Verifica os limites de conflitos para cada cargo
     if (cargo === 'IPC') {
         if (conflitoCountIPC >= 2) {
-            return true; // Não permite mais de 2 IPC no mesmo período
+            return true; // Conflito se houver 2 ou mais IPC
         } else {
-            return false; // Permite até 2 IPC no mesmo período
+            return false; // Permite até 2 IPC
         }
     } else if (cargo === 'EPC') {
         if (conflitoCountEPC >= 1) {
-            return true; // Não permite mais de 1 EPC no mesmo período
+            return true; // Conflito se houver 1 ou mais EPC
         } else {
-            return false; // Permite até 1 EPC no mesmo período
+            return false; // Permite até 1 EPC
         }
     }
     
