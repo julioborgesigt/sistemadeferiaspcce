@@ -779,6 +779,7 @@ function salvarBancoDados() {
     .then(response => {
         // Verifica se a resposta da requisição foi bem-sucedida
         if (!response.ok) {
+            alert("Você precisa exibir uma tabela antes de gerar o PDF")
             throw new Error('Erro ao salvar os dados.');
         }
         alert("Dados salvos com sucesso!");
@@ -796,6 +797,8 @@ function logout() {
     // Redireciona para a página de login
     window.location.href = 'index.html';
 }
+
+
 
 
 // Função para gerar PDF
