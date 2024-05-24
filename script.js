@@ -125,9 +125,24 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
     // Verifica os limites de conflitos para cada cargo
     if (conflitoCountIPC >= 2 ) {
-        return true;
-    } else if (conflitoCountEPC >= 1) {
-        return true;
+        if (conflitoCountIPC >= 2 && conflitoCountEPC >= 1) {
+            return true;
+        } 
+        
+        else if (conflitoCountIPC >= 2 && conflitoCountEPC < 1) {
+            return false;
+        }
+        
+    } 
+    
+    else if (conflitoCountEPC >= 1) {
+        if (conflitoCountEPC >= 1 && conflitoCountIPC >= 2) {
+            return true;
+        } 
+        
+        else if (conflitoCountEPC >= 1 && conflitoCountIPC < 2) {
+            return false;
+        }
     }
     
     console.log("retornou falso veja abaixo os contadores")
