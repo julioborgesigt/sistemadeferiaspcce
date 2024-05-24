@@ -64,11 +64,9 @@
             const anoAtual = new Date().getFullYear();
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
-            // Predefinir um conjunto de cores
             const cores = ['#FF6347', '#FFD700', '#90EE90', '#1E90FF', '#9370DB', '#FF69B4', '#FFA500', '#00CED1', '#8B4513', '#00FF7F'];
             const corUsuario = {};
 
-            // Obter todas as datas de férias
             const datasFerias = [];
             let corIndex = 0;
             for (const usuario in database) {
@@ -89,7 +87,13 @@
                         const fim = new Date(`${fimAno}-${fimMes}-${fimDia}`);
 
                         for (let d = new Date(inicio); d <= fim; d.setDate(d.getDate() + 1)) {
-                            datasFerias.push({ data: new Date(d).toISOString().split('T')[0], usuario });
+                            const dataStr = new Date(d).toISOString().split('T')[0];
+                            const feriasData = datasFerias.find(f => f.data === dataStr);
+                            if (feriasData) {
+                                feriasData.usuarios.push(usuario);
+                            } else {
+                                datasFerias.push({ data: dataStr, usuarios: [usuario] });
+                            }
                         }
                     }
                 });
@@ -116,19 +120,19 @@
                     celula.textContent = dia;
 
                     const data = new Date(anoAtual, mes, dia).toISOString().split('T')[0];
-                    const feriasUsuario = datasFerias.filter(f => f.data === data);
+                    const feriasData = datasFerias.find(f => f.data === data);
 
-                    if (feriasUsuario.length > 0) {
-                        const cor = corUsuario[feriasUsuario[0].usuario];
-                        celula.style.backgroundColor = cor;
-                        celula.title = feriasUsuario[0].usuario; // Exibir a matrícula como dica
+                    if (feriasData) {
+                        const coresUsuarios = feriasData.usuarios.map(usuario => corUsuario[usuario]);
+                        celula.style.backgroundImage = `linear-gradient(${coresUsuarios.join(', ')})`;
 
-                        // Adicionar a matrícula abaixo do dia
-                        const matriculaDiv = document.createElement('div');
-                        matriculaDiv.textContent = feriasUsuario[0].usuario;
-                        matriculaDiv.style.fontSize = '0.8em';
-                        celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e a matrícula
-                        celula.appendChild(matriculaDiv);
+                        feriasData.usuarios.forEach(usuario => {
+                            const matriculaDiv = document.createElement('div');
+                            matriculaDiv.textContent = usuario;
+                            matriculaDiv.style.fontSize = '0.8em';
+                            celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e a matrícula
+                            celula.appendChild(matriculaDiv);
+                        });
                     }
 
                     linha.appendChild(celula);
