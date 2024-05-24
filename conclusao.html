@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusão do Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro Concluído</h1>
+        <div id="info">
+            <!-- As informações do cadastro serão exibidas aqui -->
+        </div>
+        <button onclick="window.print()">Imprimir</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const matricula = params.get('matricula');
+            const senha = params.get('senha');
+            const cargo = params.get('cargo');
+
+            const infoDiv = document.getElementById('info');
+            infoDiv.innerHTML = `
+                <p>Matrícula: ${matricula}</p>
+                <p>Senha: ${senha}</p>
+                <p>Cargo: ${cargo}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
