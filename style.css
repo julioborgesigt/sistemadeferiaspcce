@@ -83,16 +83,7 @@ button:hover {
 }
 
 
-/* Estilo para a seção de dados */
-#logout {
-    margin-top: 20px;
-}
 
-/* Estilo para modo escuro */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
 .logout-container {
     width: 100%;
     max-width: 800px;
@@ -102,15 +93,15 @@ body.dark-mode {
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;      /* Espaçamento interno */
-    background-color: #ff0000; /* Cor de fundo */
-    border: 1px solid #ff0000;    /* Borda */
+    background-color: #f8f9fa; /* Cor de fundo */
+    border: 1px solid #ddd;    /* Borda */
     border-radius: 5px;        /* Bordas arredondadas */
 
     
 }
 
 .logout-container button {
-    padding: 0px 0px;    /* Espaçamento interno do botão */
+    padding: 10px 10px;    /* Espaçamento interno do botão */
     font-size: 16px;       /* Tamanho da fonte */
     background-color: #ff0000; /* Cor de fundo do botão */
     color: #fff;           /* Cor do texto do botão */
