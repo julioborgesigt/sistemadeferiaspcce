@@ -796,3 +796,20 @@ function logout() {
     // Redireciona para a página de login
     window.location.href = 'index.html';
 }
+
+
+// Função para gerar PDF
+function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+
+    html2canvas(document.querySelector("#dados2")).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("dados_cadastro.pdf");
+    });
+}

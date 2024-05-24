@@ -101,7 +101,7 @@ button:hover {
 }
 
 .logout-container button {
-    padding: 10px 10px;    /* Espaçamento interno do botão */
+    padding: 0px 0px;    /* Espaçamento interno do botão */
     font-size: 16px;       /* Tamanho da fonte */
     background-color: #ff0000; /* Cor de fundo do botão */
     color: #fff;           /* Cor do texto do botão */
