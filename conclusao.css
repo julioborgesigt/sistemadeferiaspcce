@@ -59,31 +59,3 @@ button {
         display: none; /* Oculta o botão na impressão */
     }
 }
-.calendario td div {
-    margin-top: 2px;
-    line-height: 1em;
-}
-
-.calendario td {
-    position: relative;
-}
-
-.calendario td::before {
-    content: attr(data-day);
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    font-weight: bold;
-}
-
-.calendario td div {
-    font-size: 0.8em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
-
-.calendario td br {
-    line-height: 0.5em; /* Ajuste a altura da linha para as quebras de linha */
-}
