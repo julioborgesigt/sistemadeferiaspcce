@@ -126,7 +126,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     }
 
 
-    if (funcionario.cargo === 'IPC') {
+    if (database[matricula].cargo === 'IPC') {
         console.log("este é o cargoooooo IPC")
         if (conflitoCountIPC >= 2) {
             console.log("contou 2 ipc")
@@ -135,7 +135,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
             console.log("contou menos de 2 ipc")
             return false; // Permite até 2 IPC
         }
-    } else if (funcionario.cargo === 'EPC') {
+    } else if (database[matricula].cargo === 'EPC') {
         console.log("este é o cargoooooo epc")
         if (conflitoCountEPC >= 1) {
             console.log("contou 1 epc")
