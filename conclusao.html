@@ -14,9 +14,12 @@
         </div>
         <button onclick="window.print()">Imprimir</button>
         <h2>Calendário de Férias</h2>
-        <div id="calendario">
-            <!-- A tabela de calendário será inserida aqui -->
+        <div>
+            <button id="anoCorrenteBtn">Ano Corrente</button>
+            <button id="proximoAnoBtn">Próximo Ano</button>
         </div>
+        <div id="calendarioCorrente" class="calendario-ano"></div>
+        <div id="calendarioProximo" class="calendario-ano" style="display:none;"></div>
     </div>
 
     <script>
@@ -51,17 +54,27 @@
                         document.getElementById('info').innerHTML = "<p>Erro: usuário não encontrado.</p>";
                     }
 
-                    criarCalendario(database);
+                    criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente');
+                    criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo');
                 })
                 .catch(error => {
                     console.error('Erro ao carregar o banco de dados:', error);
                     document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
                 });
+
+            document.getElementById('anoCorrenteBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'block';
+                document.getElementById('calendarioProximo').style.display = 'none';
+            });
+
+            document.getElementById('proximoAnoBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'none';
+                document.getElementById('calendarioProximo').style.display = 'block';
+            });
         });
 
-        function criarCalendario(database) {
-            const container = document.getElementById('calendario');
-            const anoAtual = new Date().getFullYear();
+        function criarCalendario(database, ano, containerId) {
+            const container = document.getElementById(containerId);
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
             const cores = ['#FF6347', '#FFD700', '#90EE90', '#1E90FF', '#9370DB', '#FF69B4', '#FFA500', '#00CED1', '#8B4513', '#00FF7F'];
@@ -107,8 +120,8 @@
                 table.appendChild(thead);
 
                 const tbody = document.createElement('tbody');
-                const primeiroDia = new Date(anoAtual, mes, 1).getDay();
-                const ultimoDia = new Date(anoAtual, mes + 1, 0).getDate();
+                const primeiroDia = new Date(ano, mes, 1).getDay();
+                const ultimoDia = new Date(ano, mes + 1, 0).getDate();
 
                 let linha = document.createElement('tr');
                 for (let i = 0; i < primeiroDia; i++) {
@@ -119,7 +132,7 @@
                     const celula = document.createElement('td');
                     celula.textContent = dia;
 
-                    const data = new Date(anoAtual, mes, dia).toISOString().split('T')[0];
+                    const data = new Date(ano, mes, dia).toISOString().split('T')[0];
                     const feriasData = datasFerias.find(f => f.data === data);
 
                     if (feriasData) {
