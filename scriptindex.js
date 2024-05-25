@@ -135,8 +135,10 @@ return;
 
 const cargoIpc = document.getElementById("cargoIpc").checked;
 const cargoEpc = document.getElementById("cargoEpc").checked;
+const cargoIpcPlantao = document.getElementById("cargoIpcPlantao").checked;
+const cargoEpcPlantao = document.getElementById("cargoEpcPlantao").checked;
 
-if (!cargoIpc && !cargoEpc) {
+if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoEpcPlantao) {
 alert("Por favor, selecione pelo menos uma opção de cargo.");
 return;
 }
@@ -144,6 +146,8 @@ return;
 let cargo = "";
 if (cargoIpc) cargo = "IPC";
 if (cargoEpc) cargo = "EPC";
+if (cargoIpcPlantao) cargo = "IPCplantao";
+if (cargoEpcPlantao) cargo = "EPCplantao";
 
 if (database[matricula]) {
 

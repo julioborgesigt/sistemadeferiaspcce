@@ -6,7 +6,7 @@
         "paquisitivofim": "01/05/2024",
         "antiguidade": 23,
         "senha": "12345678",
-        "cargo": "EPC"       
+        "cargo": "EPCplantao"
     },
     "22222222": {
         "matricula": "22222222",
@@ -15,7 +15,7 @@
         "paquisitivofim": "01/05/2024",
         "antiguidade": 53,
         "senha": "12345678",
-        "cargo": "EPC"       
+        "cargo": "EPCplantao"
     },
     "30109511": {
         "senha": "25081990",
@@ -67,7 +67,17 @@
         "paquisitivofim": "01/05/2024",
         "antiguidade": 23,
         "senha": "12345678",
-        "cargo": "IPC"        
+        "cargo": "IPC",
+        "numeroDePeriodos": 1,
+        "feriasescolarounao": 0,
+        "qtdfilhosmenores": "1",
+        "periodo11": "02/12/2024",
+        "periodo12": "31/12/2024",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": "",
+        "pontuacaoferiasNaoescolar": 8
     },
     "66666666": {
         "matricula": "66666666",
@@ -76,7 +86,17 @@
         "paquisitivofim": "01/05/2024",
         "antiguidade": 23,
         "senha": "12345678",
-        "cargo": "IPC"        
+        "cargo": "IPC",
+        "numeroDePeriodos": 1,
+        "feriasescolarounao": 1,
+        "qtdfilhosmenores": "1",
+        "periodo11": "02/12/2024",
+        "periodo12": "31/12/2024",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": "",
+        "pontuacaoferiasescolar": 8
     },
     "77777777": {
         "matricula": "77777777",
@@ -94,7 +114,17 @@
         "paquisitivofim": "01/05/2024",
         "antiguidade": 23,
         "senha": "12345678",
-        "cargo": "EPC"        
+        "cargo": "EPC",
+        "numeroDePeriodos": 1,
+        "feriasescolarounao": 0,
+        "qtdfilhosmenores": "1",
+        "periodo11": "01/11/2024",
+        "periodo12": "30/11/2024",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": "",
+        "pontuacaoferiasNaoescolar": 8
     },
     "99999999": {
         "matricula": "99999999",
@@ -103,6 +133,16 @@
         "paquisitivofim": "01/05/2024",
         "antiguidade": 23,
         "senha": "12345678",
-        "cargo": "EPC"        
+        "cargo": "EPC",
+        "numeroDePeriodos": 1,
+        "feriasescolarounao": 0,
+        "qtdfilhosmenores": "1",
+        "periodo11": "02/12/2024",
+        "periodo12": "31/12/2024",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": "",
+        "pontuacaoferiasNaoescolar": 8
     }
 }

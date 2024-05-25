@@ -97,6 +97,8 @@ function verificarFimDeSemana(data) {
 function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPC = 0;
     let conflitoCountEPC = 0;
+    let conflitoCountIPCplantao = 0;
+    let conflitoCountEPCplantao = 0;
 
     for (let matricula in database) {
         let funcionario = database[matricula];
@@ -119,6 +121,15 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                     } else if (funcionario.cargo === 'EPC') {
                         conflitoCountEPC++;
                     }
+                }else if ((dataInicio <= fimExistente && dataInicio >= inicioExistente) ||
+                (dataFim <= fimExistente && dataFim >= inicioExistente) ||
+                (dataInicio <= inicioExistente && dataFim >= fimExistente)) {
+                    conflitoCountEPC++;
+                    if (funcionario.cargo === 'IPCplantao') {
+                        conflitoCountIPCplantao++;
+                    } else if (funcionario.cargo === 'EPCplantao') {
+                        conflitoCountEPCplantao++;
+                    }
                 }
             }
         }
@@ -139,9 +150,25 @@ function verificarConflito(dataInicio, dataFim, cargo) {
         }
     }
 
+    if (cargo === 'IPCplantao') {
+        if (conflitoCountIPCplantao >= 2) {
+            return true; // Conflito se houver 2 ou mais IPC
+        } else {
+            return false; // Permite até 2 IPC
+        }
+    } else if (cargo === 'EPCplantao') {
+        if (conflitoCountEPCplantao >= 1) {
+            return true; // Conflito se houver 1 ou mais EPC
+        } else {
+            return false; // Permite até 1 EPC
+        }
+    }
+
     console.log("retornou falso veja abaixo os contadores");
     console.log(conflitoCountEPC);
     console.log(conflitoCountIPC);
+    console.log(conflitoCountEPCplantao);
+    console.log(conflitoCountIPCplantao);
     return false; // Permite o cadastro se não houver conflitos
 }
 
