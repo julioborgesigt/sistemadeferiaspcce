@@ -93,6 +93,22 @@ function verificarFimDeSemana(data) {
 }
 
 
+// Função para verificar conflitos de datas por cargo
+function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
+    switch (cargo) {
+        case 'IPC':
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC
+        case 'EPC':
+            return conflitoCountEPC >= 1; // Conflito se houver 1 ou mais EPC
+        case 'IPCplantao':
+            return conflitoCountIPCplantao >= 2; // Conflito se houver 2 ou mais IPC
+        case 'EPCplantao':
+            return conflitoCountEPCplantao >= 1; // Conflito se houver 1 ou mais EPC
+        default:
+            return false; // Nenhum conflito para outros cargos
+    }
+}
+
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPC = 0;
@@ -120,12 +136,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
                         conflitoCountEPC++;
-                    }
-                }else if ((dataInicio <= fimExistente && dataInicio >= inicioExistente) ||
-                (dataFim <= fimExistente && dataFim >= inicioExistente) ||
-                (dataInicio <= inicioExistente && dataFim >= fimExistente)) {
-                    conflitoCountEPC++;
-                    if (funcionario.cargo === 'IPCplantao') {
+                    } else if (funcionario.cargo === 'IPCplantao') {
                         conflitoCountIPCplantao++;
                     } else if (funcionario.cargo === 'EPCplantao') {
                         conflitoCountEPCplantao++;
@@ -136,42 +147,16 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     }
 
     // Verifica os limites de conflitos para cada cargo
-    if (cargo === 'IPC') {
-        if (conflitoCountIPC >= 2) {
-            return true; // Conflito se houver 2 ou mais IPC
-        } else {
-            return false; // Permite até 2 IPC
-        }
-    } else if (cargo === 'EPC') {
-        if (conflitoCountEPC >= 1) {
-            return true; // Conflito se houver 1 ou mais EPC
-        } else {
-            return false; // Permite até 1 EPC
-        }
-    }
+    const conflito = verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao);
 
-    if (cargo === 'IPCplantao') {
-        if (conflitoCountIPCplantao >= 2) {
-            return true; // Conflito se houver 2 ou mais IPC
-        } else {
-            return false; // Permite até 2 IPC
-        }
-    } else if (cargo === 'EPCplantao') {
-        if (conflitoCountEPCplantao >= 1) {
-            return true; // Conflito se houver 1 ou mais EPC
-        } else {
-            return false; // Permite até 1 EPC
-        }
-    }
-
-    console.log("retornou falso veja abaixo os contadores");
+    console.log("retornou " + conflito + " veja abaixo os contadores");
     console.log(conflitoCountEPC);
     console.log(conflitoCountIPC);
     console.log(conflitoCountEPCplantao);
     console.log(conflitoCountIPCplantao);
-    return false; // Permite o cadastro se não houver conflitos
-}
 
+    return conflito;
+}
 
 
 function preCadastro() {
