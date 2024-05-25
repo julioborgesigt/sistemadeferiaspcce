@@ -97,13 +97,17 @@ function verificarFimDeSemana(data) {
 function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
     switch (cargo) {
         case 'IPC':
-            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC expediente
+        case 'IPC':
+            return conflitoCountIPC >= 1 && conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC expediente e 1 ou mais IPC plantão
         case 'EPC':
-            return conflitoCountEPC >= 1; // Conflito se houver 1 ou mais EPC
+            return conflitoCountEPC >= 1; // Conflito se houver 1 ou mais EPC expediente
         case 'IPCplantao':
-            return conflitoCountIPCplantao >= 2; // Conflito se houver 2 ou mais IPC
+            return conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC plantão
+        case 'IPCplantao':
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC do expediente
         case 'EPCplantao':
-            return conflitoCountEPCplantao >= 1; // Conflito se houver 1 ou mais EPC
+            return conflitoCountEPCplantao >= 1; // Conflito se houver 1 ou mais EPC plantão
         default:
             return false; // Nenhum conflito para outros cargos
     }
