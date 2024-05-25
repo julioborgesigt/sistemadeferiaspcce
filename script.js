@@ -241,7 +241,7 @@ function cadastroInicial() {
         return;
     }
 
-    let cargo = buscarCargo(matricula);
+    let cargo = database[matricula].cargo;
 
     // Verifica conflitos para cada período
     if (verificarConflito(dataInicio1, dataFim1, cargo) || (dataInicio2 && verificarConflito(dataInicio2, dataFim2, cargo)) || (dataInicio3 && verificarConflito(dataInicio3, dataFim3, cargo))) {
@@ -840,11 +840,3 @@ function gerarPDF() {
 }
 
 
-// Função para buscar o cargo a partir da matrícula
-function buscarCargo(matricula) {
-    if (bancoDados[matricula] && bancoDados[matricula].cargo) {
-        return bancoDados[matricula].cargo;
-    } else {
-        return null;
-    }
-}
