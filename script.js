@@ -1,3 +1,4 @@
+
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -219,6 +220,10 @@ function cadastroInicial() {
     console.log("Período 3:", periodo31, "a", periodo32);
 
 
+    
+
+
+
    // Converte as datas para objetos Date
    let dataInicio1 = new Date(periodo11.split('/').reverse().join('-') + 'T00:00:00');
    let dataFim1 = new Date(periodo12.split('/').reverse().join('-') + 'T00:00:00');
@@ -235,6 +240,8 @@ function cadastroInicial() {
         alert("Os períodos de férias escolhidos não podem começar em um fim de semana.");
         return;
     }
+
+    let cargo = buscarCargo(matricula);
 
     // Verifica conflitos para cada período
     if (verificarConflito(dataInicio1, dataFim1, cargo) || (dataInicio2 && verificarConflito(dataInicio2, dataFim2, cargo)) || (dataInicio3 && verificarConflito(dataInicio3, dataFim3, cargo))) {
@@ -830,4 +837,14 @@ function gerarPDF() {
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
         pdf.save("dados_cadastro.pdf");
     });
+}
+
+
+// Função para buscar o cargo a partir da matrícula
+function buscarCargo(matricula) {
+    if (bancoDados[matricula] && bancoDados[matricula].cargo) {
+        return bancoDados[matricula].cargo;
+    } else {
+        return null;
+    }
 }
