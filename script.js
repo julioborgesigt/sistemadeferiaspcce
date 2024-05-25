@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', () => {
+    carregarBancoDados();
+});
+
+
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -747,7 +752,7 @@ function calcularAntiguidade(dataIngresso) {
 
 
 
-carregarBancoDados(); //função correta para carregar o banco de dados
+
 
 function carregarBancoDados() {
     // URL do arquivo remoto
