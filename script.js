@@ -120,39 +120,31 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                         conflitoCountEPC++;
                     }
                 }
-               
             }
         }
     }
 
-
-    if (database[matricula].cargo === 'IPC') {
-        console.log("este é o cargoooooo IPC")
+    // Verifica os limites de conflitos para cada cargo
+    if (cargo === 'IPC') {
         if (conflitoCountIPC >= 2) {
-            console.log("contou 2 ipc")
             return true; // Conflito se houver 2 ou mais IPC
         } else {
-            console.log("contou menos de 2 ipc")
             return false; // Permite até 2 IPC
         }
-    } else if (database[matricula].cargo === 'EPC') {
-        console.log("este é o cargoooooo epc")
+    } else if (cargo === 'EPC') {
         if (conflitoCountEPC >= 1) {
-            console.log("contou 1 epc")
             return true; // Conflito se houver 1 ou mais EPC
         } else {
-            console.log("contou menos de 1 epc")
             return false; // Permite até 1 EPC
         }
     }
-    
-    console.log("retornou falso veja abaixo os contadores")
+
+    console.log("retornou falso veja abaixo os contadores");
     console.log(conflitoCountEPC);
     console.log(conflitoCountIPC);
-    return false;
-    
-   
+    return false; // Permite o cadastro se não houver conflitos
 }
+
 
 
 function preCadastro() {
