@@ -1,6 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    carregarBancoDados();
-});
 
 
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
