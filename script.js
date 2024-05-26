@@ -418,7 +418,7 @@ function calcularIdade(dataNascimento) {
 
 function feriasEscolar(matricula, numeroDePeriodos) {
 
-     // Cria um formulário para a opção de possuir filho em idade escolar
+    /* // Cria um formulário para a opção de possuir filho em idade escolar
      let formulario = `
         <form id="formFeriasEscolar">
             <label for="possuiFilho">Possui filho em idade escolar?</label><br>
@@ -428,7 +428,7 @@ function feriasEscolar(matricula, numeroDePeriodos) {
             <label for="nao">Não</label><br>
             
         </form>
-    `;
+    `;*/
 
     let formulario2 = `
         <form id="formFeriasEscolar">
@@ -462,14 +462,14 @@ function feriasEscolar(matricula, numeroDePeriodos) {
 
 function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
     // Obtém o valor selecionado pelo usuário
-    let possuiFilho = document.querySelector('input[name="possuiFilho"]:checked').value;
+    let possuiFilho = qtdfilhosmenores;
     let ecasadoComPofessor = document.querySelector('input[name="ecasadoComPofessor"]:checked').value;
     let estudanteOUaluno = document.querySelector('input[name="estudanteOUaluno"]:checked').value;
 
     // Calcula a pontuação com base na resposta do usuário
     let pontuacaoferiasescolar = 0;
-    if (possuiFilho === "sim") {
-        pontuacaoferiasescolar += 5;
+    if (qtdfilhosmenores !== 0) {
+        pontuacaoferiasescolar = qtdfilhosmenores * 5;
     }
 
     if (ecasadoComPofessor === "sim") {
