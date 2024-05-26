@@ -165,6 +165,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
+    const nome = document.getElementById("matriculaNome").value;
     const dataIngresso = document.getElementById("dataIngresso").value;
     const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
     const paquisitivofim = document.getElementById("paquisitivofim").value;
@@ -179,6 +180,7 @@ function preCadastro() {
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], {
             matricula: matricula,
+            nome: nome,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
@@ -191,6 +193,7 @@ function preCadastro() {
         // Se a matrícula não existir, crie um novo registro
         database[matricula] = {
             matricula: matricula,
+            nome: nome,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
