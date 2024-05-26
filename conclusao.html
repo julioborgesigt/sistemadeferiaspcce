@@ -40,6 +40,7 @@
                     if (dadosUsuario) {
                         const infoDiv = document.getElementById('info');
                         infoDiv.innerHTML = `
+                            <p>Nome: ${dadosUsuario.nome}</p>
                             <p>Matrícula: ${dadosUsuario.matricula}</p>
                             <p>Idade: ${dadosUsuario.idade}</p>
                             <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
@@ -103,9 +104,9 @@
                             const dataStr = new Date(d).toISOString().split('T')[0];
                             const feriasData = datasFerias.find(f => f.data === dataStr);
                             if (feriasData) {
-                                feriasData.usuarios.push(usuario);
+                                feriasData.usuarios.push(database[usuario].nome);
                             } else {
-                                datasFerias.push({ data: dataStr, usuarios: [usuario] });
+                                datasFerias.push({ data: dataStr, usuarios: [database[usuario].nome] });
                             }
                         }
                     }
@@ -140,11 +141,11 @@
                         celula.style.backgroundImage = `linear-gradient(${coresUsuarios.join(', ')})`;
 
                         feriasData.usuarios.forEach(usuario => {
-                            const matriculaDiv = document.createElement('div');
-                            matriculaDiv.textContent = usuario;
-                            matriculaDiv.style.fontSize = '0.8em';
-                            celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e a matrícula
-                            celula.appendChild(matriculaDiv);
+                            const nomeDiv = document.createElement('div');
+                            nomeDiv.textContent = usuario;
+                            nomeDiv.style.fontSize = '0.8em';
+                            celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e o nome
+                            celula.appendChild(nomeDiv);
                         });
                     }
 
