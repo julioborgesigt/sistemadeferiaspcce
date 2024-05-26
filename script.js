@@ -164,15 +164,6 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
 
-function validarMatricula(input) {
-    const anoCorrente = new Date().getFullYear();
-    const matricula = input.value.trim();
-
-    // Verifica se a matrícula já contém um ponto seguido de quatro dígitos no final
-    if (!matricula.match(/\.\d{4}$/)) {
-        input.value = `${matricula}.${anoCorrente}`;
-    }
-}
 
 function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;

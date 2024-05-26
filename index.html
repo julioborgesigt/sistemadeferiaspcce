@@ -13,7 +13,6 @@
             carregarBancoDados();
         });
 
-
         // Verifica se a página foi carregada a partir do cache do navegador
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
@@ -63,145 +62,131 @@
             });
         }
 
-
         function generateToken() {
             return Math.random().toString(36).substr(2);
         }
 
-        function login() {
-    const matricula = document.getElementById('loginMatricula').value;
-    const senha = document.getElementById('loginSenha').value;
-    const isAdmin = document.getElementById('adminCheckbox').checked;
+        function validarMatricula(input) {
+            const anoCorrente = new Date().getFullYear();
+            const matricula = input.value.trim();
 
-    console.log("Tentando login:", { matricula, senha, isAdmin });
-
-    if (database[matricula] && database[matricula].senha === senha) {
-        console.log("Credenciais verificadas no banco de dados.");
-    
-        const token = generateToken();
-        const expirationTime = new Date().getTime() + 10 * 60 * 1000; // 10 minutos em milissegundos
-        const loginData = { token, expirationTime };
-
-        localStorage.setItem('loginToken', JSON.stringify(loginData));
-
-    
-
-        if (isAdmin) {
-            if (senha === '25081990') {
-                alert("Bem-vindo, Administrador!");
-                window.location.href = 'adm.html';
-            } else {
-                alert("Você não é um administrador.");
+            // Verifica se a matrícula já contém um ponto seguido de quatro dígitos no final
+            if (!matricula.match(/\.\d{4}$/)) {
+                input.value = `${matricula}.${anoCorrente}`;
             }
-        } else {
-            alert("Login bem-sucedido!");
-            window.location.href = `cadastro.html?matricula=${matricula}`; 
         }
-    } else {
-        alert("Matrícula ou senha incorreta.");
-    }
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('.cargo-checkbox');
+        function login() {
+            const matricula = document.getElementById('loginMatricula').value;
+            const senha = document.getElementById('loginSenha').value;
+            const isAdmin = document.getElementById('adminCheckbox').checked;
 
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                checkboxes.forEach(box => {
-                    if (box !== this) {
-                        box.checked = false;
+            console.log("Tentando login:", { matricula, senha, isAdmin });
+
+            if (database[matricula] && database[matricula].senha === senha) {
+                console.log("Credenciais verificadas no banco de dados.");
+                
+                const token = generateToken();
+                const expirationTime = new Date().getTime() + 10 * 60 * 1000; // 10 minutos em milissegundos
+                const loginData = { token, expirationTime };
+
+                localStorage.setItem('loginToken', JSON.stringify(loginData));
+
+                if (isAdmin) {
+                    if (senha === '25081990') {
+                        alert("Bem-vindo, Administrador!");
+                        window.location.href = 'adm.html';
+                    } else {
+                        alert("Você não é um administrador.");
+                    }
+                } else {
+                    alert("Login bem-sucedido!");
+                    window.location.href = `cadastro.html?matricula=${matricula}`; 
+                }
+            } else {
+                alert("Matrícula ou senha incorreta.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.cargo-checkbox');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        checkboxes.forEach(box => {
+                            if (box !== this) {
+                                box.checked = false;
+                            }
+                        });
                     }
                 });
-            }
+            });
         });
-    });
-});
 
+        function cadastrar() {
+            const matricula = document.getElementById('cadastroMatricula').value;
+            const senha = document.getElementById('cadastroSenha').value;
+            const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
+            if (senha.length < 8 || senha.length > 8 || matricula.length < 8 || matricula.length > 8) {
+                alert("Matrícula e senha devem ter exatamente 8 caracteres.");
+                return;
+            }
 
-function cadastrar() {
-   
-    
-    const matricula = document.getElementById('cadastroMatricula').value;
-    const senha = document.getElementById('cadastroSenha').value;
-    const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+            if (senha !== confirmacaoSenha) {
+                alert("As senhas não coincidem.");
+                return;
+            }
 
-    if (senha.length < 8 || senha.length > 8 || matricula.length < 8 || matricula.length > 8) {
-        alert("Matrícula e senha devem ter exatamente 8 caracteres.");
-        return;
-    }
+            if (database[matricula] && database[matricula].senha.length === 8) {
+                alert("Matrícula já cadastrada com uma senha.");
+                return;
+            }
 
-    if (senha !== confirmacaoSenha) {
-        alert("As senhas não coincidem.");
-        return;
-    }
+            const cargoIpc = document.getElementById("cargoIpc").checked;
+            const cargoEpc = document.getElementById("cargoEpc").checked;
+            const cargoIpcPlantao = document.getElementById("cargoIpcPlantao").checked;
+            const cargoEpcPlantao = document.getElementById("cargoEpcPlantao").checked;
 
-    if (database[matricula] && database[matricula].senha.length === 8) {
-        alert("Matrícula já cadastrada com uma senha.");
-        return;
-    }
+            if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoEpcPlantao) {
+                alert("Por favor, selecione pelo menos uma opção de cargo.");
+                return;
+            }
 
-    const cargoIpc = document.getElementById("cargoIpc").checked;
-    const cargoEpc = document.getElementById("cargoEpc").checked;
-    const cargoIpcPlantao = document.getElementById("cargoIpcPlantao").checked;
-    const cargoEpcPlantao = document.getElementById("cargoEpcPlantao").checked;
+            let cargo = "";
+            if (cargoIpc) cargo = "IPC";
+            if (cargoEpc) cargo = "EPC";
+            if (cargoIpcPlantao) cargo = "IPCplantao";
+            if (cargoEpcPlantao) cargo = "EPCplantao";
 
-    if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoEpcPlantao) {
-    alert("Por favor, selecione pelo menos uma opção de cargo.");
-    return;
-    }
+            if (database[matricula]) {
+                // Se a matrícula já existir, adicione os dados aos existentes
+                Object.assign(database[matricula], {
+                    senha: senha,
+                    cargo: cargo
+                });
+                console.log('pre cad');
+            } else {
+                // Se a matrícula não existir, crie um novo registro
+                database[matricula] = {
+                    senha,
+                    matricula,
+                    cargo
+                };
+                console.log('novo cad');
+            }
 
-    let cargo = "";
-    if (cargoIpc) cargo = "IPC";
-    if (cargoEpc) cargo = "EPC";
-    if (cargoIpcPlantao) cargo = "IPCplantao";
-    if (cargoEpcPlantao) cargo = "EPCplantao";
-    
-    if (database[matricula]) {
-
-         // Se a matrícula já existir, adicione os dados aos existentes
-Object.assign(database[matricula], {
-   
-   senha: senha,
-   cargo: cargo
-   
-   
-});
-console.log('pre cad');
-
-
-
-
-} else {
-// Se a matrícula não existir, crie um novo registro
-database[matricula] = 
-        {   
-            senha,
-            matricula,
-            cargo
-         };
-
-console.log('novo cad');
-
-
-}
-
-
-    salvarBancoDados();
-}
+            salvarBancoDados();
+        }
     </script>
-
-
 </head>
 <body>
     <div class="login-background"></div>
-
-    
     <div class="login-container">
         <h2>Login</h2>
         <label for="loginMatricula">Matrícula:</label>
-        <input type="text" id="loginMatricula" name="loginMatricula" required>
+        <input type="text" id="loginMatricula" name="loginMatricula" required onblur="validarMatricula(this)">
         <label for="loginSenha">Senha:</label>
         <input type="password" id="loginSenha" name="loginSenha" required>
         <label for="adminCheckbox">
@@ -211,10 +196,9 @@ console.log('novo cad');
         <button onclick="login()">Entrar</button>
     </div>
     <div class="login-container">
-        
         <h2>Cadastro</h2>
         <label for="cadastroMatricula">Matrícula:</label>
-        <input type="text" id="cadastroMatricula" name="cadastroMatricula" required>
+        <input type="text" id="cadastroMatricula" name="cadastroMatricula" required onblur="validarMatricula(this)">
         <label for="cadastroSenha">Senha:</label>
         <input type="password" id="cadastroSenha" name="cadastroSenha" required>
         <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
@@ -236,10 +220,8 @@ console.log('novo cad');
                 <input type="checkbox" id="cargoEpcPlantao" name="cargo" class="cargo-checkbox">
                 EPC-Plantão
             </label>
-            
         </div>
         <button onclick="cadastrar()">Cadastrar</button>
     </div>
-   </body>
+</body>
 </html>
-
