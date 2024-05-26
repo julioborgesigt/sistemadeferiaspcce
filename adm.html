@@ -10,42 +10,41 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
        document.addEventListener('DOMContentLoaded', function() {
-    const loginData = JSON.parse(localStorage.getItem('loginToken'));
+            const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
-    if (!loginData || new Date().getTime() > loginData.expirationTime) {
-        // Redirecionar para a página de login se o token não existir ou estiver expirado
-        alert("Sua sessão expirou. Faça login novamente.");
-        window.location.href = 'index.html';
-    }
-});
+            if (!loginData || new Date().getTime() > loginData.expirationTime) {
+                // Redirecionar para a página de login se o token não existir ou estiver expirado
+                alert("Sua sessão expirou. Faça login novamente.");
+                window.location.href = 'index.html';
+            }
+        });
+
+        function validarMatricula(input) {
+            const anoCorrente = new Date().getFullYear();
+            const matricula = input.value.trim();
+
+            // Verifica se a matrícula já contém um ponto seguido de quatro dígitos no final
+            if (!matricula.match(/\.\d{4}$/)) {
+                input.value = `${matricula}.${anoCorrente}`;
+            }
+        }
     </script>
-    
-    
 </head>
 <body>
     <div class="container">
-
-       
         <h1>Cadastro e Consulta de Férias</h1>
-        
-
-
-
-         <!-- Botão para alternar entre modos claro e escuro -->
-   <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
-    <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
-</div>
-   
-        
+        <!-- Botão para alternar entre modos claro e escuro -->
+        <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
+            <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
+        </div>
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
-
                 <label for="matriculaCadastro">Matrícula:</label>
-                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="11" onblur="validarMatricula(this)">
+                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="16" onblur="validarMatricula(this)">
 
                 <label for="matriculaNome">Primeiro Nome:</label>
-                <input type="text" id="matriculaNome" name="matriculaNome" >
+                <input type="text" id="matriculaNome" name="matriculaNome">
 
                 <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
                 <input type="text" id="dataIngresso" name="dataIngresso">
@@ -56,10 +55,8 @@
                 <label for="paquisitivofim">Fim do seu período aquisitivo (formato DD/MM/AAAA):</label>
                 <input type="text" id="paquisitivofim" name="paquisitivofim">
                 
-                <label for="dataNascimento">Qual sua data de nacimento? (formato DD/MM/AAAA)</label>
+                <label for="dataNascimento">Qual sua data de nascimento? (formato DD/MM/AAAA)</label>
                 <input type="text" id="dataNascimento" name="dataNascimento">
-
-                              
 
                 <button type="button" onclick="preCadastro()">Cadastrar</button>
             </form>
@@ -74,19 +71,14 @@
             <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
             <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para férias escolar</button>
             <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
-            
         </div>
 
         <div class="logout-container">
             <!-- Botão logout -->
-        <button onclick="logout()">Logout</button>
+            <button onclick="logout()">Logout</button>
         </div>
 
-        <div id="dados2">
-                              
-        </div>
-
-        
+        <div id="dados2"></div>
     </div>
     
     <!-- jQuery -->
@@ -97,7 +89,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Arquivo de localização do flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-     <!-- Seu script personalizado -->
-     <script src="script.js"></script>
+    <!-- Seu script personalizado -->
+    <script src="script.js"></script>
 </body>
 </html>
