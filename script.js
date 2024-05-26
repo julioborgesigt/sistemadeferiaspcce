@@ -470,8 +470,8 @@ function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
     // Calcula a pontuação com base na resposta do usuário
     let pontuacaoferiasescolar = 0;
     console.log("esta é a qtd de filhos menores");
-    console.log(database[matricula].pontuacaoferiasescolar);
-    if (database[matricula].pontuacaoferiasescolar !== 0) {
+    console.log(database[matricula].qtdfilhosmenores);
+    if (database[matricula].qtdfilhosmenores !== 0) {
         pontuacaoferiasescolar += qtdfilhosmenores * 5;
     }
 
