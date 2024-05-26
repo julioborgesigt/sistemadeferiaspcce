@@ -462,15 +462,16 @@ function feriasEscolar(matricula, numeroDePeriodos) {
 
 function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
     // Obtém o valor selecionado pelo usuário
-    let possuiFilho = qtdfilhosmenores;
+    //let possuiFilho = qtdfilhosmenores;
+    
     let ecasadoComPofessor = document.querySelector('input[name="ecasadoComPofessor"]:checked').value;
     let estudanteOUaluno = document.querySelector('input[name="estudanteOUaluno"]:checked').value;
 
     // Calcula a pontuação com base na resposta do usuário
     let pontuacaoferiasescolar = 0;
     console.log("esta é a qtd de filhos menores");
-    console.log(qtdfilhosmenores);
-    if (qtdfilhosmenores !== 0) {
+    console.log(database[matricula].pontuacaoferiasescolar);
+    if (database[matricula].pontuacaoferiasescolar !== 0) {
         pontuacaoferiasescolar += qtdfilhosmenores * 5;
     }
 
