@@ -129,8 +129,8 @@
             const senha = document.getElementById('cadastroSenha').value;
             const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
 
-            if (senha.length < 8 || senha.length > 8 || matricula.length < 8 || matricula.length > 8) {
-                alert("Matrícula e senha devem ter exatamente 8 caracteres.");
+            if (senha.length < 8 || senha.length > 8 || matricula.length < 13 || matricula.length > 13) {
+                alert("Confira a Matrícula ou verifique se a senha tem exatamente 8 caracteres.");
                 return;
             }
 
