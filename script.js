@@ -880,10 +880,10 @@ let dataArray = Object.values(database).filter(dados =>
 
 
     // Limitar a exibição aos 6 primeiros resultados
-    let seisPrimeiros = selecionados.slice(0, 6);
+    let seisPrimeiros = dataArray.slice(0, 6);
     
     // Gerar a tabela HTML
-    dataArray.forEach(dados => {
+    seisPrimeiros.forEach(dados => {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
@@ -896,10 +896,10 @@ let dataArray = Object.values(database).filter(dados =>
             </tr>`;
     });
 
-    seisPrimeiros.forEach(dados => {
+    /*seisPrimeiros.forEach(dados => {
         html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
     });
-    
+    */
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
@@ -951,10 +951,10 @@ let dataArray = Object.values(database).filter(dados =>
 
 
     // Limitar a exibição aos 6 primeiros resultados
-    let seisPrimeiros = selecionados.slice(0, 6);
+    let seisPrimeiros = dataArray.slice(0, 6);
     
     // Gerar a tabela HTML
-    dataArray.forEach(dados => {
+    seisPrimeiros.forEach(dados => {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
@@ -966,11 +966,11 @@ let dataArray = Object.values(database).filter(dados =>
               
             </tr>`;
     });
-
+/*
     seisPrimeiros.forEach(dados => {
         html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
     });
-    
+ */   
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
