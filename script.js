@@ -742,7 +742,7 @@ function exibirListaFinalFeriasSelecionados() {
 function exibirListaFinalFeriasNaoEscolar() {
     let html = "<h3>Lista Final de Férias Não Escolar em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Nao Escolar(desempate)</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Gestante?</th><th>Idade</th><th>Qtd Filhos Menores</th><th>É estudante?</th><th>2 empregos mesmo periodo?</th><th>Antiguidade</th><th>Conjuje com mesmo periodo?</th><th>Idade</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -790,12 +790,13 @@ function exibirListaFinalFeriasNaoEscolar() {
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-                <td data-label="Idade">${dados.idade}</td>
+                <td data-label="Idade">${dados.gestante}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
+                <td data-label="Qtd Filhos Menores">${dados.estudante}</td>
+                <td data-label="Qtd Filhos Menores">${dados.DoisEmpregos}</td>
+                <td data-label="Qtd Filhos Menores">${dados.ConjugeMesmoPeriodo}</td>
                 <td data-label="Antiguidade">${dados.antiguidade}</td>
-                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                <td data-label="Pontuação Féria Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-              
+                <td data-label="Idade">${dados.idade}</td>              
                 
                 
             </tr>`;
