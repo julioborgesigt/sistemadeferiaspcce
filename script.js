@@ -92,25 +92,6 @@ function verificarFimDeSemana(data) {
 }
 
 
-// Função para verificar conflitos de datas por cargo
-function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
-    switch (cargo) {
-        case 'IPC':
-            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC expediente
-        case 'IPC':
-            return conflitoCountIPC >= 1 && conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC expediente e 1 ou mais IPC plantão
-        case 'EPC':
-            return conflitoCountEPC >= 1; // Conflito se houver 1 ou mais EPC expediente
-        case 'IPCplantao':
-            return conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC plantão
-        case 'IPCplantao':
-            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC do expediente
-        case 'EPCplantao':
-            return conflitoCountEPCplantao >= 1; // Conflito se houver 1 ou mais EPC plantão
-        default:
-            return false; // Nenhum conflito para outros cargos
-    }
-}
 
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
@@ -163,18 +144,37 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
 
+// Função para verificar conflitos de datas por cargo
+function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
+    switch (cargo) {
+        case 'IPC':
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC expediente
+        case 'IPC':
+            return conflitoCountIPC >= 1 && conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC expediente e 1 ou mais IPC plantão
+        case 'EPC':
+            return conflitoCountEPC >= 1; // Conflito se houver 1 ou mais EPC expediente
+        case 'IPCplantao':
+            return conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC plantão
+        case 'IPCplantao':
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC do expediente
+        case 'EPCplantao':
+            return conflitoCountEPCplantao >= 1; // Conflito se houver 1 ou mais EPC plantão
+        default:
+            return false; // Nenhum conflito para outros cargos
+    }
+}
+
+
 
 function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
     const nome = document.getElementById("matriculaNome").value;
-    const dataIngresso = document.getElementById("dataIngresso").value;
-    const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
+    const dataIngresso = document.getElementById("dataIngresso").value; //antiguidade
+    const paquisitivoinicio = document.getElementById("paquisitivoinicio").value; 
     const paquisitivofim = document.getElementById("paquisitivofim").value;
-    const dataNascimento = document.getElementById("dataNascimento").value;
-    const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
-    
-    
-    
+    const dataNascimento = document.getElementById("dataNascimento").value; // idade
+    const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value; // filhos em idade escolar
+         
 
     // Salvar os dados no banco de dados
     let senha = '';
@@ -508,7 +508,7 @@ function formularioDEcriterios(matricula) {
     // Adiciona o formulário à div "dados"
     document.getElementById("dados").innerHTML =  formulario1 + formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
    // feriasNaoEscolar(matricula);
-    console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
+    //console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }
 
 
@@ -568,7 +568,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     }
 
     if (possuiFilho !== 0) {
-        pontuacaoferiasescolar += (possuiFilho * 9);
+        pontuacaoferiasNaoescolar += (possuiFilho * 9);
     }
 
     if (estudante === "sim") {
@@ -579,9 +579,9 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
         pontuacaoferiasNaoescolar += 2;
     }
 
-    if (ConjugeMesmoPeriodo === "sim") {
+    /*if (ConjugeMesmoPeriodo === "sim") {
         pontuacaoferiasNaoescolar += 1;
-    }
+    }*/
 
     
     console.log(pontuacaoferiasNaoescolar);
@@ -668,7 +668,7 @@ function exibirListaFinalFerias() {
 function exibirListaFinalFeriasSelecionados() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Idade(desempate)</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th><th>Desempate Férias Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -676,15 +676,35 @@ function exibirListaFinalFeriasSelecionados() {
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
     let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
     
-    // Ordenar os registros filtrados
-    selecionados.sort((a, b) => {
-        if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
-            return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
-        } else {
-            return b.idade - a.idade;
-        }
-    });
-    
+   // Ordenar os registros filtrados
+selecionados.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
     // Limitar a exibição aos 6 primeiros resultados
     let seisPrimeiros = selecionados.slice(0, 6);
     
@@ -695,7 +715,9 @@ function exibirListaFinalFeriasSelecionados() {
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-                <td data-label="Idade">${dados.idade}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.desempateFeriasEscolar || 0}</td>
+               
               
             </tr>`;
     });
@@ -723,18 +745,27 @@ function exibirListaFinalFeriasNaoEscolar() {
 
     dataArray.sort((a, b) => {
         // Ordenar por pontuação de férias escolar em ordem decrescente
-        if (b.idade !== a.idade) {
-            return b.idade - a.idade;
+        if (b.gestante !== a.gestante) {
+            return b.gestante - a.gestante;
         } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
             // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
             return b.qtdfilhosmenores - a.qtdfilhosmenores;
+        }else if (b.estudante !== a.estudante) {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.estudante - a.estudante;
+        }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.DoisEmpregos - a.DoisEmpregos;
         } else if (b.antiguidade !== a.antiguidade) {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.antiguidade - a.antiguidade;
-            t
-        } else if (b.pontuacaoferiasNaoescolar !== a.pontuacaoferiasNaoescolar) {
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.pontuacaoferiasNaoescolar - a.pontuacaoferiasNaoescolar;
+            return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+        }
+        else{
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.idade - a.idade;
         }
     });
 
