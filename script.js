@@ -668,10 +668,7 @@ function exibirListaCompletaDEFerias() {
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
-    let anoCorrente = new Date().getFullYear().toString();
-    let dataArray = Object.values(database).filter(dados => 
-        dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
-    );
+   
     
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
