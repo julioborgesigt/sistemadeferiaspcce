@@ -756,25 +756,25 @@ function exibirListaFinalFeriasNaoEscolar() {
 
     dataArray.sort((a, b) => {
         // Ordenar por pontuação de férias escolar em ordem decrescente
-        if (b.gestante !== a.gestante && cargo === "IPC") {
+        if (b.gestante !== a.gestante && a.cargo === "IPC" && b.cargo === "IPC") {
             return b.gestante - a.gestante;
-        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores && cargo === "IPC") {
+        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
             return b.qtdfilhosmenores - a.qtdfilhosmenores;
-        }else if (b.estudante !== a.estudante && cargo === "IPC") {
+        }else if (b.estudante !== a.estudante && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.estudante - a.estudante;
-        }else if (b.DoisEmpregos !== a.DoisEmpregos && cargo === "IPC") {
+        }else if (b.DoisEmpregos !== a.DoisEmpregos && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.DoisEmpregos - a.DoisEmpregos;
-        } else if (b.antiguidade !== a.antiguidade && cargo === "IPC") {
+        } else if (b.antiguidade !== a.antiguidade && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.antiguidade - a.antiguidade;
-        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo && cargo === "IPC") {
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
         }
-        else if(b.idade !== a.idade && cargo === "IPC") {
+        else if(b.idade !== a.idade && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.idade - a.idade;
         }
