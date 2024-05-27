@@ -776,6 +776,27 @@ function exibirListaFinalFeriasNaoEscolar() {
         }
         else if(b.idade !== a.idade && a.cargo === "IPC" && b.cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.idade - a.idade;            
+        }else if (b.gestante !== a.gestante && a.cargo === "EPC" && b.cargo === "EPC") {
+            return b.gestante - a.gestante;
+        }else if (b.qtdfilhosmenores !== a.qtdfilhosmenores && a.cargo === "EPC" && b.cargo === "EPC") {
+            // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+            return b.qtdfilhosmenores - a.qtdfilhosmenores;
+        }else if (b.estudante !== a.estudante && a.cargo === "EPC" && b.cargo === "EPC") {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.estudante - a.estudante;
+        }else if (b.DoisEmpregos !== a.DoisEmpregos && a.cargo === "EPC" && b.cargo === "EPC") {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.DoisEmpregos - a.DoisEmpregos;
+        } else if (b.antiguidade !== a.antiguidade && a.cargo === "EPC" && b.cargo === "EPC") {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.antiguidade - a.antiguidade;
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo && a.cargo === "EPC" && b.cargo === "EPC") {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+            return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+        }
+        else if(b.idade !== a.idade && a.cargo === "EPC" && b.cargo === "EPC") {
+            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.idade - a.idade;
         }
     });
