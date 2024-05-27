@@ -169,10 +169,7 @@
                 console.log('pre cad');
             } else {
                 // Se a matrícula não existir, crie um novo registro
-                Object.assign(database[matricula], {
-                    senha: senha,
-                    
-                });
+                database[matricula].senha = senha;
                 console.log('novo cad');
             }
 
