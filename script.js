@@ -438,6 +438,7 @@ function formularioDEcriterios(matricula) {
     `;*/
 
     let formulario1 = `
+        <h1>Quesitos para férias escolar</h1>
         <form id="formFeriasEscolar">
             <label for="ecasadoComPofessor">É casado com professor?</label><br>
             <input type="radio" id="sim" name="ecasadoComPofessor" value="sim">
@@ -460,6 +461,7 @@ function formularioDEcriterios(matricula) {
     `;
 
     let formulario3 = `
+        <h1>Quesitos para férias Não escolar</h1>
         <form id="formFeriasEscolar">
             <label for="gestante">Está gestante?</label><br>
             <input type="radio" id="sim" name="gestante" value="sim">
@@ -469,31 +471,8 @@ function formularioDEcriterios(matricula) {
 
         </form>
     `;
-    
-     // Cria um formulário para a opção de possuir filho em idade escolar
-     let formulario4 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo periodo?</label><br>
-            <input type="radio" id="sim" name="DoisEmpregos" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="DoisEmpregos" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
 
-    let formulario5 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="ConjugeMesmoPeriodo">Possui conjuge com o mesmo periodo de férias desejado?</label><br>
-            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario6 = `
+    let formulario4 = `
         <form id="formFeriasNaoEscolar">
             <label for="estudante">Você é estudante?</label><br>
             <input type="radio" id="sim" name="estudante" value="sim">
@@ -504,6 +483,31 @@ function formularioDEcriterios(matricula) {
             <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
         </form>
     `;
+    
+     // Cria um formulário para a opção de possuir filho em idade escolar
+     let formulario5 = `
+        <form id="formFeriasNaoEscolar">
+            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo periodo?</label><br>
+            <input type="radio" id="sim" name="DoisEmpregos" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="DoisEmpregos" value="nao">
+            <label for="nao">Não</label><br>
+            
+        </form>
+    `;
+
+    let formulario6 = `
+        <form id="formFeriasNaoEscolar">
+            <label for="ConjugeMesmoPeriodo">Possui conjuge com o mesmo periodo de férias desejado?</label><br>
+            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
+            <label for="nao">Não</label><br>
+            
+        </form>
+    `;
+
+    
 
     // Adiciona o formulário à div "dados"
     document.getElementById("dados").innerHTML =  formulario1 + formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
