@@ -748,7 +748,7 @@ function exibirListaFinalFeriasSelecionados() {
 function exibirListaFinalFeriasNaoEscolar() {
     let html = "<h3>Lista Final de Férias Não Escolar em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -756,25 +756,25 @@ function exibirListaFinalFeriasNaoEscolar() {
 
     dataArray.sort((a, b) => {
         // Ordenar por pontuação de férias escolar em ordem decrescente
-        if (b.gestante !== a.gestante) {
+        if (b.gestante !== a.gestante && cargo === "IPC") {
             return b.gestante - a.gestante;
-        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores && cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
             return b.qtdfilhosmenores - a.qtdfilhosmenores;
-        }else if (b.estudante !== a.estudante) {
+        }else if (b.estudante !== a.estudante && cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.estudante - a.estudante;
-        }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        }else if (b.DoisEmpregos !== a.DoisEmpregos && cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.DoisEmpregos - a.DoisEmpregos;
-        } else if (b.antiguidade !== a.antiguidade) {
+        } else if (b.antiguidade !== a.antiguidade && cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.antiguidade - a.antiguidade;
-        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo && cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
         }
-        else{
+        else if(b.idade !== a.idade && cargo === "IPC") {
             // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
             return b.idade - a.idade;
         }
@@ -783,19 +783,19 @@ function exibirListaFinalFeriasNaoEscolar() {
 
 
     // Filtrar apenas os registros sem pontuação de férias escolar ou com pontuação zero
-    let naoEscolhidos = dataArray.filter(dados => !dados.pontuacaoferiasescolar || dados.pontuacaoferiasescolar === 0);
+   // let naoEscolhidos = dataArray.filter(dados => !dados.pontuacaoferiasescolar || dados.pontuacaoferiasescolar === 0);
     
     // Ordenar os registros filtrados por idade
-    naoEscolhidos.sort((a, b) => {
-        return b.idade - a.idade;
-    });
+   // naoEscolhidos.sort((a, b) => {
+   //     return b.idade - a.idade;
+   // });
     
 
     dataArray.forEach(dados => {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
-                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+                <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Idade">${dados.gestante}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
                 <td data-label="Qtd Filhos Menores">${dados.estudante}</td>
