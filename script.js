@@ -211,7 +211,7 @@ function preCadastro() {
 
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
-    feriasEscolar(matricula);
+    formularioDEcriterios(matricula);
 
 }
 
@@ -378,7 +378,7 @@ function validarMatricula(input) {
 }
 
 
-function finalizarCadastro() {
+function limparInformacoes() {
     document.getElementById("matriculaCadastro").value = "";
     document.getElementById("dataIngresso").value = "";
     document.getElementById("paquisitivoinicio").value = "";
@@ -423,7 +423,7 @@ function calcularIdade(dataNascimento) {
     return diferencaAnos;
 }
 
-function feriasEscolar(matricula) {
+function formularioDEcriterios(matricula) {
 
     /* // Cria um formulário para a opção de possuir filho em idade escolar
      let formulario = `
@@ -437,7 +437,7 @@ function feriasEscolar(matricula) {
         </form>
     `;*/
 
-    let formulario2 = `
+    let formulario1 = `
         <form id="formFeriasEscolar">
             <label for="ecasadoComPofessor">É casado com professor?</label><br>
             <input type="radio" id="sim" name="ecasadoComPofessor" value="sim">
@@ -448,12 +448,23 @@ function feriasEscolar(matricula) {
         </form>
     `;
 
-    let formulario3 = `
+    let formulario2 = `
         <form id="formFeriasEscolar">
             <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
             <input type="radio" id="sim" name="estudanteOUaluno" value="sim">
             <label for="sim">Sim</label><br>
             <input type="radio" id="nao" name="estudanteOUaluno" value="nao">
+            <label for="nao">Não</label><br>
+
+        </form>
+    `;
+
+    let formulario3 = `
+        <form id="formFeriasEscolar">
+            <label for="gestante">Está gestante?</label><br>
+            <input type="radio" id="sim" name="gestante" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="gestante" value="nao">
             <label for="nao">Não</label><br>
 
         </form>
@@ -490,12 +501,12 @@ function feriasEscolar(matricula) {
             <input type="radio" id="nao" name="estudante" value="nao">
             <label for="nao">Não</label><br>
             <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
-            <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
+            <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
         </form>
     `;
 
     // Adiciona o formulário à div "dados"
-    document.getElementById("dados").innerHTML = formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
+    document.getElementById("dados").innerHTML =  formulario1 + formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
    // feriasNaoEscolar(matricula);
     console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }
@@ -507,11 +518,14 @@ function calcularPontuacaoFeriasEscolar(matricula) {
     
     let ecasadoComPofessor = document.querySelector('input[name="ecasadoComPofessor"]:checked').value;
     let estudanteOUaluno = document.querySelector('input[name="estudanteOUaluno"]:checked').value;
+    
 
     // Calcula a pontuação com base na resposta do usuário
     let pontuacaoferiasescolar = 0;
     console.log("esta é a qtd de filhos menores");
     console.log(possuiFilho);
+
+
     if (possuiFilho !== 0) {
         pontuacaoferiasescolar += (possuiFilho * 5);
     }
@@ -524,6 +538,8 @@ function calcularPontuacaoFeriasEscolar(matricula) {
         pontuacaoferiasescolar += 1;
     }
 
+    
+
     database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
@@ -535,73 +551,44 @@ function calcularPontuacaoFeriasEscolar(matricula) {
 
 
 
-
-function feriasNaoEscolar(matricula) {
-     // Cria um formulário para a opção de possuir filho em idade escolar
-     let formulario4 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo periodo?</label><br>
-            <input type="radio" id="sim" name="DoisEmpregos" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="DoisEmpregos" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario5 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="ConjugeMesmoPeriodo">Possui conjuge com o mesmo periodo de férias desejado?</label><br>
-            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;
-
-    let formulario6 = `
-        <form id="formFeriasNaoEscolar">
-            <label for="estudante">Você é estudante?</label><br>
-            <input type="radio" id="sim" name="estudante" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="estudante" value="nao">
-            <label for="nao">Não</label><br>
-            <button type="button" onclick="calcularPontuacaoFeriasNaoEscolar('${matricula}')">Finalizar cadastro</button>
-            <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
-        </form>
-    `;
-    
-    // Adiciona o formulário à div "dados"
-    document.getElementById("dados").innerHTML = formulario4 + formulario5 + formulario6;
-    console.log(database[matricula]);
-    console.log(`Funcionário ${matricula} escolheu férias não escolares em ${numeroDePeriodos} período(s).`);
-}
-
-
 function calcularPontuacaoFeriasNaoEscolar(matricula) {
     // Obtém o valor selecionado pelo usuário
     let DoisEmpregos = document.querySelector('input[name="DoisEmpregos"]:checked').value;
     let ConjugeMesmoPeriodo = document.querySelector('input[name="ConjugeMesmoPeriodo"]:checked').value;
     let estudante = document.querySelector('input[name="estudante"]:checked').value;
+    let gestante = document.querySelector('input[name="gestante"]:checked').value;
+    let possuiFilho = database[matricula].qtdfilhosmenores;
+
 
     // Calcula a pontuação com base na resposta do usuário
     let pontuacaoferiasNaoescolar = 0;
-    if (DoisEmpregos === "sim") {
-        pontuacaoferiasNaoescolar += 5;
+
+    if (gestante === "sim") {
+        pontuacaoferiasNaoescolar += 100;
     }
 
-    if (ConjugeMesmoPeriodo === "sim") {
-        pontuacaoferiasNaoescolar += 2;
+    if (possuiFilho !== 0) {
+        pontuacaoferiasescolar += (possuiFilho * 9);
     }
 
     if (estudante === "sim") {
+        pontuacaoferiasNaoescolar += 5;
+    }
+
+    if (DoisEmpregos === "sim") {
+        pontuacaoferiasNaoescolar += 2;
+    }
+
+    if (ConjugeMesmoPeriodo === "sim") {
         pontuacaoferiasNaoescolar += 1;
     }
+
+    
     console.log(pontuacaoferiasNaoescolar);
     
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
+    database[matricula].desempateFeriasEscolar = pontuacaoferiasescolar + pontuacaoferiasNaoescolar;
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
   
@@ -758,7 +745,7 @@ function exibirListaFinalFeriasNaoEscolar() {
     
     // Ordenar os registros filtrados por idade
     naoEscolhidos.sort((a, b) => {
-        return b.idade - a.idade;
+        return b.desempateFeriasEscolar - a.desempateFeriasEscolar;
     });
     
 
@@ -771,6 +758,9 @@ function exibirListaFinalFeriasNaoEscolar() {
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
                 <td data-label="Antiguidade">${dados.antiguidade}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                <td data-label="Pontuação Féria Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação de desempate Férias Escolar">${dados.desempateFeriasEscolar || 0}</td>
+                
                 
             </tr>`;
     });
