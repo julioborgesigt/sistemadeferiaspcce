@@ -591,8 +591,10 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
     console.log(pontuacaoferiasNaoescolar);
     
+    pontuacaoferiasescolar = pontuacaoferiasescolar + pontuacaoferiasNaoescolar
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
+    database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
     database[matricula].gestante = gestante;
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].estudante = estudante;
@@ -747,7 +749,7 @@ function exibirListaFinalFeriasSelecionados() {
 function exibirListaFinalFeriasNaoEscolarIPC() {
     let html = "<h3>Lista Final de Férias Não Escolar IPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
     let dataArray = Object.values(database).filter(dados => dados.cargo === 'IPC');
     
@@ -774,6 +776,7 @@ function exibirListaFinalFeriasNaoEscolarIPC() {
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
+                <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
                 <td data-label="Estudante?">${dados.estudante}</td>
@@ -791,7 +794,7 @@ function exibirListaFinalFeriasNaoEscolarIPC() {
 function exibirListaFinalFeriasNaoEscolarEPC() {
     let html = "<h3>Lista Final de Férias Não Escolar EPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
     let dataArray = Object.values(database).filter(dados => dados.cargo === 'EPC');
     
@@ -813,11 +816,13 @@ function exibirListaFinalFeriasNaoEscolarEPC() {
         }
     });
 
+
     dataArray.forEach(dados => {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
+                <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
                 <td data-label="Estudante?">${dados.estudante}</td>
