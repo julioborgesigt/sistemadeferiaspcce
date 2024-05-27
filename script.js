@@ -635,13 +635,13 @@ function exibirDadosPorMatricula() {
         <tr><th>Matrícula</th><td> ${dados.matricula}</td></tr>
         <tr><th>Cargo</th><td>${dados.cargo}</td></tr>
 
-        <tr>Critéiros para férias escolar</tr>
+        <tr><th>Critéiros para férias escolar</th></tr>
 
         <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho || 0}</td></tr>
         <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor || 0}</td></tr>
         <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno || 0}</td></tr>
 
-        <tr>Critéiros para férias não escolar</tr>
+        <th>Critéiros para férias não escolar</th>
             
             <tr><th>Gestante?</th><td>${dados.gestante}</td></tr>
             <tr><th>Qtd de Filhos de idade escolar</th><td>${dados.qtdfilhosmenores}</td></tr>
