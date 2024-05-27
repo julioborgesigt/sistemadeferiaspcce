@@ -365,9 +365,9 @@ function cadastroInicial() {
 let alertaExibido = false;
 
 function validarMatricula(input) {
-    if (input.value.length < 8 && !alertaExibido) {
+    if (input.value.length < 13 && !alertaExibido) {
         alertaExibido = true;
-        alert("A matrícula deve ter pelo menos 8 caracteres.");
+        alert("A matrícula deve ter pelo menos 13 caracteres.");
         input.focus();
     } else {
         alertaExibido = false;
