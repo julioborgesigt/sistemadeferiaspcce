@@ -591,10 +591,10 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
     console.log(pontuacaoferiasNaoescolar);
     
-    pontuacaoferiasescolar = pontuacaoferiasescolar + pontuacaoferiasNaoescolar
+    
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
+    database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar + pontuacaoferiasNaoescolar
     database[matricula].gestante = gestante;
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].estudante = estudante;
@@ -678,13 +678,13 @@ function exibirListaFinalFerias() {
 
 
 // Exibe os 6 cadastros selecionados para ferias escolar
-function exibirListaFinalFeriasSelecionados() {
+function exibirListaFinalFeriasSelecionadosIPC() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
+    let dataArray = Object.values(database).filter(dados => dados.cargo === 'IPC');
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
     //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
@@ -743,6 +743,72 @@ function exibirListaFinalFeriasSelecionados() {
     document.getElementById("dados2").innerHTML = html;
 }
 
+
+// Exibe os 6 cadastros selecionados para ferias escolar
+function exibirListaFinalFeriasSelecionadosEPC() {
+    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
+    
+    // Converter o objeto em um array de objetos para poder ordenar
+    let dataArray = Object.values(database).filter(dados => dados.cargo === 'EPC');
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    //let seisPrimeiros = selecionados.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                
+               
+              
+            </tr>`;
+    });
+/*
+    seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+    */
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
 
 
 
