@@ -545,6 +545,9 @@ function calcularPontuacaoFeriasEscolar(matricula) {
     
 
     database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
+    database[matricula].possuiFilho = possuiFilho;
+    database[matricula].ecasadoComPofessor = ecasadoComPofessor;
+    database[matricula].estudanteOUaluno = estudanteOUaluno;
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
    
@@ -583,15 +586,20 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
         pontuacaoferiasNaoescolar += 2;
     }
 
-    /*if (ConjugeMesmoPeriodo === "sim") {
+    if (ConjugeMesmoPeriodo === "sim") {
         pontuacaoferiasNaoescolar += 1;
-    }*/
+    }
 
     
     console.log(pontuacaoferiasNaoescolar);
     
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
+    database[matricula].gestante = gestante;
+    database[matricula].possuiFilho = possuiFilho;
+    database[matricula].estudante = estudante;
+    database[matricula].DoisEmpregos = DoisEmpregos;
+    database[matricula].ConjugeMesmoPeriodo = ConjugeMesmoPeriodo;
  
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
