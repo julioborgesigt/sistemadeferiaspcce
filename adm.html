@@ -88,7 +88,86 @@
             </form>
         </div>
 
-        <div id="dados-container"></div>
+        <div id="dados">
+
+               
+        <h1>Formulário (sim ou não) para férias escolar</h1>
+        <form id="formFeriasEscolar">
+            <label for="ecasadoComPofessor">É casado com professor?</label><br>
+            <div class="radio-group">
+                <input type="radio" id="sim" name="ecasadoComPofessor" value="1">
+                <label for="sim">Sim</label>
+                <input type="radio" id="nao" name="ecasadoComPofessor" value="0">
+                <label for="nao">Não</label>
+            </div>
+        </form>
+    
+
+    
+        <form id="formFeriasEscolar">
+            <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
+            <div class="radio-group">
+                <input type="radio" id="sim" name="estudanteOUaluno" value="1">
+                <label for="sim">Sim</label>
+                <input type="radio" id="nao" name="estudanteOUaluno" value="0">
+                <label for="nao">Não</label>
+            </div>
+        </form>
+    
+
+
+        <h1>Formulário (sim ou não) para férias Não escolar</h1>
+        <form id="formFeriasEscolar">
+            <label for="gestante">Está gestante?</label><br>
+            <div class="radio-group">
+                <input type="radio" id="sim" name="gestante" value="1">
+                <label for="sim">Sim</label>
+                <input type="radio" id="nao" name="gestante" value="0">
+                <label for="nao">Não</label>
+            </div>
+        </form>
+  
+
+   
+        <form id="formFeriasNaoEscolar">
+            <label for="estudante">Você é estudante?</label><br>
+            <div class="radio-group">
+                <input type="radio" id="sim" name="estudante" value="1">
+                <label for="sim">Sim</label>
+                <input type="radio" id="nao" name="estudante" value="0">
+                <label for="nao">Não</label>
+            </div>
+        </form>
+    
+
+        <form id="formFeriasNaoEscolar">
+            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo período?</label><br>
+            <div class="radio-group">
+                <input type="radio" id="sim" name="DoisEmpregos" value="1">
+                <label for="sim">Sim</label>
+                <input type="radio" id="nao" name="DoisEmpregos" value="0">
+                <label for="nao">Não</label>
+            </div>
+        </form>
+   
+
+    
+        <form id="formFeriasNaoEscolar">
+            <label for="ConjugeMesmoPeriodo">Possui cônjuge com o mesmo período de férias desejado?</label><br>
+            <div class="radio-group">
+                <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="1">
+                <label for="sim">Sim</label>
+                <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="0">
+                <label for="nao">Não</label>
+            </div>
+            <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
+            <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
+        </form>
+  
+
+
+
+        </div>
 
         <div class="consulta-container">
             <h2>Consultas</h2>

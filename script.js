@@ -441,18 +441,7 @@ function calcularIdade(dataNascimento) {
 
 function formularioDEcriterios(matricula) {
 
-    /* // Cria um formulário para a opção de possuir filho em idade escolar
-     let formulario = `
-        <form id="formFeriasEscolar">
-            <label for="possuiFilho">Possui filho em idade escolar?</label><br>
-            <input type="radio" id="sim" name="possuiFilho" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="possuiFilho" value="nao">
-            <label for="nao">Não</label><br>
-            
-        </form>
-    `;*/
-
+   
     let formulario1 = `
     <h1>Formulário (sim ou não) para férias escolar</h1>
     <form id="formFeriasEscolar">
@@ -532,7 +521,7 @@ let formulario6 = `
     
 
     // Adiciona o formulário à div "dados"
-    document.getElementById("dados-container").innerHTML =  formulario1 + formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
+    document.getElementById("dados").innerHTML =  formulario1 + formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
    // feriasNaoEscolar(matricula);
     //console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }

@@ -428,14 +428,3 @@ body.dark-mode .login-container h2 {
     display: none;
 }
 
-
-/* Estilo adicional */
-.dados-container {
-    display: flex;
-    gap: 10px;
-}
-
-#formulario1-container
- {
-    display: none;
-}
