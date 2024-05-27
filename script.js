@@ -208,7 +208,10 @@ function preCadastro() {
         alert("Pre Cadastro concluído com suscesso 2");
     }
 
+
+    feriasEscolar(matricula, qtdperiodos);
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
+
 }
 
 function cadastroInicial() {
@@ -228,9 +231,8 @@ function cadastroInicial() {
 
     // Suas validações e lógica de cadastro aqui
     console.log("Matrícula:", matricula);
-    console.log("Será férias escolar:", seraferiasEscolar);
+   // console.log("Será férias escolar:", seraferiasEscolar);
     console.log("Quantidade de períodos:", qtdperiodos);
-    console.log("Filhos menores em idade escolar:", qtdfilhosmenores);
     console.log("Período 1:", periodo11, "a", periodo12);
     console.log("Período 2:", periodo21, "a", periodo22);
     console.log("Período 3:", periodo31, "a", periodo32);
@@ -353,11 +355,11 @@ function cadastroInicial() {
         };
     }
 
-    if (seraferiasEscolar === 1) {
-        feriasEscolar(matricula, qtdperiodos);
-    } else {
-        feriasNaoEscolar(matricula, qtdperiodos);
-    }
+   
+        
+    window.location.href = `conclusao.html?matricula=${matricula}`;
+        
+    
 }
 
 
@@ -460,6 +462,7 @@ function feriasEscolar(matricula, numeroDePeriodos) {
     
     // Adiciona o formulário à div "dados"
     document.getElementById("dados").innerHTML = formulario2 + formulario3;
+    feriasNaoEscolar(matricula, qtdperiodos);
     console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }
 
