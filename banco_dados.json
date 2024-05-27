@@ -242,5 +242,24 @@
         "estudante": "1",
         "DoisEmpregos": "1",
         "ConjugeMesmoPeriodo": "1"
+    },
+    "30109511.2024": {
+        "matricula": "30109511.2024",
+        "nome": "julio",
+        "idade": 33,
+        "paquisitivoinicio": "10/04/2023",
+        "paquisitivofim": "09/04/2024",
+        "antiguidade": 2604,
+        "qtdfilhosmenores": "1",
+        "senha": "",
+        "pontuacaoferiasescolar": 19,
+        "possuiFilho": "1",
+        "ecasadoComPofessor": "0",
+        "estudanteOUaluno": "1",
+        "pontuacaoferiasNaoescolar": 14,
+        "gestante": "0",
+        "estudante": "1",
+        "DoisEmpregos": "0",
+        "ConjugeMesmoPeriodo": "0"
     }
 }
