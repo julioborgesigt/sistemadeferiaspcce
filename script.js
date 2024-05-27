@@ -664,7 +664,7 @@ function exibirDadosPorMatricula() {
 
 // Exibe todos os cadastros
 function exibirListaCompletaDEFerias() {
-    let html = "<h3>Lista de Férias com todos os cadastros</h3>";
+    let html = "<h3>Lista de Férias com todos os cadastros EPC e IPC</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
