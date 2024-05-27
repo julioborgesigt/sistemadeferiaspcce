@@ -691,10 +691,8 @@ function exibirListaCompletaDEFerias() {
     document.getElementById("dados2").innerHTML = html;
 }
 
-
-
-// Exibe os 6 cadastros selecionados para ferias escolar
-function exibirListaFinalFeriasSelecionadosIPC() {
+// Exibe em ordem a pontuação das férias escolares
+function exibirListaConcorrentesFeriasEscolarIPC() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
@@ -703,7 +701,7 @@ function exibirListaFinalFeriasSelecionadosIPC() {
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
-    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}` )
 );
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
@@ -764,8 +762,8 @@ let dataArray = Object.values(database).filter(dados =>
 }
 
 
-// Exibe os 6 cadastros selecionados para ferias escolar
-function exibirListaFinalFeriasSelecionadosEPC() {
+// Exibe em ordem a pontuação das férias escolares
+function exibirListaConcorrentesFeriasEscolarEPC() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
@@ -773,7 +771,7 @@ function exibirListaFinalFeriasSelecionadosEPC() {
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
-    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}`  )
 );
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
@@ -829,6 +827,150 @@ let dataArray = Object.values(database).filter(dados =>
         html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
     });
     */
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+
+
+// Exibe os 6 cadastros selecionados para ferias escolar
+function exibirListaFinalFeriasEscolarSelecionadosIPC() {
+    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    
+
+    // Converter o objeto em um array de objetos para poder ordenar
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}` &&
+    (dados.feriasescolarounao === true || dados.feriasescolarounao === 1))
+);
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    let seisPrimeiros = selecionados.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                     
+            </tr>`;
+    });
+
+    seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+    
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+
+// Exibe os 6 cadastros selecionados para ferias escolar
+function exibirListaFinalFeriasEscolarSelecionadosEPC() {
+    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
+    
+    // Converter o objeto em um array de objetos para poder ordenar
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}` &&
+    (dados.feriasescolarounao === true || dados.feriasescolarounao === 1) )
+);
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    let seisPrimeiros = selecionados.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                
+               
+              
+            </tr>`;
+    });
+
+    seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+    
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
