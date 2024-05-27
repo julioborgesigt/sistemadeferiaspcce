@@ -455,14 +455,47 @@ function feriasEscolar(matricula) {
             <label for="sim">Sim</label><br>
             <input type="radio" id="nao" name="estudanteOUaluno" value="nao">
             <label for="nao">Não</label><br>
-            <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
-            <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
 
         </form>
     `;
     
+     // Cria um formulário para a opção de possuir filho em idade escolar
+     let formulario4 = `
+        <form id="formFeriasNaoEscolar">
+            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo periodo?</label><br>
+            <input type="radio" id="sim" name="DoisEmpregos" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="DoisEmpregos" value="nao">
+            <label for="nao">Não</label><br>
+            
+        </form>
+    `;
+
+    let formulario5 = `
+        <form id="formFeriasNaoEscolar">
+            <label for="ConjugeMesmoPeriodo">Possui conjuge com o mesmo periodo de férias desejado?</label><br>
+            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
+            <label for="nao">Não</label><br>
+            
+        </form>
+    `;
+
+    let formulario6 = `
+        <form id="formFeriasNaoEscolar">
+            <label for="estudante">Você é estudante?</label><br>
+            <input type="radio" id="sim" name="estudante" value="sim">
+            <label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="estudante" value="nao">
+            <label for="nao">Não</label><br>
+            <button type="button" onclick="calcularPontuacaoFeriasNaoEscolar('${matricula}'); calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
+            <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
+        </form>
+    `;
+
     // Adiciona o formulário à div "dados"
-    document.getElementById("dados").innerHTML = formulario2 + formulario3;
+    document.getElementById("dados").innerHTML = formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
     feriasNaoEscolar(matricula);
     console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }
