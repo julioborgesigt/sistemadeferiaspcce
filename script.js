@@ -627,7 +627,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
 
 
 // Consulta pelo número da matricula
-function exibirDados() {
+function exibirDadosPorMatricula() {
     let matricula = document.getElementById("matriculaConsulta").value;
     let dados = database[matricula];
     if (dados) {
@@ -662,13 +662,16 @@ function exibirDados() {
 
 
 // Exibe todos os cadastros
-function exibirListaFinalFerias() {
+function exibirListaCompletaDEFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
+    let anoCorrente = new Date().getFullYear().toString();
+    let dataArray = Object.values(database).filter(dados => 
+        dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+    );
     
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
