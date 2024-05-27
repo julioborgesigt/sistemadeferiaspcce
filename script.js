@@ -744,99 +744,94 @@ function exibirListaFinalFeriasSelecionados() {
 
 
 
-// Function to display vacations not chosen for school holiday
-function exibirListaFinalFeriasNaoEscolar() {
-    let html = "<h3>Lista Final de Férias Não Escolar em ordem de Preferências</h3>";
+function exibirListaFinalFeriasNaoEscolarIPC() {
+    let html = "<h3>Lista Final de Férias Não Escolar IPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Cargo</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
-    // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
+    let dataArray = Object.values(database).filter(dados => dados.cargo === 'IPC');
     
-
     dataArray.sort((a, b) => {
-        // Ordenar por pontuação de férias escolar em ordem decrescente
-        if (b.gestante !== a.gestante && a.cargo === "IPC" && b.cargo === "IPC") {
+        if (b.gestante !== a.gestante) {
             return b.gestante - a.gestante;
-        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores && a.cargo === "IPC" && b.cargo === "IPC") {
-            // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
             return b.qtdfilhosmenores - a.qtdfilhosmenores;
-        }else if (b.estudante !== a.estudante && a.cargo === "IPC" && b.cargo === "IPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        } else if (b.estudante !== a.estudante) {
             return b.estudante - a.estudante;
-        }else if (b.DoisEmpregos !== a.DoisEmpregos && a.cargo === "IPC" && b.cargo === "IPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        } else if (b.DoisEmpregos !== a.DoisEmpregos) {
             return b.DoisEmpregos - a.DoisEmpregos;
-        } else if (b.antiguidade !== a.antiguidade && a.cargo === "IPC" && b.cargo === "IPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        } else if (b.antiguidade !== a.antiguidade) {
             return b.antiguidade - a.antiguidade;
-        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo && a.cargo === "IPC" && b.cargo === "IPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
             return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
-        }
-        else if(b.idade !== a.idade && a.cargo === "IPC" && b.cargo === "IPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.idade - a.idade;            
-        }else if (b.gestante !== a.gestante && a.cargo === "EPC" && b.cargo === "EPC") {
-            return b.gestante - a.gestante;
-        }else if (b.qtdfilhosmenores !== a.qtdfilhosmenores && a.cargo === "EPC" && b.cargo === "EPC") {
-            // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
-            return b.qtdfilhosmenores - a.qtdfilhosmenores;
-        }else if (b.estudante !== a.estudante && a.cargo === "EPC" && b.cargo === "EPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.estudante - a.estudante;
-        }else if (b.DoisEmpregos !== a.DoisEmpregos && a.cargo === "EPC" && b.cargo === "EPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.DoisEmpregos - a.DoisEmpregos;
-        } else if (b.antiguidade !== a.antiguidade && a.cargo === "EPC" && b.cargo === "EPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.antiguidade - a.antiguidade;
-        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo && a.cargo === "EPC" && b.cargo === "EPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
-            return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
-        }
-        else if(b.idade !== a.idade && a.cargo === "EPC" && b.cargo === "EPC") {
-            // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        } else {
             return b.idade - a.idade;
         }
     });
-
-
-
-    // Filtrar apenas os registros sem pontuação de férias escolar ou com pontuação zero
-   // let naoEscolhidos = dataArray.filter(dados => !dados.pontuacaoferiasescolar || dados.pontuacaoferiasescolar === 0);
-    
-    // Ordenar os registros filtrados por idade
-   // naoEscolhidos.sort((a, b) => {
-   //     return b.idade - a.idade;
-   // });
-    
 
     dataArray.forEach(dados => {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
-                <td data-label="Idade">${dados.gestante}</td>
+                <td data-label="Gestante?">${dados.gestante}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
-                <td data-label="Qtd Filhos Menores">${dados.estudante}</td>
-                <td data-label="Qtd Filhos Menores">${dados.DoisEmpregos}</td>
-                <td data-label="Qtd Filhos Menores">${dados.ConjugeMesmoPeriodo}</td>
-                <td data-label="Antiguidade">${dados.antiguidade}</td>
-                <td data-label="Idade">${dados.idade}</td>              
-                
-                
+                <td data-label="Estudante?">${dados.estudante}</td>
+                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos}</td>
+                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo}</td>
+                <td data-label="Antig.">${dados.antiguidade}</td>
+                <td data-label="Idade">${dados.idade}</td>
             </tr>`;
     });
 
-    // Gerar a tabela HTML
-    /*naoEscolhidos.forEach(dados => {
-        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.idade}</td><td>${dados.qtdfilhosmenores}</td><td>${dados.antiguidade}</td><td>${dados.pontuacaoferiasNaoescolar || 0}</td></tr>`;
-    });*/
-    
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
+
+function exibirListaFinalFeriasNaoEscolarEPC() {
+    let html = "<h3>Lista Final de Férias Não Escolar EPC em ordem de Preferências</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Gestante?</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    
+    let dataArray = Object.values(database).filter(dados => dados.cargo === 'EPC');
+    
+    dataArray.sort((a, b) => {
+        if (b.gestante !== a.gestante) {
+            return b.gestante - a.gestante;
+        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+            return b.qtdfilhosmenores - a.qtdfilhosmenores;
+        } else if (b.estudante !== a.estudante) {
+            return b.estudante - a.estudante;
+        } else if (b.DoisEmpregos !== a.DoisEmpregos) {
+            return b.DoisEmpregos - a.DoisEmpregos;
+        } else if (b.antiguidade !== a.antiguidade) {
+            return b.antiguidade - a.antiguidade;
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+            return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+        } else {
+            return b.idade - a.idade;
+        }
+    });
+
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Cargo">${dados.cargo}</td>
+                <td data-label="Gestante?">${dados.gestante}</td>
+                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
+                <td data-label="Estudante?">${dados.estudante}</td>
+                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos}</td>
+                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo}</td>
+                <td data-label="Antig.">${dados.antiguidade}</td>
+                <td data-label="Idade">${dados.idade}</td>
+            </tr>`;
+    });
+
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
 
 
 
