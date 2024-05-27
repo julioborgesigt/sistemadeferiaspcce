@@ -172,6 +172,7 @@ function preCadastro() {
     const paquisitivoinicio = document.getElementById("paquisitivoinicio").value;
     const paquisitivofim = document.getElementById("paquisitivofim").value;
     const dataNascimento = document.getElementById("dataNascimento").value;
+    const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
     
     
     
@@ -187,6 +188,7 @@ function preCadastro() {
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
             antiguidade: calcularAntiguidade(dataIngresso),
+            qtdfilhosmenores: qtdfilhosmenores,
             senha: senha
             
         });
@@ -200,7 +202,9 @@ function preCadastro() {
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
             antiguidade: calcularAntiguidade(dataIngresso),
+            qtdfilhosmenores: qtdfilhosmenores,
             senha: senha
+            
         };
         alert("Pre Cadastro concluído com suscesso 2");
     }
@@ -214,7 +218,7 @@ function cadastroInicial() {
 
     const qtdperiodos = document.querySelectorAll('input[name="qtdperiodos"]:checked').length;
 
-    const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value;
+    
 
     let periodo11 = document.getElementById("periodo11").value;
     let periodo12 = document.getElementById("periodo12").value;
@@ -323,7 +327,7 @@ function cadastroInicial() {
             numeroDePeriodos: qtdperiodos,
             feriasescolarounao: seraferiasEscolar,
             
-            qtdfilhosmenores: qtdfilhosmenores,
+           
             periodo11: periodo11,
             periodo12: periodo12,
             periodo21: periodo21,
@@ -339,7 +343,7 @@ function cadastroInicial() {
             numeroDePeriodos: qtdperiodos,
             feriasescolarounao: seraferiasEscolar,
             
-            qtdfilhosmenores: qtdfilhosmenores,
+            
             periodo11: periodo11,
             periodo12: periodo12,
             periodo21: periodo21,
