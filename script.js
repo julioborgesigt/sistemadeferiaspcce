@@ -361,7 +361,7 @@ function cadastroInicial() {
 }
 
 
-/*
+
 let alertaExibido = false;
 
 function validarMatricula(input) {
@@ -373,7 +373,6 @@ function validarMatricula(input) {
         alertaExibido = false;
     }
 }
-*/
 
 
 function finalizarCadastro() {

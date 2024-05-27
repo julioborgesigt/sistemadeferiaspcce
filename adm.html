@@ -9,89 +9,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginData = JSON.parse(localStorage.getItem('loginToken'));
+       document.addEventListener('DOMContentLoaded', function() {
+    const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
-            if (!loginData || new Date().getTime() > loginData.expirationTime) {
-                alert("Sua sessão expirou. Faça login novamente.");
-                window.location.href = 'index.html';
-            } else {
-                carregarBancoDados();
-            }
-        });
-
-        let database = {};
-
-        function carregarBancoDados() {
-            const url = 'banco_dados.json';
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.json();
-                })
-                .then(jsonData => {
-                    database = jsonData;
-                    preencherDropdownMatriculas();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
-
-        function preencherDropdownMatriculas() {
-            const matriculaDropdown = document.getElementById('matriculaCadastro');
-            matriculaDropdown.innerHTML = ''; // Limpa qualquer opção existente
-
-            for (let matricula in database) {
-                if (database.hasOwnProperty(matricula)) {
-                    const option = document.createElement('option');
-                    option.value = matricula;
-                    option.text = matricula;
-                    matriculaDropdown.appendChild(option);
-                }
-            }
-        }
-
-        
-        function validarMatricula(input) {
-            const anoCorrente = new Date().getFullYear();
-            const matricula = input.value.trim();
-
-            if (!matricula.match(/\.\d{4}$/)) {
-                input.value = `${matricula}.${anoCorrente}`;
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('loginToken');
-            window.location.href = 'index.html';
-        }
-
-        
+    if (!loginData || new Date().getTime() > loginData.expirationTime) {
+        // Redirecionar para a página de login se o token não existir ou estiver expirado
+        alert("Sua sessão expirou. Faça login novamente.");
+        window.location.href = 'index.html';
+    }
+});
     </script>
+    
+    
 </head>
 <body>
     <div class="container">
-        <h1>Cadastro e Consulta de Férias</h1>
 
-        <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
-            <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
-        </div>
+       
+        <h1>Cadastro e Consulta de Férias</h1>
+        
+
+
+
+         <!-- Botão para alternar entre modos claro e escuro -->
+   <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
+    <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
+</div>
    
+        
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
 
                 <label for="matriculaCadastro">Matrícula:</label>
-                <select id="matriculaCadastro" name="matriculaCadastro">
-                    <!-- Opções serão preenchidas dinamicamente -->
-                </select>
+                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)">
 
                 <label for="matriculaNome">Primeiro Nome:</label>
-                <input type="text" id="matriculaNome" name="matriculaNome">
+                <input type="text" id="matriculaNome" name="matriculaNome" >
 
                 <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
                 <input type="text" id="dataIngresso" name="dataIngresso">
@@ -102,11 +56,10 @@
                 <label for="paquisitivofim">Fim do seu período aquisitivo (formato DD/MM/AAAA):</label>
                 <input type="text" id="paquisitivofim" name="paquisitivofim">
                 
-                <label for="dataNascimento">Qual sua data de nascimento? (formato DD/MM/AAAA)</label>
+                <label for="dataNascimento">Qual sua data de nacimento? (formato DD/MM/AAAA)</label>
                 <input type="text" id="dataNascimento" name="dataNascimento">
 
-                <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possua, deixar em branco</label>
-                <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">
+                              
 
                 <button type="button" onclick="preCadastro()">Cadastrar</button>
             </form>
@@ -121,13 +74,19 @@
             <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
             <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para férias escolar</button>
             <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
+            
         </div>
 
         <div class="logout-container">
-            <button onclick="logout()">Logout</button>
+            <!-- Botão logout -->
+        <button onclick="logout()">Logout</button>
         </div>
 
-        <div id="dados2"></div>
+        <div id="dados2">
+                              
+        </div>
+
+        
     </div>
     
     <!-- jQuery -->
@@ -138,7 +97,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Arquivo de localização do flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-    <!-- Seu script personalizado -->
-    <script src="script.js"></script>
+     <!-- Seu script personalizado -->
+     <script src="script.js"></script>
 </body>
 </html>
