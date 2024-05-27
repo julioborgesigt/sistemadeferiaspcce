@@ -438,7 +438,7 @@ function formularioDEcriterios(matricula) {
     `;*/
 
     let formulario1 = `
-        <h1>Quesitos para férias escolar</h1>
+        <h1>Formulário (sim ou não) para férias escolar</h1>
         <form id="formFeriasEscolar">
             <label for="ecasadoComPofessor">É casado com professor?</label><br>
             <input type="radio" id="sim" name="ecasadoComPofessor" value="sim">
@@ -461,7 +461,7 @@ function formularioDEcriterios(matricula) {
     `;
 
     let formulario3 = `
-        <h1>Quesitos para férias Não escolar</h1>
+        <h1>Formulário (sim ou não) para férias Não escolar</h1>
         <form id="formFeriasEscolar">
             <label for="gestante">Está gestante?</label><br>
             <input type="radio" id="sim" name="gestante" value="sim">
@@ -479,8 +479,7 @@ function formularioDEcriterios(matricula) {
             <label for="sim">Sim</label><br>
             <input type="radio" id="nao" name="estudante" value="nao">
             <label for="nao">Não</label><br>
-            <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
-            <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
+            
         </form>
     `;
     
@@ -503,7 +502,8 @@ function formularioDEcriterios(matricula) {
             <label for="sim">Sim</label><br>
             <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
             <label for="nao">Não</label><br>
-            
+            <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
+            <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
         </form>
     `;
 
