@@ -441,10 +441,8 @@ function formularioDEcriterios(matricula) {
         <h1>Formulário (sim ou não) para férias escolar</h1>
         <form id="formFeriasEscolar">
             <label for="ecasadoComPofessor">É casado com professor?</label><br>
-            <input type="radio" id="sim" name="ecasadoComPofessor" value="sim">
-            <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="ecasadoComPofessor" value="nao">
-            <label for="nao">Não</label><br>
+            <input type="radio" id="sim" name="ecasadoComPofessor" value="1"><label for="sim">Sim</label><br>
+            <input type="radio" id="nao" name="ecasadoComPofessor" value="0"><label for="nao">Não</label><br>
             
         </form>
     `;
@@ -452,9 +450,9 @@ function formularioDEcriterios(matricula) {
     let formulario2 = `
         <form id="formFeriasEscolar">
             <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
-            <input type="radio" id="sim" name="estudanteOUaluno" value="sim">
+            <input type="radio" id="sim" name="estudanteOUaluno" value="1">
             <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="estudanteOUaluno" value="nao">
+            <input type="radio" id="nao" name="estudanteOUaluno" value="0">
             <label for="nao">Não</label><br>
 
         </form>
@@ -464,9 +462,9 @@ function formularioDEcriterios(matricula) {
         <h1>Formulário (sim ou não) para férias Não escolar</h1>
         <form id="formFeriasEscolar">
             <label for="gestante">Está gestante?</label><br>
-            <input type="radio" id="sim" name="gestante" value="sim">
+            <input type="radio" id="sim" name="gestante" value="1">
             <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="gestante" value="nao">
+            <input type="radio" id="nao" name="gestante" value="0">
             <label for="nao">Não</label><br>
 
         </form>
@@ -475,9 +473,9 @@ function formularioDEcriterios(matricula) {
     let formulario4 = `
         <form id="formFeriasNaoEscolar">
             <label for="estudante">Você é estudante?</label><br>
-            <input type="radio" id="sim" name="estudante" value="sim">
+            <input type="radio" id="sim" name="estudante" value="1">
             <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="estudante" value="nao">
+            <input type="radio" id="nao" name="estudante" value="0">
             <label for="nao">Não</label><br>
             
         </form>
@@ -487,9 +485,9 @@ function formularioDEcriterios(matricula) {
      let formulario5 = `
         <form id="formFeriasNaoEscolar">
             <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo periodo?</label><br>
-            <input type="radio" id="sim" name="DoisEmpregos" value="sim">
+            <input type="radio" id="sim" name="DoisEmpregos" value="1">
             <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="DoisEmpregos" value="nao">
+            <input type="radio" id="nao" name="DoisEmpregos" value="0">
             <label for="nao">Não</label><br>
             
         </form>
@@ -498,9 +496,9 @@ function formularioDEcriterios(matricula) {
     let formulario6 = `
         <form id="formFeriasNaoEscolar">
             <label for="ConjugeMesmoPeriodo">Possui conjuge com o mesmo periodo de férias desejado?</label><br>
-            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="sim">
+            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="1">
             <label for="sim">Sim</label><br>
-            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="nao">
+            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="0">
             <label for="nao">Não</label><br>
             <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
             <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
