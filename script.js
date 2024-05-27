@@ -742,7 +742,7 @@ function exibirListaFinalFeriasSelecionados() {
 function exibirListaFinalFeriasNaoEscolar() {
     let html = "<h3>Lista Final de Férias Não Escolar em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Gestante?</th><th>Idade</th><th>Qtd Filhos Menores</th><th>É estudante?</th><th>2 empregos mesmo periodo?</th><th>Antiguidade</th><th>Conjuje com mesmo periodo?</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Gestante?</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Estudante?</th><th>Empregos com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
