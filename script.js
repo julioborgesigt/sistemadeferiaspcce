@@ -848,7 +848,7 @@ let dataArray = Object.values(database).filter(dados =>
 
 // Exibe os 6 cadastros selecionados para ferias escolar
 function exibirListaFinalFeriasEscolarSelecionadosIPC() {
-    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    let html = "<h3>Lista Final de Selecionados para Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
@@ -920,13 +920,13 @@ let dataArray = Object.values(database).filter(dados =>
 
 // Exibe os 6 cadastros selecionados para ferias escolar
 function exibirListaFinalFeriasEscolarSelecionadosEPC() {
-    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    let html = "<h3>Lista Final de Selecionados para Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
-let dataArray = Object.values(database).filter(dados => 
+    let dataArray = Object.values(database).filter(dados => 
     dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}` &&
     (dados.feriasescolarounao === true || dados.feriasescolarounao === 1) )
 );
