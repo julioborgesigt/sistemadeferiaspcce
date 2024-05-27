@@ -594,7 +594,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar + pontuacaoferiasNaoescolar
+    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + pontuacaoferiasNaoescolar
     database[matricula].gestante = gestante;
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].estudante = estudante;
