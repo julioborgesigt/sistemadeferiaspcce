@@ -18,9 +18,22 @@
         window.location.href = 'index.html';
     }
 });
+
+
+    document.head.insertAdjacentHTML("beforeend", style);
     </script>
     
+    <style>let style = `
+        <style>
+            .radio-group {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+        </style>
+    `;
     
+</style>
 </head>
 <body>
     <div class="container">
@@ -61,6 +74,25 @@
 
                 <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possua, deixar em branco</label>
                 <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">
+
+                <div class="checkbox-container">
+                    <label for="cargoIpc">
+                        <input type="checkbox" id="cargoIpc" name="cargo" class="cargo-checkbox">
+                        IPC-Exp.
+                    </label>
+                    <label for="cargoEpc">
+                        <input type="checkbox" id="cargoEpc" name="cargo" class="cargo-checkbox">
+                        EPC-Exp.
+                    </label>
+                    <label for="cargoIpcPlantao">
+                        <input type="checkbox" id="cargoIpcPlantao" name="cargo" class="cargo-checkbox">
+                        IPC-Plantão
+                    </label>
+                    <label for="cargoEpcPlantao">
+                        <input type="checkbox" id="cargoEpcPlantao" name="cargo" class="cargo-checkbox">
+                        EPC-Plantão
+                    </label>
+                </div>
 
                 <button type="button" onclick="preCadastro()">Cadastrar</button>
             </form>

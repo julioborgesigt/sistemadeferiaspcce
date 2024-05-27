@@ -174,7 +174,21 @@ function preCadastro() {
     const paquisitivofim = document.getElementById("paquisitivofim").value;
     const dataNascimento = document.getElementById("dataNascimento").value; // idade
     const qtdfilhosmenores = document.getElementById("qtdfilhosmenores").value; // filhos em idade escolar
-         
+    const cargoIpc = document.getElementById("cargoIpc").checked;
+    const cargoEpc = document.getElementById("cargoEpc").checked;
+    const cargoIpcPlantao = document.getElementById("cargoIpcPlantao").checked;
+    const cargoEpcPlantao = document.getElementById("cargoEpcPlantao").checked;
+
+    if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoEpcPlantao) {
+        alert("Por favor, selecione pelo menos uma opção de cargo.");
+        return;
+    }
+
+    let cargo = "";
+    if (cargoIpc) cargo = "IPC";
+    if (cargoEpc) cargo = "EPC";
+    if (cargoIpcPlantao) cargo = "IPCplantao";
+    if (cargoEpcPlantao) cargo = "EPCplantao";     
 
     // Salvar os dados no banco de dados
     let senha = '';
@@ -188,7 +202,8 @@ function preCadastro() {
             paquisitivofim: paquisitivofim,
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
-            senha: senha
+            senha: senha,
+            cargo: cargo
             
         });
         alert("Pre Cadastro concluído com suscesso");
@@ -202,7 +217,8 @@ function preCadastro() {
             paquisitivofim: paquisitivofim,
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
-            senha: senha
+            senha: senha,
+            cargo: cargo
             
         };
         alert("Pre Cadastro concluído com suscesso 2");
@@ -727,19 +743,12 @@ function exibirListaFinalFeriasSelecionadosIPC() {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
-                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
                 <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
                 <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
-                
-       
-    
-    
-    
-
-              
+                     
             </tr>`;
     });
 /*
