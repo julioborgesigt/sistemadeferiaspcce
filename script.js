@@ -358,7 +358,7 @@ function cadastroInicial() {
 
    
     salvarBancoDados(); // Salvar o banco de dados
-    window.location.href = `conclusao.html?matricula=${matricula}`;
+   // window.location.href = `conclusao.html?matricula=${matricula}`;
         
     
 }
