@@ -673,13 +673,13 @@ function exibirListaFinalFerias() {
 function exibirListaFinalFeriasSelecionados() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th><th>Desempate Férias Escolar</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
-    let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
     
    // Ordenar os registros filtrados
 selecionados.sort((a, b) => {
@@ -688,23 +688,23 @@ selecionados.sort((a, b) => {
     } else if (b.gestante !== a.gestante) {
         return b.gestante - a.gestante;
     } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
-        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+       
         return b.qtdfilhosmenores - a.qtdfilhosmenores;
     }else if (b.estudante !== a.estudante) {
-        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        
         return b.estudante - a.estudante;
     }else if (b.DoisEmpregos !== a.DoisEmpregos) {
-        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        
         return b.DoisEmpregos - a.DoisEmpregos;
     } else if (b.antiguidade !== a.antiguidade) {
-        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        
         return b.antiguidade - a.antiguidade;
     } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
-        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        
         return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
     }
     else{
-        // Em caso de empate na pontuação, ordenar por antiguidade em ordem decrescente
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
         return b.idade - a.idade;
     }
 });
