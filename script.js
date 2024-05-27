@@ -698,7 +698,10 @@ function exibirListaFinalFeriasSelecionadosIPC() {
     
 
     // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database).filter(dados => dados.cargo === 'IPC');
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+);
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
     //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
@@ -765,7 +768,10 @@ function exibirListaFinalFeriasSelecionadosEPC() {
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database).filter(dados => dados.cargo === 'EPC');
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+);
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
     //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
@@ -831,7 +837,10 @@ function exibirListaFinalFeriasNaoEscolarIPC() {
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
-    let dataArray = Object.values(database).filter(dados => dados.cargo === 'IPC');
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+);
     
     dataArray.sort((a, b) => {
         if (b.gestante !== a.gestante) {
@@ -876,7 +885,10 @@ function exibirListaFinalFeriasNaoEscolarEPC() {
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
-    let dataArray = Object.values(database).filter(dados => dados.cargo === 'EPC');
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+);
     
     dataArray.sort((a, b) => {
         if (b.gestante !== a.gestante) {
