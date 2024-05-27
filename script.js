@@ -711,7 +711,7 @@ function exibirListaFinalFeriasSelecionados() {
 
 
     // Limitar a exibição aos 6 primeiros resultados
-    let seisPrimeiros = selecionados.slice(0, 6);
+    //let seisPrimeiros = selecionados.slice(0, 6);
     
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
