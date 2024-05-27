@@ -607,7 +607,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
      alert("Cadastro concluído.");
     console.log(database[matricula]);
     // Redireciona para a página de conclusão do cadastro
-    window.location.href = `conclusao.html?matricula=${matricula}`;
+    //window.location.href = `conclusao.html?matricula=${matricula}`;
            
 }
 
@@ -681,8 +681,9 @@ function exibirListaFinalFerias() {
 function exibirListaFinalFeriasSelecionadosIPC() {
     let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
+
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database).filter(dados => dados.cargo === 'IPC');
     
@@ -729,8 +730,15 @@ function exibirListaFinalFeriasSelecionadosIPC() {
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
                 
-               
+       
+    
+    
+    
+
               
             </tr>`;
     });
