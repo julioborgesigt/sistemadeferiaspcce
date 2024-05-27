@@ -568,7 +568,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     // Calcula a pontuação com base na resposta do usuário
     let pontuacaoferiasNaoescolar = 0;
 
-    if (gestante === "sim") {
+    if (gestante === "1") {
         pontuacaoferiasNaoescolar += 100;
     }
 
@@ -576,15 +576,15 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
         pontuacaoferiasNaoescolar += (possuiFilho * 9);
     }
 
-    if (estudante === "sim") {
+    if (estudante === "1") {
         pontuacaoferiasNaoescolar += 5;
     }
 
-    if (DoisEmpregos === "sim") {
+    if (DoisEmpregos === "1") {
         pontuacaoferiasNaoescolar += 2;
     }
 
-    if (ConjugeMesmoPeriodo === "sim") {
+    if (ConjugeMesmoPeriodo === "1") {
         pontuacaoferiasNaoescolar += 1;
     }
 
