@@ -588,7 +588,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    database[matricula].desempateFeriasEscolar = pontuacaoferiasescolar + pontuacaoferiasNaoescolar;
+ 
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
   
@@ -716,7 +716,7 @@ selecionados.sort((a, b) => {
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                <td data-label="Pontuação Férias Escolar">${dados.desempateFeriasEscolar || 0}</td>
+                
                
               
             </tr>`;
@@ -776,7 +776,7 @@ function exibirListaFinalFeriasNaoEscolar() {
     
     // Ordenar os registros filtrados por idade
     naoEscolhidos.sort((a, b) => {
-        return b.desempateFeriasEscolar - a.desempateFeriasEscolar;
+        return b.idade - a.idade;
     });
     
 
@@ -790,7 +790,7 @@ function exibirListaFinalFeriasNaoEscolar() {
                 <td data-label="Antiguidade">${dados.antiguidade}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Pontuação Féria Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-                <td data-label="Pontuação de desempate Férias Escolar">${dados.desempateFeriasEscolar || 0}</td>
+              
                 
                 
             </tr>`;
