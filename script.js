@@ -682,7 +682,7 @@ function exibirListaFinalFeriasSelecionados() {
     //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
     
    // Ordenar os registros filtrados
-selecionados.sort((a, b) => {
+   dataArray.sort((a, b) => {
     if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
         return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
     } else if (b.gestante !== a.gestante) {
