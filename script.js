@@ -600,6 +600,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
 }
 
 
+
 // Consulta pelo número da matricula
 function exibirDados() {
     let matricula = document.getElementById("matriculaConsulta").value;
