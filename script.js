@@ -209,8 +209,9 @@ function preCadastro() {
     }
 
 
-    feriasEscolar(matricula, qtdperiodos);
+    
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
+    feriasEscolar(matricula);
 
 }
 
@@ -422,7 +423,7 @@ function calcularIdade(dataNascimento) {
     return diferencaAnos;
 }
 
-function feriasEscolar(matricula, numeroDePeriodos) {
+function feriasEscolar(matricula) {
 
     /* // Cria um formulário para a opção de possuir filho em idade escolar
      let formulario = `
@@ -462,7 +463,7 @@ function feriasEscolar(matricula, numeroDePeriodos) {
     
     // Adiciona o formulário à div "dados"
     document.getElementById("dados").innerHTML = formulario2 + formulario3;
-    feriasNaoEscolar(matricula, qtdperiodos);
+    feriasNaoEscolar(matricula);
     console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }
 
@@ -504,7 +505,7 @@ function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
 
 
 
-function feriasNaoEscolar(matricula, numeroDePeriodos) {
+function feriasNaoEscolar(matricula) {
      // Cria um formulário para a opção de possuir filho em idade escolar
      let formulario4 = `
         <form id="formFeriasNaoEscolar">
