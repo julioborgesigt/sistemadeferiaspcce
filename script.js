@@ -632,12 +632,24 @@ function exibirDadosPorMatricula() {
     let dados = database[matricula];
     if (dados) {
         let html = `<table border="1">
-            <tr><th>Matrícula</th><td>${dados.matricula}</td></tr>
-            <tr><th>Qtd Períodos</th><td>${dados.numeroDePeriodos}</td></tr>
-            <tr><th>Férias Escolar</th><td >${dados.feriasescolarounao}</td></tr>
-            <tr><th>Pontuação Férias Escolar</th><td >${dados.pontuacaoferiasescolar || 'não'}</td></tr>
-            <tr><th>Pontuação Férias Nao Escolar(desempate)</th><td >${dados.pontuacaoferiasNaoescolar || 'não'}</td></tr>
-            <tr><th>Idade</th><td >${dados.idade}</td></tr>`;
+        <tr><th>Matrícula</th><td> ${dados.matricula}</td></tr>
+        <tr><th>Cargo</th><td>${dados.cargo}</td></tr>
+
+        <tr><th>Critéiros para férias escolar</th></tr>
+
+        <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho || 0}</td></tr>
+        <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor || 0}</td></tr>
+        <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno || 0}</td></tr>
+
+        <tr><th>Critéiros para férias não escolar</th></tr>
+            
+            <tr><th>Gestante?</th><td>${dados.gestante}</td></tr>
+            <tr><th>Qtd de Filhos de idade escolar</th><td>${dados.qtdfilhosmenores}</td></tr>
+            <tr><th>Estudante?</th><td>${dados.estudante}</td></tr>
+            <tr><th>Dois vínculos com mesmo periodo?</th><td>${dados.DoisEmpregos}</td></tr>
+            <tr><th>Conjuge com mesmo periodo?</th><td>${dados.ConjugeMesmoPeriodo}</td></tr>
+            <tr><th>Antiguidade</th><td>${dados.antiguidade}</td></tr>
+            <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
             
         // Verificar se os períodos de férias estão definidos
         if (dados.periodo11) {
