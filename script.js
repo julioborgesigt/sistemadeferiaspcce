@@ -1,4 +1,3 @@
-
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -362,7 +361,7 @@ function cadastroInicial() {
 }
 
 
-
+/*
 let alertaExibido = false;
 
 function validarMatricula(input) {
@@ -374,6 +373,8 @@ function validarMatricula(input) {
         alertaExibido = false;
     }
 }
+*/
+
 
 function finalizarCadastro() {
     document.getElementById("matriculaCadastro").value = "";

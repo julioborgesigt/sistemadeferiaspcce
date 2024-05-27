@@ -20,26 +20,6 @@
             }
         });
 
-        let database = {};
-
-        function carregarBancoDados() {
-            const url = 'banco_dados.json';
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.json();
-                })
-                .then(jsonData => {
-                    database = jsonData;
-                    preencherDropdownMatriculas();
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
 
         function preencherDropdownMatriculas() {
             const matriculaDropdown = document.getElementById('matriculaCadastro');
@@ -55,10 +35,7 @@
             }
         }
 
-        function preCadastro() {
-            // Lógica para pré-cadastro
-        }
-
+        
         function validarMatricula(input) {
             const anoCorrente = new Date().getFullYear();
             const matricula = input.value.trim();
@@ -73,21 +50,7 @@
             window.location.href = 'index.html';
         }
 
-        function exibirDados() {
-            // Função para exibir dados com base na matrícula
-        }
-
-        function exibirListaFinalFerias() {
-            // Função para exibir a lista final de férias
-        }
-
-        function exibirListaFinalFeriasSelecionados() {
-            // Função para exibir a lista final de férias selecionados
-        }
-
-        function exibirListaFinalFeriasNaoEscolar() {
-            // Função para exibir a lista final de férias não escolar
-        }
+        
     </script>
 </head>
 <body>
