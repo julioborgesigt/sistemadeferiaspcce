@@ -489,7 +489,7 @@ function feriasEscolar(matricula) {
             <label for="sim">Sim</label><br>
             <input type="radio" id="nao" name="estudante" value="nao">
             <label for="nao">Não</label><br>
-            <button type="button" onclick="calcularPontuacaoFeriasNaoEscolar('${matricula}'); calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
+            <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
             <button type="button" onclick="finalizarCadastro()">Limpar Informações</button>
         </form>
     `;
@@ -501,7 +501,7 @@ function feriasEscolar(matricula) {
 }
 
 
-function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
+function calcularPontuacaoFeriasEscolar(matricula) {
     // Obtém o valor selecionado pelo usuário
     let possuiFilho = database[matricula].qtdfilhosmenores;
     
@@ -529,10 +529,8 @@ function calcularPontuacaoFeriasEscolar(matricula, numeroDePeriodos) {
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
    
     alert("Cadastro concluído.");
-    console.log(database[matricula]);
-    // Redireciona para a página de conclusão do cadastro
-    window.location.href = `conclusao.html?matricula=${matricula}`;
-           
+    calcularPontuacaoFeriasNaoEscolar(matricula)
+   
 }
 
 
