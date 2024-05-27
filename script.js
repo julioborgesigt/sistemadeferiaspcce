@@ -496,7 +496,7 @@ function feriasEscolar(matricula) {
 
     // Adiciona o formulário à div "dados"
     document.getElementById("dados").innerHTML = formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
-    feriasNaoEscolar(matricula);
+   // feriasNaoEscolar(matricula);
     console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
 }
 
