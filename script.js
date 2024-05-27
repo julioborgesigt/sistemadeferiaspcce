@@ -661,6 +661,7 @@ function exibirDadosPorMatricula() {
 }
 
 
+
 // Exibe todos os cadastros
 function exibirListaCompletaDEFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros</h3>";
@@ -668,7 +669,7 @@ function exibirListaCompletaDEFerias() {
     html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
-   
+    let dataArray = Object.values(database);
     
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
@@ -687,6 +688,7 @@ function exibirListaCompletaDEFerias() {
     html += "</table>";
     document.getElementById("dados2").innerHTML = html;
 }
+
 
 // Exibe em ordem a pontuação das férias escolares
 function exibirListaConcorrentesFeriasEscolarIPC() {
