@@ -225,9 +225,9 @@ function preCadastro() {
     }
 
 
-    
+    calcularPontuacaoFeriasEscolar(matricula);
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
-    formularioDEcriterios(matricula);
+
 
 }
 
