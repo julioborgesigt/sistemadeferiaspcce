@@ -493,11 +493,11 @@ function calcularPontuacaoFeriasEscolar(matricula) {
         pontuacaoferiasescolar += (possuiFilho * 31000);
     }
 
-    if (ecasadoComPofessor === "sim") {
+    if (ecasadoComPofessor === "1") {
         pontuacaoferiasescolar += 32000;
     }
 
-    if (estudanteOUaluno === "sim") {
+    if (estudanteOUaluno === "1") {
         pontuacaoferiasescolar += 33000;
     }
 
