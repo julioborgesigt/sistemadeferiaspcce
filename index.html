@@ -20,26 +20,8 @@
             }
         });
 
-        function carregarBancoDados() {
-            const url = 'banco_dados.json';
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.text();
-                })
-                .then(jsonData => {
-                    database = JSON.parse(jsonData);
-                    console.log("Banco de dados carregado:", database);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
-
-        carregarBancoDados();
+        
+        
 
         function salvarBancoDados() {
             const url = 'banco_dados.json';
