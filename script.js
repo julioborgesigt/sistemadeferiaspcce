@@ -548,7 +548,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     }
 
     if (antiguidade !== "0") {
-        pontuacaoferiasNaoescolar += (antiguidade * 20); //minimo 20 maximo 1140
+        pontuacaoferiasNaoescolar += ((antiguidade / 365) * 20); //minimo 20 maximo 1140
     }
 
     if (ConjugeMesmoPeriodo === "1") {
@@ -556,7 +556,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     }
 
     if (idade !== "0") {
-        pontuacaoferiasNaoescolar += (idade/10); //minimo 1.8 maximo 7.5
+        pontuacaoferiasNaoescolar += (idade / 10); //minimo 1.8 maximo 7.5
     }
     
     console.log(pontuacaoferiasNaoescolar);
