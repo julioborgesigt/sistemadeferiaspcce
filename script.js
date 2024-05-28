@@ -428,16 +428,16 @@ function calcularAntiguidade(dataIngresso) {
     const dataAtual = new Date();
     const [dia, mes, ano] = dataIngresso.split('/');
     const dataIngressoFormatada = new Date(`${ano}-${mes}-${dia}`);
-    const diferencaAnos = dataAtual.getFullYear() - dataIngressoFormatada.getFullYear();
+    const antiguidade = dataAtual.getFullYear() - dataIngressoFormatada.getFullYear();
 
     if (dataAtual.getMonth() < dataIngressoFormatada.getMonth() ||
         (dataAtual.getMonth() === dataIngressoFormatada.getMonth() && dataAtual.getDate() < dataIngressoFormatada.getDate())) {
-        return diferencaAnos - 1;
+        return antiguidade - 1;
     }
 
-    return diferencaAnos;
+    return antiguidade;
 }
-
+/*
 function calcularIdade(dataNascimento) {
     const dataAtual = new Date();
     const [dia, mes, ano] = dataNascimento.split('/');
@@ -451,6 +451,28 @@ function calcularIdade(dataNascimento) {
 
     return diferencaAnos;
 }
+*/
+
+function calcularIdade(dataNascimento) {
+    let [dia, mes, ano] = dataNascimento.split('/').map(Number);
+    let nascimento = new Date(ano, mes - 1, dia);
+    let hoje = new Date();
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    if (hoje.getMonth() < nascimento.getMonth() || 
+        (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    return idade;
+}
+
+/*
+function calcularAntiguidade(dataIngresso) {
+    let [dia, mes, ano] = dataIngresso.split('/').map(Number);
+    let ingresso = new Date(ano, mes - 1, dia);
+    let hoje = new Date();
+    return Math.floor((hoje - ingresso) / (1000 * 60 * 60 * 24));
+}
+*/
 
 
 function calcularPontuacaoFeriasEscolar(matricula) {
@@ -468,15 +490,15 @@ function calcularPontuacaoFeriasEscolar(matricula) {
 
 
     if (possuiFilho !== 0) {
-        pontuacaoferiasescolar += (possuiFilho * 5);
+        pontuacaoferiasescolar += (possuiFilho * 2500);
     }
 
     if (ecasadoComPofessor === "sim") {
-        pontuacaoferiasescolar += 2;
+        pontuacaoferiasescolar += 1000;
     }
 
     if (estudanteOUaluno === "sim") {
-        pontuacaoferiasescolar += 1;
+        pontuacaoferiasescolar += 500;
     }
 
     
@@ -508,32 +530,39 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     let pontuacaoferiasNaoescolar = 0;
 
     if (gestante === "1") {
-        pontuacaoferiasNaoescolar += 100;
+        pontuacaoferiasNaoescolar += 30000;
     }
 
     if (possuiFilho !== 0) {
-        pontuacaoferiasNaoescolar += (possuiFilho * 9);
+        pontuacaoferiasNaoescolar += (possuiFilho * 2500);
     }
 
     if (estudante === "1") {
-        pontuacaoferiasNaoescolar += 5;
+        pontuacaoferiasNaoescolar += 2350;
     }
 
     if (DoisEmpregos === "1") {
-        pontuacaoferiasNaoescolar += 2;
+        pontuacaoferiasNaoescolar += 1200;
+    }
+
+    if (antiguidade !== "0") {
+        pontuacaoferiasNaoescolar += (antiguidade * 20); //minimo 20 maximo 1140
     }
 
     if (ConjugeMesmoPeriodo === "1") {
-        pontuacaoferiasNaoescolar += 1;
+        pontuacaoferiasNaoescolar += 10;
     }
 
+    if (idade !== "0") {
+        pontuacaoferiasNaoescolar += (idade/10); //minimo 1.8 maximo 7.5
+    }
     
     console.log(pontuacaoferiasNaoescolar);
     
     
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + pontuacaoferiasNaoescolar
+    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + (pontuacaoferiasNaoescolar - (possuiFilho * 2500))
     database[matricula].gestante = gestante;
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].estudante = estudante;
@@ -1017,24 +1046,7 @@ let dataArray = Object.values(database).filter(dados =>
 
 
 
-function calcularIdade(dataNascimento) {
-    let [dia, mes, ano] = dataNascimento.split('/').map(Number);
-    let nascimento = new Date(ano, mes - 1, dia);
-    let hoje = new Date();
-    let idade = hoje.getFullYear() - nascimento.getFullYear();
-    if (hoje.getMonth() < nascimento.getMonth() || 
-        (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate())) {
-        idade--;
-    }
-    return idade;
-}
 
-function calcularAntiguidade(dataIngresso) {
-    let [dia, mes, ano] = dataIngresso.split('/').map(Number);
-    let ingresso = new Date(ano, mes - 1, dia);
-    let hoje = new Date();
-    return Math.floor((hoje - ingresso) / (1000 * 60 * 60 * 24));
-}
 
 
 
