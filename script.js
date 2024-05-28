@@ -197,6 +197,7 @@ function preCadastro() {
         let novosDados = {
             matricula: matricula,
             nome: nome,
+            dataNascimento: dataNascimento,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
@@ -222,6 +223,7 @@ function preCadastro() {
         database[matricula] = {
             matricula: matricula,
             nome: nome,
+            dataNascimento: dataNascimento,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
