@@ -423,7 +423,7 @@ function limparInformacoes() {
     document.getElementById("periodo31").value = "";
     document.getElementById("periodo32").value = "";
 }
-
+/*
 function calcularAntiguidade(dataIngresso) {
     const dataAtual = new Date();
     const [dia, mes, ano] = dataIngresso.split('/');
@@ -437,7 +437,7 @@ function calcularAntiguidade(dataIngresso) {
 
     return antiguidade;
 }
-/*
+
 function calcularIdade(dataNascimento) {
     const dataAtual = new Date();
     const [dia, mes, ano] = dataNascimento.split('/');
@@ -465,14 +465,14 @@ function calcularIdade(dataNascimento) {
     return idade;
 }
 
-/*
+
 function calcularAntiguidade(dataIngresso) {
     let [dia, mes, ano] = dataIngresso.split('/').map(Number);
     let ingresso = new Date(ano, mes - 1, dia);
     let hoje = new Date();
     return Math.floor((hoje - ingresso) / (1000 * 60 * 60 * 24));
 }
-*/
+
 
 
 function calcularPontuacaoFeriasEscolar(matricula) {
