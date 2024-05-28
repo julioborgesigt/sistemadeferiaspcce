@@ -183,4 +183,25 @@
         "periodo32": "",
         "pontuacaoferiasNaoescolar": 0
     }
+    ,
+    "22222222.2024": {
+        "matricula": "22222222.2024",
+        "nome": "teste",
+        "idade": -1,
+        "paquisitivoinicio": "01/05/2024",
+        "paquisitivofim": "01/05/2024",
+        "antiguidade": 27,
+        "qtdfilhosmenores": "1",
+        "senha": "",
+        "cargo": "IPC",
+        "pontuacaoferiasescolar": 14,
+        "possuiFilho": "1",
+        "ecasadoComPofessor": "0",
+        "estudanteOUaluno": "0",
+        "pontuacaoferiasNaoescolar": 9,
+        "gestante": "0",
+        "estudante": "0",
+        "DoisEmpregos": "0",
+        "ConjugeMesmoPeriodo": "0"
+    }
 }

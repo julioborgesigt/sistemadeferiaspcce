@@ -193,19 +193,29 @@ function preCadastro() {
     // Salvar os dados no banco de dados
     let senha = '';
     if (matricula in database) {
-        // Se a matrícula já existir, adicione os dados aos existentes
-        Object.assign(database[matricula], {
+        // Novo objeto com os dados
+        let novosDados = {
             matricula: matricula,
             nome: nome,
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
+            dataIngresso: dataIngresso,
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
             senha: senha,
             cargo: cargo
-            
+        };
+    
+        // Remove propriedades com valores em branco
+        Object.keys(novosDados).forEach(key => {
+            if (novosDados[key] === "" || novosDados[key] === null || novosDados[key] === undefined) {
+                delete novosDados[key];
+            }
         });
+    
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], novosDados);
         alert("Pre Cadastro concluído com suscesso");
     } else {
         // Se a matrícula não existir, crie um novo registro
@@ -215,6 +225,7 @@ function preCadastro() {
             idade: calcularIdade(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
+            dataIngresso: dataIngresso,
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
             senha: senha,
