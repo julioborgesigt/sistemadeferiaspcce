@@ -524,6 +524,8 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     let estudante = document.querySelector('input[name="estudante"]:checked').value;
     let gestante = document.querySelector('input[name="gestante"]:checked').value;
     let possuiFilho = database[matricula].qtdfilhosmenores;
+    let antiguidade = database[matricula].antiguidade;
+    let idade = database[matricula].idade;
 
 
     // Calcula a pontuação com base na resposta do usuário
