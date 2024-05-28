@@ -439,93 +439,6 @@ function calcularIdade(dataNascimento) {
     return diferencaAnos;
 }
 
-function formularioDEcriterios(matricula) {
-
-   
-    let formulario1 = `
-    <h1>Formulário (sim ou não) para férias escolar</h1>
-    <form id="formFeriasEscolar">
-        <label for="ecasadoComPofessor">É casado com professor?</label><br>
-        <div class="radio-group">
-            <input type="radio" id="sim" name="ecasadoComPofessor" value="1">
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="ecasadoComPofessor" value="0">
-            <label for="nao">Não</label>
-        </div>
-    </form>
-`;
-
-let formulario2 = `
-    <form id="formFeriasEscolar">
-        <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
-        <div class="radio-group">
-            <input type="radio" id="sim" name="estudanteOUaluno" value="1">
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="estudanteOUaluno" value="0">
-            <label for="nao">Não</label>
-        </div>
-    </form>
-`;
-
-let formulario3 = `
-    <h1>Formulário (sim ou não) para férias Não escolar</h1>
-    <form id="formFeriasEscolar">
-        <label for="gestante">Está gestante?</label><br>
-        <div class="radio-group">
-            <input type="radio" id="sim" name="gestante" value="1">
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="gestante" value="0">
-            <label for="nao">Não</label>
-        </div>
-    </form>
-`;
-
-let formulario4 = `
-    <form id="formFeriasNaoEscolar">
-        <label for="estudante">Você é estudante?</label><br>
-        <div class="radio-group">
-            <input type="radio" id="sim" name="estudante" value="1">
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="estudante" value="0">
-            <label for="nao">Não</label>
-        </div>
-    </form>
-`;
-
-let formulario5 = `
-    <form id="formFeriasNaoEscolar">
-        <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo período?</label><br>
-        <div class="radio-group">
-            <input type="radio" id="sim" name="DoisEmpregos" value="1">
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="DoisEmpregos" value="0">
-            <label for="nao">Não</label>
-        </div>
-    </form>
-`;
-
-let formulario6 = `
-    <form id="formFeriasNaoEscolar">
-        <label for="ConjugeMesmoPeriodo">Possui cônjuge com o mesmo período de férias desejado?</label><br>
-        <div class="radio-group">
-            <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="1">
-            <label for="sim">Sim</label>
-            <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="0">
-            <label for="nao">Não</label>
-        </div>
-        <button type="button" onclick="calcularPontuacaoFeriasEscolar('${matricula}')">Finalizar cadastro</button>
-        <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
-    </form>
-`;
-
-    
-
-    // Adiciona o formulário à div "dados"
-    document.getElementById("dados").innerHTML =  formulario1 + formulario2 + formulario3 + formulario4 + formulario5 + formulario6;
-   // feriasNaoEscolar(matricula);
-    //console.log(`Funcionário ${matricula} escolheu férias escolares em ${numeroDePeriodos} período(s).`);
-}
-
 
 function calcularPontuacaoFeriasEscolar(matricula) {
     // Obtém o valor selecionado pelo usuário
@@ -857,7 +770,7 @@ function exibirListaFinalFeriasEscolarSelecionadosIPC() {
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
     dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}` &&
-    (dados.feriasescolarounao === true || dados.feriasescolarounao === 1))
+    dados.feriasescolarounao !== 0)
 );
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
@@ -928,7 +841,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
     let anoCorrente = new Date().getFullYear().toString();
     let dataArray = Object.values(database).filter(dados => 
     dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}` &&
-    (dados.feriasescolarounao === true || dados.feriasescolarounao === 1) )
+    dados.feriasescolarounao !== 0) 
 );
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
