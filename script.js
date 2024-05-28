@@ -769,8 +769,8 @@ function exibirListaFinalFeriasEscolarSelecionadosIPC() {
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
-    (dados.cargo === 'IPC' || dados.cargo === 'IPCplantao') && dados.matricula.endsWith(`.${anoCorrente}` &&
-    dados.feriasescolarounao !== 0)
+    (dados.cargo === 'IPC' || dados.cargo === 'IPCplantao') &&
+    dados.feriasescolarounao !== 0 && dados.matricula.endsWith(`.${anoCorrente}`)
 );
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
@@ -840,8 +840,8 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
     let dataArray = Object.values(database).filter(dados => 
-    (dados.cargo === 'EPC' || dados.cargo === 'EPCplantao') && dados.matricula.endsWith(`.${anoCorrente}` &&
-    dados.feriasescolarounao !== 0) 
+    (dados.cargo === 'EPC' || dados.cargo === 'EPCplantao') &&
+    dados.feriasescolarounao !== 0 && dados.matricula.endsWith(`.${anoCorrente}`) 
 );
     
     // Filtrar apenas os registros com pontuação de férias escolar maior que zero
