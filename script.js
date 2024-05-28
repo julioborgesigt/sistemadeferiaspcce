@@ -490,15 +490,15 @@ function calcularPontuacaoFeriasEscolar(matricula) {
 
 
     if (possuiFilho !== 0) {
-        pontuacaoferiasescolar += (possuiFilho * 2500);
+        pontuacaoferiasescolar += (possuiFilho * 31000);
     }
 
     if (ecasadoComPofessor === "sim") {
-        pontuacaoferiasescolar += 1000;
+        pontuacaoferiasescolar += 32000;
     }
 
     if (estudanteOUaluno === "sim") {
-        pontuacaoferiasescolar += 500;
+        pontuacaoferiasescolar += 33000;
     }
 
     
@@ -564,7 +564,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
 
     database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + (pontuacaoferiasNaoescolar - (possuiFilho * 2500))
+    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + pontuacaoferiasNaoescolar; 
     database[matricula].gestante = gestante;
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].estudante = estudante;
