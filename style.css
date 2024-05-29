@@ -293,12 +293,14 @@ h3 {
 }
 
 .dark-mode #dados button {
-    background-color: #0056b3;
-    color: #fff;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 10px; /* Bordas mais arredondadas no modo escuro */
 }
 
 .dark-mode #dados button:hover {
-    background-color: #007bff;
+    background-color: #333;
 }
 
 
