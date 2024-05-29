@@ -223,55 +223,58 @@ h3 {
 }
 
 #dados {
-    background-color: #f9f9f9; /* Cor de fundo clara para contraste */
-    border: 1px solid #ddd; /* Borda suave */
-    border-radius: 8px; /* Bordas arredondadas */
-    padding: 20px; /* Espaçamento interno */
-    margin: 20px 0; /* Espaçamento externo */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #dados h1 {
-    font-size: 1.5em; /* Tamanho do título */
-    color: #333; /* Cor do texto */
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
-    text-align: center; /* Centralizar título */
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 #dados form {
-    margin-bottom: 20px; /* Espaçamento entre formulários */
+    margin-bottom: 20px;
 }
 
 #dados label {
-    font-weight: bold; /* Texto em negrito */
-    display: block; /* Ocupando linha inteira */
-    margin-bottom: 8px; /* Espaçamento abaixo do rótulo */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
 }
 
 #dados .radio-group {
-    margin-bottom: 20px; /* Espaçamento abaixo do grupo de radio buttons */
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 #dados .radio-group input[type="radio"] {
-    margin-right: 10px; /* Espaçamento à direita do radio button */
+    margin-right: 10px;
 }
 
 #dados .radio-group label {
-    margin-right: 20px; /* Espaçamento à direita do rótulo */
+    margin-right: 20px;
+    margin-bottom: 0; /* Remove bottom margin to align labels horizontally */
 }
 
 #dados button {
-    background-color: #007bff; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto do botão */
-    border: none; /* Remover borda padrão */
-    border-radius: 4px; /* Bordas arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
-    cursor: pointer; /* Cursor de mão */
-    transition: background-color 0.3s; /* Transição suave da cor de fundo */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 #dados button:hover {
-    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+    background-color: #0056b3;
 }
 
 
