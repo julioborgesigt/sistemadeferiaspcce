@@ -279,7 +279,7 @@ h3 {
 
 /* Estilo para o modo escuro */
 .dark-mode #dados {
-    background-color: #333;
+    background-color: #000000;
     border-color: #555;
     color: #f9f9f9;
 }
