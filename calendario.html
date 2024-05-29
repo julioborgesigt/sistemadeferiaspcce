@@ -25,6 +25,29 @@
     <script>
         
 
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('banco_dados.json')
+                .then(response => response.json())
+                .then(database => {
+                    criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente');
+                    criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo');
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o banco de dados:', error);
+                    document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
+                });
+
+            document.getElementById('anoCorrenteBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'block';
+                document.getElementById('calendarioProximo').style.display = 'none';
+            });
+
+            document.getElementById('proximoAnoBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'none';
+                document.getElementById('calendarioProximo').style.display = 'block';
+            });
+        });
+
         function criarCalendario(database, ano, containerId) {
             const container = document.getElementById(containerId);
             const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];

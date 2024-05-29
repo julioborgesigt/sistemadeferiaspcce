@@ -13,15 +13,16 @@
             <!-- As informações do cadastro serão exibidas aqui -->
         </div>
         <button onclick="window.print()">Imprimir</button>
-        <button onclick="openCalendar()">Ver Calendário</button>
+        <h2>Calendário de Férias</h2>
+        <div>
+            <button id="anoCorrenteBtn">Ano Corrente</button>
+            <button id="proximoAnoBtn">Próximo Ano</button>
+        </div>
+        <div id="calendarioCorrente" class="calendario-ano"></div>
+        <div id="calendarioProximo" class="calendario-ano" style="display:none;"></div>
     </div>
 
     <script>
-
-        function openCalendar() {
-            window.open('calendario.html', '_blank');
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const matricula = urlParams.get('matricula');
@@ -54,9 +55,115 @@
                         document.getElementById('info').innerHTML = "<p>Erro: usuário não encontrado.</p>";
                     }
 
-                
+                    criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente');
+                    criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo');
                 })
-        })
+                .catch(error => {
+                    console.error('Erro ao carregar o banco de dados:', error);
+                    document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
+                });
+
+            document.getElementById('anoCorrenteBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'block';
+                document.getElementById('calendarioProximo').style.display = 'none';
+            });
+
+            document.getElementById('proximoAnoBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'none';
+                document.getElementById('calendarioProximo').style.display = 'block';
+            });
+        });
+
+        function criarCalendario(database, ano, containerId) {
+            const container = document.getElementById(containerId);
+            const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+            const cores = ['#FF6347', '#FFD700', '#90EE90', '#1E90FF', '#9370DB', '#FF69B4', '#FFA500', '#00CED1', '#8B4513', '#00FF7F'];
+            const corUsuario = {};
+
+            const datasFerias = [];
+            let corIndex = 0;
+            for (const usuario in database) {
+                corUsuario[usuario] = cores[corIndex % cores.length];
+                corIndex++;
+
+                const periodos = [
+                    { inicio: database[usuario].periodo11, fim: database[usuario].periodo12 },
+                    { inicio: database[usuario].periodo21, fim: database[usuario].periodo22 },
+                    { inicio: database[usuario].periodo31, fim: database[usuario].periodo32 }
+                ];
+
+                periodos.forEach(periodo => {
+                    if (periodo.inicio && periodo.fim) {
+                        const [inicioDia, inicioMes, inicioAno] = periodo.inicio.split('/');
+                        const [fimDia, fimMes, fimAno] = periodo.fim.split('/');
+                        const inicio = new Date(`${inicioAno}-${inicioMes}-${inicioDia}`);
+                        const fim = new Date(`${fimAno}-${fimMes}-${fimDia}`);
+
+                        for (let d = new Date(inicio); d <= fim; d.setDate(d.getDate() + 1)) {
+                            const dataStr = new Date(d).toISOString().split('T')[0];
+                            const feriasData = datasFerias.find(f => f.data === dataStr);
+                            if (feriasData) {
+                                feriasData.usuarios.push(database[usuario].nome);
+                            } else {
+                                datasFerias.push({ data: dataStr, usuarios: [database[usuario].nome] });
+                            }
+                        }
+                    }
+                });
+            }
+
+            for (let mes = 0; mes < 12; mes++) {
+                const table = document.createElement('table');
+                table.classList.add('calendario');
+                const thead = document.createElement('thead');
+                thead.innerHTML = `<tr><th colspan="7">${meses[mes]}</th></tr><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>`;
+                table.appendChild(thead);
+
+                const tbody = document.createElement('tbody');
+                const primeiroDia = new Date(ano, mes, 1).getDay();
+                const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+
+                let linha = document.createElement('tr');
+                for (let i = 0; i < primeiroDia; i++) {
+                    linha.appendChild(document.createElement('td'));
+                }
+
+                for (let dia = 1; dia <= ultimoDia; dia++) {
+                    const celula = document.createElement('td');
+                    celula.textContent = dia;
+
+                    const data = new Date(ano, mes, dia).toISOString().split('T')[0];
+                    const feriasData = datasFerias.find(f => f.data === data);
+
+                    if (feriasData) {
+                        const coresUsuarios = feriasData.usuarios.map(usuario => corUsuario[usuario]);
+                        celula.style.backgroundImage = `linear-gradient(${coresUsuarios.join(', ')})`;
+
+                        feriasData.usuarios.forEach(usuario => {
+                            const nomeDiv = document.createElement('div');
+                            nomeDiv.textContent = usuario;
+                            nomeDiv.style.fontSize = '0.8em';
+                            celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e o nome
+                            celula.appendChild(nomeDiv);
+                        });
+                    }
+
+                    linha.appendChild(celula);
+                    if ((primeiroDia + dia) % 7 === 0) {
+                        tbody.appendChild(linha);
+                        linha = document.createElement('tr');
+                    }
+                }
+
+                if (linha.children.length > 0) {
+                    tbody.appendChild(linha);
+                }
+
+                table.appendChild(tbody);
+                container.appendChild(table);
+            }
+        }
     </script>
 </body>
 </html>
