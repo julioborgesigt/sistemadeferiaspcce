@@ -116,9 +116,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 
                 
 
-                if ((dataInicio  <= fimExistente && dataInicio  >= inicioExistente) ||
-                    (dataFim  <= fimExistente && dataFim  >= inicioExistente) ||
-                    (dataInicio  <= inicioExistente && dataFim  >= fimExistente)) {
+                if ((dataInicio + 5  <= fimExistente && dataInicio - 5  >= inicioExistente) ||
+                    (dataFim  + 5 <= fimExistente && dataFim - 5 >= inicioExistente) ||
+                    (dataInicio + 5 <= inicioExistente && dataFim - 5 >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
