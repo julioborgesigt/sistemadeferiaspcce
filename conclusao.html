@@ -13,19 +13,17 @@
             <!-- As informações do cadastro serão exibidas aqui -->
         </div>
         <button onclick="window.print()">Imprimir</button>
-        <button onclick="openCalendar()">Ver Calendário</button>
     </div>
 
     <script>
-
-        function openCalendar() {
-            window.open('calendario.html', '_blank');
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            return;
-            
+            const matricula = urlParams.get('matricula');
+
+            if (!matricula) {
+                document.getElementById('info').innerHTML = "<p>Erro: matrícula não fornecida.</p>";
+                return;
+            }
 
             fetch('banco_dados.json')
                 .then(response => response.json())
@@ -46,9 +44,15 @@
                             <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
                             <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>
                         `;
+                    } else {
+                        document.getElementById('info').innerHTML = "<p>Erro: usuário não encontrado.</p>";
                     }
                 })
-            })
+                .catch(error => {
+                    console.error('Erro ao carregar o banco de dados:', error);
+                    document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
+                });
+        });
     </script>
 </body>
 </html>
