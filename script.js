@@ -406,7 +406,7 @@ function validarMatricula(input) {
     }
 }
 
-
+/*
 function limparInformacoes() {
     document.getElementById("matriculaCadastro").value = "";
     document.getElementById("dataIngresso").value = "";
@@ -423,6 +423,7 @@ function limparInformacoes() {
     document.getElementById("periodo31").value = "";
     document.getElementById("periodo32").value = "";
 }
+*/
 /*
 function calcularAntiguidade(dataIngresso) {
     const dataAtual = new Date();

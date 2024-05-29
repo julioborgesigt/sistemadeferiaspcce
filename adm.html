@@ -16,6 +16,11 @@
                 window.location.href = 'index.html';
             }
         });
+
+
+        function openCalendar() {
+            window.open('calendario.html', '_blank');
+        }
     </script>
 </head>
 <body>
@@ -133,7 +138,7 @@
                     <label for="nao">Não</label>
                 </div>
                 <button type="button" onclick="preCadastro()">Cadastrar</button>
-                <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
+                
             </form>
         </div>
 
@@ -151,6 +156,7 @@
         </div>
 
         <div class="logout-container">
+            <button onclick="openCalendar()">Ver Calendário</button>
             <button onclick="logout()">Logout</button>
         </div>
 
