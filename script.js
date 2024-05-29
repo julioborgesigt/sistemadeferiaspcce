@@ -217,7 +217,7 @@ function preCadastro() {
     
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], novosDados);
-        alert("Pre Cadastro concluído com suscesso");
+        //alert("Pre Cadastro concluído com suscesso");
     } else {
         // Se a matrícula não existir, crie um novo registro
         database[matricula] = {
@@ -234,7 +234,7 @@ function preCadastro() {
             cargo: cargo
             
         };
-        alert("Pre Cadastro concluído com suscesso 2");
+        //alert("Pre Cadastro concluído com suscesso 2");
     }
 
 
@@ -511,7 +511,7 @@ function calcularPontuacaoFeriasEscolar(matricula) {
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
    
-    alert("Cadastro concluído.");
+    //alert("Cadastro concluído.");
     calcularPontuacaoFeriasNaoEscolar(matricula)
    
 }
@@ -575,7 +575,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
   
-     alert("Cadastro concluído.");
+    // alert("Cadastro concluído.");
     console.log(database[matricula]);
     // Redireciona para a página de conclusão do cadastro
     //window.location.href = `conclusao.html?matricula=${matricula}`;
@@ -1108,7 +1108,7 @@ function salvarBancoDados() {
         if (!response.ok) {
                         throw new Error('Erro ao salvar os dados.');
         }
-        alert("Dados salvos com sucesso!");
+        //alert("Dados salvos com sucesso!");
     })
     .catch(error => {
         // Trata qualquer erro que ocorrer durante o salvamento dos dados
