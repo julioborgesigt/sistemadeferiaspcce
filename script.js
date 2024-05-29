@@ -1144,3 +1144,6 @@ function gerarPDF() {
 }
 
 
+function openCalendar() {
+    window.open('calendario.html', '_blank');
+}
