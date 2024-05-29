@@ -13,9 +13,15 @@
             <!-- As informações do cadastro serão exibidas aqui -->
         </div>
         <button onclick="window.print()">Imprimir</button>
+        <button onclick="fecharPagina()">Fechar a página</button>
     </div>
 
     <script>
+
+function fecharPagina() {
+            window.close();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const matricula = urlParams.get('matricula');
@@ -38,7 +44,6 @@
                             <p>Idade: ${dadosUsuario.idade}</p>
                             <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
                             <p>Antiguidade: ${dadosUsuario.antiguidade}</p>
-                            <p>Senha: ${dadosUsuario.senha}</p>
                             <p>Cargo: ${dadosUsuario.cargo}</p>
                             <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
                             <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
