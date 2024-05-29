@@ -503,7 +503,7 @@ function calcularPontuacaoFeriasEscolar(matricula) {
 
     
 
-    database[matricula].pontuacaoferiasescolar = pontuacaoferiasescolar;
+    database[matricula].pontuacaoferiasescolar = parseFloat(pontuacaoferiasescolar.toFixed(2));
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].ecasadoComPofessor = ecasadoComPofessor;
     database[matricula].estudanteOUaluno = estudanteOUaluno;
@@ -563,8 +563,8 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     
     
 
-    database[matricula].pontuacaoferiasNaoescolar = pontuacaoferiasNaoescolar;
-    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + pontuacaoferiasNaoescolar; 
+    database[matricula].pontuacaoferiasNaoescolar = parseFloat(pontuacaoferiasNaoescolar.toFixed(2));
+    database[matricula].pontuacaoferiasescolar = database[matricula].pontuacaoferiasescolar + parseFloat(pontuacaoferiasNaoescolar.toFixed(2)); 
     database[matricula].gestante = gestante;
     database[matricula].possuiFilho = possuiFilho;
     database[matricula].estudante = estudante;
