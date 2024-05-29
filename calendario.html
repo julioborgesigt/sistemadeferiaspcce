@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        
+        <h2 id="tituloCalendario">Calendário de Férias - Ano Corrente</h2>
         <div id="info">
             <!-- As informações do cadastro serão exibidas aqui -->
         </div>
@@ -17,6 +17,7 @@
         <div>
             <button id="anoCorrenteBtn">Ano Corrente</button>
             <button id="proximoAnoBtn">Próximo Ano</button>
+            <button onclick="window.print()">Imprimir</button>
         </div>
         <div id="calendarioCorrente" class="calendario-ano"></div>
         <div id="calendarioProximo" class="calendario-ano" style="display:none;"></div>
@@ -40,11 +41,13 @@
             document.getElementById('anoCorrenteBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'block';
                 document.getElementById('calendarioProximo').style.display = 'none';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente';
             });
 
             document.getElementById('proximoAnoBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano';
             });
         });
 
