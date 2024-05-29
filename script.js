@@ -113,12 +113,12 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
                 let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
                  // Adicionar 5 dias de margem
-                const margemDias = 5;
+                
                 
 
-                if ((dataInicio + margemDias <= fimExistente && dataInicio - margemDias >= inicioExistente) ||
-                    (dataFim + margemDias <= fimExistente && dataFim - margemDias >= inicioExistente) ||
-                    (dataInicio + margemDias <= inicioExistente && dataFim - margemDias >= fimExistente)) {
+                if ((dataInicio  <= fimExistente && dataInicio  >= inicioExistente) ||
+                    (dataFim  <= fimExistente && dataFim  >= inicioExistente) ||
+                    (dataInicio  <= inicioExistente && dataFim  >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
