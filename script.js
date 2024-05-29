@@ -179,7 +179,7 @@ function preCadastro() {
     const cargoIpcPlantao = document.getElementById("cargoIpcPlantao").checked;
     const cargoEpcPlantao = document.getElementById("cargoEpcPlantao").checked;
 
-    if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoEpcPlantao) {
+    if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoIpcPlantao) {
         alert("Por favor, selecione pelo menos uma opção de cargo.");
         return;
     }
