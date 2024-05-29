@@ -490,15 +490,15 @@ function calcularPontuacaoFeriasEscolar(matricula) {
 
 
     if (possuiFilho !== 0) {
-        pontuacaoferiasescolar += (possuiFilho * 3300);
+        pontuacaoferiasescolar += (possuiFilho * 8000);
     }
 
     if (ecasadoComPofessor === "1") {
-        pontuacaoferiasescolar += 3200;
+        pontuacaoferiasescolar += 7000;
     }
 
     if (estudanteOUaluno === "1") {
-        pontuacaoferiasescolar += 3100;
+        pontuacaoferiasescolar += 6000;
     }
 
     
@@ -532,23 +532,23 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     let pontuacaoferiasNaoescolar = 0;
 
     if (gestante === "1") {
-        pontuacaoferiasNaoescolar += 3000;
+        pontuacaoferiasNaoescolar += 5000;
     }
 
     if (possuiFilho !== 0) {
-        pontuacaoferiasNaoescolar += (possuiFilho * 250);
+        pontuacaoferiasNaoescolar += (possuiFilho * 500);
     }
 
     if (estudante === "1") {
-        pontuacaoferiasNaoescolar += 235;
+        pontuacaoferiasNaoescolar += 237;
     }
 
     if (DoisEmpregos === "1") {
-        pontuacaoferiasNaoescolar += 120;
+        pontuacaoferiasNaoescolar += 120; 
     }
 
     if (antiguidade !== "0") {
-        pontuacaoferiasNaoescolar += ((antiguidade / 365) * 2); //minimo 20 maximo 1140
+        pontuacaoferiasNaoescolar += ((antiguidade / 365) * 2); //minimo 20 maximo 1140 //minimo 2 maximo 114
     }
 
     if (ConjugeMesmoPeriodo === "1") {
@@ -556,7 +556,7 @@ function calcularPontuacaoFeriasNaoEscolar(matricula) {
     }
 
     if (idade !== "0") {
-        pontuacaoferiasNaoescolar += (idade / 100); //minimo 1.8 maximo 7.5
+        pontuacaoferiasNaoescolar += (idade / 100); //minimo 1.8 maximo 7.5  //minimo 0.18 maximo 0.75
     }
     
     console.log(pontuacaoferiasNaoescolar);
