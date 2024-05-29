@@ -116,9 +116,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 const margemDias = 5;
                 
 
-                if ((dataInicio >= inicioExistente - margemDias && dataInicio <= fimExistente + margemDias) ||
-                (dataFim >= inicioExistente - margemDias && dataFim <= fimExistente + margemDias) ||
-                (dataInicio <= inicioExistente - margemDias && dataFim >= fimExistente + margemDias)) {
+                if ((dataInicio + margemDias <= fimExistente && dataInicio - margemDias >= inicioExistente) ||
+                    (dataFim + margemDias <= fimExistente && dataFim - margemDias >= inicioExistente) ||
+                    (dataInicio + margemDias <= inicioExistente && dataFim - margemDias >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
