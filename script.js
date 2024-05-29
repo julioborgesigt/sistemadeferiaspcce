@@ -663,7 +663,7 @@ function exibirListaCompletaDEFerias() {
 
 // Exibe em ordem a pontuação das férias escolares
 function exibirListaConcorrentesFeriasEscolarIPC() {
-    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    let html = "<h3>Lista ordenada por potuação escolar - IPC/h3>";
     html += "<table border='1'>";
     html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
@@ -734,9 +734,9 @@ let dataArray = Object.values(database).filter(dados =>
 
 // Exibe em ordem a pontuação das férias escolares
 function exibirListaConcorrentesFeriasEscolarEPC() {
-    let html = "<h3>Lista Final de Férias Escolar em ordem</h3>";
+    let html = "<h3>Lista ordenada por potuação escolar - EPC</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
@@ -783,10 +783,12 @@ let dataArray = Object.values(database).filter(dados =>
     dataArray.forEach(dados => {
         html += `
             <tr>
-                <td data-label="Matrícula">${dados.matricula}</td>
-                <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
-                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+            <td data-label="Matrícula">${dados.matricula}</td>
+            <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+            <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
                 
                
               
