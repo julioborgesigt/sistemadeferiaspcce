@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Atualizado</title>
+    <style>
+        /* Adicione seu CSS aqui */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendário Atualizado</h1>
+    <div id="calendario">
+        <!-- Calendário atualizado será inserido aqui -->
+    </div>
+
+    <script>
+        // Função para exibir o calendário atualizado (substitua com os dados reais)
+        function exibirCalendarioAtualizado() {
+            let html = '<table>';
+            html += '<tr><th>Data</th><th>Evento</th></tr>';
+            // Exemplo de eventos (substitua com os eventos reais)
+            const eventos = [
+                { data: '2024-06-01', evento: 'Início das férias' },
+                { data: '2024-06-15', evento: 'Reunião de planejamento' },
+                // Adicione outros eventos conforme necessário
+            ];
+
+            eventos.forEach(evento => {
+                html += '<tr><td>' + evento.data + '</td><td>' + evento.evento + '</td></tr>';
+            });
+
+            html += '</table>';
+            document.getElementById('calendario').innerHTML = html;
+        }
+
+        // Chamar a função para exibir o calendário atualizado quando a página carregar
+        window.onload = exibirCalendarioAtualizado;
+    </script>
+</body>
+</html>
