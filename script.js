@@ -118,9 +118,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 
                 
 
-                if ((dataInicio - (margemDias * umDiaEmMs)  <= fimExistente && dataInicio + (margemDias * umDiaEmMs) >= inicioExistente) ||
-                    (dataFim - (margemDias * umDiaEmMs) <= fimExistente && dataFim + (margemDias * umDiaEmMs) >= inicioExistente) ||
-                    (dataInicio - (margemDias * umDiaEmMs) <= inicioExistente && dataFim + (margemDias * umDiaEmMs) >= fimExistente)) {
+                if ((dataInicio - margemDias  <= fimExistente && dataInicio + margemDias  >= inicioExistente) ||
+                    (dataFim - margemDias <= fimExistente && dataFim + margemDias  >= inicioExistente) ||
+                    (dataInicio - margemDias  <= inicioExistente && dataFim + margemDias  >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
