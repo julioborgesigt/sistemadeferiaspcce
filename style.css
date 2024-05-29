@@ -222,6 +222,57 @@ h3 {
     }
 }
 
+#dados {
+    background-color: #f9f9f9; /* Cor de fundo clara para contraste */
+    border: 1px solid #ddd; /* Borda suave */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    margin: 20px 0; /* Espaçamento externo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para destaque */
+}
+
+#dados h1 {
+    font-size: 1.5em; /* Tamanho do título */
+    color: #333; /* Cor do texto */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    text-align: center; /* Centralizar título */
+}
+
+#dados form {
+    margin-bottom: 20px; /* Espaçamento entre formulários */
+}
+
+#dados label {
+    font-weight: bold; /* Texto em negrito */
+    display: block; /* Ocupando linha inteira */
+    margin-bottom: 8px; /* Espaçamento abaixo do rótulo */
+}
+
+#dados .radio-group {
+    margin-bottom: 20px; /* Espaçamento abaixo do grupo de radio buttons */
+}
+
+#dados .radio-group input[type="radio"] {
+    margin-right: 10px; /* Espaçamento à direita do radio button */
+}
+
+#dados .radio-group label {
+    margin-right: 20px; /* Espaçamento à direita do rótulo */
+}
+
+#dados button {
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    border: none; /* Remover borda padrão */
+    border-radius: 4px; /* Bordas arredondadas */
+    padding: 10px 20px; /* Espaçamento interno */
+    cursor: pointer; /* Cursor de mão */
+    transition: background-color 0.3s; /* Transição suave da cor de fundo */
+}
+
+#dados button:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
 
 
 /* Estilo para a seção de dados */
