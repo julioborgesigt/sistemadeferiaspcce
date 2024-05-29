@@ -160,7 +160,7 @@
             if (cargoIpcPlantao) cargo = "IPCplantao";
             if (cargoEpcPlantao) cargo = "EPCplantao";
 */
-            if (database[matricula] === matricula) {
+            if (database[matricula]) {
                 // Se a matrícula já existir, adicione os dados aos existentes
                 Object.assign(database[matricula], {
                     senha: senha,
