@@ -222,6 +222,7 @@ h3 {
     }
 }
 
+/* Estilo padrão (modo claro) */
 #dados {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -277,50 +278,33 @@ h3 {
     background-color: #0056b3;
 }
 
-
-/* Estilo para modo escuro */
-#dados body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-#dados body.dark-mode .container {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-#dados body.dark-mode h1,
-#dados body.dark-mode h2,
-#dadosbody.dark-mode h3 {
-    color: #ffffff;
-}
-
-#dados body.dark-mode input[type="text"],
-#dados body.dark-mode input[type="date"],
-#dados body.dark-mode input[type="checkbox"],
-#dados body.dark-mode button {
+/* Estilo para o modo escuro */
+.dark-mode #dados {
     background-color: #333;
-    color: #ffffff;
-    border: 1px solid #555;
-    border-radius: 10px; /* Bordas mais arredondadas no modo escuro */
+    border-color: #555;
+    color: #f9f9f9;
 }
 
-#dados body.dark-mode button:hover {
-    background-color: #555;
+.dark-mode #dados h1 {
+    color: #f9f9f9;
 }
 
-#dados body.dark-mode table {
-    border-color: #444;
+.dark-mode #dados label {
+    color: #f9f9f9;
 }
 
-#dados body.dark-mode th {
-    background-color: #333;
-    color: #ffffff;
+.dark-mode #dados button {
+    background-color: #0056b3;
+    color: #fff;
 }
 
-#dados body.dark-mode td {
-    border-bottom-color: #444;
+.dark-mode #dados button:hover {
+    background-color: #007bff;
 }
+
+
+
+
 
 /* Estilo para a seção de dados */
 #dados2 {

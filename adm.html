@@ -9,46 +9,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-    const loginData = JSON.parse(localStorage.getItem('loginToken'));
-
-    if (!loginData || new Date().getTime() > loginData.expirationTime) {
-        // Redirecionar para a página de login se o token não existir ou estiver expirado
-        alert("Sua sessão expirou. Faça login novamente.");
-        window.location.href = 'index.html';
-    }
-});
-
-
-
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginData = JSON.parse(localStorage.getItem('loginToken'));
+            if (!loginData || new Date().getTime() > loginData.expirationTime) {
+                alert("Sua sessão expirou. Faça login novamente.");
+                window.location.href = 'index.html';
+            }
+        });
     </script>
-    
-   
 </head>
 <body>
     <div class="container">
-
-       
         <h1>Cadastro e Consulta de Férias</h1>
         
+        <div class="dark-mode-toggle">
+            <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
+        </div>
 
-
-
-         <!-- Botão para alternar entre modos claro e escuro -->
-   <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
-    <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
-</div>
-   
-        
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
-
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="13" onblur="validarMatricula(this)">
 
                 <label for="matriculaNome">Primeiro Nome:</label>
-                <input type="text" id="matriculaNome" name="matriculaNome" >
+                <input type="text" id="matriculaNome" name="matriculaNome">
 
                 <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
                 <input type="text" id="dataIngresso" name="dataIngresso">
@@ -83,90 +68,73 @@
                         EPC-Plantão
                     </label>
                 </div>
-
-                
             </form>
         </div>
 
         <div id="dados">
-
-               
-        <h1>Formulário (sim ou não) para férias escolar</h1>
-        <form id="formFeriasEscolar">
-            <label for="ecasadoComPofessor">É casado com professor?</label><br>
-            <div class="radio-group">
-                <input type="radio" id="sim" name="ecasadoComPofessor" value="1">
-                <label for="sim">Sim</label>
-                <input type="radio" id="nao" name="ecasadoComPofessor" value="0">
-                <label for="nao">Não</label>
-            </div>
-        </form>
-    
-
-    
-        <form id="formFeriasEscolar">
-            <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
-            <div class="radio-group">
-                <input type="radio" id="sim" name="estudanteOUaluno" value="1">
-                <label for="sim">Sim</label>
-                <input type="radio" id="nao" name="estudanteOUaluno" value="0">
-                <label for="nao">Não</label>
-            </div>
-        </form>
-    
-
-
-        <h1>Formulário (sim ou não) para férias Não escolar</h1>
-        <form id="formFeriasEscolar">
-            <label for="gestante">Está gestante?</label><br>
-            <div class="radio-group">
-                <input type="radio" id="sim" name="gestante" value="1">
-                <label for="sim">Sim</label>
-                <input type="radio" id="nao" name="gestante" value="0">
-                <label for="nao">Não</label>
-            </div>
-        </form>
-  
-
-   
-        <form id="formFeriasNaoEscolar">
-            <label for="estudante">Você é estudante?</label><br>
-            <div class="radio-group">
-                <input type="radio" id="sim" name="estudante" value="1">
-                <label for="sim">Sim</label>
-                <input type="radio" id="nao" name="estudante" value="0">
-                <label for="nao">Não</label>
-            </div>
-        </form>
-    
-
-        <form id="formFeriasNaoEscolar">
-            <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo período?</label><br>
-            <div class="radio-group">
-                <input type="radio" id="sim" name="DoisEmpregos" value="1">
-                <label for="sim">Sim</label>
-                <input type="radio" id="nao" name="DoisEmpregos" value="0">
-                <label for="nao">Não</label>
-            </div>
-        </form>
-   
-
-    
-        <form id="formFeriasNaoEscolar">
-            <label for="ConjugeMesmoPeriodo">Possui cônjuge com o mesmo período de férias desejado?</label><br>
-            <div class="radio-group">
-                <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="1">
-                <label for="sim">Sim</label>
-                <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="0">
-                <label for="nao">Não</label>
-            </div>
-            <button type="button" onclick="preCadastro()">Cadastrar</button>
-            <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
-        </form>
-  
-
-
-
+            <h1>Formulário (sim ou não) para férias escolar</h1>
+            <form id="formFeriasEscolar">
+                <label for="ecasadoComPofessor">É casado com professor?</label><br>
+                <div class="radio-group">
+                    <input type="radio" id="sim" name="ecasadoComPofessor" value="1">
+                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="ecasadoComPofessor" value="0">
+                    <label for="nao">Não</label>
+                </div>
+            </form>
+        
+            <form id="formFeriasEscolar">
+                <label for="estudanteOUaluno">É estudante ou aluno de Curso de formação?</label><br>
+                <div class="radio-group">
+                    <input type="radio" id="sim" name="estudanteOUaluno" value="1">
+                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="estudanteOUaluno" value="0">
+                    <label for="nao">Não</label>
+                </div>
+            </form>
+        
+            <h1>Formulário (sim ou não) para férias Não escolar</h1>
+            <form id="formFeriasEscolar">
+                <label for="gestante">Está gestante?</label><br>
+                <div class="radio-group">
+                    <input type="radio" id="sim" name="gestante" value="1">
+                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="gestante" value="0">
+                    <label for="nao">Não</label>
+                </div>
+            </form>
+        
+            <form id="formFeriasNaoEscolar">
+                <label for="estudante">Você é estudante?</label><br>
+                <div class="radio-group">
+                    <input type="radio" id="sim" name="estudante" value="1">
+                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="estudante" value="0">
+                    <label for="nao">Não</label>
+                </div>
+            </form>
+        
+            <form id="formFeriasNaoEscolar">
+                <label for="DoisEmpregos">Possui um segundo emprego com férias programas para o mesmo período?</label><br>
+                <div class="radio-group">
+                    <input type="radio" id="sim" name="DoisEmpregos" value="1">
+                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="DoisEmpregos" value="0">
+                    <label for="nao">Não</label>
+                </div>
+            </form>
+        
+            <form id="formFeriasNaoEscolar">
+                <label for="ConjugeMesmoPeriodo">Possui cônjuge com o mesmo período de férias desejado?</label><br>
+                <div class="radio-group">
+                    <input type="radio" id="sim" name="ConjugeMesmoPeriodo" value="1">
+                    <label for="sim">Sim</label>
+                    <input type="radio" id="nao" name="ConjugeMesmoPeriodo" value="0">
+                    <label for="nao">Não</label>
+                </div>
+                <button type="button" onclick="preCadastro()">Cadastrar</button>
+                <button type="button" onclick="limparInformacoes()">Limpar Informações</button>
+            </form>
         </div>
 
         <div class="consulta-container">
@@ -180,19 +148,13 @@
             <button onclick="exibirListaFinalFeriasEscolarSelecionadosEPC()">Consultar selecionados para férias escolar - EPC</button>
             <button onclick="exibirListaFinalFeriasNaoEscolarIPC()">Lista ordenada por critérios não escolar - IPC</button>
             <button onclick="exibirListaFinalFeriasNaoEscolarEPC()">Lista ordenada por critérios não escolar - EPC</button>
-            
         </div>
 
         <div class="logout-container">
-            <!-- Botão logout -->
-        <button onclick="logout()">Logout</button>
+            <button onclick="logout()">Logout</button>
         </div>
 
-        <div id="dados2">
-                              
-        </div>
-
-        
+        <div id="dados2"></div>
     </div>
     
     <!-- jQuery -->
@@ -203,7 +165,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Arquivo de localização do flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-     <!-- Seu script personalizado -->
-     <script src="script.js"></script>
+    <!-- Seu script personalizado -->
+    <script src="script.js"></script>
 </body>
 </html>
