@@ -1,3 +1,36 @@
+carregarBancoDados()
+
+function carregarBancoDados() {
+    // URL do arquivo remoto
+    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    //const PORT = process.env.PORT || 3000;
+    const url = `${baseUrl}/banco_dados.json`;
+
+    // Faz uma requisição GET para obter o arquivo JSON
+    fetch(url)
+        .then(response => {
+            // Verifica se a resposta da requisição foi bem-sucedida
+            if (!response.ok) {
+                throw new Error('Erro ao carregar o arquivo.');
+            }
+            // Retorna o conteúdo do arquivo JSON como texto
+            return response.text();
+        })
+        .then(jsonData => {
+            // Converte o JSON de volta para o objeto database
+            database = JSON.parse(jsonData);
+            console.log("Banco de dados carregado:", database);
+            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
+        })
+        .catch(error => {
+            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
+            console.error('Erro:', error);
+        });
+}
+
+
+
+
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -1137,43 +1170,6 @@ let dataArray = Object.values(database).filter(dados =>
 }
 
 
-
-
-
-
-
-
-
-
-carregarBancoDados()
-
-function carregarBancoDados() {
-    // URL do arquivo remoto
-    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    //const PORT = process.env.PORT || 3000;
-    const url = `${baseUrl}/banco_dados.json`;
-
-    // Faz uma requisição GET para obter o arquivo JSON
-    fetch(url)
-        .then(response => {
-            // Verifica se a resposta da requisição foi bem-sucedida
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            // Retorna o conteúdo do arquivo JSON como texto
-            return response.text();
-        })
-        .then(jsonData => {
-            // Converte o JSON de volta para o objeto database
-            database = JSON.parse(jsonData);
-            console.log("Banco de dados carregado:", database);
-            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
-        })
-        .catch(error => {
-            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
-            console.error('Erro:', error);
-        });
-}
 
 
 function salvarBancoDados() {
