@@ -21,15 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("Dados de login carregados:", loginData); // Log para verificar os dados de login
 
-       if (!localStorage.getItem('bancoDeDados')) {
-            carregarBancoDados().then(() => {
-                verificarPontuacao(loginData.matricula);
-            }).catch(error => {
-                console.error("Erro ao carregar o banco de dados:", error);
-            });
-        } else {
-            verificarPontuacao(loginData.matricula);
-        }
+        carregarBancoDados().then(database => {
+            verificarPontuacao(loginData.matricula, database);
+        }).catch(error => {
+            console.error("Erro ao carregar o banco de dados:", error);
+        });
     }
 });
 
@@ -44,24 +40,23 @@ function carregarBancoDados() {
             return response.json();
         })
         .then(jsonData => {
-            localStorage.setItem('bancoDeDados', JSON.stringify(jsonData));
             console.log("Banco de dados carregado:", jsonData);
+            return jsonData;
         })
         .catch(error => {
             console.error('Erro:', error);
         });
 }
 
-function verificarPontuacao(matricula) {
+function verificarPontuacao(matricula, database) {
     if (!matricula) {
         console.error("Matrícula não fornecida ou inválida.");
         return;
     }
-    
-    const data = JSON.parse(localStorage.getItem('bancoDeDados'));
-    console.log("Dados carregados do localStorage:", data);
 
-    if (!data) {
+    console.log("Dados carregados do banco de dados:", database);
+
+    if (!database) {
         console.error("Banco de dados não carregado ou formato inválido.");
         return;
     }
@@ -71,12 +66,11 @@ function verificarPontuacao(matricula) {
     let maiorPontuacaoEscolar = 0;
     let maiorPontuacaoNaoEscolar = 0;
 
-    for (let key in data) {
-        if (data.hasOwnProperty(key)) {
-            const usuario = data[key];
-            console.log("Usuario . cadastrado retorna:", usuario.cadastrado);
+    for (let key in database) {
+        if (database.hasOwnProperty(key)) {
+            const usuario = database[key];
 
-            if (usuario.matricula === matricula && usuario.cadastrado === 0) {
+            if (usuario.matricula === matricula) {
                 pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar || 0;
                 pontuacaoUsuarioNaoEscolar = usuario.pontuacaoferiasNaoescolar || 0;
             }
@@ -102,6 +96,7 @@ function verificarPontuacao(matricula) {
         alert("Você não tem a maior pontuação para fazer o cadastro.");
     }
 }
+
     </script>
 </head>
 
