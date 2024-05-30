@@ -10,18 +10,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="script.js"></script>
+    
     <script>
-       /* document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const loginData = JSON.parse(localStorage.getItem('loginToken'));
-            
 
             if (!loginData || new Date().getTime() > loginData.expirationTime) {
                 alert("Sua sessão expirou. Faça login novamente.");
                 window.location.href = 'index.html';
             }
-        });*/
-       
+        });
 
 
 
@@ -49,7 +47,6 @@
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
                 <button onclick="openCalendar()">Ver Calendário</button>
-                <button onclick="verificapontuacao(matricula)">Verificar pontuação</button>
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
                 
@@ -139,6 +136,6 @@
     <!-- Arquivo de localização do flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
     <!-- Seu script personalizado -->
-    
+    <script src="script.js"></script>
 </body>
 </html>
