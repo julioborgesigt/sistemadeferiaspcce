@@ -179,6 +179,10 @@ function concluirCadastro() {
         // Sua lógica para concluir o cadastro aqui...
         console.log("Cadastro concluído com sucesso!");
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        window.location.href = `conclusao.html?matricula=${matricula}`;
+    } else{
+        alert("tente novamente depois");
+        
     }
 }
 
@@ -424,7 +428,7 @@ function cadastroInicial() {
 
    
     concluirCadastro(); // Salvar o banco de dados
-    window.location.href = `conclusao.html?matricula=${matricula}`;
+   
         
     
 }
