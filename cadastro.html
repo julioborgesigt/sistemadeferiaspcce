@@ -12,42 +12,41 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script>
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
     if (!loginData || new Date().getTime() > loginData.expirationTime) {
         alert("Sua sessão expirou. Faça login novamente.");
         window.location.href = 'index.html';
     } else {
-       
-            verificapontuacao(loginData.matricula);
-       
+        verificarPontuacao(loginData.matricula);
     }
 });
 
 function carregarBancoDados() {
-            const url = 'banco_dados.json';
+    const url = 'banco_dados.json';
 
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.text();
-                })
-                .then(jsonData => {
-                    database = JSON.parse(jsonData);
-                    console.log("Banco de dados carregado:", database);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar o arquivo.');
+            }
+            return response.text();
+        })
+        .then(jsonData => {
+            const database = JSON.parse(jsonData);
+            localStorage.setItem('bancoDeDados', JSON.stringify(database));
+            console.log("Banco de dados carregado:", database);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
 
-function verificapontuacao(matricula) {
+function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
-    if (!data) {
-        console.error("Banco de dados não carregado.");
+    if (!data || !data.usuarios) {
+        console.error("Banco de dados não carregado ou formato inválido.");
         return;
     }
 
@@ -75,7 +74,6 @@ function verificapontuacao(matricula) {
         alert("Você não tem a maior pontuação para fazer o cadastro.");
     }
 }
-
 
 
     </script>
