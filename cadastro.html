@@ -52,6 +52,8 @@ function carregarBancoDados() {
 
 function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
+    console.log("Dados carregados do localStorage:", data);
+
     if (!data || !data.usuarios) {
         console.error("Banco de dados não carregado ou formato inválido.");
         return;
@@ -74,6 +76,11 @@ function verificarPontuacao(matricula) {
             maiorPontuacaoNaoEscolar = usuario.pontuacaoferiasNaoescolar;
         }
     });
+
+    console.log("Pontuação do usuário (escolar):", pontuacaoUsuarioEscolar);
+    console.log("Pontuação do usuário (não escolar):", pontuacaoUsuarioNaoEscolar);
+    console.log("Maior pontuação escolar:", maiorPontuacaoEscolar);
+    console.log("Maior pontuação não escolar:", maiorPontuacaoNaoEscolar);
 
     if (pontuacaoUsuarioEscolar >= maiorPontuacaoEscolar && pontuacaoUsuarioNaoEscolar >= maiorPontuacaoNaoEscolar) {
         alert("Você pode fazer o cadastro.");
