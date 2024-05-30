@@ -19,9 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
         alert("Sua sessão expirou. Faça login novamente.");
         window.location.href = 'index.html';
     } else {
+        if (!localStorage.getItem('bancoDeDados')) {
+            carregarBancoDados();
+        }
         verificarPontuacao(loginData.matricula);
     }
 });
+
 
 function carregarBancoDados() {
     const url = 'banco_dados.json';
