@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function verificapontuacao(matricula) {
+    console.log("chamou a função de verificar");
     const usuario = database[matricula];
     if (!usuario) {
         alert("Usuário não encontrado.");
