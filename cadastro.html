@@ -12,15 +12,50 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginData = JSON.parse(localStorage.getItem('loginToken'));
+       document.addEventListener('DOMContentLoaded', function() {
+    const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
-            if (!loginData || new Date().getTime() > loginData.expirationTime) {
-                alert("Sua sessão expirou. Faça login novamente.");
-                window.location.href = 'index.html';
+    if (!loginData || new Date().getTime() > loginData.expirationTime) {
+        alert("Sua sessão expirou. Faça login novamente.");
+        window.location.href = 'index.html';
+    } else {
+        // Chame verificapontuacao após o loginData ser carregado
+        verificapontuacao(loginData.matricula);
+    }
+});
+
+function verificapontuacao(matricula) {
+    fetch('path/to/bancoDeDados.json')
+        .then(response => response.json())
+        .then(data => {
+            let pontuacaoUsuarioEscolar = 0;
+            let pontuacaoUsuarioNaoEscolar = 0;
+            let maiorPontuacaoEscolar = 0;
+            let maiorPontuacaoNaoEscolar = 0;
+
+            data.usuarios.forEach(usuario => {
+                if (usuario.matricula === matricula) {
+                    pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar;
+                    pontuacaoUsuarioNaoEscolar = usuario.pontuacaoferiasNaoescolar;
+                }
+                if (usuario.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
+                    maiorPontuacaoEscolar = usuario.pontuacaoferiasescolar;
+                }
+                if (usuario.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
+                    maiorPontuacaoNaoEscolar = usuario.pontuacaoferiasNaoescolar;
+                }
+            });
+
+            if (pontuacaoUsuarioEscolar >= maiorPontuacaoEscolar && pontuacaoUsuarioNaoEscolar >= maiorPontuacaoNaoEscolar) {
+                alert("Você pode fazer o cadastro.");
+            } else {
+                alert("Você não tem a maior pontuação para fazer o cadastro.");
             }
+        })
+        .catch(error => {
+            console.error("Erro ao carregar o banco de dados:", error);
         });
-
+}
 
 
     </script>
@@ -50,7 +85,8 @@
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
                 
-
+                 <!-- Botão para verificar pontuação -->
+                 <button type="button" onclick="verificapontuacao(document.getElementById('matriculaCadastro').value)">Verificar Pontuação</button>
 
 
 
