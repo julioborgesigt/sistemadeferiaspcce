@@ -17,11 +17,7 @@
 
 function verificapontuacao(matricula) {
     console.log("chamou a função de verificar");
-    const usuario = database[matricula];
-    if (!usuario) {
-        alert("Usuário não encontrado.");
-        return false;
-    }
+    
 
     const pontuacaoAtual = {
         escolar: usuario.pontuacaoferiasescolar,
