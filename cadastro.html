@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
         alert("Sua sessão expirou. Faça login novamente.");
         window.location.href = 'index.html';
     } else {
+        console.log("Dados de login carregados:", loginData); // Log para verificar os dados de login
+
         if (!localStorage.getItem('bancoDeDados')) {
             carregarBancoDados().then(() => {
                 verificarPontuacao(loginData.matricula);
@@ -27,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             verificarPontuacao(loginData.matricula);
-            console.log("esta é a  loginData matricula carregada:", loginData.matricula);
         }
     }
 });
@@ -52,9 +53,13 @@ function carregarBancoDados() {
 }
 
 function verificarPontuacao(matricula) {
+    if (!matricula) {
+        console.error("Matrícula não fornecida ou inválida.");
+        return;
+    }
+    
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
     console.log("Dados carregados do localStorage:", data);
-    console.log("esta é a matricula carregada:", matricula);
 
     if (!data) {
         console.error("Banco de dados não carregado ou formato inválido.");
