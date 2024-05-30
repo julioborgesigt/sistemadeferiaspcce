@@ -12,12 +12,15 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
             const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
             if (!loginData || new Date().getTime() > loginData.expirationTime) {
+                // Redirecionar para a página de login se o token não existir ou estiver expirado
                 alert("Sua sessão expirou. Faça login novamente.");
                 window.location.href = 'index.html';
+            } else {
+                verificapontuacao(loginData.matricula);
             }
         });
 

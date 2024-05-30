@@ -82,6 +82,87 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+
+function verificapontuacao(matricula) {
+    console.log("chamou a função de verificar");
+    const usuario = database[matricula];
+    if (!usuario) {
+        alert("Usuário não encontrado.");
+        return false;
+    }
+
+    const pontuacaoAtual = {
+        escolar: usuario.pontuacaoferiasescolar,
+        naoEscolar: usuario.pontuacaoferiasNaoescolar
+    };
+
+    let maiorPontuacaoEscolar = 0;
+    let maiorPontuacaoNaoEscolar = 0;
+
+    for (let matricula in database) {
+        const pontuacao = database[matricula];
+        if (pontuacao.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
+            maiorPontuacaoEscolar = pontuacao.pontuacaoferiasescolar;
+        }
+        if (pontuacao.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
+            maiorPontuacaoNaoEscolar = pontuacao.pontuacaoferiasNaoescolar;
+        }
+    }
+
+    const podeCadastrar = (pontuacaoAtual.escolar >= maiorPontuacaoEscolar) && (pontuacaoAtual.naoEscolar >= maiorPontuacaoNaoEscolar);
+
+    if (!podeCadastrar) {
+        alert("Sua pontuação não é suficiente para o cadastro.");
+    } else {
+        alert("Pontuação suficiente para cadastro.");
+    }
+
+    //return podeCadastrar;
+    alert("Sua pontuação é suficiente para o cadastro.");
+    
+}
+
+
+
+
+function verificapontuacao(matricula) {
+    console.log("chamou a função de verificar");
+    const usuario = database[matricula];
+    if (!usuario) {
+        alert("Usuário não encontrado.");
+        return false;
+    }
+
+    const pontuacaoAtual = {
+        escolar: usuario.pontuacaoferiasescolar,
+        naoEscolar: usuario.pontuacaoferiasNaoescolar
+    };
+
+    let maiorPontuacaoEscolar = 0;
+    let maiorPontuacaoNaoEscolar = 0;
+
+    for (let matricula in database) {
+        const pontuacao = database[matricula];
+        if (pontuacao.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
+            maiorPontuacaoEscolar = pontuacao.pontuacaoferiasescolar;
+        }
+        if (pontuacao.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
+            maiorPontuacaoNaoEscolar = pontuacao.pontuacaoferiasNaoescolar;
+        }
+    }
+
+    const podeCadastrar = (pontuacaoAtual.escolar >= maiorPontuacaoEscolar) && (pontuacaoAtual.naoEscolar >= maiorPontuacaoNaoEscolar);
+
+    if (!podeCadastrar) {
+        alert("Sua pontuação não é suficiente para o cadastro.");
+    } else {
+        alert("Pontuação suficiente para cadastro.");
+    }
+
+    //return podeCadastrar;
+    alert("Sua pontuação é suficiente para o cadastro.");
+    
+}
      
 
 // Função para verificar se uma data é um fim de semana
