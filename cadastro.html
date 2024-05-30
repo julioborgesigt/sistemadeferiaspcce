@@ -25,18 +25,24 @@
     }
 });
 
-function carregarBancoDeDados() {
-    return fetch('banco_dados.json')
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('bancoDeDados', JSON.stringify(data));
-            return data;
-        })
-        .catch(error => {
-            console.error("Erro ao carregar o banco de dados:", error);
-            throw error;
-        });
-}
+function carregarBancoDados() {
+            const url = 'banco_dados.json';
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo.');
+                    }
+                    return response.text();
+                })
+                .then(jsonData => {
+                    database = JSON.parse(jsonData);
+                    console.log("Banco de dados carregado:", database);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
 
 function verificapontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
