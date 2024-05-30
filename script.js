@@ -11,19 +11,6 @@ document.getElementById('toggle-dark-mode').addEventListener('click', function (
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const loginData = JSON.parse(localStorage.getItem('loginToken'));
-
-    if (!loginData || new Date().getTime() > loginData.expirationTime) {
-        // Redirecionar para a página de login se o token não existir ou estiver expirado
-        alert("Sua sessão expirou. Faça login novamente.");
-        window.location.href = 'index.html';
-    } else {
-        verificapontuacao(loginData.matricula);
-        
-        
-    }
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     flatpickr("#dataIngresso, #paquisitivoinicio, #paquisitivofim, #dataNascimento, #periodo11, #periodo12, #periodo21, #periodo22, #periodo31, #periodo32", {
