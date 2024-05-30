@@ -169,6 +169,39 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 }
 
 
+// Função para conclusão do cadastro
+function concluirCadastro() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+
+    // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
+    if (verificarPontuacaoUsuario(matricula)) {
+        // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
+        // Sua lógica para concluir o cadastro aqui...
+        console.log("Cadastro concluído com sucesso!");
+        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+    }
+}
+
+function verificarPontuacaoUsuario(matricula) {
+    const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
+    let maiorPontuacao = 0;
+
+    // Encontrar a maior pontuação de férias escolares no banco de dados
+    for (let key in database) {
+        if (database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
+            maiorPontuacao = database[key].pontuacaoferiasescolar;
+        }
+    }
+
+    // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
+    if (pontuacaoUsuario < maiorPontuacao) {
+        alert("A pontuação de férias escolares do usuário não é a maior do banco de dados. Cadastro não permitido.");
+        return false; // Não permitir a conclusão do cadastro
+    }
+
+    return true; // Permitir a conclusão do cadastro
+}
+
 
 function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
@@ -390,7 +423,7 @@ function cadastroInicial() {
     }
 
    
-    salvarBancoDados(); // Salvar o banco de dados
+    concluirCadastro(); // Salvar o banco de dados
     window.location.href = `conclusao.html?matricula=${matricula}`;
         
     
@@ -410,53 +443,6 @@ function validarMatricula(input) {
     }
 }
 
-/*
-function limparInformacoes() {
-    document.getElementById("matriculaCadastro").value = "";
-    document.getElementById("dataIngresso").value = "";
-    document.getElementById("paquisitivoinicio").value = "";
-    document.getElementById("paquisitivofim").value = "";
-    document.getElementById("seraferiasEscolar").checked = false;
-    document.getElementById("qtdperiodos").value = "";
-    document.getElementById("dataNascimento").value = "";
-    document.getElementById("qtdfilhosmenores").value = "";
-    document.getElementById("periodo11").value = "";
-    document.getElementById("periodo12").value = "";
-    document.getElementById("periodo21").value = "";
-    document.getElementById("periodo22").value = "";
-    document.getElementById("periodo31").value = "";
-    document.getElementById("periodo32").value = "";
-}
-*/
-/*
-function calcularAntiguidade(dataIngresso) {
-    const dataAtual = new Date();
-    const [dia, mes, ano] = dataIngresso.split('/');
-    const dataIngressoFormatada = new Date(`${ano}-${mes}-${dia}`);
-    const antiguidade = dataAtual.getFullYear() - dataIngressoFormatada.getFullYear();
-
-    if (dataAtual.getMonth() < dataIngressoFormatada.getMonth() ||
-        (dataAtual.getMonth() === dataIngressoFormatada.getMonth() && dataAtual.getDate() < dataIngressoFormatada.getDate())) {
-        return antiguidade - 1;
-    }
-
-    return antiguidade;
-}
-
-function calcularIdade(dataNascimento) {
-    const dataAtual = new Date();
-    const [dia, mes, ano] = dataNascimento.split('/');
-    const dataNascimentoFormatada = new Date(`${ano}-${mes}-${dia}`);
-    const diferencaAnos = dataAtual.getFullYear() - dataNascimentoFormatada.getFullYear();
-
-    if (dataAtual.getMonth() < dataNascimentoFormatada.getMonth() ||
-        (dataAtual.getMonth() === dataNascimentoFormatada.getMonth() && dataAtual.getDate() < dataNascimentoFormatada.getDate())) {
-        return diferencaAnos - 1;
-    }
-
-    return diferencaAnos;
-}
-*/
 
 function calcularIdade(dataNascimento) {
     let [dia, mes, ano] = dataNascimento.split('/').map(Number);
@@ -1054,14 +1040,6 @@ let dataArray = Object.values(database).filter(dados =>
 }
 
 
-
-
-
-
-
-
-
-
 carregarBancoDados()
 
 function carregarBancoDados() {
@@ -1094,9 +1072,6 @@ function carregarBancoDados() {
 
 
 function salvarBancoDados() {
-    // URL para salvar os dados
-    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    //const PORT = process.env.PORT || 3000;
     const url = `${baseUrl}/banco_dados.json`;
 
     // Realiza uma requisição POST para enviar os dados atualizados para o servidor
@@ -1151,3 +1126,5 @@ function gerarPDF() {
 function openCalendar() {
     window.open('calendario.html', '_blank');
 }
+
+
