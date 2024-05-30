@@ -41,6 +41,7 @@ function carregarBancoDados() {
         })
         .then(jsonData => {
             console.log("Banco de dados carregado:", jsonData);
+            verificarPontuacao(loginData.matricula, jsonData); // Chamada da função verificarPontuacao após o carregamento completo dos dados
             return jsonData;
         })
         .catch(error => {
@@ -96,6 +97,7 @@ function verificarPontuacao(matricula, database) {
         alert("Você não tem a maior pontuação para fazer o cadastro.");
     }
 }
+
 
     </script>
 </head>
