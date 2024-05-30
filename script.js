@@ -1,3 +1,5 @@
+
+/*
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -9,7 +11,7 @@ document.getElementById('toggle-dark-mode').addEventListener('click', function (
         icon.classList.add('fa-moon');
     }
 });
-
+*/
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1109,7 +1111,7 @@ let dataArray = Object.values(database).filter(dados =>
 
 
 
-carregarBancoDados()
+
 
 function carregarBancoDados() {
     // URL do arquivo remoto
@@ -1138,7 +1140,7 @@ function carregarBancoDados() {
             console.error('Erro:', error);
         });
 }
-
+carregarBancoDados();
 
 function salvarBancoDados() {
     // URL para salvar os dados
