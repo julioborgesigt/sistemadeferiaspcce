@@ -12,6 +12,9 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script>
+
+    
+
        document.addEventListener('DOMContentLoaded', function() {
             const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
@@ -20,6 +23,7 @@
                 alert("Sua sessão expirou. Faça login novamente.");
                 window.location.href = 'index.html';
             } else {
+                carregarBancoDados();
                 verificapontuacao(loginData.matricula);
             }
         });
