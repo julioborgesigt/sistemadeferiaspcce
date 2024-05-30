@@ -1,36 +1,3 @@
-carregarBancoDados()
-
-function carregarBancoDados() {
-    // URL do arquivo remoto
-    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    //const PORT = process.env.PORT || 3000;
-    const url = `${baseUrl}/banco_dados.json`;
-
-    // Faz uma requisição GET para obter o arquivo JSON
-    fetch(url)
-        .then(response => {
-            // Verifica se a resposta da requisição foi bem-sucedida
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            // Retorna o conteúdo do arquivo JSON como texto
-            return response.text();
-        })
-        .then(jsonData => {
-            // Converte o JSON de volta para o objeto database
-            database = JSON.parse(jsonData);
-            console.log("Banco de dados carregado:", database);
-            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
-        })
-        .catch(error => {
-            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
-            console.error('Erro:', error);
-        });
-}
-
-
-
-
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -116,44 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
 
-function verificapontuacao(matricula) {
-    console.log("chamou a função de verificar");
-    const usuario = database[matricula];
-    if (!usuario) {
-        alert("Usuário não encontrado.");
-        return false;
-    }
 
-    const pontuacaoAtual = {
-        escolar: usuario.pontuacaoferiasescolar,
-        naoEscolar: usuario.pontuacaoferiasNaoescolar
-    };
-
-    let maiorPontuacaoEscolar = 0;
-    let maiorPontuacaoNaoEscolar = 0;
-
-    for (let matricula in database) {
-        const pontuacao = database[matricula];
-        if (pontuacao.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
-            maiorPontuacaoEscolar = pontuacao.pontuacaoferiasescolar;
-        }
-        if (pontuacao.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
-            maiorPontuacaoNaoEscolar = pontuacao.pontuacaoferiasNaoescolar;
-        }
-    }
-
-    const podeCadastrar = (pontuacaoAtual.escolar >= maiorPontuacaoEscolar) && (pontuacaoAtual.naoEscolar >= maiorPontuacaoNaoEscolar);
-
-    if (!podeCadastrar) {
-        alert("Sua pontuação não é suficiente para o cadastro.");
-    } else {
-        alert("Pontuação suficiente para cadastro.");
-    }
-
-    //return podeCadastrar;
-    alert("Sua pontuação é suficiente para o cadastro.");
-    
-}
 
 
 
@@ -1172,6 +1102,43 @@ let dataArray = Object.values(database).filter(dados =>
 
 
 
+
+
+
+
+
+
+carregarBancoDados()
+
+function carregarBancoDados() {
+    // URL do arquivo remoto
+    //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+    //const PORT = process.env.PORT || 3000;
+    const url = `${baseUrl}/banco_dados.json`;
+
+    // Faz uma requisição GET para obter o arquivo JSON
+    fetch(url)
+        .then(response => {
+            // Verifica se a resposta da requisição foi bem-sucedida
+            if (!response.ok) {
+                throw new Error('Erro ao carregar o arquivo.');
+            }
+            // Retorna o conteúdo do arquivo JSON como texto
+            return response.text();
+        })
+        .then(jsonData => {
+            // Converte o JSON de volta para o objeto database
+            database = JSON.parse(jsonData);
+            console.log("Banco de dados carregado:", database);
+            // Aqui você pode chamar qualquer função necessária para inicializar sua aplicação com os dados carregados
+        })
+        .catch(error => {
+            // Trata qualquer erro que ocorrer durante o carregamento do arquivo
+            console.error('Erro:', error);
+        });
+}
+
+
 function salvarBancoDados() {
     // URL para salvar os dados
     //const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
@@ -1229,4 +1196,44 @@ function gerarPDF() {
 
 function openCalendar() {
     window.open('calendario.html', '_blank');
+}
+
+
+function verificapontuacao(matricula) {
+    console.log("chamou a função de verificar");
+    const usuario = database[matricula];
+    if (!usuario) {
+        alert("Usuário não encontrado.");
+        return false;
+    }
+
+    const pontuacaoAtual = {
+        escolar: usuario.pontuacaoferiasescolar,
+        naoEscolar: usuario.pontuacaoferiasNaoescolar
+    };
+
+    let maiorPontuacaoEscolar = 0;
+    let maiorPontuacaoNaoEscolar = 0;
+
+    for (let matricula in database) {
+        const pontuacao = database[matricula];
+        if (pontuacao.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
+            maiorPontuacaoEscolar = pontuacao.pontuacaoferiasescolar;
+        }
+        if (pontuacao.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
+            maiorPontuacaoNaoEscolar = pontuacao.pontuacaoferiasNaoescolar;
+        }
+    }
+
+    const podeCadastrar = (pontuacaoAtual.escolar >= maiorPontuacaoEscolar) && (pontuacaoAtual.naoEscolar >= maiorPontuacaoNaoEscolar);
+
+    if (!podeCadastrar) {
+        alert("Sua pontuação não é suficiente para o cadastro.");
+    } else {
+        alert("Pontuação suficiente para cadastro.");
+    }
+
+    //return podeCadastrar;
+    alert("Sua pontuação é suficiente para o cadastro.");
+    
 }
