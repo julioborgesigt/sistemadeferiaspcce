@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!localStorage.getItem('bancoDeDados')) {
             carregarBancoDados().then(() => {
                 verificarPontuacao(loginData.matricula);
+            }).catch(error => {
+                console.error("Erro ao carregar o banco de dados:", error);
             });
         } else {
             verificarPontuacao(loginData.matricula);
@@ -30,23 +32,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function carregarBancoDados() {
-            const url = 'banco_dados.json';
+    const url = 'banco_dados.json';
 
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.text();
-                })
-                .then(jsonData => {
-                    database = JSON.parse(jsonData);
-                    console.log("Banco de dados carregado:", database);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar o arquivo.');
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+            localStorage.setItem('bancoDeDados', JSON.stringify(jsonData));
+            console.log("Banco de dados carregado:", jsonData);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
 
 function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
