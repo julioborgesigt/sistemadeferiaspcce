@@ -17,7 +17,13 @@
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
                 window.location.href = 'index.html';
-            }
+            }else {
+        carregarBancoDeDados().then(() => {
+            verificapontuacao(loginData.matricula);
+        }).catch(error => {
+            console.error("Erro ao carregar o banco de dados:", error);
+        });
+    }
         });
 
         function carregarBancoDados() {
@@ -39,7 +45,38 @@
                 });
         }
 
-        
+        function verificapontuacao(matricula) {
+    const data = JSON.parse(localStorage.getItem('bancoDeDados'));
+    if (!data) {
+        console.error("Banco de dados não carregado.");
+        return;
+    }
+
+    let pontuacaoUsuarioEscolar = 0;
+    let pontuacaoUsuarioNaoEscolar = 0;
+    let maiorPontuacaoEscolar = 0;
+    let maiorPontuacaoNaoEscolar = 0;
+
+    data.usuarios.forEach(usuario => {
+        if (usuario.matricula === matricula) {
+            pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar;
+            pontuacaoUsuarioNaoEscolar = usuario.pontuacaoferiasNaoescolar;
+        }
+        if (usuario.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
+            maiorPontuacaoEscolar = usuario.pontuacaoferiasescolar;
+        }
+        if (usuario.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
+            maiorPontuacaoNaoEscolar = usuario.pontuacaoferiasNaoescolar;
+        }
+    });
+
+    if (pontuacaoUsuarioEscolar >= maiorPontuacaoEscolar && pontuacaoUsuarioNaoEscolar >= maiorPontuacaoNaoEscolar) {
+        alert("Você pode fazer o cadastro.");
+    } else {
+        alert("Você não tem a maior pontuação para fazer o cadastro.");
+    }
+}
+
 
         function salvarBancoDados() {
             const url = 'banco_dados.json';
