@@ -27,7 +27,18 @@
     }
 });
 
-
+function carregarBancoDeDados() {
+    return fetch('path/to/bancoDeDados.json')
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('bancoDeDados', JSON.stringify(data));
+            return data;
+        })
+        .catch(error => {
+            console.error("Erro ao carregar o banco de dados:", error);
+            throw error;
+        });
+}
 
 function verificapontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
