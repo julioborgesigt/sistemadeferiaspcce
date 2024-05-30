@@ -97,8 +97,8 @@ function verificapontuacao(matricula) {
         alert("Pontuação suficiente para cadastro.");
     }
 
-    return podeCadastrar;
-
+    //return podeCadastrar;
+    alert("Sua pontuação é suficiente para o cadastro.");
     
 }
 
