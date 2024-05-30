@@ -20,31 +20,34 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'index.html';
     } else {
         if (!localStorage.getItem('bancoDeDados')) {
-            carregarBancoDados();
+            carregarBancoDados().then(() => {
+                verificarPontuacao(loginData.matricula);
+            });
+        } else {
+            verificarPontuacao(loginData.matricula);
         }
-        verificarPontuacao(loginData.matricula);
     }
 });
 
-
 function carregarBancoDados() {
-            const url = 'banco_dados.json';
+    const url = 'banco_dados.json';
 
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao carregar o arquivo.');
-                    }
-                    return response.text();
-                })
-                .then(jsonData => {
-                    database = JSON.parse(jsonData);
-                    console.log("Banco de dados carregado:", database);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
-        }
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar o arquivo.');
+            }
+            return response.text();
+        })
+        .then(jsonData => {
+            const database = JSON.parse(jsonData);
+            localStorage.setItem('bancoDeDados', JSON.stringify(database));
+            console.log("Banco de dados carregado:", database);
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
 
 function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
@@ -77,24 +80,12 @@ function verificarPontuacao(matricula) {
         alert("Você não tem a maior pontuação para fazer o cadastro.");
     }
 }
-
-
     </script>
-    
-    
-
-
 </head>
-
 
 <body>
     <div class="container">
         <h1>Cadastro e Consulta de Férias</h1>
-
-
-       
-        
-
 
         <div style="text-align: right; margin-bottom: -40px; margin-left:90%">
             <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
@@ -102,14 +93,12 @@ function verificarPontuacao(matricula) {
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
-                <button onclick="openCalendar()">Ver Calendário</button>
+                <button type="button" onclick="openCalendar()">Ver Calendário</button>
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
                 
-                 <!-- Botão para verificar pontuação -->
-                 <button type="button" onclick="verificapontuacao(document.getElementById('matriculaCadastro').value)">Verificar Pontuação</button>
-
-
+                <!-- Botão para verificar pontuação -->
+                <button type="button" onclick="verificarPontuacao(document.getElementById('matriculaCadastro').value)">Verificar Pontuação</button>
 
                 <label for="seraferiasEscolar">
                     <hr>
@@ -118,14 +107,10 @@ function verificarPontuacao(matricula) {
                    <hr>
                 </label>
 
-
-
                 <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
                 <input type="checkbox" id="periodo1" name="qtdperiodos" value="1"> 1
                 <input type="checkbox" id="periodo2" name="qtdperiodos" value="2"> 2
                 <input type="checkbox" id="periodo3" name="qtdperiodos" value="3"> 3
-
-                
 
                 <div id="periodo1-container">
                     <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
@@ -149,7 +134,6 @@ function verificarPontuacao(matricula) {
                 </div>
 
                 <button type="button" onclick="cadastroInicial()">Cadastrar</button>
-            
             </form>
         </div>
 
@@ -158,31 +142,22 @@ function verificarPontuacao(matricula) {
         <div class="consulta-container">
             <h2>Consultas</h2>
             <input type="text" id="matriculaConsulta" placeholder="Matrícula">
-            <button onclick="exibirDadosPorMatricula()">Consulta por matrícula</button>  
-            <button onclick="exibirListaCompletaDEFerias()">Consultar todos os cadastros - EPC + IPC</button>
-            <button onclick="exibirListaConcorrentesFeriasEscolarIPC()">Lista ordenada por potuação escolar - IPC</button>
-            <button onclick="exibirListaConcorrentesFeriasEscolarEPC()">Lista ordenada por potuação escolar - EPC</button>
-            <button onclick="exibirListaFinalFeriasEscolarSelecionadosIPC()">Consultar selecionados para férias escolar - IPC</button>
-            <button onclick="exibirListaFinalFeriasEscolarSelecionadosEPC()">Consultar selecionados para férias escolar - EPC</button>
-            <button onclick="exibirListaFinalFeriasNaoEscolarIPC()">Lista ordenada por critérios não escolar - IPC</button>
-            <button onclick="exibirListaFinalFeriasNaoEscolarEPC()">Lista ordenada por critérios não escolar - EPC</button>
+            <button type="button" onclick="exibirDadosPorMatricula()">Consulta por matrícula</button>
+            <button type="button" onclick="exibirListaCompletaDEFerias()">Consultar todos os cadastros - EPC + IPC</button>
+            <button type="button" onclick="exibirListaConcorrentesFeriasEscolarIPC()">Lista ordenada por pontuação escolar - IPC</button>
+            <button type="button" onclick="exibirListaConcorrentesFeriasEscolarEPC()">Lista ordenada por pontuação escolar - EPC</button>
+            <button type="button" onclick="exibirListaFinalFeriasEscolarSelecionadosIPC()">Consultar selecionados para férias escolar - IPC</button>
+            <button type="button" onclick="exibirListaFinalFeriasEscolarSelecionadosEPC()">Consultar selecionados para férias escolar - EPC</button>
+            <button type="button" onclick="exibirListaFinalFeriasNaoEscolarIPC()">Lista ordenada por critérios não escolar - IPC</button>
+            <button type="button" onclick="exibirListaFinalFeriasNaoEscolarEPC()">Lista ordenada por critérios não escolar - EPC</button>
         </div>
 
-        
         <div class="logout-container">
-            <!-- Botão logout -->
-        <button onclick="logout()">Encerrar o acesso</button>
+            <button type="button" onclick="logout()">Encerrar o acesso</button>
         </div>
-        
 
-        
         <div id="dados2"></div>
-
-        
-
     </div>
-
-    
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
