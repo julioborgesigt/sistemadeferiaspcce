@@ -191,16 +191,16 @@ function verificarPontuacaoUsuario(matricula) {
     let maiorPontuacao = 0;
     let matriculaMaiorPontuacao = '';
 
-    // Encontrar a maior pontuação de férias escolares no banco de dados
+    // Encontrar a maior pontuação de férias escolares no banco de dados, considerando apenas matriculas com cadastrado = 0
     for (let key in database) {
-        if (database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
+        if (database[key].cadastrado === 0 && database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
             maiorPontuacao = database[key].pontuacaoferiasescolar;
             matriculaMaiorPontuacao = key;
         }
     }
 
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
-    if (pontuacaoUsuario < maiorPontuacao) {
+    if (pontuacaoUsuario < maiorPontuacao ) {
         alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao}. Cadastro não permitido.`);
         return false; // Não permitir a conclusão do cadastro
     }
@@ -228,6 +228,7 @@ function preCadastro() {
     }
 
     let cargo = "";
+    let cadastrado = 0;
     if (cargoIpc) cargo = "IPC";
     if (cargoEpc) cargo = "EPC";
     if (cargoIpcPlantao) cargo = "IPCplantao";
@@ -248,7 +249,8 @@ function preCadastro() {
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
             senha: senha,
-            cargo: cargo
+            cargo: cargo,
+            cadastrado: cadastrado
         };
     
         // Remove propriedades com valores em branco
@@ -274,7 +276,8 @@ function preCadastro() {
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
             senha: senha,
-            cargo: cargo
+            cargo: cargo,
+            cadastrado: cadastrado
             
         };
         alert("Pre Cadastro concluído com suscesso!");
@@ -393,6 +396,7 @@ function cadastroInicial() {
 
     
     
+    let cadastrado = 1;
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
@@ -408,6 +412,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
+            cadastrado: cadastrado
             
         });
     } else {
@@ -424,7 +429,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-            
+            cadastrado: cadastrado
         };
     }
 

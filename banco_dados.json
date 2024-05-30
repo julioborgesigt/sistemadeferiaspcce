@@ -31,7 +31,8 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "dataIngresso": "10/01/2011"
+        "dataIngresso": "10/01/2011",
+        "cadastrado": 1
     },
     "30088417.2024": {
         "matricula": "30088417.2024",
@@ -61,7 +62,8 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     },
     "30093712.2024": {
         "matricula": "30093712.2024",
@@ -91,7 +93,8 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     },
     "30094115.2024": {
         "matricula": "30094115.2024",
@@ -121,7 +124,8 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     },
     "30109511.2024": {
         "matricula": "30109511.2024",
@@ -151,7 +155,8 @@
         "gestante": "0",
         "estudante": "1",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 0
     },
     "30115910.2024": {
         "matricula": "30115910.2024",
@@ -181,7 +186,8 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     },
     "30118995.2024": {
         "matricula": "30118995.2024",
@@ -211,7 +217,8 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     },
     "30119231.2024": {
         "matricula": "30119231.2024",
@@ -241,7 +248,8 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     },
     "30124537.2024": {
         "matricula": "30124537.2024",
@@ -271,6 +279,7 @@
         "gestante": "0",
         "estudante": "0",
         "DoisEmpregos": "0",
-        "ConjugeMesmoPeriodo": "0"
+        "ConjugeMesmoPeriodo": "0",
+        "cadastrado": 1
     }
 }
