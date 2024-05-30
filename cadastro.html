@@ -14,30 +14,7 @@
 
 <script>
 
-function verificapontuacao(matricula) {
-    if (!(matricula in database)) {
-        alert("Matrícula não encontrada.");
-        return false;
-    }
 
-    let usuario = database[matricula];
-    let pontuacaoAtual = usuario.pontuacaoferiasescolar; // ou pontuacaoferiasNaoescolar, conforme necessário
-
-    // Encontrar a maior pontuação existente no banco de dados
-    let maiorPontuacao = 0;
-    for (let key in database) {
-        if (database[key].pontuacaoferiasescolar > maiorPontuacao) {
-            maiorPontuacao = database[key].pontuacaoferiasescolar;
-        }
-    }
-
-    if (pontuacaoAtual >= maiorPontuacao) {
-        return true;
-    } else {
-        alert("Sua pontuação não é suficiente para realizar o cadastro.");
-        return false;
-    }
-}
 
 
 // Chamada da função verificapontuacao após o banco de dados ser carregado e o DOM estar pronto
@@ -48,10 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Redirecionar para a página de login se o token não existir ou estiver expirado
         alert("Sua sessão expirou. Faça login novamente.");
         window.location.href = 'index.html';
-    } else {
-        //let database = carregarBancoDados();
-        verificapontuacao(loginData.matricula);
-    }
+    } 
 
        
 });
@@ -81,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
                 <button onclick="openCalendar()">Ver Calendário</button>
+                <button onclick="verificapontuacao(matricula)">Ver Calendário</button>
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
                 
