@@ -196,6 +196,7 @@ function preCadastro() {
 
     // Salvar os dados no banco de dados
     let senha = '';
+    let cadastrado = 0;
     if (matricula in database) {
         // Novo objeto com os dados
         let novosDados = {
@@ -209,7 +210,8 @@ function preCadastro() {
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
             senha: senha,
-            cargo: cargo
+            cargo: cargo,
+            cadastrado: cadastrado
         };
     
         // Remove propriedades com valores em branco
@@ -235,7 +237,8 @@ function preCadastro() {
             antiguidade: calcularAntiguidade(dataIngresso),
             qtdfilhosmenores: qtdfilhosmenores,
             senha: senha,
-            cargo: cargo
+            cargo: cargo,
+            cadastrado: cadastrado
             
         };
         alert("Pre Cadastro concluído com suscesso!");
