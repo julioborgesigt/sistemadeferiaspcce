@@ -13,9 +13,21 @@
     
     <script>
 
+// Chamada da função verificapontuacao após o banco de dados ser carregado e o DOM estar pronto
+document.addEventListener('DOMContentLoaded', function() {
+    const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
+    if (!loginData || new Date().getTime() > loginData.expirationTime) {
+        // Redirecionar para a página de login se o token não existir ou estiver expirado
+        alert("Sua sessão expirou. Faça login novamente.");
+        window.location.href = 'index.html';
+    } else {
+        let database = carregarBancoDados();
+        verificapontuacao(loginData.matricula);
+    }
 
        
+});
 
        
 
