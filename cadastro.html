@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             verificarPontuacao(loginData.matricula);
+            console.log("esta é a  loginData matricula carregada:", loginData.matricula);
         }
     }
 });
@@ -53,7 +54,7 @@ function carregarBancoDados() {
 function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
     console.log("Dados carregados do localStorage:", data);
-    console.log("esta é a matricula carregada....:", matricula);
+    console.log("esta é a matricula carregada:", matricula);
 
     if (!data) {
         console.error("Banco de dados não carregado ou formato inválido.");
@@ -66,8 +67,8 @@ function verificarPontuacao(matricula) {
     let maiorPontuacaoNaoEscolar = 0;
 
     for (let key in data) {
-        if (database[matricula]) {
-            const usuario =  database[matricula].matricula;
+        if (data.hasOwnProperty(key)) {
+            const usuario = data[key];
 
             if (usuario.matricula === matricula) {
                 pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar || 0;
