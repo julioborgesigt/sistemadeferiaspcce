@@ -75,7 +75,7 @@ function verificarPontuacao(matricula) {
         if (data.hasOwnProperty(key)) {
             const usuario = data[key];
 
-            if (usuario.matricula === matricula) {
+            if (usuario.matricula === matricula && usuario.cadastrado === 0) {
                 pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar || 0;
                 pontuacaoUsuarioNaoEscolar = usuario.pontuacaoferiasNaoescolar || 0;
             }

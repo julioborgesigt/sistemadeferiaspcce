@@ -353,7 +353,7 @@ function cadastroInicial() {
     }
 
     
-    
+    let cadastrado = 1;
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
@@ -361,14 +361,13 @@ function cadastroInicial() {
         Object.assign(database[matricula], {
             numeroDePeriodos: qtdperiodos,
             feriasescolarounao: seraferiasEscolar,
-            
-           
             periodo11: periodo11,
             periodo12: periodo12,
             periodo21: periodo21,
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
+            cadastrado: cadastrado
             
         });
     } else {
@@ -377,14 +376,13 @@ function cadastroInicial() {
             matricula: matricula,
             numeroDePeriodos: qtdperiodos,
             feriasescolarounao: seraferiasEscolar,
-            
-            
             periodo11: periodo11,
             periodo12: periodo12,
             periodo21: periodo21,
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
+            cadastrado: cadastrado
             
         };
     }
