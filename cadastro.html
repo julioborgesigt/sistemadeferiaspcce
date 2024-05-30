@@ -54,7 +54,7 @@ function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
     console.log("Dados carregados do localStorage:", data);
 
-    if (!data || !data.usuarios) {
+    if (!data) {
         console.error("Banco de dados não carregado ou formato inválido.");
         return;
     }
@@ -64,18 +64,24 @@ function verificarPontuacao(matricula) {
     let maiorPontuacaoEscolar = 0;
     let maiorPontuacaoNaoEscolar = 0;
 
-    data.usuarios.forEach(usuario => {
-        if (usuario.matricula === matricula) {
-            pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar;
-            pontuacaoUsuarioNaoEscolar = usuario.pontuacaoferiasNaoescolar;
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            const usuario = data[key];
+
+            if (usuario.matricula === matricula) {
+                pontuacaoUsuarioEscolar = usuario.pontuacaoferiasescolar || 0;
+                pontuacaoUsuarioNaoEscolar = usuario.pontuacaoferiasNaoescolar || 0;
+            }
+
+            if (usuario.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
+                maiorPontuacaoEscolar = usuario.pontuacaoferiasescolar;
+            }
+
+            if (usuario.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
+                maiorPontuacaoNaoEscolar = usuario.pontuacaoferiasNaoescolar;
+            }
         }
-        if (usuario.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
-            maiorPontuacaoEscolar = usuario.pontuacaoferiasescolar;
-        }
-        if (usuario.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
-            maiorPontuacaoNaoEscolar = usuario.pontuacaoferiasNaoescolar;
-        }
-    });
+    }
 
     console.log("Pontuação do usuário (escolar):", pontuacaoUsuarioEscolar);
     console.log("Pontuação do usuário (não escolar):", pontuacaoUsuarioNaoEscolar);
@@ -156,8 +162,6 @@ function verificarPontuacao(matricula) {
             <button type="button" onclick="exibirListaConcorrentesFeriasEscolarEPC()">Lista ordenada por pontuação escolar - EPC</button>
             <button type="button" onclick="exibirListaFinalFeriasEscolarSelecionadosIPC()">Consultar selecionados para férias escolar - IPC</button>
             <button type="button" onclick="exibirListaFinalFeriasEscolarSelecionadosEPC()">Consultar selecionados para férias escolar - EPC</button>
-            <button type="button" onclick="exibirListaFinalFeriasNaoEscolarIPC()">Lista ordenada por critérios não escolar - IPC</button>
-            <button type="button" onclick="exibirListaFinalFeriasNaoEscolarEPC()">Lista ordenada por critérios não escolar - EPC</button>
         </div>
 
         <div class="logout-container">
