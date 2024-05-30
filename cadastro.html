@@ -32,21 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
 function carregarBancoDados() {
     const url = 'banco_dados.json';
 
-    return fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            return response.json();
-        })
-        .then(jsonData => {
-            console.log("Banco de dados carregado:", jsonData);
-            verificarPontuacao(loginData.matricula, jsonData); // Chamada da função verificarPontuacao após o carregamento completo dos dados
-            return jsonData;
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo.');
+                    }
+                    return response.text();
+                })
+                .then(jsonData => {
+                    database = JSON.parse(jsonData);
+                    console.log("Banco de dados carregado:", database);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
 }
 
 function verificarPontuacao(matricula, database) {
