@@ -10,43 +10,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
-<script>
-
-
-
-
-// Chamada da função verificapontuacao após o banco de dados ser carregado e o DOM estar pronto
-document.addEventListener('DOMContentLoaded', function() {
-    const loginData = JSON.parse(localStorage.getItem('loginToken'));
-
-    if (!loginData || new Date().getTime() > loginData.expirationTime) {
-        // Redirecionar para a página de login se o token não existir ou estiver expirado
-        alert("Sua sessão expirou. Faça login novamente.");
-        window.location.href = 'index.html';
-    } 
-
-       
-});
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get('matricula');
-            if (matricula) {
-                document.getElementById('matriculaCadastro').value = matricula;
-                console.log("esta é a matricula carregada");
-                console.log(matricula);
-               
+            if (!loginData || new Date().getTime() > loginData.expirationTime) {
+                alert("Sua sessão expirou. Faça login novamente.");
+                window.location.href = 'index.html';
             }
         });
 
-</script>
+
+
+    </script>
     
     
 
@@ -70,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
                 <button onclick="openCalendar()">Ver Calendário</button>
-                <button onclick="verificapontuacao(matricula)">Ver Calendário</button>
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
                 

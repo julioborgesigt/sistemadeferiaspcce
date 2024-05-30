@@ -1,5 +1,3 @@
-
-/*
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -11,7 +9,6 @@ document.getElementById('toggle-dark-mode').addEventListener('click', function (
         icon.classList.add('fa-moon');
     }
 });
-*/
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -79,56 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const matricula = params.get('matricula');
             if (matricula) {
                 document.getElementById('matriculaCadastro').value = matricula;
-                console.log("esta é a matricula carregada");
-                console.log(matricula);
                
             }
         });
 
-
-
-
-
-
-
-function verificapontuacao(matricula) {
-    console.log("chamou a função de verificar");
-    const usuario = database[matricula];
-    if (!usuario) {
-        alert("Usuário não encontrado.");
-        return false;
-    }
-
-    const pontuacaoAtual = {
-        escolar: usuario.pontuacaoferiasescolar,
-        naoEscolar: usuario.pontuacaoferiasNaoescolar
-    };
-
-    let maiorPontuacaoEscolar = 0;
-    let maiorPontuacaoNaoEscolar = 0;
-
-    for (let matricula in database) {
-        const pontuacao = database[matricula];
-        if (pontuacao.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
-            maiorPontuacaoEscolar = pontuacao.pontuacaoferiasescolar;
-        }
-        if (pontuacao.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
-            maiorPontuacaoNaoEscolar = pontuacao.pontuacaoferiasNaoescolar;
-        }
-    }
-
-    const podeCadastrar = (pontuacaoAtual.escolar >= maiorPontuacaoEscolar) && (pontuacaoAtual.naoEscolar >= maiorPontuacaoNaoEscolar);
-
-    if (!podeCadastrar) {
-        alert("Sua pontuação não é suficiente para o cadastro.");
-    } else {
-        alert("Pontuação suficiente para cadastro.");
-    }
-
-    //return podeCadastrar;
-    alert("Sua pontuação é suficiente para o cadastro.");
-    
-}
      
 
 // Função para verificar se uma data é um fim de semana
@@ -1111,7 +1062,7 @@ let dataArray = Object.values(database).filter(dados =>
 
 
 
-
+carregarBancoDados()
 
 function carregarBancoDados() {
     // URL do arquivo remoto
@@ -1140,7 +1091,7 @@ function carregarBancoDados() {
             console.error('Erro:', error);
         });
 }
-carregarBancoDados();
+
 
 function salvarBancoDados() {
     // URL para salvar os dados
@@ -1199,30 +1150,4 @@ function gerarPDF() {
 
 function openCalendar() {
     window.open('calendario.html', '_blank');
-}
-
-
-function verificapontuacao(matricula) {
-    if (!(matricula in database)) {
-        alert("Matrícula não encontrada.");
-        return false;
-    }
-
-    let usuario = database[matricula];
-    let pontuacaoAtual = usuario.pontuacaoferiasescolar; // ou pontuacaoferiasNaoescolar, conforme necessário
-
-    // Encontrar a maior pontuação existente no banco de dados
-    let maiorPontuacao = 0;
-    for (let key in database) {
-        if (database[key].pontuacaoferiasescolar > maiorPontuacao) {
-            maiorPontuacao = database[key].pontuacaoferiasescolar;
-        }
-    }
-
-    if (pontuacaoAtual >= maiorPontuacao) {
-        return true;
-    } else {
-        alert("Sua pontuação não é suficiente para realizar o cadastro.");
-        return false;
-    }
 }
