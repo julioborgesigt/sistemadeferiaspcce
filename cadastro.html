@@ -28,7 +28,7 @@
 });
 
 function carregarBancoDeDados() {
-    return fetch('path/to/bancoDeDados.json')
+    return fetch('banco_dados.json')
         .then(response => response.json())
         .then(data => {
             localStorage.setItem('bancoDeDados', JSON.stringify(data));
