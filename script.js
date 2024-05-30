@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const matricula = params.get('matricula');
             if (matricula) {
                 document.getElementById('matriculaCadastro').value = matricula;
+                console.log("esta é a matricula carregada");
+                console.log(matricula);
                
             }
         });
