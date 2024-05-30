@@ -14,40 +14,29 @@
 
 <script>
 
-
 function verificapontuacao(matricula) {
-    console.log("chamou a função de verificar");
-    
+    if (!(matricula in database)) {
+        alert("Matrícula não encontrada.");
+        return false;
+    }
 
-    const pontuacaoAtual = {
-        escolar: usuario.pontuacaoferiasescolar,
-        naoEscolar: usuario.pontuacaoferiasNaoescolar
-    };
+    let usuario = database[matricula];
+    let pontuacaoAtual = usuario.pontuacaoferiasescolar; // ou pontuacaoferiasNaoescolar, conforme necessário
 
-    let maiorPontuacaoEscolar = 0;
-    let maiorPontuacaoNaoEscolar = 0;
-
-    for (let matricula in database) {
-        const pontuacao = database[matricula];
-        if (pontuacao.pontuacaoferiasescolar > maiorPontuacaoEscolar) {
-            maiorPontuacaoEscolar = pontuacao.pontuacaoferiasescolar;
-        }
-        if (pontuacao.pontuacaoferiasNaoescolar > maiorPontuacaoNaoEscolar) {
-            maiorPontuacaoNaoEscolar = pontuacao.pontuacaoferiasNaoescolar;
+    // Encontrar a maior pontuação existente no banco de dados
+    let maiorPontuacao = 0;
+    for (let key in database) {
+        if (database[key].pontuacaoferiasescolar > maiorPontuacao) {
+            maiorPontuacao = database[key].pontuacaoferiasescolar;
         }
     }
 
-    const podeCadastrar = (pontuacaoAtual.escolar >= maiorPontuacaoEscolar) && (pontuacaoAtual.naoEscolar >= maiorPontuacaoNaoEscolar);
-
-    if (!podeCadastrar) {
-        alert("Sua pontuação não é suficiente para o cadastro.");
+    if (pontuacaoAtual >= maiorPontuacao) {
+        return true;
     } else {
-        alert("Pontuação suficiente para cadastro.");
+        alert("Sua pontuação não é suficiente para realizar o cadastro.");
+        return false;
     }
-
-    //return podeCadastrar;
-    alert("Sua pontuação é suficiente para o cadastro.");
-    
 }
 
 
