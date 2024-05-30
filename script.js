@@ -189,17 +189,19 @@ function concluirCadastro() {
 function verificarPontuacaoUsuario(matricula) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
     let maiorPontuacao = 0;
+    let matriculaMaiorPontuacao = '';
 
     // Encontrar a maior pontuação de férias escolares no banco de dados
     for (let key in database) {
         if (database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
             maiorPontuacao = database[key].pontuacaoferiasescolar;
+            matriculaMaiorPontuacao = key;
         }
     }
 
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
     if (pontuacaoUsuario < maiorPontuacao) {
-        alert("A pontuação de férias escolares do usuário não é a maior do banco de dados. Cadastro não permitido.");
+        alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao}. Cadastro não permitido.`);
         return false; // Não permitir a conclusão do cadastro
     }
 
