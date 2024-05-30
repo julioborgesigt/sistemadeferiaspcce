@@ -28,24 +28,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function carregarBancoDados() {
-    const url = 'banco_dados.json';
+            const url = 'banco_dados.json';
 
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar o arquivo.');
-            }
-            return response.text();
-        })
-        .then(jsonData => {
-            const database = JSON.parse(jsonData);
-            localStorage.setItem('bancoDeDados', JSON.stringify(database));
-            console.log("Banco de dados carregado:", database);
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
-}
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo.');
+                    }
+                    return response.text();
+                })
+                .then(jsonData => {
+                    database = JSON.parse(jsonData);
+                    console.log("Banco de dados carregado:", database);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
 
 function verificarPontuacao(matricula) {
     const data = JSON.parse(localStorage.getItem('bancoDeDados'));
