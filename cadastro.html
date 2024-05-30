@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log("Dados de login carregados:", loginData); // Log para verificar os dados de login
 
-        if (!localStorage.getItem('bancoDeDados')) {
+       /* if (!localStorage.getItem('bancoDeDados')) {
             carregarBancoDados().then(() => {
                 verificarPontuacao(loginData.matricula);
             }).catch(error => {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             verificarPontuacao(loginData.matricula);
-        }
+        }*/
     }
 });
 
