@@ -12,16 +12,22 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+         document.addEventListener('DOMContentLoaded', function() {
+            // Verifica se a sessão expirou
             const loginData = JSON.parse(localStorage.getItem('loginToken'));
 
             if (!loginData || new Date().getTime() > loginData.expirationTime) {
                 alert("Sua sessão expirou. Faça login novamente.");
                 window.location.href = 'index.html';
+                return;  // Adicionado para garantir que o resto do script não será executado se a sessão expirou
             }
-        });
 
-    
+            // Muda a cor do botão ao ser clicado
+            const button = document.querySelector('button');
+            button.addEventListener('click', function() {
+                button.style.backgroundColor = 'yellow';
+            });
+        });
 
     </script>
     
