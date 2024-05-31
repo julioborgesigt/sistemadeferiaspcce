@@ -177,9 +177,10 @@ function concluirCadastro() {
     if (verificarPontuacaoUsuario(matricula)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         console.log("Cadastro concluído com sucesso!");
+       
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
-        
+        window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
         alert("Tente novamente depois");
@@ -226,7 +227,7 @@ function verificarPontuacaoUsuario(matricula) {
     }
 
     return true; // Permitir a conclusão do cadastro
-    window.location.href = `conclusao.html?matricula=${matricula}`;
+    
 }
 
 
