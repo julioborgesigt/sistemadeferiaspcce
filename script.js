@@ -1225,5 +1225,5 @@ function openCalendar() {
 }
 
 function mostrarDiv() {
-    document.getElementById('minhaDiv').classList.remove('hidden');
+    document.getElementById('escolhadeferias').classList.remove('hidden');
 }
