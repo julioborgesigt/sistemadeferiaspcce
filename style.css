@@ -82,7 +82,9 @@ button:hover {
     background-color: #06b300;
 }
 
-
+button:active {
+    background-color: yellow;
+}
 
 .logout-container {
     width: 100%;
