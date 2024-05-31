@@ -1,3 +1,21 @@
+function removeEmptyFields(form) {
+    const params = new URLSearchParams(new FormData(form));
+    for (const [key, value] of params) {
+      if (!value) {
+        params.delete(key);
+      }
+    }
+    const action = form.action.split('?')[0]; // Obter a URL base sem parâmetros
+    form.action = action + '?' + params.toString();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+      removeEmptyFields(form);
+    });
+  });
+  
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -178,12 +196,12 @@ function concluirCadastro() {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         console.log("Cadastro concluído com sucesso!");
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        document.getElementById('matriculaCadastro').value = matricula;
+        
         window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
         alert("Tente novamente depois");
-        document.getElementById('matriculaCadastro').value = matricula;
+        
         window.location.href = `conclusao.html?matricula=${matricula}`;
     }
 }
