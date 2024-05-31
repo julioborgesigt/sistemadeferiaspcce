@@ -48,11 +48,11 @@
             <button onclick="concluirCadastro()">Verificar se já está apto para cadastrar</button>
             <button onclick="openCalendar()">Ver Calendário</button>
             <button id="botaoqueroferiasescolar">Quero férias escolar</button>
-            <button onclick="queroferiasnaoescolar()">Quero férias não escolar</button>
+            <button id="botaoqueroferiasnaoescolar"">Quero férias não escolar</button>
 
         </div>
        
-        <div id="escolhadeferias" class="hidden"></div>
+        <div id="escolhadeferias" class="escolhadeferias-text hidden"></div>
           
         <div style="text-align: right; margin-bottom: -40px; margin-left:90%">
             <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
@@ -159,8 +159,12 @@
 
 <script>
     document.getElementById('botaoqueroferiasescolar').addEventListener('click', function() {
-        alert("deu certo");
         queroferiasescolar();
+        mostrarDiv();
+    });
+
+    document.getElementById('botaoqueroferiasnaoescolar').addEventListener('click', function() {
+        queroferiasnaoescolar();
         mostrarDiv();
     });
 </script>
