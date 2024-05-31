@@ -192,6 +192,7 @@ function concluirCadastro() {
 function verificarPontuacaoUsuario(matricula) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
     const cargoUsuario = database[matricula].cargo;
+    const tipodeferias = database[matricula].feriasescolarounao;
     let maiorPontuacao = 0;
     let matriculaMaiorPontuacao = '';
     
@@ -212,13 +213,39 @@ function verificarPontuacaoUsuario(matricula) {
         }
     }
 
+
+    // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
+    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes) {
+        for (let key in database) {
+            if (database[key].cadastrado === 0 && 
+                cargosEquivalentes.includes(database[key].cargo) && 
+                database[key].pontuacaoferiaNaosescolar && 
+                database[key].pontuacaoferiasNaoescolar > maiorPontuacao) {
+                
+                maiorPontuacao = database[key].pontuacaoferiasNaoescolar;
+                matriculaMaiorPontuacao = key;
+                nomeMaiorPontuacao = database[key].nome;
+            }
+        }
+    }
+
     if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") {
         alert("Entrou na rotina EPC");
         verificarMaiorPontuacao(["EPC", "EPCplantao"]);
     } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") {
         alert("Entrou na rotina IPC");
         verificarMaiorPontuacao(["IPC", "IPCplantao"]);
+    }else if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 0) {
+        alert("Entrou na rotina EPC não escolar");
+        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"]);
+    }else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 0 ) {
+        alert("Entrou na rotina IPC não escolar");
+        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"]);
     }
+
+
+
+
 
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
     if (pontuacaoUsuario < maiorPontuacao) {
