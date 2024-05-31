@@ -311,7 +311,7 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "cadastrado": 1
+        "cadastrado": 0
     },
     "30000001.2024": {
         "matricula": "30000001.2024",
@@ -342,7 +342,7 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "cadastrado": 1
+        "cadastrado": 0
     },
     "30000002.2024": {
         "matricula": "30000002.2024",
@@ -373,7 +373,7 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "cadastrado": 1
+        "cadastrado": 0
     }
     
 }
