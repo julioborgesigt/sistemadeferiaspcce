@@ -407,6 +407,14 @@ function queroferiasnaoescolar() {
 }
 
 function cadastroInicial() {
+    let escolhaotipodeferias = database[matricula].feriasescolarounao
+    if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
+        alert("escolha qual o tipo de férias você deseja cadastrar")
+
+    }
+
+
+
     const matricula = document.getElementById("matriculaCadastro").value;
     //const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
 
@@ -428,10 +436,6 @@ function cadastroInicial() {
     console.log("Período 1:", periodo11, "a", periodo12);
     console.log("Período 2:", periodo21, "a", periodo22);
     console.log("Período 3:", periodo31, "a", periodo32);
-
-
-    
-
 
 
    // Converte as datas para objetos Date
@@ -550,6 +554,8 @@ function cadastroInicial() {
     }
 
    
+    
+
     concluirCadastro(); // Salvar o banco de dados
    
         
