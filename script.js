@@ -181,6 +181,7 @@ function concluirCadastro() {
         window.location.href = `conclusao.html?matricula=${matricula}`;
     } else {
         alert("Tente novamente depois");
+        window.location.href = `conclusao.html?matricula=${matricula}`;
     }
 }
 
