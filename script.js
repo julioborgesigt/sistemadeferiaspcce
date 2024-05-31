@@ -417,12 +417,7 @@ function cadastroInicial() {
 
     const qtdperiodos = document.querySelectorAll('input[name="qtdperiodos"]:checked').length;
 
-    let escolhaotipodeferias = matricula.feriasescolarounao
-
-    if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
-        alert("escolha qual o tipo de férias você deseja cadastrar")
-
-    }
+    
 
     let periodo11 = document.getElementById("periodo11").value;
     let periodo12 = document.getElementById("periodo12").value;
@@ -556,9 +551,18 @@ function cadastroInicial() {
     }
 
    
-    
+    let escolhaotipodeferias = matricula.feriasescolarounao
 
-    concluirCadastro(); // Salvar o banco de dados
+    if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
+        alert("escolha qual o tipo de férias você deseja cadastrar")
+
+    }else{
+        alert("entrou no else");
+        concluirCadastro(); // Salvar o banco de dados
+
+    }  
+
+    
    
         
     
