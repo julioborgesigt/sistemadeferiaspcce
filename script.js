@@ -226,7 +226,7 @@ else {
     return true; // Permitir a conclusão do cadastro
 }
 
-
+}
 
 function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
