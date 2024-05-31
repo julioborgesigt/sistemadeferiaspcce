@@ -203,6 +203,17 @@ function verificarPontuacaoUsuario(matricula) {
     }
 }
 
+if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao"){
+    // Encontrar a maior pontuação de férias escolares no banco de dados, considerando apenas matriculas com cadastrado = 0
+    for (let key in database) {
+        if (database[key].cadastrado === 0 && (database[key].cargo === "IPC" || database[key].cargo === "IPCplantao") && database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
+            maiorPontuacao = database[key].pontuacaoferiasescolar;
+            matriculaMaiorPontuacao = key;
+        }
+    }
+}
+
+
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
     if (pontuacaoUsuario < maiorPontuacao ) {
         alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao}. Cadastro não permitido.`);
