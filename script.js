@@ -333,7 +333,7 @@ function queroferiasescolar() {
     }
     
         let html = `<table border="1">
-        <hr> <tr>Você escolheu Férias escolar</tr></hr>`;
+        <hr> <tr>Você escolheu Férias escolar</tr><hr>`;
         
     
         html += `</table>`;
@@ -367,7 +367,7 @@ function queroferiasnaoescolar() {
     }
 
     let html = `<table border="1">
-    <hr><tr>Você escolheu Férias NÃO escolar</tr></hr>`;
+    <hr><tr>Você escolheu Férias NÃO escolar</tr><hr>`;
         
     
         html += `</table>`;
@@ -378,7 +378,7 @@ function queroferiasnaoescolar() {
 
 function cadastroInicial() {
     const matricula = document.getElementById("matriculaCadastro").value;
-    const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
+    //const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
 
     const qtdperiodos = document.querySelectorAll('input[name="qtdperiodos"]:checked').length;
 
@@ -489,7 +489,7 @@ function cadastroInicial() {
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], {
             numeroDePeriodos: qtdperiodos,
-            feriasescolarounao: seraferiasEscolar,
+           
             
            
             periodo11: periodo11,
@@ -506,7 +506,7 @@ function cadastroInicial() {
         database[matricula] = {
             matricula: matricula,
             numeroDePeriodos: qtdperiodos,
-            feriasescolarounao: seraferiasEscolar,
+            
             
             
             periodo11: periodo11,
