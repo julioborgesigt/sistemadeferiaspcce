@@ -337,7 +337,7 @@ function queroferiasescolar() {
         
     
         html += `</table>`;
-        document.getElementById("dados2").innerHTML = html;
+        document.getElementById("escolhadeferias").innerHTML = html;
     
     salvarBancoDados();
     carregarBancoDados();
@@ -365,6 +365,13 @@ function queroferiasnaoescolar() {
            
         };
     }
+
+    let html = `<table border="1">
+        <tr><th>Você escolheu Férias NÃO escolar</th><td> ${dados.matricula}</td></tr>`;
+        
+    
+        html += `</table>`;
+        document.getElementById("escolhadeferias").innerHTML = html;
     salvarBancoDados();
     carregarBancoDados();
 }
