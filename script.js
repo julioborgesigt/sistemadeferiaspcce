@@ -209,6 +209,7 @@ function verificarPontuacaoUsuario(matricula) {
 }
 
 
+
 function preCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
     const nome = document.getElementById("matriculaNome").value;
