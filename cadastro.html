@@ -36,9 +36,14 @@
         <h1>Cadastro e Consulta de Férias</h1>
 
 
-        <div style="text-align: left; margin-bottom: -40px; margin-right:90%">
+        <div >
+            <button onclick="concluirCadastro()">Verificar se já está apto para cadastrar</button>
             <button onclick="openCalendar()">Ver Calendário</button>
+            <button onclick="queroferiasescolar()">Quero férias escolar</button>
+            <button onclick="queroferiasnaoescolar()">Quero férias não escolar</button>
+
         </div>
+       
           
         <div style="text-align: right; margin-bottom: -40px; margin-left:90%">
             <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
@@ -49,10 +54,9 @@
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
-                <button onclick="openCalendar()">Ver Calendário</button>
-                <button onclick="concluirCadastro()">Verificar se já está apto para cadastrar</button>
-                <button onclick="queroferiasescolar()">Quero férias escolar</button>
-                <button onclick="queroferiasnaoescolar()">Quero férias não escolar</button>
+                
+                
+                
                 <label for="matriculaCadastro">Matrícula:</label>
                 <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
                 
