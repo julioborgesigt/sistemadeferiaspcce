@@ -184,7 +184,7 @@ function concluirCadastro() {
     } else {
         alert("Tente novamente depois");
         
-        window.location.href = `conclusao.html?matricula=${matricula}`;
+        window.location.href = `cadastro.html?matricula=${matricula}`;
     }
 }
 
@@ -306,7 +306,7 @@ function preCadastro() {
 
     calcularPontuacaoFeriasEscolar(matricula);
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
-    window.location.href = `conclusao.html?matricula=${matricula}`;
+    window.location.href = `cadastro.html?matricula=${matricula}`;
 
 }
 
@@ -333,7 +333,7 @@ function queroferiasescolar() {
     }
     salvarBancoDados();
     carregarBancoDados();
-    window.location.href = `conclusao.html?matricula=${matricula}`;
+    window.location.href = `cadastro.html?matricula=${matricula}`;
 }
 
 
