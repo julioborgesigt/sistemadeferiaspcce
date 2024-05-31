@@ -331,6 +331,14 @@ function queroferiasescolar() {
            
         };
     }
+    
+        let html = `<table border="1">
+        <tr><th>Você escolheu Férias escolar</th><td> ${dados.matricula}</td></tr>`;
+        
+    
+        html += `</table>`;
+        document.getElementById("dados2").innerHTML = html;
+    
     salvarBancoDados();
     carregarBancoDados();
    
