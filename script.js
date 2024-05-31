@@ -309,6 +309,7 @@ function preCadastro() {
 
 function queroferiasescolar() {
 
+    const matricula = document.getElementById("matriculaCadastro").value;
     let feriasescolarounao = 1;
     // Salvar os dados no banco de dados
     if (matricula in database) {
@@ -332,6 +333,7 @@ function queroferiasescolar() {
 
 
 function queroferiasnaoescolar() {
+    const matricula = document.getElementById("matriculaCadastro").value;
 
     let feriasescolarounao = 0;
     // Salvar os dados no banco de dados
