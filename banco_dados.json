@@ -32,7 +32,7 @@
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
         "dataIngresso": "10/01/2011",
-        "cadastrado": 1
+        "cadastrado": 0
     },
     "30088417.2024": {
         "matricula": "30088417.2024",
@@ -176,10 +176,10 @@
         "periodo22": "",
         "periodo31": "",
         "periodo32": "",
-        "pontuacaoferiasNaoescolar": 14,
+        "pontuacaoferiasNaoescolar": 0,
         "dataNascimento": "30/11/1984",
         "dataIngresso": "10/04/2017",
-        "pontuacaoferiasescolar": 19,
+        "pontuacaoferiasescolar": 0,
         "possuiFilho": "0",
         "ecasadoComPofessor": "0",
         "estudanteOUaluno": "0",
@@ -187,7 +187,7 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "cadastrado": 0
+        "cadastrado": 1
     },
     "30118995.2024": {
         "matricula": "30118995.2024",
