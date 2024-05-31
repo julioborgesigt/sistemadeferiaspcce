@@ -1224,4 +1224,6 @@ function openCalendar() {
     window.open('calendario.html', '_blank');
 }
 
-
+function mostrarDiv() {
+    document.getElementById('minhaDiv').classList.remove('hidden');
+}

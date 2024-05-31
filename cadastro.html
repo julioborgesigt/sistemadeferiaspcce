@@ -29,6 +29,11 @@
             });
         });
 
+        document.getElementById('queroferiasescolar').addEventListener('click', function() {
+            queroferiasescolar();
+            mostrarDiv();
+        });
+
     </script>
     
     
@@ -45,7 +50,7 @@
         <div >
             <button onclick="concluirCadastro()">Verificar se já está apto para cadastrar</button>
             <button onclick="openCalendar()">Ver Calendário</button>
-            <button onclick="queroferiasescolar()">Quero férias escolar</button>
+            <button id="queroferiasescolar">Quero férias escolar</button>
             <button onclick="queroferiasnaoescolar()">Quero férias não escolar</button>
 
         </div>
