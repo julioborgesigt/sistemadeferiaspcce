@@ -178,9 +178,12 @@ function concluirCadastro() {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         console.log("Cadastro concluído com sucesso!");
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        document.getElementById('matriculaCadastro').value = matricula;
         window.location.href = `conclusao.html?matricula=${matricula}`;
+        
     } else {
         alert("Tente novamente depois");
+        document.getElementById('matriculaCadastro').value = matricula;
         window.location.href = `conclusao.html?matricula=${matricula}`;
     }
 }
