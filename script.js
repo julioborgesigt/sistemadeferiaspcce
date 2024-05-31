@@ -306,6 +306,54 @@ function preCadastro() {
 
 }
 
+
+function queroferiasescolar() {
+
+    let feriasescolarounao = 1;
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            
+            feriasescolarounao: feriasescolarounao,
+                        
+        });
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            
+            feriasescolarounao: feriasescolarounao,
+           
+        };
+    }
+    salvarBancoDados();
+    carregarBancoDados();
+}
+
+
+function queroferiasnaoescolar() {
+
+    let feriasescolarounao = 0;
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            
+            feriasescolarounao: feriasescolarounao,
+                        
+        });
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            
+            feriasescolarounao: feriasescolarounao,
+           
+        };
+    }
+    salvarBancoDados();
+    carregarBancoDados();
+}
+
 function cadastroInicial() {
     const matricula = document.getElementById("matriculaCadastro").value;
     const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
