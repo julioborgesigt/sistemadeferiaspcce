@@ -232,14 +232,14 @@ h3 {
 
 #escolhadeferias {
     text-align: center;
-    font-size: 36px; /* Aumenta o tamanho da fonte */
+    font-size: 20px; /* Aumenta o tamanho da fonte */
     background-color: red; /* Fundo vermelho */
     color: white; /* Letras brancas */
     padding: 0px; /* Espaçamento interno */;
     border: 1px solid #ffffff;
     border-radius: 20px;
-    padding: 00px;
-    margin: 10px 0;
+    padding: 0px;
+    margin-bottom: 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
