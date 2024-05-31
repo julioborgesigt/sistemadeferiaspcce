@@ -194,6 +194,7 @@ function verificarPontuacaoUsuario(matricula) {
     console.log("este é o cargo em cadastramento", cargoUsuario);
 
     if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao"){
+        alert("entrou na rotina EPC");
     // Encontrar a maior pontuação de férias escolares no banco de dados, considerando apenas matriculas com cadastrado = 0
     for (let key in database) {
         if (database[key].cadastrado === 0 && (database[key].cargo === "EPC" || database[key].cargo === "EPCplantao") && database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
@@ -203,21 +204,15 @@ function verificarPontuacaoUsuario(matricula) {
     }
 }
 
-else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao"){
+    if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao"){
     // Encontrar a maior pontuação de férias escolares no banco de dados, considerando apenas matriculas com cadastrado = 0
+    alert("entrou na rotina IPC");
     for (let key in database) {
         if (database[key].cadastrado === 0 && (database[key].cargo === "IPC" || database[key].cargo === "IPCplantao") && database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
             maiorPontuacao = database[key].pontuacaoferiasescolar;
             matriculaMaiorPontuacao = key;
         }
     }
-}
-
-else {
-
-    alert("verifique  a rotina de verificar pontuação")
-
-    
 }
 
 
@@ -227,6 +222,13 @@ if (pontuacaoUsuario < maiorPontuacao ) {
     return false; // Não permitir a conclusão do cadastro
 }
 
+
+else {
+
+    alert("verifique  a rotina de verificar pontuação")
+
+    
+}
 return true; // Permitir a conclusão do cadastro
 
 }
