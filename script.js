@@ -226,6 +226,7 @@ function verificarPontuacaoUsuario(matricula) {
     }
 
     return true; // Permitir a conclusão do cadastro
+    window.location.href = `conclusao.html?matricula=${matricula}`;
 }
 
 
@@ -365,7 +366,7 @@ function queroferiasnaoescolar() {
            
         };
     }
-    
+
 
     let html = `<table border="1">
     <hr><tr>Você escolheu Férias não escolar</tr><hr>`;
