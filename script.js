@@ -229,10 +229,10 @@ function verificarPontuacaoUsuario(matricula) {
         }
     }
 
-    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") {
+    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 1) {
         alert("Entrou na rotina EPC");
         verificarMaiorPontuacao(["EPC", "EPCplantao"]);
-    } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") {
+    } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 1) {
         alert("Entrou na rotina IPC");
         verificarMaiorPontuacao(["IPC", "IPCplantao"]);
     }else if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 0) {
