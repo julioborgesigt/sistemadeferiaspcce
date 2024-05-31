@@ -236,6 +236,7 @@ h3 {
     background-color: red; /* Fundo vermelho */
     color: white; /* Letras brancas */
     padding-top: 10px; /* Espaçamento interno */;
+    padding-bottom: 5px; /* Espaçamento interno */;
     border: 1px solid #ffffff;
     border-radius: 20px;
     margin-bottom: 5%;
