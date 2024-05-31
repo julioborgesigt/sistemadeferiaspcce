@@ -367,7 +367,7 @@ function queroferiasnaoescolar() {
     }
 
     let html = `<table border="1">
-        <tr><th>Você escolheu Férias NÃO escolar</th></tr>`;
+        <tr>Você escolheu Férias NÃO escolar</tr>`;
         
     
         html += `</table>`;
