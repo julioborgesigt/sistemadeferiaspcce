@@ -21,24 +21,7 @@
             }
         });
 
-        function removeEmptyFields(form) {
-    const params = new URLSearchParams(new FormData(form));
-    for (const [key, value] of params) {
-      if (!value) {
-        params.delete(key);
-      }
-    }
-    const action = form.action.split('?')[0]; // Obter a URL base sem parâmetros
-    form.action = action + '?' + params.toString();
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
-      removeEmptyFields(form);
-    });
-  });
-  
+    
 
     </script>
     
@@ -53,13 +36,16 @@
         <h1>Cadastro e Consulta de Férias</h1>
 
 
-       
-        
-
-
+        <div style="text-align: left; margin-bottom: -40px; margin-right:90%">
+            <button onclick="openCalendar()">Ver Calendário</button>
+        </div>
+          
         <div style="text-align: right; margin-bottom: -40px; margin-left:90%">
             <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
         </div>
+
+
+
         <div class="form-container">
             <h2>Cadastre-se abaixo:</h2>
             <form id="cadastroForm">
