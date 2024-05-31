@@ -202,6 +202,11 @@ function verificarPontuacaoUsuario(matricula) {
             matriculaMaiorPontuacao = key;
         }
     }
+    // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
+if (pontuacaoUsuario < maiorPontuacao ) {
+    alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao}. Cadastro não permitido.`);
+    return false; // Não permitir a conclusão do cadastro
+}
 }
 
     if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao"){
@@ -213,6 +218,11 @@ function verificarPontuacaoUsuario(matricula) {
             matriculaMaiorPontuacao = key;
         }
     }
+    // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
+if (pontuacaoUsuario < maiorPontuacao ) {
+    alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao}. Cadastro não permitido.`);
+    return false; // Não permitir a conclusão do cadastro
+}
 }
 
 
@@ -223,12 +233,6 @@ if (pontuacaoUsuario < maiorPontuacao ) {
 }
 
 
-else {
-
-    alert("verifique  a rotina de verificar pontuação")
-
-    
-}
 return true; // Permitir a conclusão do cadastro
 
 }
