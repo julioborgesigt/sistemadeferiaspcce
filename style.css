@@ -238,6 +238,13 @@ h3 {
    padding-top: 5%;
 }
 
+/* Estilo para o modo escuro */
+.dark-mode #escolhadeferias {
+    background-color: #1e1e1e;
+    ;
+    border-color: #555;
+    color: #f9f9f9;
+}
 
 
 
