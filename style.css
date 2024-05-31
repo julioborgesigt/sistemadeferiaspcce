@@ -228,6 +228,8 @@ h3 {
     display: none;
 }
 
+
+
 #escolhadeferias {
     background-color: #ddd;
     border: 1px solid #422121;
@@ -237,6 +239,14 @@ h3 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+#escolhadeferias-text {
+    text-align: center;
+    font-size: 20px; /* Aumenta o tamanho da fonte */
+    background-color: red; /* Fundo vermelho */
+    color: white; /* Letras brancas */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 5px; /* Borda arredondada opcional */
+}
 
 #dados {
     background-color: #f9f9f9;
