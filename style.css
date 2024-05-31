@@ -231,7 +231,11 @@ h3 {
 
 
 #escolhadeferias {
-    background-color: #ddd;
+    text-align: center;
+    font-size: 20px; /* Aumenta o tamanho da fonte */
+    background-color: red; /* Fundo vermelho */
+    color: white; /* Letras brancas */
+    padding: 20px; /* Espaçamento interno */;
     border: 1px solid #422121;
     border-radius: 20px;
     padding: 10px;
