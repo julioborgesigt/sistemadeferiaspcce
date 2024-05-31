@@ -239,7 +239,7 @@ h3 {
     padding-bottom: 5px; /* Espaçamento interno */;
     border: 1px solid #ffffff;
     border-radius: 20px;
-    margin-bottom: 5%;
+    margin-bottom: -10px;
     margin-top: 5%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
