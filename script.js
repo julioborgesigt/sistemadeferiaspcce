@@ -345,6 +345,7 @@ function queroferiasescolar() {
 }
 
 
+
 function queroferiasnaoescolar() {
     const matricula = document.getElementById("matriculaCadastro").value;
 
