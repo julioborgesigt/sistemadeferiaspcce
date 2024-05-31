@@ -232,25 +232,18 @@ h3 {
 
 #escolhadeferias {
     text-align: center;
-    font-size: 20px; /* Aumenta o tamanho da fonte */
+    font-size: 36px; /* Aumenta o tamanho da fonte */
     background-color: red; /* Fundo vermelho */
     color: white; /* Letras brancas */
-    padding: 20px; /* Espaçamento interno */;
-    border: 1px solid #422121;
+    padding: 0px; /* Espaçamento interno */;
+    border: 1px solid #ffffff;
     border-radius: 20px;
-    padding: 10px;
+    padding: 00px;
     margin: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#escolhadeferias-text {
-    text-align: center;
-    font-size: 20px; /* Aumenta o tamanho da fonte */
-    background-color: red; /* Fundo vermelho */
-    color: white; /* Letras brancas */
-    padding: 20px; /* Espaçamento interno */
-    border-radius: 5px; /* Borda arredondada opcional */
-}
+
 
 #dados {
     background-color: #f9f9f9;
