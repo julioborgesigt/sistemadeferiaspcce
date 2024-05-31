@@ -407,8 +407,8 @@ function queroferiasnaoescolar() {
 }
 
 function cadastroInicial() {
-    const matricula = document.getElementById("matriculaCadastro").value;
-    let escolhaotipodeferias = database[matricula].feriasescolarounao
+    
+    let escolhaotipodeferias = matricula.feriasescolarounao
 
     if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
         alert("escolha qual o tipo de férias você deseja cadastrar")
