@@ -333,7 +333,7 @@ function queroferiasescolar() {
     }
     
         let html = `<table border="1">
-        <h1>Você escolheu Férias escolar<h1>`;
+        <tr>Você escolheu Férias escolar</tr>`;
         
     
         html += `</table>`;
@@ -343,7 +343,6 @@ function queroferiasescolar() {
     carregarBancoDados();
    
 }
-
 
 
 function queroferiasnaoescolar() {

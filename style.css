@@ -233,13 +233,9 @@ h3 {
 #escolhadeferias {
     text-align: center;
     font-size: 20px; /* Aumenta o tamanho da fonte */
-    background-color: red; /* Fundo vermelho */
-    color: white; /* Letras brancas */
-    padding: 10px; /* Espaçamento interno uniforme */
-    border: 1px solid #ffffff;
-    border-radius: 20px;
-    margin-top: 5%; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 255, 255); /* Fundo vermelho */
+    color: rgb(255, 0, 0); /* Letras brancas */
+   
 }
 
 
