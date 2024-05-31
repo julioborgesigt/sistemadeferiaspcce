@@ -235,8 +235,7 @@ h3 {
     font-size: 20px; /* Aumenta o tamanho da fonte */
     background-color: red; /* Fundo vermelho */
     color: white; /* Letras brancas */
-    padding-top: 10px; /* Espaçamento interno */;
-    padding-bottom: -25px; /* Espaçamento interno */;
+    padding-top: 20px; /* Espaçamento interno */;
     border: 1px solid #ffffff;
     border-radius: 20px;
     margin-top: 5%;
