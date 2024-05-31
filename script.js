@@ -184,7 +184,7 @@ function concluirCadastro() {
         
     } else {
         alert("Tente novamente depois");
-        
+        carregarBancoDados();
         
     }
 }
