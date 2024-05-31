@@ -79,11 +79,11 @@ button {
 }
 
 button:hover {
-    background-color: #06b300;
+    background-color: #50a3fc;
 }
 
 button:active {
-    background-color: yellow;
+    background-color: #06b300;
 }
 
 .logout-container {
