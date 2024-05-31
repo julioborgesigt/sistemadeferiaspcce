@@ -191,9 +191,9 @@ function verificarPontuacaoUsuario(matricula) {
     const cargoUsuario = database[matricula].cargo;
     let maiorPontuacao = 0;
     let matriculaMaiorPontuacao = '';
-    console.log("este é o cargo em cadastramento", cargo);
+    console.log("este é o cargo em cadastramento", cargoUsuario);
 
-    if (dcargoUsuario === "EPC" || cargoUsuario === "EPCplantao"){
+    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao"){
     // Encontrar a maior pontuação de férias escolares no banco de dados, considerando apenas matriculas com cadastrado = 0
     for (let key in database) {
         if (database[key].cadastrado === 0 && (database[key].cargo === "EPC" || database[key].cargo === "EPCplantao") && database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
