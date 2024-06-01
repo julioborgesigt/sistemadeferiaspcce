@@ -570,7 +570,7 @@ function cadastroInicial() {
 
     }else{
         alert("este é seu tipo de ferias escolhido3",escolhaotipodeferias );
-        alert("escolha qual o tipo de férias você deseja cadastrar")
+        alert("escolha qual o tipo de férias você deseja cadastrar2")
         carregarBancoDados();
 
     }  
