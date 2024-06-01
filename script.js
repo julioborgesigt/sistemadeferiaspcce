@@ -569,7 +569,7 @@ function cadastroInicial() {
 
     }else{
         alert("entrou no else");
-        concluirCadastro(); // Salvar o banco de dados
+        cadastrar(); 
 
     }  
 
