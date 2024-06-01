@@ -169,13 +169,6 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 }
 
 
-const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
-const pontuacaoUsuarioNaoEscolar = database[matricula].pontuacaoferiasNaoescolar || 0;
-    const cargoUsuario = database[matricula].cargo;
-    const tipodeferias = database[matricula].feriasescolarounao;
-    maiorPontuacao = 0; // Resetar a maior pontuação antes de iniciar a verificação
-    matriculaMaiorPontuacao = '';
-
 // Função para verificar a maior pontuação considerando os cargos equivalentes
 function verificarMaiorPontuacao(cargosEquivalentes, apenasVerificar = false) {
     for (let key in database) {
@@ -215,7 +208,7 @@ function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes, apenasVerificar =
     }
     
     if (apenasVerificar) {
-        if (pontuacaoUsuarioNaoEscolar >= maiorPontuacao) {
+        if (pontuacaoUsuario >= maiorPontuacao) {
             alert("Você possui a maior pontuação.");
         } else {
             alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
@@ -226,7 +219,12 @@ function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes, apenasVerificar =
 
 // Função para iniciar a verificação
 function iniciarVerificacao(matricula, apenasVerificar = false) {
-    
+    const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
+    const cargoUsuario = database[matricula].cargo;
+    const tipodeferias = database[matricula].feriasescolarounao;
+    maiorPontuacao = 0; // Resetar a maior pontuação antes de iniciar a verificação
+    matriculaMaiorPontuacao = '';
+    nomeMaiorPontuacao = '';
 
     if (cargoUsuario === "EPC" || (cargoUsuario === "EPCplantao" && tipodeferias === 1)) {
         alert("Entrou na rotina EPC");
@@ -277,6 +275,7 @@ function verificarPontuacao() {
     const matricula = document.getElementById("matriculaCadastro").value;
     iniciarVerificacao(matricula, true);
 }
+
 
 
 
