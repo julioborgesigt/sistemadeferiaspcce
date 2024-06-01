@@ -582,7 +582,7 @@ function cadastroInicial() {
     }
 
    
-    let escolhaotipodeferias = matricula.feriasescolarounao
+    let escolhaotipodeferias =  database[matricula].feriasescolarounao
     alert(`este é seu tipo de ferias escolhido2" ${escolhaotipodeferias}`);
     if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
         alert("entrou no else");
