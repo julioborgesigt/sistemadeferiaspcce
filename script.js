@@ -200,7 +200,7 @@ function verificarPontuacao() {
 
 function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
-    const pontuacaoUsuarioNaoescolar = database[matricula].pontuacaoferiasescolar || 0;
+    const pontuacaoUsuarioNaoescolar = database[matricula].pontuacaoferiasNaoescolar || 0;
     const cargoUsuario = database[matricula].cargo;
     const tipodeferias = database[matricula].feriasescolarounao;
     let maiorPontuacao = 0;
@@ -247,7 +247,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
         if (apenasVerificar) {
             if (pontuacaoUsuarioNaoescolar >= maiorPontuacao) {
-                alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${maiorPontuacao}`);
+                alert(`Você possui a maior pontuação. ${pontuacaoUsuarioNaoescolar} contra ${maiorPontuacao}`);
             } else {
                 alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao} contra ${maiorPontuacao}.`);
             }
