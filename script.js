@@ -189,7 +189,7 @@ function concluirCadastro() {
     }
 }
 
-
+let iniciarVerificacao = false;
 // Função para o botão de verificação de pontuação
 function verificarPontuacao() {
     iniciarVerificacao(true);
