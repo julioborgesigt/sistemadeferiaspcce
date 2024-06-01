@@ -75,7 +75,7 @@
                 input.value = `${matricula}.${anoCorrente}`;
             }
         }
-
+        let feriasescolarounao = 3 ;
         function login() {
             const matricula = document.getElementById('loginMatricula').value;
             const senha = document.getElementById('loginSenha').value;
@@ -101,7 +101,7 @@
                     }
                 } else {
                     alert("Login bem-sucedido!");
-                    let feriasescolarounao = '';
+                    
                     if (database[matricula]) {
                 // Se a matrícula já existir, adicione os dados aos existentes
                 Object.assign(database[matricula], {
@@ -174,7 +174,7 @@
             if (cargoIpcPlantao) cargo = "IPCplantao";
             if (cargoEpcPlantao) cargo = "EPCplantao";
 */
-            let feriasescolarounao = '';
+            
             if (database[matricula]) {
                 // Se a matrícula já existir, adicione os dados aos existentes
                 Object.assign(database[matricula], {
