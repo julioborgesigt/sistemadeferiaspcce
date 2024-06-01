@@ -256,16 +256,16 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
 
     if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 1) {
         alert("Entrou na rotina EPC");
-        verificarMaiorPontuacao(["EPC", "EPCplantao"]);
+        verificarMaiorPontuacao(["EPC", "EPCplantao"], apenasVerificar);
     } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 1) {
         alert("Entrou na rotina IPC");
-        verificarMaiorPontuacao(["IPC", "IPCplantao"]);
+        verificarMaiorPontuacao(["IPC", "IPCplantao"], apenasVerificar);
     }else if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 0) {
         alert("Entrou na rotina EPC não escolar");
-        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"]);
+        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"], apenasVerificar);
     }else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 0 ) {
         alert("Entrou na rotina IPC não escolar");
-        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"]);
+        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"], apenasVerificar);
     }
 
 
