@@ -223,9 +223,9 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
         if (apenasVerificar) {
             if (pontuacaoUsuario >= maiorPontuacao) {
-                alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${matriculaMaiorPontuacao}`);
+                alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${MaiorPontuacao}`);
             } else {
-                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao} contra ${matriculaMaiorPontuacao}.`);
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao} contra ${MaiorPontuacao}.`);
             }
             return; // Não continuar com o cadastro
         }
@@ -247,9 +247,9 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
         if (apenasVerificar) {
             if (pontuacaoUsuarioNaoescolar >= maiorPontuacao) {
-                alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${matriculaMaiorPontuacao}`);
+                alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${MaiorPontuacao}`);
             } else {
-                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao} contra ${matriculaMaiorPontuacao}.`);
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao} contra ${MaiorPontuacao}.`);
             }
             return; // Não continuar com o cadastro
         }
