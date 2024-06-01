@@ -237,7 +237,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
-                database[key].pontuacaoferiaNaosescolar && 
+                database[key].pontuacaoferiasNaoescolar && 
                 database[key].pontuacaoferiasNaoescolar > maiorPontuacao) {
                 
                 maiorPontuacao = database[key].pontuacaoferiasNaoescolar;
