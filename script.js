@@ -193,7 +193,7 @@ function concluirCadastro() {
 // Função para o botão de verificação de pontuação
 function verificarPontuacao() {
     const matricula = document.getElementById("matriculaCadastro").value;
-    iniciarVerificacao(matricula, true);
+    verificarPontuacaoUsuario(matricula, true);
 }
 
 
