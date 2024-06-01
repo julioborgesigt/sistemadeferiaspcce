@@ -160,10 +160,12 @@
             if (cargoIpcPlantao) cargo = "IPCplantao";
             if (cargoEpcPlantao) cargo = "EPCplantao";
 */
+            let feriasescolarounao = '';
             if (database[matricula]) {
                 // Se a matrícula já existir, adicione os dados aos existentes
                 Object.assign(database[matricula], {
                     senha: senha,
+                    feriasescolarounao: feriasescolarounao
                     
                 });
                 console.log('pre cad');
@@ -172,7 +174,7 @@
                 database[matricula] = {
                     senha,
                     matricula,
-                    
+                    feriasescolarounao: feriasescolarounao
                 };
                 console.log('novo cad');
             }
