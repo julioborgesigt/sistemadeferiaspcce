@@ -207,7 +207,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     let matriculaMaiorPontuacao = '';
     let maiorPontuacaoNaoescolar = 0;
     let matriculaMaiorPontuacaoNaoescolar = '';
-    let nomeMaiorPontuacao = '';
+    let nomeMaiorPontuacaoescolar = '';
     let nomeMaiorPontuacaoNaoescolar = '';
     
     console.log("Este é o cargo em cadastramento", cargoUsuario);
@@ -222,7 +222,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
                 
                 maiorPontuacao = database[key].pontuacaoferiasescolar;
                 matriculaMaiorPontuacao = key;
-                nomeMaiorPontuacao = database[key].nome;
+                nomeMaiorPontuacaoescolar = database[key].nome;
             }
         }
         if (apenasVerificar) {
@@ -242,7 +242,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
                 database[key].pontuacaoferiasNaoescolar && 
-                database[key].pontuacaoferiasNaoescolar > maiorPontuacao) {
+                database[key].pontuacaoferiasNaoescolar > maiorPontuacaoNaoescolar) {
                 
                 maiorPontuacaoNaoescolar = database[key].pontuacaoferiasNaoescolar;
                 matriculaMaiorPontuacaoNaoescolar  = key;
@@ -250,7 +250,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
             }
         }
         if (apenasVerificar) {
-            if (pontuacaoUsuarioNaoescolar >= maiorPontuacao) {
+            if (pontuacaoUsuarioNaoescolar >= maiorPontuacaoNaoescolar) {
                 alert(`Você possui a maior pontuação. ${pontuacaoUsuarioNaoescolar} contra ${maiorPontuacaoNaoescolar }`);
             } else {
                 alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacaoNaoescolar } - Nome: ${nomeMaiorPontuacaoNaoescolar } contra ${maiorPontuacaoNaoescolar }.`);
@@ -284,7 +284,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     }
 
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
-    if (pontuacaoUsuarioNaoescolar < maiorPontuacao) {
+    if (pontuacaoUsuarioNaoescolar < maiorPontuacaoNaoescolar) {
         alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}. Cadastro não permitido.`);
         return false; // Não permitir a conclusão do cadastro
     }
