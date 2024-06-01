@@ -184,7 +184,7 @@ function verificarMaiorPontuacao(cargosEquivalentes, apenasVerificar = false) {
     }
     
     if (apenasVerificar) {
-        if (pontuacaoUsuario >= maiorPontuacao) {
+        if (database[matricula].pontuacaoferiasescolar >= maiorPontuacao) {
             alert("Você possui a maior pontuação.");
         } else {
             alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
@@ -208,7 +208,7 @@ function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes, apenasVerificar =
     }
     
     if (apenasVerificar) {
-        if (pontuacaoUsuario >= maiorPontuacao) {
+        if (database[matricula].pontuacaoferiasNaoescolar >= maiorPontuacao) {
             alert("Você possui a maior pontuação.");
         } else {
             alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
