@@ -102,9 +102,15 @@
                 } else {
                     alert("Login bem-sucedido!");
 
-                    Object.assign(database[matricula], {
+                    if (database[matricula]) {
+                // Se a matrícula já existir, adicione os dados aos existentes
+                Object.assign(database[matricula], {
+                    senha: senha,
                     feriasescolarounao: feriasescolarounao
+                    
                 });
+                console.log('pre cad');
+            }
 
 
 
