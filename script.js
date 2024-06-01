@@ -170,7 +170,11 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 
 
 // Função para verificar a maior pontuação considerando os cargos equivalentes
-function verificarMaiorPontuacao(cargosEquivalentes, apenasVerificar = false) {
+function verificarMaiorPontuacao(cargosEquivalentes, pontuacaoUsuario, apenasVerificar = false) {
+    let maiorPontuacao = 0;
+    let matriculaMaiorPontuacao = '';
+    let nomeMaiorPontuacao = '';
+
     for (let key in database) {
         if (database[key].cadastrado === 0 && 
             cargosEquivalentes.includes(database[key].cargo) && 
@@ -191,10 +195,16 @@ function verificarMaiorPontuacao(cargosEquivalentes, apenasVerificar = false) {
         }
         return; // Não continuar com o cadastro
     }
+
+    return { maiorPontuacao, matriculaMaiorPontuacao, nomeMaiorPontuacao };
 }
 
 // Função para verificar a maior pontuação considerando os cargos equivalentes e férias não escolares
-function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes, apenasVerificar = false) {
+function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes, pontuacaoUsuario, apenasVerificar = false) {
+    let maiorPontuacao = 0;
+    let matriculaMaiorPontuacao = '';
+    let nomeMaiorPontuacao = '';
+
     for (let key in database) {
         if (database[key].cadastrado === 0 && 
             cargosEquivalentes.includes(database[key].cargo) && 
@@ -215,6 +225,8 @@ function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes, apenasVerificar =
         }
         return; // Não continuar com o cadastro
     }
+
+    return { maiorPontuacao, matriculaMaiorPontuacao, nomeMaiorPontuacao };
 }
 
 // Função para iniciar a verificação
@@ -222,28 +234,26 @@ function iniciarVerificacao(matricula, apenasVerificar = false) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
     const cargoUsuario = database[matricula].cargo;
     const tipodeferias = database[matricula].feriasescolarounao;
-    maiorPontuacao = 0; // Resetar a maior pontuação antes de iniciar a verificação
-    matriculaMaiorPontuacao = '';
-    nomeMaiorPontuacao = '';
+    let resultadoVerificacao;
 
     if (cargoUsuario === "EPC" || (cargoUsuario === "EPCplantao" && tipodeferias === 1)) {
         alert("Entrou na rotina EPC");
-        verificarMaiorPontuacao(["EPC", "EPCplantao"], apenasVerificar);
+        resultadoVerificacao = verificarMaiorPontuacao(["EPC", "EPCplantao"], pontuacaoUsuario, apenasVerificar);
     } else if (cargoUsuario === "IPC" || (cargoUsuario === "IPCplantao" && tipodeferias === 1)) {
         alert("Entrou na rotina IPC");
-        verificarMaiorPontuacao(["IPC", "IPCplantao"], apenasVerificar);
+        resultadoVerificacao = verificarMaiorPontuacao(["IPC", "IPCplantao"], pontuacaoUsuario, apenasVerificar);
     } else if (cargoUsuario === "EPC" || (cargoUsuario === "EPCplantao" && tipodeferias === 0)) {
         alert("Entrou na rotina EPC não escolar");
-        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"], apenasVerificar);
+        resultadoVerificacao = verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"], pontuacaoUsuario, apenasVerificar);
     } else if (cargoUsuario === "IPC" || (cargoUsuario === "IPCplantao" && tipodeferias === 0)) {
         alert("Entrou na rotina IPC não escolar");
-        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"], apenasVerificar);
+        resultadoVerificacao = verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"], pontuacaoUsuario, apenasVerificar);
     }
 
     if (!apenasVerificar) {
         // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
-        if (pontuacaoUsuario < maiorPontuacao) {
-            alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}. Cadastro não permitido.`);
+        if (pontuacaoUsuario < resultadoVerificacao.maiorPontuacao) {
+            alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${resultadoVerificacao.matriculaMaiorPontuacao} - Nome: ${resultadoVerificacao.nomeMaiorPontuacao}. Cadastro não permitido.`);
             return false; // Não permitir a conclusão do cadastro
         }
 
