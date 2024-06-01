@@ -176,36 +176,93 @@ function concluirCadastro() {
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
     if (verificarPontuacaoUsuario(matricula)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
-        // Sua lógica para concluir o cadastro aqui...
         console.log("Cadastro concluído com sucesso!");
+       
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        
         window.location.href = `conclusao.html?matricula=${matricula}`;
-    } else{
-        alert("tente novamente depois");
+        
+    } else {
+        alert("Tente novamente depois");
+        carregarBancoDados();
         
     }
 }
 
+
+// Função para o botão de verificação de pontuação
+function verificarPontuacao() {
+    iniciarVerificacao(true);
+}
+
+
 function verificarPontuacaoUsuario(matricula) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
+    const cargoUsuario = database[matricula].cargo;
+    const tipodeferias = database[matricula].feriasescolarounao;
     let maiorPontuacao = 0;
     let matriculaMaiorPontuacao = '';
+    
+    console.log("Este é o cargo em cadastramento", cargoUsuario);
 
-    // Encontrar a maior pontuação de férias escolares no banco de dados, considerando apenas matriculas com cadastrado = 0
-    for (let key in database) {
-        if (database[key].cadastrado === 0 && database[key].pontuacaoferiasescolar && database[key].pontuacaoferiasescolar > maiorPontuacao) {
-            maiorPontuacao = database[key].pontuacaoferiasescolar;
-            matriculaMaiorPontuacao = key;
+    // Função para verificar a maior pontuação considerando os cargos equivalentes
+    function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
+        for (let key in database) {
+            if (database[key].cadastrado === 0 && 
+                cargosEquivalentes.includes(database[key].cargo) && 
+                database[key].pontuacaoferiasescolar && 
+                database[key].pontuacaoferiasescolar > maiorPontuacao) {
+                
+                maiorPontuacao = database[key].pontuacaoferiasescolar;
+                matriculaMaiorPontuacao = key;
+                nomeMaiorPontuacao = database[key].nome;
+            }
+        }
+        
+    }
+
+
+    // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
+    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes,  apenasVerificar = false) {
+        for (let key in database) {
+            if (database[key].cadastrado === 0 && 
+                cargosEquivalentes.includes(database[key].cargo) && 
+                database[key].pontuacaoferiaNaosescolar && 
+                database[key].pontuacaoferiasNaoescolar > maiorPontuacao) {
+                
+                maiorPontuacao = database[key].pontuacaoferiasNaoescolar;
+                matriculaMaiorPontuacao = key;
+                nomeMaiorPontuacao = database[key].nome;
+            }
         }
     }
 
+    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 1) {
+        alert("Entrou na rotina EPC");
+        verificarMaiorPontuacao(["EPC", "EPCplantao"]);
+    } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 1) {
+        alert("Entrou na rotina IPC");
+        verificarMaiorPontuacao(["IPC", "IPCplantao"]);
+    }else if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 0) {
+        alert("Entrou na rotina EPC não escolar");
+        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"]);
+    }else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 0 ) {
+        alert("Entrou na rotina IPC não escolar");
+        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"]);
+    }
+
+
+
+
+
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
-    if (pontuacaoUsuario < maiorPontuacao ) {
-        alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao}. Cadastro não permitido.`);
+    if (pontuacaoUsuario < maiorPontuacao) {
+        alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}. Cadastro não permitido.`);
         return false; // Não permitir a conclusão do cadastro
     }
 
     return true; // Permitir a conclusão do cadastro
+    
 }
 
 
@@ -286,13 +343,85 @@ function preCadastro() {
 
     calcularPontuacaoFeriasEscolar(matricula);
     salvarBancoDados(); // Salvar o banco de dados após calcular a pontuação
-
+   
 
 }
 
-function cadastroInicial() {
+
+function queroferiasescolar() {
+
     const matricula = document.getElementById("matriculaCadastro").value;
-    const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
+    let feriasescolarounao = 1;
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            
+            feriasescolarounao: feriasescolarounao,
+                        
+        });
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            
+            feriasescolarounao: feriasescolarounao,
+           
+        };
+    }
+    
+        let html = `<table border="1">
+        <hr> <tr>Você escolheu Férias escolar</tr><hr>`;
+        
+    
+        html += `</table>`;
+        document.getElementById("escolhadeferias").innerHTML = html;
+    
+    salvarBancoDados();
+    carregarBancoDados();
+   
+}
+
+
+function queroferiasnaoescolar() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+
+    let feriasescolarounao = 0;
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            
+            feriasescolarounao: feriasescolarounao,
+                        
+        });
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            
+            feriasescolarounao: feriasescolarounao,
+           
+        };
+    }
+
+
+    let html = `<table border="1">
+    <hr><tr>Você escolheu Férias não escolar</tr><hr>`;
+        
+    
+        html += `</table>`;
+        document.getElementById("escolhadeferias").innerHTML = html;
+    salvarBancoDados();
+    carregarBancoDados();
+}
+
+function cadastroInicial() {
+    
+    
+
+
+
+    const matricula = document.getElementById("matriculaCadastro").value;
+    //const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
 
     const qtdperiodos = document.querySelectorAll('input[name="qtdperiodos"]:checked').length;
 
@@ -312,10 +441,6 @@ function cadastroInicial() {
     console.log("Período 1:", periodo11, "a", periodo12);
     console.log("Período 2:", periodo21, "a", periodo22);
     console.log("Período 3:", periodo31, "a", periodo32);
-
-
-    
-
 
 
    // Converte as datas para objetos Date
@@ -403,7 +528,7 @@ function cadastroInicial() {
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], {
             numeroDePeriodos: qtdperiodos,
-            feriasescolarounao: seraferiasEscolar,
+           
             
            
             periodo11: periodo11,
@@ -420,7 +545,7 @@ function cadastroInicial() {
         database[matricula] = {
             matricula: matricula,
             numeroDePeriodos: qtdperiodos,
-            feriasescolarounao: seraferiasEscolar,
+            
             
             
             periodo11: periodo11,
@@ -434,7 +559,19 @@ function cadastroInicial() {
     }
 
    
-    concluirCadastro(); // Salvar o banco de dados
+    let escolhaotipodeferias = matricula.feriasescolarounao
+
+    if(escolhaotipodeferias !== 1 && escolhaotipodeferias !== 0 ){
+        alert("escolha qual o tipo de férias você deseja cadastrar")
+        carregarBancoDados();
+
+    }else{
+        alert("entrou no else");
+        concluirCadastro(); // Salvar o banco de dados
+
+    }  
+
+    
    
         
     
@@ -663,6 +800,392 @@ function exibirListaCompletaDEFerias() {
 }
 
 
+// Exibe em ordem a pontuação das férias escolares
+function exibirListaConcorrentesFeriasEscolarIPC() {
+    let html = "<h3>Lista ordenada por potuação escolar - IPC</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    
+
+    // Converter o objeto em um array de objetos para poder ordenar
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    (dados.cargo === 'IPC' || dados.cargo === 'IPCplantao') && dados.matricula.endsWith(`.${anoCorrente}` )
+);
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    //let seisPrimeiros = selecionados.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                     
+            </tr>`;
+    });
+/*
+    seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+    */
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+
+// Exibe em ordem a pontuação das férias escolares
+function exibirListaConcorrentesFeriasEscolarEPC() {
+    let html = "<h3>Lista ordenada por potuação escolar - EPC</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    
+    // Converter o objeto em um array de objetos para poder ordenar
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    (dados.cargo === 'EPC' || dados.cargo === 'EPCplantao') && dados.matricula.endsWith(`.${anoCorrente}`  )
+);
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    //let seisPrimeiros = selecionados.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+            <td data-label="Matrícula">${dados.matricula}</td>
+            <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+            <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                
+               
+              
+            </tr>`;
+    });
+/*
+    seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+    */
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+
+
+// Exibe os 6 cadastros selecionados para ferias escolar
+function exibirListaFinalFeriasEscolarSelecionadosIPC() {
+    let html = "<h3>Lista Final de Selecionados para Férias Escolar em ordem</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    
+
+    // Converter o objeto em um array de objetos para poder ordenar
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    (dados.cargo === 'IPC' || dados.cargo === 'IPCplantao') &&
+    dados.feriasescolarounao !== 0 && dados.matricula.endsWith(`.${anoCorrente}`)
+);
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    let seisPrimeiros = dataArray.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    seisPrimeiros.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+                <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                     
+            </tr>`;
+    });
+
+    /*seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+    */
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+
+// Exibe os 6 cadastros selecionados para ferias escolar
+function exibirListaFinalFeriasEscolarSelecionadosEPC() {
+    let html = "<h3>Lista Final de Selecionados para Férias Escolar em ordem</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    
+    // Converter o objeto em um array de objetos para poder ordenar
+    let anoCorrente = new Date().getFullYear().toString();
+    let dataArray = Object.values(database).filter(dados => 
+    (dados.cargo === 'EPC' || dados.cargo === 'EPCplantao') &&
+    dados.feriasescolarounao !== 0 && dados.matricula.endsWith(`.${anoCorrente}`) 
+);
+    
+    // Filtrar apenas os registros com pontuação de férias escolar maior que zero
+    //let selecionados = dataArray.filter(dados => dados.pontuacaoferiasescolar && dados.pontuacaoferiasescolar > 0);
+    
+   // Ordenar os registros filtrados
+   dataArray.sort((a, b) => {
+    if (b.pontuacaoferiasescolar !== a.pontuacaoferiasescolar) {
+        return b.pontuacaoferiasescolar - a.pontuacaoferiasescolar;
+    } else if (b.gestante !== a.gestante) {
+        return b.gestante - a.gestante;
+    } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+       
+        return b.qtdfilhosmenores - a.qtdfilhosmenores;
+    }else if (b.estudante !== a.estudante) {
+        
+        return b.estudante - a.estudante;
+    }else if (b.DoisEmpregos !== a.DoisEmpregos) {
+        
+        return b.DoisEmpregos - a.DoisEmpregos;
+    } else if (b.antiguidade !== a.antiguidade) {
+        
+        return b.antiguidade - a.antiguidade;
+    } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+        
+        return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+    }
+    else{
+        // Em caso de empate na pontuação, ordenar por idade em ordem decrescente
+        return b.idade - a.idade;
+    }
+});
+
+
+    // Limitar a exibição aos 6 primeiros resultados
+    let seisPrimeiros = dataArray.slice(0, 6);
+    
+    // Gerar a tabela HTML
+    seisPrimeiros.forEach(dados => {
+        html += `
+            <tr>
+            <td data-label="Matrícula">${dados.matricula}</td>
+            <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
+            <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                
+               
+              
+            </tr>`;
+    });
+/*
+    seisPrimeiros.forEach(dados => {
+        html += `<tr><td>${dados.matricula}</td><td>${dados.numeroDePeriodos}</td><td>${dados.pontuacaoferiasescolar || 0}</td><td>${dados.idade}</td></tr>`;
+    });
+ */   
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+
+
+function exibirListaFinalFeriasNaoEscolarIPC() {
+    let html = "<h3>Lista Final de Férias Não Escolar IPC em ordem de Preferências</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+);
+    
+    dataArray.sort((a, b) => {
+        if (b.gestante !== a.gestante) {
+            return b.gestante - a.gestante;
+        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+            return b.qtdfilhosmenores - a.qtdfilhosmenores;
+        } else if (b.estudante !== a.estudante) {
+            return b.estudante - a.estudante;
+        } else if (b.DoisEmpregos !== a.DoisEmpregos) {
+            return b.DoisEmpregos - a.DoisEmpregos;
+        } else if (b.antiguidade !== a.antiguidade) {
+            return b.antiguidade - a.antiguidade;
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+            return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+        } else {
+            return b.idade - a.idade;
+        }
+    });
+
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Cargo">${dados.cargo}</td>
+                <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
+                <td data-label="Gestante?">${dados.gestante}</td>
+                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
+                <td data-label="Estudante?">${dados.estudante}</td>
+                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos}</td>
+                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo}</td>
+                <td data-label="Antig.">${dados.antiguidade}</td>
+                <td data-label="Idade">${dados.idade}</td>
+            </tr>`;
+    });
+
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
+
+function exibirListaFinalFeriasNaoEscolarEPC() {
+    let html = "<h3>Lista Final de Férias Não Escolar EPC em ordem de Preferências</h3>";
+    html += "<table border='1'>";
+    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    
+    let anoCorrente = new Date().getFullYear().toString();
+let dataArray = Object.values(database).filter(dados => 
+    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+);
+    
+    dataArray.sort((a, b) => {
+        if (b.gestante !== a.gestante) {
+            return b.gestante - a.gestante;
+        } else if (b.qtdfilhosmenores !== a.qtdfilhosmenores) {
+            return b.qtdfilhosmenores - a.qtdfilhosmenores;
+        } else if (b.estudante !== a.estudante) {
+            return b.estudante - a.estudante;
+        } else if (b.DoisEmpregos !== a.DoisEmpregos) {
+            return b.DoisEmpregos - a.DoisEmpregos;
+        } else if (b.antiguidade !== a.antiguidade) {
+            return b.antiguidade - a.antiguidade;
+        } else if (b.ConjugeMesmoPeriodo !== a.ConjugeMesmoPeriodo) {
+            return b.ConjugeMesmoPeriodo - a.ConjugeMesmoPeriodo;
+        } else {
+            return b.idade - a.idade;
+        }
+    });
+
+
+    dataArray.forEach(dados => {
+        html += `
+            <tr>
+                <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Cargo">${dados.cargo}</td>
+                <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
+                <td data-label="Gestante?">${dados.gestante}</td>
+                <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
+                <td data-label="Estudante?">${dados.estudante}</td>
+                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos}</td>
+                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo}</td>
+                <td data-label="Antig.">${dados.antiguidade}</td>
+                <td data-label="Idade">${dados.idade}</td>
+            </tr>`;
+    });
+
+    html += "</table>";
+    document.getElementById("dados2").innerHTML = html;
+}
 
 
 carregarBancoDados()
@@ -720,3 +1243,38 @@ function salvarBancoDados() {
     });
 }
 
+
+function logout() {
+    // Remove authentication token
+    localStorage.removeItem('isAuthenticated');
+    // Redireciona para a página de login
+    window.location.href = 'index.html';
+}
+
+
+
+
+// Função para gerar PDF
+function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+
+    html2canvas(document.querySelector("#dados2")).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("dados_cadastro.pdf");
+    });
+}
+
+
+function openCalendar() {
+    window.open('calendario.html', '_blank');
+}
+
+function mostrarDiv() {
+    document.getElementById('escolhadeferias').classList.remove('hidden');
+}
