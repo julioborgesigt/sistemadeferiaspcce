@@ -561,13 +561,15 @@ function cadastroInicial() {
    
     let escolhaotipodeferias = matricula.feriasescolarounao
 
-    if(escolhaotipodeferias !== 1 && escolhaotipodeferias !== 0 ){
-        alert("escolha qual o tipo de férias você deseja cadastrar")
-        carregarBancoDados();
-
-    }else{
+    if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
         alert("entrou no else");
         concluirCadastro(); // Salvar o banco de dados
+        alert("este é seu tipo de ferias escolhido",escolhaotipodeferias );
+       
+
+    }else{
+        alert("escolha qual o tipo de férias você deseja cadastrar")
+        carregarBancoDados();
 
     }  
 
