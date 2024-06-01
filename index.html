@@ -101,6 +101,14 @@
                     }
                 } else {
                     alert("Login bem-sucedido!");
+
+                    Object.assign(database[matricula], {
+                    feriasescolarounao: feriasescolarounao
+                });
+
+
+
+
                     window.location.href = `cadastro.html?matricula=${matricula}`; 
                 }
             } else {
