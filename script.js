@@ -189,16 +189,26 @@ function concluirCadastro() {
     }
 }
 
-function verificarPontuacaoUsuario(matricula) {
+
+// Função para o botão de verificação de pontuação
+function verificarPontuacao() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+    iniciarVerificacao(matricula, true);
+}
+
+
+
+function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
     const cargoUsuario = database[matricula].cargo;
+    const tipodeferias = database[matricula].feriasescolarounao;
     let maiorPontuacao = 0;
     let matriculaMaiorPontuacao = '';
     
     console.log("Este é o cargo em cadastramento", cargoUsuario);
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes
-    function verificarMaiorPontuacao(cargosEquivalentes) {
+    function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
@@ -210,15 +220,57 @@ function verificarPontuacaoUsuario(matricula) {
                 nomeMaiorPontuacao = database[key].nome;
             }
         }
+        if (apenasVerificar) {
+            if (pontuacaoUsuario >= maiorPontuacao) {
+                alert("Você possui a maior pontuação.");
+            } else {
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
+            }
+            return; // Não continuar com o cadastro
+        }
     }
 
-    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") {
+
+    // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
+    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes,  apenasVerificar = false) {
+        for (let key in database) {
+            if (database[key].cadastrado === 0 && 
+                cargosEquivalentes.includes(database[key].cargo) && 
+                database[key].pontuacaoferiaNaosescolar && 
+                database[key].pontuacaoferiasNaoescolar > maiorPontuacao) {
+                
+                maiorPontuacao = database[key].pontuacaoferiasNaoescolar;
+                matriculaMaiorPontuacao = key;
+                nomeMaiorPontuacao = database[key].nome;
+            }
+        }
+        if (apenasVerificar) {
+            if (pontuacaoUsuario >= maiorPontuacao) {
+                alert("Você possui a maior pontuação.");
+            } else {
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
+            }
+            return; // Não continuar com o cadastro
+        }
+    }
+
+    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 1) {
         alert("Entrou na rotina EPC");
         verificarMaiorPontuacao(["EPC", "EPCplantao"]);
-    } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") {
+    } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 1) {
         alert("Entrou na rotina IPC");
         verificarMaiorPontuacao(["IPC", "IPCplantao"]);
+    }else if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 0) {
+        alert("Entrou na rotina EPC não escolar");
+        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"]);
+    }else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 0 ) {
+        alert("Entrou na rotina IPC não escolar");
+        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"]);
     }
+
+
+
+
 
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
     if (pontuacaoUsuario < maiorPontuacao) {
@@ -380,6 +432,11 @@ function queroferiasnaoescolar() {
 }
 
 function cadastroInicial() {
+    
+    
+
+
+
     const matricula = document.getElementById("matriculaCadastro").value;
     //const seraferiasEscolar = document.getElementById("seraferiasEscolar").checked ? 1 : 0;
 
@@ -401,10 +458,6 @@ function cadastroInicial() {
     console.log("Período 1:", periodo11, "a", periodo12);
     console.log("Período 2:", periodo21, "a", periodo22);
     console.log("Período 3:", periodo31, "a", periodo32);
-
-
-    
-
 
 
    // Converte as datas para objetos Date
@@ -523,7 +576,19 @@ function cadastroInicial() {
     }
 
    
-    concluirCadastro(); // Salvar o banco de dados
+    let escolhaotipodeferias = matricula.feriasescolarounao
+
+    if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
+        alert("escolha qual o tipo de férias você deseja cadastrar")
+        carregarBancoDados();
+
+    }else{
+        alert("entrou no else");
+        concluirCadastro(); // Salvar o banco de dados
+
+    }  
+
+    
    
         
     
