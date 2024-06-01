@@ -229,7 +229,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
             if (pontuacaoUsuario >= maiorPontuacao) {
                 alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${maiorPontuacao}`);
             } else {
-                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao} contra ${maiorPontuacao}.`);
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar} contra ${maiorPontuacao}.`);
             }
             return; // Não continuar com o cadastro
         }
@@ -590,7 +590,7 @@ function cadastroInicial() {
     let escolhaotipodeferias =  database[matricula].feriasescolarounao
     alert(`este é seu tipo de ferias escolhido2" ${escolhaotipodeferias}`);
 
-    if(escolhaotipodeferias !== 1 && escolhaotipodeferias !== 0 ){
+    if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
         alert("escolha qual o tipo de férias você deseja cadastrar")
         carregarBancoDados();
 
