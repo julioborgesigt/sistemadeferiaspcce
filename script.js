@@ -189,6 +189,13 @@ function concluirCadastro() {
     }
 }
 
+
+// Função para o botão de verificação de pontuação
+function verificarPontuacao() {
+    iniciarVerificacao(true);
+}
+
+
 function verificarPontuacaoUsuario(matricula) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
     const cargoUsuario = database[matricula].cargo;
@@ -199,7 +206,7 @@ function verificarPontuacaoUsuario(matricula) {
     console.log("Este é o cargo em cadastramento", cargoUsuario);
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes
-    function verificarMaiorPontuacao(cargosEquivalentes) {
+    function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
@@ -211,11 +218,21 @@ function verificarPontuacaoUsuario(matricula) {
                 nomeMaiorPontuacao = database[key].nome;
             }
         }
+
+
+        if (apenasVerificar) {
+            if (pontuacaoUsuario >= maiorPontuacao) {
+                alert("Você possui a maior pontuação.");
+            } else {
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
+            }
+            return; // Não continuar com o cadastro
+        }
     }
 
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
-    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes) {
+    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes,  apenasVerificar = false) {
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
@@ -227,6 +244,16 @@ function verificarPontuacaoUsuario(matricula) {
                 nomeMaiorPontuacao = database[key].nome;
             }
         }
+
+        if (apenasVerificar) {
+            if (pontuacaoUsuario >= maiorPontuacao) {
+                alert("Você possui a maior pontuação.");
+            } else {
+                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacao}.`);
+            }
+            return; // Não continuar com o cadastro
+        }
+
     }
 
     if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 1) {
@@ -555,6 +582,7 @@ function cadastroInicial() {
 
     if(escolhaotipodeferias !== 1 || escolhaotipodeferias !== 0 ){
         alert("escolha qual o tipo de férias você deseja cadastrar")
+        carregarBancoDados();
 
     }else{
         alert("entrou no else");
