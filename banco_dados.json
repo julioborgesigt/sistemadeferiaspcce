@@ -354,7 +354,7 @@
         "senha": "",
         "cargo": "IPCplantao",
         "numeroDePeriodos": 3,
-        "feriasescolarounao": 0,
+        "feriasescolarounao": 3,
         "qtdfilhosmenores": "1",
         "periodo11": "04/03/2025",
         "periodo12": "13/03/2025",
