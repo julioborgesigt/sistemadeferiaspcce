@@ -470,7 +470,7 @@ body.dark-mode .flatpickr-day.today {
     margin: 20px;
 }
 
-/* Pseudo-elemento para a imagem de fundo desfocada 
+/* Pseudo-elemento para a imagem de fundo desfocada */
 body::before {
     content: '';
     position: absolute;
@@ -481,8 +481,8 @@ body::before {
     background: url('papel de parede.png') no-repeat center center fixed;
     background-size: cover;
     filter: blur(10px);
-    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo 
-}*/
+    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo */
+}
 
 
 
