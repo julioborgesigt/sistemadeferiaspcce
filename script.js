@@ -406,16 +406,18 @@ function queroferiasescolar() {
         };
     }
 
-    let html = `<table border="1">
-        <hr> <tr>Você escolheu Férias escolar</tr><hr>`;
-
-    html += `</table>`;
-    document.getElementById("escolhadeferias").innerHTML = html;
-
+    
     salvarBancoDados();
 
     // Usar setTimeout para adicionar um atraso antes de carregar o banco de dados
     setTimeout(() => {
+
+        let html = `<table border="1">
+        <hr> <tr>Você escolheu Férias escolar</tr><hr>`;
+
+        html += `</table>`;
+         document.getElementById("escolhadeferias").innerHTML = html;
+
         carregarBancoDados();
         
         // Ocultar o indicador de carregamento após o carregamento do banco de dados
