@@ -454,13 +454,15 @@ body.dark-mode .flatpickr-day.today {
 }
 
 .login-container {
-    max-width: 300px;
-    width: 300px;
+    max-width: 250px;
+    width: 250px;
     padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
-    margin: 20px;
+    margin: 10px;
 }
 
 /* Pseudo-elemento para a imagem de fundo desfocada */
@@ -497,8 +499,8 @@ body.dark-mode .login-container h2 {
 .login-container button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 3px;
+    margin-top: 3px;
     border-radius: 10px; /* Bordas mais arredondadas */
     border: 1px solid #ccc;
     font-size: 1em;
@@ -510,6 +512,7 @@ body.dark-mode .login-container h2 {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 .login-container button:hover {
