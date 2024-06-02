@@ -232,9 +232,9 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
         if (apenasVerificar) {
             if (pontuacaoUsuario >= maiorPontuacao) {
-                alert(`Você possui a maior pontuação. ${pontuacaoUsuario} contra ${maiorPontuacao}`);
+                alert(`Você possui a maior pontuação escolar. ${pontuacaoUsuario} contra ${maiorPontuacao}`);
             } else {
-                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar} contra ${maiorPontuacao}.`);
+                alert(`A maior pontuação escolar é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar} contra ${maiorPontuacao}.`);
             }
             return; // Não continuar com o cadastro
         }
@@ -246,7 +246,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         let maiorPontuacaoNaoescolar = 0;
         let matriculaMaiorPontuacaoNaoescolar = '';
         let nomeMaiorPontuacaoNaoescolar = '';
-        
+
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
@@ -260,9 +260,9 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
         if (apenasVerificar) {
             if (pontuacaoUsuarioNaoescolar >= maiorPontuacaoNaoescolar) {
-                alert(`Você possui a maior pontuação. ${pontuacaoUsuarioNaoescolar} contra ${maiorPontuacaoNaoescolar }`);
+                alert(`Você possui a maior pontuação não escolar. ${pontuacaoUsuarioNaoescolar} contra ${maiorPontuacaoNaoescolar }`);
             } else {
-                alert(`A maior pontuação é da matrícula ${matriculaMaiorPontuacaoNaoescolar } - Nome: ${nomeMaiorPontuacaoNaoescolar } contra ${maiorPontuacaoNaoescolar }.`);
+                alert(`A maior pontuação não escolar é da matrícula ${matriculaMaiorPontuacaoNaoescolar } - Nome: ${nomeMaiorPontuacaoNaoescolar } contra ${maiorPontuacaoNaoescolar }.`);
             }
             return; // Não continuar com o cadastro
         }
