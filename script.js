@@ -214,6 +214,11 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes
     function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
+
+        let maiorPontuacao = 0;
+        let matriculaMaiorPontuacao = '';
+        let nomeMaiorPontuacaoescolar = '';
+        
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
@@ -238,6 +243,10 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
     function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes,  apenasVerificar = false) {
+        let maiorPontuacaoNaoescolar = 0;
+        let matriculaMaiorPontuacaoNaoescolar = '';
+        let nomeMaiorPontuacaoNaoescolar = '';
+        
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
