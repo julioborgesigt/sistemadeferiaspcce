@@ -96,15 +96,15 @@ button:active {
     padding-left: 10px;
     padding-right: 10px;      /* Espaçamento interno */
     background-color: #f8f9fa; /* Cor de fundo */
-    border: 1px solid #ddd;    /* Borda */
-    border-radius: 5px;        /* Bordas arredondadas */
+    border: none;    /* Borda */
+    
     background-color: transparent; /* Fundo transparente */
 
     
 }
 
 .logout-container button {
-    padding: 0px 0px;    /* Espaçamento interno do botão */
+    padding: 10px 10px;    /* Espaçamento interno do botão */
     font-size: 16px;       /* Tamanho da fonte */
     background-color: #ff0000; /* Cor de fundo do botão */
     color: #fff;           /* Cor do texto do botão */
