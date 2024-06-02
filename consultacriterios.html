@@ -9,11 +9,9 @@
 <body>
     <div class="container">
 
-
         <div style="text-align: center; margin-top: -20px;">
             <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
         </div>
-
         
         <h1>Cadastro Concluído</h1>
         <div id="info">
@@ -43,21 +41,6 @@
                     if (dadosUsuario) {
                         const infoDiv = document.getElementById('info');
                         infoDiv.innerHTML = `
-                            <p>Nome: ${dadosUsuario.nome}</p>
-                            <p>Matrícula: ${dadosUsuario.matricula}</p>
-                            <p>Idade: ${dadosUsuario.idade}</p>
-                            <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
-                            <p>Antiguidade: ${dadosUsuario.antiguidade}</p>
-                            <p>Cargo: ${dadosUsuario.cargo}</p>
-                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
-                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
-                            <p>Início do período 1: ${dadosUsuario.periodo11}</p>
-                            <p>Final do período 1: ${dadosUsuario.periodo12}</p>
-                            <p>Início do período 2: ${dadosUsuario.periodo21}</p>
-                            <p>Final do período 2: ${dadosUsuario.periodo22}</p>
-                            <p>Início do período 3: ${dadosUsuario.periodo31}</p>
-                            <p>Final do período 3: ${dadosUsuario.periodo32}</p>
-                            <hr></hr>
                             <p>CRITÉRIOS PARA FÉRIAS ESCOLAR</p>
                             <hr></hr>
                             <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>

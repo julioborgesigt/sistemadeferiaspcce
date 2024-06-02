@@ -1377,3 +1377,7 @@ function openCalendar() {
 function mostrarDiv() {
     document.getElementById('escolhadeferias').classList.remove('hidden');
 }
+
+function consultacriterios() {
+    window.open('consultacriterios.html', '_blank');
+}
