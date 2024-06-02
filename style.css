@@ -16,17 +16,6 @@ body {
     position: relative;
 }
 
-/* Container padrão */
-#escolhadeferias {
-    width: 100%;
-    max-width: 200px;
-    padding: 20px;
-    background: rgba(145, 17, 17, 0);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    margin: 20px;
-}
 
 /* Container padrão */
 .container {
