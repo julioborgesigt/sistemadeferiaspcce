@@ -422,7 +422,7 @@ function queroferiasescolar() {
         
         // Ocultar o indicador de carregamento após o carregamento do banco de dados
         document.getElementById("loading").style.display = "none";
-    }, 2000); // 2000 milissegundos = 2 segundos
+    }, 2000); // 3000 milissegundos = 3 segundos
 }
 
 
@@ -447,7 +447,10 @@ function queroferiasnaoescolar() {
            
         };
     }
+    salvarBancoDados();
 
+     // Usar setTimeout para adicionar um atraso antes de carregar o banco de dados
+     setTimeout(() => {
 
     let html = `<table border="1">
     <hr><tr>Você escolheu Férias não escolar</tr><hr>`;
@@ -455,8 +458,12 @@ function queroferiasnaoescolar() {
     
         html += `</table>`;
         document.getElementById("escolhadeferias").innerHTML = html;
-    salvarBancoDados();
-    carregarBancoDados();
+    
+        carregarBancoDados();
+
+    // Ocultar o indicador de carregamento após o carregamento do banco de dados
+    document.getElementById("loading").style.display = "none";
+    }, 3000); // 3000 milissegundos = 3 segundos
 }
 
 function cadastroInicial() {
