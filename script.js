@@ -268,16 +268,16 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
     }
 
-    if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 1) {
+    if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 1) {
         alert("Entrou na rotina EPC");
         verificarMaiorPontuacao(["EPC", "EPCplantao"], apenasVerificar);
-    } else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 1) {
+    } else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 1) {
         alert("Entrou na rotina IPC");
         verificarMaiorPontuacao(["IPC", "IPCplantao"], apenasVerificar);
-    }else if (cargoUsuario === "EPC" || cargoUsuario === "EPCplantao" && tipodeferias === 0) {
+    }else if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 0) {
         alert("Entrou na rotina EPC não escolar");
         verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"], apenasVerificar);
-    }else if (cargoUsuario === "IPC" || cargoUsuario === "IPCplantao" && tipodeferias === 0 ) {
+    }else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 0 ) {
         alert("Entrou na rotina IPC não escolar");
         verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"], apenasVerificar);
     }
