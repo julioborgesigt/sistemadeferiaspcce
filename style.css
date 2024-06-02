@@ -111,6 +111,8 @@ button:active {
     border: none;          /* Sem borda */
     border-radius: 5px;    /* Bordas arredondadas */
     cursor: pointer;       /* Cursor de ponteiro */
+    background-color: transparent; /* Fundo transparente */
+
 }
 
 .logout-container button:hover {
