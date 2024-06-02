@@ -48,7 +48,7 @@ label {
     display: block;
     margin: 10px 0 5px;
     text-align: left;
-    color: #ffffff;
+    color: #555;
 }
 
 input[type="text"],
@@ -372,6 +372,13 @@ body.dark-mode th {
 
 body.dark-mode td {
     border-bottom-color: #444;
+}
+
+label.dark-mode {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #fffefe;
 }
 
 /* Estilos específicos para input de data no modo claro */
