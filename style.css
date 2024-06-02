@@ -110,12 +110,11 @@ button:active {
     background-color: #ff0000; /* Cor de fundo do botão */
     color: #fff;           /* Cor do texto do botão */
     
-    padding: 10px 20px;
     
     transition: background-color 0.3s;
     
-    padding: 10px 10px;    /* Espaçamento interno do botão */
-    padding-left: 30px;
+    padding: 10px 10px 30px 30px;    /* Espaçamento interno do botão */
+    
     font-size: 16px;       /* Tamanho da fonte */
     border: none;          /* Sem borda */
     border-radius: 5px;    /* Bordas arredondadas */
