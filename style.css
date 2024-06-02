@@ -17,6 +17,18 @@ body {
 }
 
 /* Container padrão */
+#escolhadeferias {
+    width: 100%;
+    max-width: 200px;
+    padding: 20px;
+    background: rgba(145, 17, 17, 0);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/* Container padrão */
 .container {
     width: 100%;
     max-width: 800px;
@@ -355,8 +367,11 @@ body.dark-mode h3 {
 }
 
 body.dark-mode input[type="text"],
+
 body.dark-mode input[type="date"],
+
 body.dark-mode input[type="checkbox"],
+
 body.dark-mode button {
     background-color: #333;
     color: #ffffff;
@@ -481,7 +496,7 @@ body::before {
     background: url('papel de parede.png') no-repeat center center fixed;
     background-size: cover;
     filter: blur(10px);
-    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo */
+    z-index: -1; 
 }
 
 
