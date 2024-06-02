@@ -241,6 +241,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     }
 
 
+    
     // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
     function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes,  apenasVerificar = false) {
         let maiorPontuacaoNaoescolar = 0;
