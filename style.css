@@ -98,6 +98,7 @@ button:active {
     background-color: #f8f9fa; /* Cor de fundo */
     border: 1px solid #ddd;    /* Borda */
     border-radius: 5px;        /* Bordas arredondadas */
+    background-color: transparent; /* Fundo transparente */
 
     
 }
@@ -235,7 +236,7 @@ h3 {
     font-size: 18px; /* Aumenta o tamanho da fonte */
     
     color: rgb(255, 0, 0); /* Letras brancas */
-    padding-top: 0%;
+    padding-top: 5%;
     background-color: transparent; /* Fundo transparente */
 }
 
