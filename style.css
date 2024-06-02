@@ -109,13 +109,17 @@ button:active {
     
     background-color: #ff0000; /* Cor de fundo do botão */
     color: #fff;           /* Cor do texto do botão */
-    border: none;
-    border-radius: 4px;
+    
     padding: 10px 20px;
-    cursor: pointer;
+    
     transition: background-color 0.3s;
     
-    
+    padding: 10px 10px;    /* Espaçamento interno do botão */
+    padding-left: 30px;
+    font-size: 16px;       /* Tamanho da fonte */
+    border: none;          /* Sem borda */
+    border-radius: 5px;    /* Bordas arredondadas */
+    cursor: pointer;       /* Cursor de ponteiro */
 
 }
 
