@@ -1377,7 +1377,7 @@ function openCalendar() {
 function mostrarDiv() {
     document.getElementById('escolhadeferias').classList.remove('hidden');
 }
-
+const matricula = document.getElementById("matriculaCadastro").value;
 function consultacriterios() {
     window.open(`consultacriterios.html?matricula=${matricula}`);
 }
