@@ -426,7 +426,46 @@ function queroferiasescolar() {
 }
 
 
+function queroferiasnaoescolar() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+    let feriasescolarounao = 0;
 
+    // Mostrar o indicador de carregamento
+    document.getElementById("loading").style.display = "block";
+
+    // Salvar os dados no banco de dados
+    if (matricula in database) {
+        // Se a matrícula já existir, adicione os dados aos existentes
+        Object.assign(database[matricula], {
+            feriasescolarounao: feriasescolarounao,
+        });
+    } else {
+        // Se a matrícula não existir, crie um novo registro
+        database[matricula] = {
+            feriasescolarounao: feriasescolarounao,
+        };
+    }
+
+    
+    salvarBancoDados();
+
+    // Usar setTimeout para adicionar um atraso antes de carregar o banco de dados
+    setTimeout(() => {
+
+        let html = `<table border="1">
+        <hr> <tr>Você escolheu Férias não escolar</tr><hr>`;
+
+        html += `</table>`;
+         document.getElementById("escolhadeferias").innerHTML = html;
+
+        carregarBancoDados();
+        
+        // Ocultar o indicador de carregamento após o carregamento do banco de dados
+        document.getElementById("loading").style.display = "none";
+    }, 3000); // 3000 milissegundos = 3 segundos
+}
+
+/*
 function queroferiasnaoescolar() {
     const matricula = document.getElementById("matriculaCadastro").value;
     let feriasescolarounao = 0;
@@ -465,6 +504,7 @@ function queroferiasnaoescolar() {
     document.getElementById("loading").style.display = "none";
     }, 3000); // 3000 milissegundos = 3 segundos
 }
+*/
 
 function cadastroInicial() {
     
