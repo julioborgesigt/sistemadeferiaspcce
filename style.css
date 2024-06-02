@@ -113,7 +113,7 @@ button:active {
     
     transition: background-color 0.3s;
     
-    padding: 10px 10px 30px 30px;    /* Espaçamento interno do botão */
+    padding: 30px 30px 30px 30px;    /* Espaçamento interno do botão */
     
     font-size: 16px;       /* Tamanho da fonte */
     border: none;          /* Sem borda */
