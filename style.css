@@ -87,34 +87,17 @@ button:active {
 }
 
 .logout-container {
-    width: 100%;
-    max-width: 800px;
-    text-align: center; /* Centraliza o conteúdo */
-    margin-top: 10px;   /* Espaçamento superior */
-    padding-top: 0px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;      /* Espaçamento interno */
-    background-color: #f8f9fa; /* Cor de fundo */
-    border: none;    /* Borda */
-    
-    background-color: transparent; /* Fundo transparente */
+    margin-bottom: 20px;
 
     
 }
 
 .logout-container button {
-    
-        
-    
+
     background-color: #ff0000; /* Cor de fundo do botão */
     color: #fff;           /* Cor do texto do botão */
-    
-    
     transition: background-color 0.3s;
-    
-    padding: 30px 30px 30px 30px;    /* Espaçamento interno do botão */
-    
+    padding: 10px 10px;    /* Espaçamento interno do botão */
     font-size: 16px;       /* Tamanho da fonte */
     border: none;          /* Sem borda */
     border-radius: 5px;    /* Bordas arredondadas */
