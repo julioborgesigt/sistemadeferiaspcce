@@ -16,7 +16,6 @@ body {
     position: relative;
 }
 
-
 /* Container padrão */
 .container {
     width: 100%;
@@ -237,8 +236,6 @@ h3 {
     background-color: rgb(255, 255, 255); /* Fundo vermelho */
     color: rgb(255, 0, 0); /* Letras brancas */
    padding-top: 5%;
-   display: none;
-
 }
 
 /* Estilo para o modo escuro */
@@ -358,11 +355,8 @@ body.dark-mode h3 {
 }
 
 body.dark-mode input[type="text"],
-
 body.dark-mode input[type="date"],
-
 body.dark-mode input[type="checkbox"],
-
 body.dark-mode button {
     background-color: #333;
     color: #ffffff;
@@ -476,7 +470,7 @@ body.dark-mode .flatpickr-day.today {
     margin: 20px;
 }
 
-/* Pseudo-elemento para a imagem de fundo desfocada */
+/* Pseudo-elemento para a imagem de fundo desfocada 
 body::before {
     content: '';
     position: absolute;
@@ -487,8 +481,9 @@ body::before {
     background: url('papel de parede.png') no-repeat center center fixed;
     background-size: cover;
     filter: blur(10px);
-    z-index: -1; 
-}
+    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo 
+}*/
+
 
 
 body.dark-mode .login-container {
