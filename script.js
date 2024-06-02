@@ -1379,5 +1379,5 @@ function mostrarDiv() {
 }
 
 function consultacriterios() {
-    window.open('consultacriterios.html', '_blank');
+    window.open(`consultacriterios.html?matricula=${matricula}`);
 }
