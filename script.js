@@ -422,15 +422,15 @@ function queroferiasescolar() {
         
         // Ocultar o indicador de carregamento após o carregamento do banco de dados
         document.getElementById("loading").style.display = "none";
-    }, 2000); // 3000 milissegundos = 3 segundos
+    }, 3000); // 3000 milissegundos = 3 segundos
 }
 
 
 
 function queroferiasnaoescolar() {
     const matricula = document.getElementById("matriculaCadastro").value;
-
     let feriasescolarounao = 0;
+
     // Salvar os dados no banco de dados
     if (matricula in database) {
         // Se a matrícula já existir, adicione os dados aos existentes
