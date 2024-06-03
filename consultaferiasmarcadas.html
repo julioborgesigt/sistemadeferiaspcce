@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusão do Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+
+
+        <h1>Consulta de férias marcadas do ano corrente</h1>
+        <div id="info">
+            <!-- As informações do cadastro serão exibidas aqui -->
+        </div>
+        <button onclick="window.print()">Imprimir</button>
+        
+    </div>
+
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const matricula = urlParams.get('matricula');
+
+            if (!matricula) {
+                document.getElementById('info').innerHTML = "<p>Erro: matrícula não fornecida.</p>";
+                return;
+            }
+
+            fetch('banco_dados.json')
+                .then(response => response.json())
+                .then(database => {
+                    const dadosUsuario = database[matricula];
+
+                    if (dadosUsuario) {
+                        const infoDiv = document.getElementById('info');
+                        infoDiv.innerHTML = `
+                            <p>Nome: ${dadosUsuario.nome}</p>
+                            <p>Matrícula: ${dadosUsuario.matricula}</p>
+                            <p>Cargo: ${dadosUsuario.cargo}</p>
+                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao === 1 ? 'Sim' : 'Não'}</p>
+                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
+                            <p>Início do período 1: ${dadosUsuario.periodo11}</p>
+                            <p>Final do período 1: ${dadosUsuario.periodo12}</p>
+                            <p>Início do período 2: ${dadosUsuario.periodo21}</p>
+                            <p>Final do período 2: ${dadosUsuario.periodo22}</p>
+                            <p>Início do período 3: ${dadosUsuario.periodo31}</p>
+                            <p>Final do período 3: ${dadosUsuario.periodo32}</p>                           
+                            
+                        `;
+                    } else {
+                        document.getElementById('info').innerHTML = "<p>Erro: usuário não encontrado.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar o banco de dados:', error);
+                    document.getElementById('info').innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
+                });
+        });
+    </script>
+</body>
+</html>

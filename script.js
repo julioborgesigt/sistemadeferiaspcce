@@ -1382,3 +1382,8 @@ function consultacriterios() {
     const matricula = document.getElementById("matriculaCadastro").value;
     window.open(`consultacriterios.html?matricula=${matricula}`);
 }
+
+function consultaferiasmarcadas() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+    window.open(`consultaferiasmarcadas.html?matricula=${matricula}`);
+}
