@@ -833,7 +833,7 @@ function exibirDadosPorMatricula() {
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th></tr>
 
 
-        <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho || 0}</td></tr>
+        <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td></tr>
         <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor || 0}</td></tr>
         <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno || 0}</td></tr>
 
@@ -954,7 +954,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
                 <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
                      
@@ -1024,7 +1024,7 @@ let dataArray = Object.values(database).filter(dados =>
             <td data-label="Matrícula">${dados.matricula}</td>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-            <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
             <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
             <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
                 
@@ -1099,7 +1099,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
                 <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
                      
@@ -1170,7 +1170,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
             <td data-label="Matrícula">${dados.matricula}</td>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-            <td data-label="Filhos em idade escolar">${dados.possuiFilho || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
             <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
             <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
                 

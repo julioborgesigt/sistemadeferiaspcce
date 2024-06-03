@@ -45,7 +45,7 @@
                             <p>Período Aquisitivo: ${dadosUsuario.paquisitivoinicio} - ${dadosUsuario.paquisitivofim}</p>
                             <p>Antiguidade: ${dadosUsuario.antiguidade}</p>
                             <p>Cargo: ${dadosUsuario.cargo}</p>
-                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao}</p>
+                            <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao === 1 ? 'Sim' : 'Não'}</p>
                             <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
                             <p>Início do período 1: ${dadosUsuario.periodo11}</p>
                             <p>Final do período 1: ${dadosUsuario.periodo12}</p>
@@ -57,17 +57,17 @@
                             <p>CRITÉRIOS PARA FÉRIAS ESCOLAR</p>
                             <hr></hr>
                             <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>
-                            <p>Casado com professor?: ${dadosUsuario.ecasadoComPofessor}</p>
-                            <p>Estudante ou aluno de acadepol?: ${dadosUsuario.estudanteOUaluno}</p>
+                            <p>Casado com professor?: ${dadosUsuario.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</p>
+                            <p>Estudante ou aluno de acadepol?: ${dadosUsuario.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</p>
                             <hr></hr>
                             <p>CRITÉRIOS PARA FÉRIAS NÃO ESCOLAR</p>
                             <hr></hr>
-                            <p>Gestante?: ${dadosUsuario.gestante}</p>
+                            <p>Gestante?: ${dadosUsuario.gestante === 1 ? 'Sim' : 'Não'}</p>
                             <p>Quantidade de Filhos Menores: ${dadosUsuario.qtdfilhosmenores}</p>
-                            <p>É estudante?: ${dadosUsuario.estudante}</p>
-                            <p>Dois vínculos com mesmo período de férias?: ${dadosUsuario.DoisEmpregos}</p>
+                            <p>É estudante?: ${dadosUsuario.estudante === 1 ? 'Sim' : 'Não'}</p>
+                            <p>Dois vínculos com mesmo período de férias?: ${dadosUsuario.DoisEmpregos === 1 ? 'Sim' : 'Não'}</p>
                             <p>Antiguidade ${dadosUsuario.antiguidade}</p>
-                            <p>Conjuge servidor com o mesmo periodo?: ${dadosUsuario.ConjugeMesmoPeriodo}</p>
+                            <p>Conjuge servidor com o mesmo periodo?: ${dadosUsuario.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</p>
                             <p>Idade: ${dadosUsuario.idade}</p>
                             
                             
