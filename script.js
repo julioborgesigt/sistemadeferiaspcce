@@ -833,18 +833,18 @@ function exibirDadosPorMatricula() {
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th></tr>
 
 
-        <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td></tr>
-        <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor || 0}</td></tr>
-        <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno || 0}</td></tr>
+        <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho}</td></tr>
+        <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td></tr>
+        <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td></tr>
 
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias Não escolar</th></tr>
 
             
-            <tr><th>Gestante?</th><td>${dados.gestante}</td></tr>
+            <tr><th>Gestante?</th><td>${dados.gestante === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Qtd de Filhos de idade escolar</th><td>${dados.qtdfilhosmenores}</td></tr>
-            <tr><th>Estudante?</th><td>${dados.estudante}</td></tr>
-            <tr><th>Dois vínculos com mesmo periodo?</th><td>${dados.DoisEmpregos}</td></tr>
-            <tr><th>Conjuge com mesmo periodo?</th><td>${dados.ConjugeMesmoPeriodo}</td></tr>
+            <tr><th>Estudante?</th><td>${dados.estudante === 1 ? 'Sim' : 'Não'}</td></tr>
+            <tr><th>Dois vínculos com mesmo periodo?</th><td>${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td></tr>
+            <tr><th>Conjuge com mesmo periodo?</th><td>${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Antiguidade</th><td>${dados.antiguidade}</td></tr>
             <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
             
@@ -954,9 +954,9 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
-                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
-                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
     });
@@ -1024,9 +1024,9 @@ let dataArray = Object.values(database).filter(dados =>
             <td data-label="Matrícula">${dados.matricula}</td>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-            <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
-            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
-            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                 
                
               
@@ -1099,9 +1099,9 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-                <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
-                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
-                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+                <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
     });
@@ -1170,9 +1170,9 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
             <td data-label="Matrícula">${dados.matricula}</td>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
-            <td data-label="Filhos em idade escolar">${dados.possuiFilho === 1 ? 'Sim' : 'Não'}</td>
-            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor || 0}</td>
-            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno || 0}</td>
+            <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                 
                
               
@@ -1223,11 +1223,11 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
-                <td data-label="Gestante?">${dados.gestante}</td>
+                <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
-                <td data-label="Estudante?">${dados.estudante}</td>
-                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos}</td>
-                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo}</td>
+                <td data-label="Estudante?">${dados.estudante === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
                 <td data-label="Idade">${dados.idade}</td>
             </tr>`;
@@ -1272,11 +1272,11 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
-                <td data-label="Gestante?">${dados.gestante}</td>
+                <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
-                <td data-label="Estudante?">${dados.estudante}</td>
-                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos}</td>
-                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo}</td>
+                <td data-label="Estudante?">${dados.estudante === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Empregos com mesmo periodo?">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Conjuge com mesmo periodo?">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
                 <td data-label="Idade">${dados.idade}</td>
             </tr>`;
