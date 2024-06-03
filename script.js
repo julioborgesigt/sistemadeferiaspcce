@@ -841,6 +841,7 @@ function exibirDadosPorMatricula() {
     if (dados) {
         let html = `<table border="1">
         <tr><th>Matrícula</th><td> ${dados.matricula}</td></tr>
+        <td data-label="Nome">${dados.nome}</td>
         <tr><th>Cargo</th><td>${dados.cargo}</td></tr>
 
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th></tr>
@@ -888,7 +889,7 @@ function exibirDadosPorMatricula() {
 function exibirListaCompletaDEFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros EPC e IPC</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Menores</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -898,6 +899,7 @@ function exibirListaCompletaDEFerias() {
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
                 <td data-label="Idade">${dados.idade}</td>
                 <td data-label="Qtd Filhos Menores">${dados.qtdfilhosmenores}</td>
@@ -916,7 +918,7 @@ function exibirListaCompletaDEFerias() {
 function exibirListaConcorrentesFeriasEscolarIPC() {
     let html = "<h3>Lista ordenada por potuação escolar - IPC</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
 
     // Converter o objeto em um array de objetos para poder ordenar
@@ -965,6 +967,7 @@ let dataArray = Object.values(database).filter(dados =>
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
@@ -987,7 +990,7 @@ let dataArray = Object.values(database).filter(dados =>
 function exibirListaConcorrentesFeriasEscolarEPC() {
     let html = "<h3>Lista ordenada por potuação escolar - EPC</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
@@ -1035,6 +1038,7 @@ let dataArray = Object.values(database).filter(dados =>
         html += `
             <tr>
             <td data-label="Matrícula">${dados.matricula}</td>
+            <td data-label="Nome">${dados.nome}</td>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
             <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
@@ -1060,7 +1064,7 @@ let dataArray = Object.values(database).filter(dados =>
 function exibirListaFinalFeriasEscolarSelecionadosIPC() {
     let html = "<h3>Lista Final de Selecionados para Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
 
     // Converter o objeto em um array de objetos para poder ordenar
@@ -1110,6 +1114,7 @@ let dataArray = Object.values(database).filter(dados =>
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
@@ -1132,7 +1137,7 @@ let dataArray = Object.values(database).filter(dados =>
 function exibirListaFinalFeriasEscolarSelecionadosEPC() {
     let html = "<h3>Lista Final de Selecionados para Férias Escolar em ordem</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Pont. Férias Escolar</th><th>Pont. Férias Não Escolar</th><th>Filhos em idade escolar</th><th>Casado com prof.?</th><th>Estudante ou aluno de ACADEPOL?</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let anoCorrente = new Date().getFullYear().toString();
@@ -1181,6 +1186,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
         html += `
             <tr>
             <td data-label="Matrícula">${dados.matricula}</td>
+            <td data-label="Nome">${dados.nome}</td>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
             <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
@@ -1205,7 +1211,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
 function exibirListaFinalFeriasNaoEscolarIPC() {
     let html = "<h3>Lista Final de Férias Não Escolar IPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
@@ -1234,6 +1240,7 @@ let dataArray = Object.values(database).filter(dados =>
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
@@ -1253,7 +1260,7 @@ let dataArray = Object.values(database).filter(dados =>
 function exibirListaFinalFeriasNaoEscolarEPC() {
     let html = "<h3>Lista Final de Férias Não Escolar EPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Menores</th><th>Estud.?</th><th>Empregos com mesmo periodo?</th><th>Conjuge com mesmo periodo?</th><th>Antig.</th><th>Idade</th></tr>";
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
@@ -1283,6 +1290,7 @@ let dataArray = Object.values(database).filter(dados =>
         html += `
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
+                <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
