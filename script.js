@@ -349,8 +349,8 @@ function preCadastro() {
             matricula: matricula,
             nome: nome,
             dataNascimento: dataNascimento,
-            idadeDias: calcularIdade(dataNascimento),
-            idadeAnos: calcularIdade(dataNascimento),
+            idadeDias: calcularIdadeDias(dataNascimento),
+            idadeAnos: calcularIdadeAnos(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
             dataIngresso: dataIngresso,
@@ -378,8 +378,8 @@ function preCadastro() {
             matricula: matricula,
             nome: nome,
             dataNascimento: dataNascimento,
-            idadeDias: calcularIdade(dataNascimento),
-            idadeAnos: calcularIdade(dataNascimento),
+            idadeDias: calcularIdadeDias(dataNascimento),
+            idadeAnos: calcularIdadeAnos(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
             dataIngresso: dataIngresso,
@@ -706,27 +706,27 @@ function validarMatricula(input) {
 }
 
 
-function calcularIdade(dataNascimento) {
+function calcularIdadeAnos(dataNascimento) {
     let [dia, mes, ano] = dataNascimento.split('/').map(Number);
     let nascimento = new Date(ano, mes - 1, dia);
     let hoje = new Date();
-    
-    // Calcular a idade em anos
-    let idadeAnos = hoje.getFullYear() - nascimento.getFullYear();
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
     if (hoje.getMonth() < nascimento.getMonth() || 
         (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate())) {
-        idadeAnos--;
+        idade--;
     }
+    return idade;
+}
 
-    // Calcular a idade em dias
+function calcularIdadeDias(dataNascimento) {
+    let [dia, mes, ano] = dataNascimento.split('/').map(Number);
+    let nascimento = new Date(ano, mes - 1, dia);
+    let hoje = new Date();
     let diferencaTempo = hoje - nascimento;
     let idadeDias = Math.floor(diferencaTempo / (1000 * 60 * 60 * 24));
-
-    return {
-        anos: idadeAnos,
-        dias: idadeDias
-    };
+    return idadeDias;
 }
+
 
 
 function calcularAntiguidade(dataIngresso) {
