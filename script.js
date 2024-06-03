@@ -847,7 +847,7 @@ function exibirDadosPorMatricula() {
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th></tr>
 
 
-        <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho}</td></tr>
+        <tr><th>Qtd Filho em idade escolar</th><td>${dados.possuiFilho}</td></tr>
         <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td></tr>
         <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td></tr>
 
@@ -858,7 +858,7 @@ function exibirDadosPorMatricula() {
             <tr><th>Qtd de Filhos de idade escolar</th><td>${dados.qtdfilhosmenores}</td></tr>
             <tr><th>Estudante?</th><td>${dados.estudante === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Dois vínculos com mesmo periodo</th><td>${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td></tr>
-            <tr><th>Conjuge com mesmo periodo</th><td>${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td></tr>
+            <tr><th>Conj. com mesmo periodo</th><td>${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Antiguidade</th><td>${dados.antiguidade}</td></tr>
             <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
             
@@ -889,7 +889,7 @@ function exibirDadosPorMatricula() {
 function exibirListaCompletaDEFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros EPC e IPC</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Nome</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filhos Men.</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filho Men.</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
     let dataArray = Object.values(database);
@@ -902,7 +902,7 @@ function exibirListaCompletaDEFerias() {
                 <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
                 <td data-label="Idade">${dados.idade}</td>
-                <td data-label="Qtd Filhos Men.">${dados.qtdfilhosmenores}</td>
+                <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
                 <td data-label="Antiguidade">${dados.antiguidade}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
@@ -1211,7 +1211,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
 function exibirListaFinalFeriasNaoEscolarIPC() {
     let html = "<h3>Lista Final de Férias Não Escolar IPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conjuge com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filho Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conj. com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
@@ -1244,10 +1244,10 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
-                <td data-label="Qtd Filhos Men.">${dados.qtdfilhosmenores}</td>
+                <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
                 <td data-label="Estudante?">${dados.estudante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="2 vinc. mesmo periodo">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
-                <td data-label="Conjuge com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Conj. com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
                 <td data-label="Idade">${dados.idade}</td>
             </tr>`;
@@ -1260,7 +1260,7 @@ let dataArray = Object.values(database).filter(dados =>
 function exibirListaFinalFeriasNaoEscolarEPC() {
     let html = "<h3>Lista Final de Férias Não Escolar EPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filhos Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conjuge com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filho Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conj. com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
@@ -1294,10 +1294,10 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
-                <td data-label="Qtd Filhos Men.">${dados.qtdfilhosmenores}</td>
+                <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
                 <td data-label="Estudante?">${dados.estudante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="2 vinc. mesmo periodo">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
-                <td data-label="Conjuge com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Conj. com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
                 <td data-label="Idade">${dados.idade}</td>
             </tr>`;
