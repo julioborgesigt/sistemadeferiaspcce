@@ -370,6 +370,7 @@ function preCadastro() {
         // Se a matrícula já existir, adicione os dados aos existentes
         Object.assign(database[matricula], novosDados);
         //alert("Pre Cadastro concluído com suscesso");
+        alert("Pre Cadastro atualizado com suscesso!");
     } else {
         // Se a matrícula não existir, crie um novo registro
         database[matricula] = {
@@ -846,7 +847,7 @@ function exibirDadosPorMatricula() {
 
 
         <tr><th>Qtd Filhos em idade escolar</th><td>${dados.possuiFilho}</td></tr>
-        <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td></tr>
+        <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td></tr>
         <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td></tr>
 
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias Não escolar</th></tr>
@@ -967,7 +968,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
-                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
                 <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
@@ -1037,7 +1038,7 @@ let dataArray = Object.values(database).filter(dados =>
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
             <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
-            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
             <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                 
                
@@ -1112,7 +1113,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
-                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
                 <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
@@ -1183,7 +1184,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
             <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
             <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
-            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === 1 ? 'Sim' : 'Não'}</td>
+            <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
             <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
                 
                
