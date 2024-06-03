@@ -43,13 +43,13 @@
                             <p>Matrícula: ${dadosUsuario.matricula}</p>
                             <p>Cargo: ${dadosUsuario.cargo}</p>
                             <p>Férias Escolar ou Não: ${dadosUsuario.feriasescolarounao === 1 ? 'Sim' : 'Não'}</p>
-                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos}</p>
-                            <p>Início do período 1: ${dadosUsuario.periodo11}</p>
-                            <p>Final do período 1: ${dadosUsuario.periodo12}</p>
-                            <p>Início do período 2: ${dadosUsuario.periodo21}</p>
-                            <p>Final do período 2: ${dadosUsuario.periodo22}</p>
-                            <p>Início do período 3: ${dadosUsuario.periodo31}</p>
-                            <p>Final do período 3: ${dadosUsuario.periodo32}</p>                           
+                            <p>Número de Períodos: ${dadosUsuario.numeroDePeriodos || 'férias não marcadas'}</p>
+                            <p>Início do período 1: ${dadosUsuario.periodo11 || 'férias não marcadas'}</p>
+                            <p>Final do período 1: ${dadosUsuario.periodo12 || 'férias não marcadas'}</p>
+                            <p>Início do período 2: ${dadosUsuario.periodo21 || 'férias não marcadas'}</p>
+                            <p>Final do período 2: ${dadosUsuario.periodo22 || 'férias não marcadas'}</p>
+                            <p>Início do período 3: ${dadosUsuario.periodo31 || 'férias não marcadas'}</p>
+                            <p>Final do período 3: ${dadosUsuario.periodo32 || 'férias não marcadas'}</p>                           
                             
                         `;
                     } else {
