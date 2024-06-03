@@ -556,7 +556,7 @@ body.dark-mode .login-container h2 {
 
 #loading {
     position: fixed;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 20px;
