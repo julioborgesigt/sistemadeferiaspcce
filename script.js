@@ -853,7 +853,7 @@ function exibirDadosPorMatricula() {
     if (dados) {
         let html = `<table border="1">
         <tr><th>Matrícula</th><td> ${dados.matricula}</td></tr>
-        <tr><td data-label="Nome">${dados.nome}</td></tr>
+        <tr><th>Matrícula</th><td> ${dados.nome}</td></tr>
         <tr><th>Cargo</th><td>${dados.cargo}</td></tr>
 
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th><td></td></tr>
