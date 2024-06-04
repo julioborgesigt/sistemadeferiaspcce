@@ -856,7 +856,7 @@ function exibirDadosPorMatricula() {
         <td data-label="Nome">${dados.nome}</td>
         <tr><th>Cargo</th><td>${dados.cargo}</td></tr>
 
-        <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th></tr>
+        <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th><td></td></tr>
 
 
         <tr><th>Qtd Filho em idade escolar</th><td>${dados.possuiFilho}</td></tr>
