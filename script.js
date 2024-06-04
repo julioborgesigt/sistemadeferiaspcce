@@ -897,7 +897,6 @@ function exibirDadosPorMatricula() {
 }
 
 
-
 // Exibe todos os cadastros
 function exibirListaCompletaDEFerias() {
     let html = "<h3>Lista de Férias com todos os cadastros EPC e IPC</h3>";
