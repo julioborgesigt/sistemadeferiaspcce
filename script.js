@@ -118,8 +118,8 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     }
 
     // Adicionar 3 dias de margem ao início e fim
-    let inicioMargemAntes = adicionarDias(inicio, -3);
-    let fimMargemDepois = adicionarDias(fim, 3);
+    let inicioMargemAntes = adicionarDias(inicio, -1);
+    let fimMargemDepois = adicionarDias(fim, 1);
 
     let conflitoCountIPC = 0;
     let conflitoCountEPC = 0;
