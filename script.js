@@ -204,7 +204,7 @@ function concluirCadastro() {
        
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
-        window.location.href = `conclusao.html?matricula=${matricula}`;
+       // window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
         alert("Tente novamente depois");
