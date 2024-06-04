@@ -95,32 +95,6 @@ function verificarFimDeSemana(data) {
 
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
-    // Verifica se dataInicio e dataFim são strings
-    if (typeof dataInicio !== 'string' || typeof dataFim !== 'string') {
-        console.error('As datas devem estar no formato string');
-        return false;
-    }
-
-    // Função auxiliar para converter data no formato DD/MM/AAAA para objeto Date
-    function converterParaData(dataStr) {
-        let [dia, mes, ano] = dataStr.split('/').map(Number);
-        return new Date(ano, mes - 1, dia);
-    }
-
-    let inicio = converterParaData(dataInicio);
-    let fim = converterParaData(dataFim);
-
-    // Função auxiliar para adicionar dias a uma data
-    function adicionarDias(data, dias) {
-        let novaData = new Date(data);
-        novaData.setDate(novaData.getDate() + dias);
-        return novaData;
-    }
-
-    // Adicionar 3 dias de margem ao início e fim
-    let inicioMargemAntes = adicionarDias(inicio, -3);
-    let fimMargemDepois = adicionarDias(fim, 3);
-
     let conflitoCountIPC = 0;
     let conflitoCountEPC = 0;
     let conflitoCountIPCplantao = 0;
@@ -136,12 +110,16 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
         for (let periodo of periodos) {
             if (periodo.inicio && periodo.fim) {
-                let inicioExistente = converterParaData(periodo.inicio);
-                let fimExistente = converterParaData(periodo.fim);
+                let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
+                let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
+                 // Adicionar 5 dias de margem
+               
+                
+                
 
-                // Verificar se há conflito considerando a margem de 3 dias
-                if ((inicioMargemAntes <= fimExistente && inicio <= inicioExistente) ||
-                    (fim >= inicioExistente && fimMargemDepois >= fimExistente)) {
+                if ((dataInicio   <= fimExistente && dataInicio  >= inicioExistente) ||
+                    (dataFim  <= fimExistente && dataFim  >= inicioExistente) ||
+                    (dataInicio   <= inicioExistente && dataFim   >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
@@ -167,6 +145,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
     return conflito;
 }
+
 
 
 // Função para verificar conflitos de datas por cargo
@@ -219,7 +198,11 @@ function verificarPontuacao() {
         const matricula = document.getElementById("matriculaCadastro").value;
         verificarPontuacaoUsuario(matricula, true);
 
-    }else{
+    }else if(escolhaotipodeferias !== 1 && escolhaotipodeferias !== 0 ){
+        alert("escolha primeiro para qual tipo de férias você deseja consultar")
+        carregarBancoDados();
+        
+    } else{
         alert("escolha primeiro para qual tipo de férias você deseja consultar")
         carregarBancoDados();
         
