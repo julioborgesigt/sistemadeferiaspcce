@@ -192,7 +192,7 @@ function concluirCadastro() {
 
 // Função para o botão de verificação de pontuação
 function verificarPontuacao() {
-
+    let escolhaotipodeferias =  database[matricula].feriasescolarounao
     if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
         const matricula = document.getElementById("matriculaCadastro").value;
         verificarPontuacaoUsuario(matricula, true);
