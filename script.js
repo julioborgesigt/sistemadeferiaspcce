@@ -350,7 +350,7 @@ function preCadastro() {
             nome: nome,
             dataNascimento: dataNascimento,
             idadeDias: calcularIdadeDias(dataNascimento),
-            idadeAnos: calcularIdadeAnos(dataNascimento),
+            idade: calcularIdadeAnos(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
             dataIngresso: dataIngresso,
@@ -379,7 +379,7 @@ function preCadastro() {
             nome: nome,
             dataNascimento: dataNascimento,
             idadeDias: calcularIdadeDias(dataNascimento),
-            idadeAnos: calcularIdadeAnos(dataNascimento),
+            idade: calcularIdadeAnos(dataNascimento),
             paquisitivoinicio: paquisitivoinicio,
             paquisitivofim: paquisitivofim,
             dataIngresso: dataIngresso,
@@ -872,7 +872,7 @@ function exibirDadosPorMatricula() {
             <tr><th>Dois vínculos com mesmo periodo</th><td>${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Conj. com mesmo periodo</th><td>${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Antiguidade</th><td>${dados.antiguidade}</td></tr>
-            <tr><th>Idade</th><td>${dados.idadeDias}</td></tr>`;
+            <tr><th>Idade</th><td>${dados.idade}</td></tr>`;
             
         // Verificar se os períodos de férias estão definidos
         if (dados.periodo11) {
@@ -913,7 +913,7 @@ function exibirListaCompletaDEFerias() {
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Nome">${dados.nome}</td>
                 <td data-label="Qtd Períodos">${dados.numeroDePeriodos}</td>
-                <td data-label="Idade">${dados.idadeDias}</td>
+                <td data-label="Idade">${dados.idade}</td>
                 <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
                 <td data-label="Antiguidade">${dados.antiguidade}</td>
                 <td data-label="Pontuação Férias Escolar">${dados.pontuacaoferiasescolar || 0}</td>
@@ -1261,7 +1261,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="2 vinc. mesmo periodo">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Conj. com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
-                <td data-label="Idade">${dados.idadeDias}</td>
+                <td data-label="Idade">${dados.idade}</td>
             </tr>`;
     });
 
@@ -1311,7 +1311,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="2 vinc. mesmo periodo">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Conj. com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
-                <td data-label="Idade">${dados.idadeDias}</td>
+                <td data-label="Idade">${dados.idade}</td>
             </tr>`;
     });
 
