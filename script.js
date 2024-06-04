@@ -1119,7 +1119,7 @@ let dataArray = Object.values(database).filter(dados =>
 
 
     // Limitar a exibição aos 6 primeiros resultados
-    let seisPrimeiros = dataArray.slice(0, 6);
+    let seisPrimeiros = dataArray.slice(0, 3);
     
     // Gerar a tabela HTML
     seisPrimeiros.forEach(dados => {
