@@ -910,7 +910,6 @@ function exibirListaCompletaDEFerias() {
         dados.matricula.endsWith(`.${anoCorrente}`)
     );
 
-
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
         html += `
