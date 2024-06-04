@@ -32,7 +32,7 @@ body::before {
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     padding: 20px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -68,33 +68,59 @@ button:active {
 
 /* Calendário */
 .calendario {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Ajustado para exibir 4 colunas em telas maiores */
+    gap: 10px;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+.mes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #dddddd;
+    background-color: #f9f9f9;
+}
+
+.mes table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 0.9em;
+    table-layout: fixed;
 }
 
-.calendario th, .calendario td {
-    padding: 10px;
+.mes th, .mes td {
+    width: 14.28%;
     text-align: center;
-    border: 1px solid #ddd;
+    padding: 20px; /* Aumentado o padding para celulas maiores */
+    border: 1px solid #dddddd;
+    font-size: 1.2em; /* Aumentado o tamanho da fonte */
 }
 
-.calendario th {
+.mes th {
     background-color: #f2f2f2;
     color: #333;
 }
 
-.calendario td {
+.mes td {
     background-color: #fff;
+    position: relative;
 }
 
-.calendario tr:nth-child(even) td {
-    background-color: #f9f9f9;
+.mes td span {
+    display: block;
+    margin-top: 5px;
+    font-size: 1em; /* Aumentado o tamanho da fonte dos números */
 }
 
-.calendario tr:nth-child(odd) td {
-    background-color: #e9e9e9;
+.mes td .users {
+    margin-top: 10px;
+    font-size: 1em; /* Aumentado o tamanho da fonte dos nomes */
+    color: #555555;
 }
 
 /* Estilo para modo escuro */
@@ -113,6 +139,57 @@ body.dark-mode .calendario td {
     border: 1px solid #444;
 }
 
+/* Responsividade */
+@media (max-width: 1024px) {
+    .calendario {
+        grid-template-columns: repeat(3, 1fr); /* Ajustado para exibir 3 colunas em telas médias */
+    }
+
+    .mes th, .mes td {
+        padding: 15px; /* Ajustado o padding para telas médias */
+        font-size: 1em;
+    }
+
+    .mes td span, .mes td .users {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendario {
+        grid-template-columns: repeat(2, 1fr); /* Ajustado para exibir 2 colunas em telas pequenas */
+    }
+
+    .mes th, .mes td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    .mes td span, .mes td .users {
+        font-size: 0.8em;
+    }
+
+    button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendario {
+        grid-template-columns: 1fr; /* Ajustado para exibir 1 coluna em telas muito pequenas */
+    }
+
+    .mes th, .mes td {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+
+    .mes td span, .mes td .users {
+        font-size: 0.7em;
+    }
+}
+
 /* Regras de impressão */
 @media print {
     body {
@@ -126,21 +203,12 @@ body.dark-mode .calendario td {
         padding: 0;
     }
 
-    .calendario {
-        page-break-inside: avoid;
-    }
-
-    .calendario tr, .calendario td {
-        page-break-inside: avoid;
-    }
-}
-@media print {
     #anoCorrenteBtn, #proximoAnoBtn, button[onclick="window.print()"], button[onclick="toggleDarkMode()"] {
         display: none;
     }
 
     /* Garantir que os meses sejam impressos completos na mesma página */
-    .calendario {
+    .calendario, .mes, .mes table, .mes tr, .mes td {
         page-break-inside: avoid;
     }
 }
