@@ -192,6 +192,7 @@ function concluirCadastro() {
 
 // Função para o botão de verificação de pontuação
 function verificarPontuacao() {
+    const matricula = document.getElementById("matriculaCadastro").value;
     let escolhaotipodeferias =  database[matricula].feriasescolarounao
     if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
         const matricula = document.getElementById("matriculaCadastro").value;
@@ -665,7 +666,7 @@ function cadastroInicial() {
         };
     }
 
-   
+    
     let escolhaotipodeferias =  database[matricula].feriasescolarounao
     alert(`este é seu tipo de ferias escolhido2" ${escolhaotipodeferias}`);
 
