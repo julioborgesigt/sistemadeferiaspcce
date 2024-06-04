@@ -92,13 +92,27 @@ function verificarFimDeSemana(data) {
 }
 
 
-
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPC = 0;
     let conflitoCountEPC = 0;
     let conflitoCountIPCplantao = 0;
     let conflitoCountEPCplantao = 0;
+
+    // Converter a data de início e fim para objetos Date
+    let inicio = new Date(dataInicio.split('/').reverse().join('-'));
+    let fim = new Date(dataFim.split('/').reverse().join('-'));
+
+    // Função auxiliar para adicionar dias a uma data
+    function adicionarDias(data, dias) {
+        let novaData = new Date(data);
+        novaData.setDate(novaData.getDate() + dias);
+        return novaData;
+    }
+
+    // Adicionar 3 dias de margem ao início e fim
+    let inicioMargemAntes = adicionarDias(inicio, -3);
+    let fimMargemDepois = adicionarDias(fim, 3);
 
     for (let matricula in database) {
         let funcionario = database[matricula];
@@ -112,14 +126,10 @@ function verificarConflito(dataInicio, dataFim, cargo) {
             if (periodo.inicio && periodo.fim) {
                 let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
                 let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
-                 // Adicionar 5 dias de margem
-               
-                
-                
 
-                if ((dataInicio   <= fimExistente && dataInicio  >= inicioExistente) ||
-                    (dataFim  <= fimExistente && dataFim  >= inicioExistente) ||
-                    (dataInicio   <= inicioExistente && dataFim   >= fimExistente)) {
+                // Verificar se há conflito considerando a margem de 3 dias
+                if ((inicioMargemAntes <= fimExistente && inicio <= inicioExistente) ||
+                    (fim >= inicioExistente && fimMargemDepois >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
@@ -145,6 +155,31 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
     return conflito;
 }
+
+// Função para verificar limites de conflitos por cargo
+function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
+    const maxConflitoPermitido = 3; // Permitir conflito de até 3 dias
+
+    // Função auxiliar para verificar se há conflito dentro do limite permitido
+    function conflitoPermitido(count) {
+        return count <= maxConflitoPermitido;
+    }
+
+    // Verifica os conflitos para cada cargo com a nova regra
+    switch (cargo) {
+        case 'IPC':
+            return conflitoPermitido(conflitoCountIPC);
+        case 'EPC':
+            return conflitoPermitido(conflitoCountEPC);
+        case 'IPCplantao':
+            return conflitoPermitido(conflitoCountIPCplantao);
+        case 'EPCplantao':
+            return conflitoPermitido(conflitoCountEPCplantao);
+        default:
+            return false;
+    }
+}
+
 
 
 
