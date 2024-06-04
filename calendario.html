@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conclusão do Cadastro</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="calendario.css">
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    
+
+
 </head>
 <body>
     <div class="container">
@@ -13,19 +23,17 @@
             <!-- As informações do cadastro serão exibidas aqui -->
         </div>
         
-        
         <div>
             <button id="anoCorrenteBtn">Ano Corrente</button>
             <button id="proximoAnoBtn">Próximo Ano</button>
             <button onclick="window.print()">Imprimir</button>
+            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
         </div>
         <div id="calendarioCorrente" class="calendario-ano"></div>
         <div id="calendarioProximo" class="calendario-ano" style="display:none;"></div>
     </div>
 
     <script>
-        
-
         document.addEventListener('DOMContentLoaded', () => {
             fetch('banco_dados.json')
                 .then(response => response.json())
@@ -94,47 +102,49 @@
                 const table = document.createElement('table');
                 table.classList.add('calendario');
                 const thead = document.createElement('thead');
-                thead.innerHTML = `<tr><th colspan="7">${meses[mes]}</th></tr><tr><th>Dom</th><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th></tr>`;
+                const headerRow = document.createElement('tr');
+                const th = document.createElement('th');
+                th.colSpan = 7;
+                th.textContent = meses[mes];
+                headerRow.appendChild(th);
+                thead.appendChild(headerRow);
                 table.appendChild(thead);
 
                 const tbody = document.createElement('tbody');
+                const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                const diasHeaderRow = document.createElement('tr');
+                diasSemana.forEach(dia => {
+                    const diaTh = document.createElement('th');
+                    diaTh.textContent = dia;
+                    diasHeaderRow.appendChild(diaTh);
+                });
+                tbody.appendChild(diasHeaderRow);
+
                 const primeiroDia = new Date(ano, mes, 1).getDay();
                 const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+                let diaAtual = 1;
 
-                let linha = document.createElement('tr');
-                for (let i = 0; i < primeiroDia; i++) {
-                    linha.appendChild(document.createElement('td'));
-                }
-
-                for (let dia = 1; dia <= ultimoDia; dia++) {
-                    const celula = document.createElement('td');
-                    celula.textContent = dia;
-
-                    const data = new Date(ano, mes, dia).toISOString().split('T')[0];
-                    const feriasData = datasFerias.find(f => f.data === data);
-
-                    if (feriasData) {
-                        const coresUsuarios = feriasData.usuarios.map(usuario => corUsuario[usuario]);
-                        celula.style.backgroundImage = `linear-gradient(${coresUsuarios.join(', ')})`;
-
-                        feriasData.usuarios.forEach(usuario => {
-                            const nomeDiv = document.createElement('div');
-                            nomeDiv.textContent = usuario;
-                            nomeDiv.style.fontSize = '0.8em';
-                            celula.appendChild(document.createElement('br')); // Quebra de linha entre o dia e o nome
-                            celula.appendChild(nomeDiv);
-                        });
+                for (let semana = 0; semana < 6; semana++) {
+                    const row = document.createElement('tr');
+                    for (let dia = 0; dia < 7; dia++) {
+                        const cell = document.createElement('td');
+                        if (semana === 0 && dia < primeiroDia) {
+                            cell.textContent = '';
+                        } else if (diaAtual > ultimoDia) {
+                            cell.textContent = '';
+                        } else {
+                            const dataStr = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(diaAtual).padStart(2, '0')}`;
+                            const feriasData = datasFerias.find(f => f.data === dataStr);
+                            cell.textContent = diaAtual;
+                            if (feriasData) {
+                                cell.style.backgroundColor = corUsuario[feriasData.usuarios[0]];
+                                cell.title = feriasData.usuarios.join(', ');
+                            }
+                            diaAtual++;
+                        }
+                        row.appendChild(cell);
                     }
-
-                    linha.appendChild(celula);
-                    if ((primeiroDia + dia) % 7 === 0) {
-                        tbody.appendChild(linha);
-                        linha = document.createElement('tr');
-                    }
-                }
-
-                if (linha.children.length > 0) {
-                    tbody.appendChild(linha);
+                    tbody.appendChild(row);
                 }
 
                 table.appendChild(tbody);
