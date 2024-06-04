@@ -1,116 +1,476 @@
-/* Calendário */
-.calendario {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #fff; /* Fundo branco */
-    color: #333; /* Texto escuro */
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-.calendario th {
-    background-color: #4CAF50; /* Verde escuro para cabeçalhos */
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-size: 1em;
-}
-
-.calendario td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-    vertical-align: top;
-    height: 100px; /* Altura fixa para células */
-    width: 14.28%; /* Dividido igualmente em 7 colunas */
-}
-
-.calendario td:hover {
-    background-color: #f1f1f1;
-}
-
-/* Cores alternadas para os fins de semana */
-.calendario th:nth-child(1),
-.calendario th:nth-child(7),
-.calendario td:nth-child(1),
-.calendario td:nth-child(7) {
-    background-color: #f9f9f9;
-}
-
-/* Estilo para o container do calendário */
-.container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para os títulos e textos */
-h2, p {
-    text-align: center;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
     color: #333;
+    position: relative;
 }
 
-/* Botões */
+/* Container padrão */
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/* Cabeçalhos */
+h1, h2 {
+    text-align: center;
+    color: #007aff;
+}
+
+h3 {
+    text-align: left;
+}
+
+/* Formulário */
+.form-container,
+.consulta-container {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
 button {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #4CAF50; /* Verde */
+    background-color: #007BFF;
     color: white;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #45a049; /* Verde escuro */
+    background-color: #50a3fc;
 }
 
-/* Estilo dark mode */
-body.dark-mode {
+button:active {
+    background-color: #06b300;
+}
+
+.logout-container {
+    margin-bottom: 20px;
+
+    
+}
+
+.logout-container button {
+
+    background-color: #ff0000; /* Cor de fundo do botão */
+    color: #fff;           /* Cor do texto do botão */
+    transition: background-color 0.3s;
+    padding: 10px 10px;    /* Espaçamento interno do botão */
+    font-size: 16px;       /* Tamanho da fonte */
+    border: none;          /* Sem borda */
+    border-radius: 5px;    /* Bordas arredondadas */
+    cursor: pointer;       /* Cursor de ponteiro */
+
+}
+
+.logout-container button:hover {
+    background-color: #b60303; /* Cor de fundo do botão ao passar o mouse */
+}
+
+
+/* Ajustar tamanho da fonte nas tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+    background-color: #e9e9e9;
+}
+
+/* Estilo para modo escuro */
+body.dark-mode table {
+    border-color: #444;
+}
+
+body.dark-mode th {
     background-color: #333;
-    color: #fff;
+    color: #ffffff;
 }
 
-body.dark-mode .calendario {
-    background-color: #444;
-    color: #fff;
+body.dark-mode td {
+    border-bottom-color: #444;
 }
 
-body.dark-mode .calendario th {
-    background-color: #555;
+body.dark-mode tr:nth-child(even) {
+    background-color: #2a2a2a;
 }
 
-body.dark-mode .calendario td {
-    border-color: #555;
+body.dark-mode tr:nth-child(odd) {
+    background-color: #1e1e1e;
 }
 
-body.dark-mode .container {
-    background: rgba(50, 50, 50, 0.8);
+/* Estilo para os cabeçalhos das tabelas */
+h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
-body.dark-mode button {
-    background-color: #555;
-    color: #fff;
-}
+/* Tabela responsiva */
+@media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
 
-body.dark-mode button:hover {
-    background-color: #666;
-}
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
 
-@media print {
-    #anoCorrenteBtn, #proximoAnoBtn, button[onclick="window.print()"], button[onclick="toggleDarkMode()"] {
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr {
+        margin-bottom: 15px;
+    }
+
+    tr:last-child {
+        margin-bottom: 0;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    th::before, th::after {
         display: none;
     }
 
-    /* Garantir que os meses sejam impressos completos na mesma página */
-    .calendario {
-        page-break-inside: avoid;
+    tr:nth-child(even) {
+        background-color: transparent;
     }
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+#escolhadeferias {
+    text-align: center;
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    
+    color: rgb(255, 0, 0); /* Letras brancas */
+    padding-top: 5%;
+    background-color: transparent; /* Fundo transparente */
+}
+
+/* Estilo para o modo escuro */
+.dark-mode #escolhadeferias {
+    background-color: #1e1e1e;
+    ;
+    border-color: #555;
+    color: #f9f9f9;
+}
+
+
+
+#dados {
+    background-color: #f9f9f9;
+    /*border: 1px solid #ddd;*/
+    /*border-radius: 8px;*/
+    padding: 20px;
+    margin: 20px 0;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    background-color: transparent;
+}
+
+#dados h1 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#dados form {
+    margin-bottom: 20px;
+}
+
+#dados label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#dados .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#dados .radio-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+#dados .radio-group label {
+    margin-right: 20px;
+    margin-bottom: 0; /* Remove bottom margin to align labels horizontally */
+}
+
+#dados button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#dados button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o modo escuro */
+.dark-mode #dados {
+    background-color: #1e1e1e;
+    ;
+    border-color: #555;
+    color: #f9f9f9;
+}
+
+.dark-mode #dados h1 {
+    color: #f9f9f9;
+}
+
+.dark-mode #dados label {
+    color: #f9f9f9;
+}
+
+.dark-mode #dados button {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 10px; /* Bordas mais arredondadas no modo escuro */
+}
+
+.dark-mode #dados button:hover {
+    background-color: #585858;
+}
+
+
+
+/* Estilo para a seção de dados */
+#dados2 {
+    margin-top: 20px;
+}
+
+/* Estilo para modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .container {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #ffffff;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="date"],
+body.dark-mode input[type="checkbox"],
+body.dark-mode button {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 10px; /* Bordas mais arredondadas no modo escuro */
+}
+
+body.dark-mode button:hover {
+    background-color: #555;
+}
+
+body.dark-mode table {
+    border-color: #444;
+}
+
+body.dark-mode th {
+    background-color: #333;
+    color: #ffffff;
+}
+
+body.dark-mode td {
+    border-bottom-color: #444;
+}
+
+.dark-mode label {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #fffefe;
+}
+
+/* Estilos específicos para input de data no modo claro */
+input[type="date"] {
+    padding: 15px;
+    border-radius: 10px; /* Bordas mais arredondadas */
+}
+
+/* Estilos específicos para input de data no modo escuro */
+body.dark-mode input[type="date"] {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 10px; /* Bordas mais arredondadas */
+}
+
+body.dark-mode input[type="date"]::placeholder {
+    color: #999;
+}
+
+/* Estilo para o botão de modo escuro */
+#toggle-dark-mode {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #333;
+    transition: color 0.3s;
+}
+
+#toggle-dark-mode:focus {
+    outline: none;
+}
+
+body.dark-mode #toggle-dark-mode {
+    color: #ffffff;
+}
+
+
+/* Ajustes específicos para o flatpickr */
+.flatpickr-calendar {
+    z-index: 1000;
+}
+
+body.dark-mode .flatpickr-calendar {
+    background: #333;
+    color: #fff;
+    border: 1px solid #777;
+}
+
+body.dark-mode .flatpickr-months {
+    background: #555;
+    color: #fff;
+}
+
+body.dark-mode .flatpickr-days {
+    background: #444;
+}
+
+body.dark-mode .flatpickr-day {
+    color: #fff;
+}
+
+body.dark-mode .flatpickr-day.today {
+    background: #007aff;
+    color: #fff;
+}
+
+/* Estilos específicos para a página de login */
+.login-background {
+    background: url('papel de parede.png') no-repeat center center fixed;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.login-container {
+    max-width: 250px;
+    width: 250px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: 10px;
 }
 
 /* Pseudo-elemento para a imagem de fundo desfocada */
@@ -125,4 +485,83 @@ body::before {
     background-size: cover;
     filter: blur(10px);
     z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo */
+}
+
+
+
+body.dark-mode .login-container {
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.login-container h2 {
+    color: #007aff;
+    text-align: center;
+}
+
+body.dark-mode .login-container h2 {
+    color: #ffffff;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px; /* Bordas mais arredondadas */
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.login-container button {
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.login-container button:hover {
+    background-color: #005bb5;
+}
+
+/* Ajustes para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Estilo adicional */
+.checkbox-container {
+    display: flex;
+    gap: 10px;
+}
+
+#periodo1-container,
+#periodo2-container,
+#periodo3-container {
+    display: none;
+}
+
+#loading {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
 }
