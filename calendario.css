@@ -32,7 +32,7 @@ body::before {
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px; /* Aumenta a largura máxima para computadores */
     padding: 20px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -70,13 +70,13 @@ button:active {
 .calendario {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
+    gap: 10px; /* Aumenta o espaçamento entre os meses */
     width: 100%;
-    max-width: 1200px;
+    max-width: 1200px; /* Aumenta a largura máxima para computadores */
     background-color: #ffffff;
     border: 1px solid #dddddd;
     margin-bottom: 20px;
-    font-size: 0.9em;
+    font-size: 1em; /* Ajusta o tamanho da fonte */
 }
 
 .mes {
