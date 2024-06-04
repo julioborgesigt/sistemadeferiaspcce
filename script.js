@@ -905,8 +905,11 @@ function exibirListaCompletaDEFerias() {
     html += "<tr><th>Matrícula</th><th>Nome</th><th>Qtd Períodos</th><th>Idade</th><th>Qtd Filho Men.</th><th>Antiguidade</th><th>Pontuação Férias Escolar</th><th>Pontuação Férias Não Escolar</th></tr>";
     
     // Converter o objeto em um array de objetos para poder ordenar
-    let dataArray = Object.values(database);
-    
+    let dataArray = Object.values(database).filter(dados => 
+        dados.matricula.endsWith(`.${anoCorrente}`)
+    );
+
+
     // Gerar a tabela HTML
     dataArray.forEach(dados => {
         html += `
