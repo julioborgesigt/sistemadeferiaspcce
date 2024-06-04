@@ -1223,7 +1223,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
 function exibirListaFinalFeriasNaoEscolarIPC() {
     let html = "<h3>Lista Final de Férias Não Escolar IPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filho Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conj. com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filho Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conj. com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
@@ -1253,7 +1253,6 @@ let dataArray = Object.values(database).filter(dados =>
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Nome">${dados.nome}</td>
-                <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
@@ -1272,7 +1271,7 @@ let dataArray = Object.values(database).filter(dados =>
 function exibirListaFinalFeriasNaoEscolarEPC() {
     let html = "<h3>Lista Final de Férias Não Escolar EPC em ordem de Preferências</h3>";
     html += "<table border='1'>";
-    html += "<tr><th>Matrícula</th><th>Nome</th><th>Cargo</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filho Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conj. com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
+    html += "<tr><th>Matrícula</th><th>Nome</th><th>Pont. não escolar</th><th>Gest?</th><th>Qtd Filho Men.</th><th>Estud.</th><th>2 vinc. mesmo periodo</th><th>Conj. com mesmo periodo</th><th>Antig.</th><th>Idade</th></tr>";
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
@@ -1303,7 +1302,6 @@ let dataArray = Object.values(database).filter(dados =>
             <tr>
                 <td data-label="Matrícula">${dados.matricula}</td>
                 <td data-label="Nome">${dados.nome}</td>
-                <td data-label="Cargo">${dados.cargo}</td>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
