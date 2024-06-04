@@ -95,36 +95,12 @@ function verificarFimDeSemana(data) {
 
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
-    // Verifica se dataInicio e dataFim são strings
-    if (typeof dataInicio !== 'string' || typeof dataFim !== 'string') {
-        console.error('As datas devem estar no formato string');
-        return false;
-    }
-
-    // Função auxiliar para converter data no formato DD/MM/AAAA para objeto Date
-    function converterParaData(dataStr) {
-        let [dia, mes, ano] = dataStr.split('/').map(Number);
-        return new Date(ano, mes - 1, dia);
-    }
-
-    let inicio = converterParaData(dataInicio);
-    let fim = converterParaData(dataFim);
-
-    // Função auxiliar para adicionar dias a uma data
-    function adicionarDias(data, dias) {
-        let novaData = new Date(data);
-        novaData.setDate(novaData.getDate() + dias);
-        return novaData;
-    }
-
-    // Adicionar 3 dias de margem ao início e fim
-    let inicioMargemAntes = adicionarDias(inicio, -1);
-    let fimMargemDepois = adicionarDias(fim, 1);
-
     let conflitoCountIPC = 0;
     let conflitoCountEPC = 0;
     let conflitoCountIPCplantao = 0;
     let conflitoCountEPCplantao = 0;
+
+    
 
     for (let matricula in database) {
         let funcionario = database[matricula];
@@ -136,12 +112,16 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
         for (let periodo of periodos) {
             if (periodo.inicio && periodo.fim) {
-                let inicioExistente = converterParaData(periodo.inicio);
-                let fimExistente = converterParaData(periodo.fim);
+                let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
+                let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
+                 // Adicionar 5 dias de margem
+               
+                
+                
 
-                // Verificar se há conflito considerando a margem de 3 dias
-                if ((inicioMargemAntes <= fimExistente && inicio <= inicioExistente) ||
-                    (fim >= inicioExistente && fimMargemDepois >= fimExistente)) {
+                if ((dataInicio - 1  <= fimExistente && dataInicio  >= inicioExistente) ||
+                    (dataFim  <= fimExistente && dataFim + 1  >= inicioExistente) ||
+                    (dataInicio - 1  <= inicioExistente && dataFim + 1  >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
@@ -168,27 +148,25 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     return conflito;
 }
 
-// Função para verificar limites de conflitos por cargo
+
+
+// Função para verificar conflitos de datas por cargo
 function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
-    const maxConflitoPermitido = 3; // Permitir conflito de até 3 dias
-
-    // Função auxiliar para verificar se há conflito dentro do limite permitido
-    function conflitoPermitido(count) {
-        return count <= maxConflitoPermitido;
-    }
-
-    // Verifica os conflitos para cada cargo com a nova regra
     switch (cargo) {
         case 'IPC':
-            return conflitoPermitido(conflitoCountIPC);
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC expediente
+        case 'IPC':
+            return conflitoCountIPC >= 1 && conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC expediente e 1 ou mais IPC plantão
         case 'EPC':
-            return conflitoPermitido(conflitoCountEPC);
+            return conflitoCountEPC >= 1; // Conflito se houver 1 ou mais EPC expediente
         case 'IPCplantao':
-            return conflitoPermitido(conflitoCountIPCplantao);
+            return conflitoCountIPCplantao >= 1; // Conflito se houver 1 ou mais IPC plantão
+        case 'IPCplantao':
+            return conflitoCountIPC >= 2; // Conflito se houver 2 ou mais IPC do expediente
         case 'EPCplantao':
-            return conflitoPermitido(conflitoCountEPCplantao);
+            return conflitoCountEPCplantao >= 1; // Conflito se houver 1 ou mais EPC plantão
         default:
-            return false;
+            return false; // Nenhum conflito para outros cargos
     }
 }
 
@@ -204,7 +182,7 @@ function concluirCadastro() {
        
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
-       // window.location.href = `conclusao.html?matricula=${matricula}`;
+        window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
         alert("Tente novamente depois");
