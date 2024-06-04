@@ -1227,7 +1227,7 @@ function exibirListaFinalFeriasNaoEscolarIPC() {
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
-    dados.cargo === 'IPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+    (dados.cargo === 'IPC' || dados.cargo === 'IPCplantao') && dados.matricula.endsWith(`.${anoCorrente}`)
 );
     
     dataArray.sort((a, b) => {
@@ -1276,7 +1276,7 @@ function exibirListaFinalFeriasNaoEscolarEPC() {
     
     let anoCorrente = new Date().getFullYear().toString();
 let dataArray = Object.values(database).filter(dados => 
-    dados.cargo === 'EPC' && dados.matricula.endsWith(`.${anoCorrente}`)
+    (dados.cargo === 'EPC' || dados.cargo === 'EPCplantao') && dados.matricula.endsWith(`.${anoCorrente}`)
 );
     
     dataArray.sort((a, b) => {
