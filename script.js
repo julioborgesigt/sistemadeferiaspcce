@@ -92,16 +92,23 @@ function verificarFimDeSemana(data) {
 }
 
 
+
 // Função para verificar conflitos de datas
 function verificarConflito(dataInicio, dataFim, cargo) {
-    let conflitoCountIPC = 0;
-    let conflitoCountEPC = 0;
-    let conflitoCountIPCplantao = 0;
-    let conflitoCountEPCplantao = 0;
+    // Verifica se dataInicio e dataFim são strings
+    if (typeof dataInicio !== 'string' || typeof dataFim !== 'string') {
+        console.error('As datas devem estar no formato string');
+        return false;
+    }
 
-    // Converter a data de início e fim para objetos Date
-    let inicio = new Date(dataInicio.split('/').reverse().join('-'));
-    let fim = new Date(dataFim.split('/').reverse().join('-'));
+    // Função auxiliar para converter data no formato DD/MM/AAAA para objeto Date
+    function converterParaData(dataStr) {
+        let [dia, mes, ano] = dataStr.split('/').map(Number);
+        return new Date(ano, mes - 1, dia);
+    }
+
+    let inicio = converterParaData(dataInicio);
+    let fim = converterParaData(dataFim);
 
     // Função auxiliar para adicionar dias a uma data
     function adicionarDias(data, dias) {
@@ -114,6 +121,11 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     let inicioMargemAntes = adicionarDias(inicio, -3);
     let fimMargemDepois = adicionarDias(fim, 3);
 
+    let conflitoCountIPC = 0;
+    let conflitoCountEPC = 0;
+    let conflitoCountIPCplantao = 0;
+    let conflitoCountEPCplantao = 0;
+
     for (let matricula in database) {
         let funcionario = database[matricula];
         let periodos = [
@@ -124,8 +136,8 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
         for (let periodo of periodos) {
             if (periodo.inicio && periodo.fim) {
-                let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
-                let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
+                let inicioExistente = converterParaData(periodo.inicio);
+                let fimExistente = converterParaData(periodo.fim);
 
                 // Verificar se há conflito considerando a margem de 3 dias
                 if ((inicioMargemAntes <= fimExistente && inicio <= inicioExistente) ||
@@ -155,32 +167,6 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
     return conflito;
 }
-
-// Função para verificar limites de conflitos por cargo
-function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao) {
-    const maxConflitoPermitido = 3; // Permitir conflito de até 3 dias
-
-    // Função auxiliar para verificar se há conflito dentro do limite permitido
-    function conflitoPermitido(count) {
-        return count <= maxConflitoPermitido;
-    }
-
-    // Verifica os conflitos para cada cargo com a nova regra
-    switch (cargo) {
-        case 'IPC':
-            return conflitoPermitido(conflitoCountIPC);
-        case 'EPC':
-            return conflitoPermitido(conflitoCountEPC);
-        case 'IPCplantao':
-            return conflitoPermitido(conflitoCountIPCplantao);
-        case 'EPCplantao':
-            return conflitoPermitido(conflitoCountEPCplantao);
-        default:
-            return false;
-    }
-}
-
-
 
 
 // Função para verificar conflitos de datas por cargo
