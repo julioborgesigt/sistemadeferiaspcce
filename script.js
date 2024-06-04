@@ -853,7 +853,7 @@ function exibirDadosPorMatricula() {
     if (dados) {
         let html = `<table border="1">
         <tr><th>Matrícula</th><td> ${dados.matricula}</td></tr>
-        <td data-label="Nome">${dados.nome}</td>
+        <tr><td data-label="Nome">${dados.nome}</td></tr>
         <tr><th>Cargo</th><td>${dados.cargo}</td></tr>
 
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias escolar</th><td></td></tr>
@@ -863,7 +863,7 @@ function exibirDadosPorMatricula() {
         <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td></tr>
         <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td></tr>
 
-        <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias Não escolar</th></tr>
+        <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias Não escolar</th><td></td></tr>
 
             
             <tr><th>Gestante?</th><td>${dados.gestante === 1 ? 'Sim' : 'Não'}</td></tr>
