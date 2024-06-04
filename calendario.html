@@ -138,6 +138,13 @@
                             if (feriasData) {
                                 cell.style.backgroundColor = corUsuario[feriasData.usuarios[0]];
                                 cell.title = feriasData.usuarios.join(', ');
+
+                                // Adiciona os nomes dos usuários abaixo do dia
+                                const usuariosDiv = document.createElement('div');
+                                usuariosDiv.style.fontSize = '0.7em';
+                                usuariosDiv.style.marginTop = '5px';
+                                usuariosDiv.textContent = feriasData.usuarios.join(', ');
+                                cell.appendChild(usuariosDiv);
                             }
                             diaAtual++;
                         }
@@ -149,6 +156,10 @@
                 table.appendChild(tbody);
                 container.appendChild(table);
             }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
         }
     </script>
 </body>
