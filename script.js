@@ -901,7 +901,7 @@ function exibirDadosPorMatricula() {
 
         <tr><th>Qtd Filho em idade escolar</th><td>${dados.possuiFilho}</td></tr>
         <tr><th>Casado com prof.?</th><td>${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td></tr>
-        <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td></tr>
+        <tr><th>Estudante ou aluno de ACADEPOL?</th><td>${dados.estudanteOUaluno === "1" ? 'Sim' : 'Não'}</td></tr>
 
         <tr><th style="font-size: 20px; text-align: center;">Critéiros para férias Não escolar</th><td></td></tr>
 
@@ -1027,7 +1027,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
                 <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
-                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === "1" ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
     });
@@ -1098,7 +1098,7 @@ let dataArray = Object.values(database).filter(dados =>
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
             <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
             <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
-            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === "1" ? 'Sim' : 'Não'}</td>
                 
                
               
@@ -1174,7 +1174,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
                 <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
-                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === "1" ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
     });
@@ -1246,7 +1246,7 @@ function exibirListaFinalFeriasEscolarSelecionadosEPC() {
             <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
             <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
             <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
-            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === 1 ? 'Sim' : 'Não'}</td>
+            <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === "1" ? 'Sim' : 'Não'}</td>
                 
                
               
