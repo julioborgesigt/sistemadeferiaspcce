@@ -100,25 +100,22 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPCplantao = 0;
     let conflitoCountEPCplantao = 0;
 
-    let dataInicio2 = dataInicio
+
 
      // Subtrair um dia da data
-     dataInicio2.setDate(dataInicio2.getDate() - 1);
+     dataInicio.setDate(dataInicio.getDate() - 1);
 
      // Formatar a data de volta para DD/MM/AAAA
-     let diaAnterior = ("0" + dataInicio2.getDate()).slice(-2);
-     let mesAnterior = ("0" + (dataInicio2.getMonth() + 1)).slice(-2);
-     let anoAnterior = dataInicio2.getFullYear();
+     let diaAnterior = ("0" + dataInicio.getDate()).slice(-2);
+     let mesAnterior = ("0" + (dataInicio.getMonth() + 1)).slice(-2);
+     let anoAnterior = dataInicio.getFullYear();
  
      let dataAnterior = `${diaAnterior}/${mesAnterior}/${anoAnterior}`;
      console.log(dataAnterior);  // Resultado
 
-
-
      
-
      
-         dataFim.setDate(dataFim.getDate() + 1);
+         dataFim.setDate(dataFim.getDate() - 1);
      
          // Formatar a data de volta para DD/MM/AAAA
          let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
