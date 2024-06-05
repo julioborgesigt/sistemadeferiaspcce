@@ -635,15 +635,15 @@ function cadastroInicial() {
     console.log('a diferença em  dias 3 é:');
     console.log(diferencaEmDias3);
 
-    if ( diferencaEmDias1 !== 31 && qtdperiodos == 1 ) {
+    if ( diferencaEmDias1 !== 27 && qtdperiodos == 1 ) {
         alert("O intervalo entre as datas de início e fim do período 1 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 2 && diferencaEmDias2 === null  && (diferencaEmDias2 !== 16 || diferencaEmDias1 !== 14)  && qtdperiodos < 3 ) {
+    if (qtdperiodos === 2 && diferencaEmDias2 === null  && (diferencaEmDias2 !== 12 || diferencaEmDias1 !== 12)  && qtdperiodos < 3 ) {
         alert("O intervalo entre as datas de início e fim do período 1 e 2 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
-    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN)  && (diferencaEmDias3 !== 11 || diferencaEmDias2 !== 9 || diferencaEmDias1 !== 9)) {
+    if (qtdperiodos === 3 && (diferencaEmDias3 === null || diferencaEmDias2 === null || diferencaEmDias1 === null || diferencaEmDias1 === NaN)  && (diferencaEmDias3 !== 7 || diferencaEmDias2 !== 7 || diferencaEmDias1 !== 7)) {
         alert("O intervalo entre as datas de início e fim do período 1, 2 e 3 de férias deve ser de 10 ou 15 ou 30 dias.");
         return;
     }
