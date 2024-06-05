@@ -159,7 +159,7 @@ body.dark-mode .calendario td {
         padding: 0;
     }
 
-    #anoCorrenteBtn, #proximoAnoBtn, button[onclick="window.print()"], button[onclick="toggleDarkMode()"] {
+    #anoCorrenteIPCBtn, #proximoAnoIPCBtn, #anoCorrenteEPCBtn, #proximoAnoEPCBtn, button[onclick="window.print()"], button[onclick="toggleDarkMode()"] {
         display: none;
     }
 
