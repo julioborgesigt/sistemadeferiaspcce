@@ -102,7 +102,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
 
-     // Subtrair um dia da data
+     // adicionar um dia da data
      dataInicio.setDate(dataInicio.getDate() + 1);
 
      // Formatar a data de volta para DD/MM/AAAA
@@ -114,16 +114,16 @@ function verificarConflito(dataInicio, dataFim, cargo) {
      console.log(dataAnterior);  // Resultado
 
      
+     // Subtrair um dia da data
+    dataFim.setDate(dataFim.getDate() - 1);
      
-         dataFim.setDate(dataFim.getDate() - 1);
+    // Formatar a data de volta para DD/MM/AAAA
+    let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
+    let mesPosterior = ("0" + (dataFim.getMonth() + 1)).slice(-2);
+    let anoPosterior = dataFim.getFullYear();
      
-         // Formatar a data de volta para DD/MM/AAAA
-         let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
-         let mesPosterior = ("0" + (dataFim.getMonth() + 1)).slice(-2);
-         let anoPosterior = dataFim.getFullYear();
-     
-         let dataPosterior = `${diaPosterior}/${mesPosterior}/${anoPosterior}`;
-         console.log(dataPosterior);  // Resultado
+    let dataPosterior = `${diaPosterior}/${mesPosterior}/${anoPosterior}`;
+    console.log(dataPosterior);  // Resultado
     
 
 
@@ -144,15 +144,14 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
 
+
         for (let periodo of periodos) {
             if (periodo.inicio && periodo.fim) {
                 let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
                 let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
-                 // Adicionar 5 dias de margem
-               
-                
-                
-
+                console.log("data inicioExistente", inicioExistente);
+                console.log("data fimExistente", fimExistente);
+                 // verifica se a data escolhida para início e para fim estão entre alguma data de início ou fim já existente
                 if ((dataAnterior   <= fimExistente && dataAnterior  >= inicioExistente) ||
                     (dataPosterior  <= fimExistente && dataPosterior   >= inicioExistente)) {
                     if (funcionario.cargo === 'IPC') {
