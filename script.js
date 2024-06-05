@@ -136,8 +136,13 @@ function verificarConflito(dataInicio, dataFim, cargo) {
             { inicio: funcionario.periodo31, fim: funcionario.periodo32 }
         ];
 
+
+        console.log("data data Inicio", dataInicio);
+        console.log("data Fim", dataFim);
         console.log("data anterior", dataAnterior);
         console.log("data Posterior", dataPosterior);
+
+
 
         for (let periodo of periodos) {
             if (periodo.inicio && periodo.fim) {
