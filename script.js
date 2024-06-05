@@ -174,10 +174,10 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     const conflito = verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, conflitoCountIPCplantao, conflitoCountEPCplantao);
 
     console.log("retornou " + conflito + " veja abaixo os contadores");
-    console.log(conflitoCountEPC);
-    console.log(conflitoCountIPC);
-    console.log(conflitoCountEPCplantao);
-    console.log(conflitoCountIPCplantao);
+    console.log("epc", conflitoCountEPC);
+    console.log("ipc", conflitoCountIPC);
+    console.log("epc Plantao", conflitoCountEPCplantao);
+    console.log("ipc plantao", conflitoCountIPCplantao);
 
     return conflito;
 }
