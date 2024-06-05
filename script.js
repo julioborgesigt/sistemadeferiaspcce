@@ -102,7 +102,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
      // adicionar um dia da data
-     dataInicio.setDate(dataInicio.getDate() + 3);
+     dataInicio.setDate(dataInicio.getDate() + 2);
 
      // Formatar a data de volta para DD/MM/AAAA
      let diaAnterior = ("0" + dataInicio.getDate()).slice(-2);
@@ -113,7 +113,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
      console.log(dataAnterior);  // Resultado
      
      // Subtrair um dia da data
-    dataFim.setDate(dataFim.getDate() - 2);
+    dataFim.setDate(dataFim.getDate() - 3);
      
     // Formatar a data de volta para DD/MM/AAAA
     let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
