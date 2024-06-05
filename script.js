@@ -105,20 +105,29 @@ function verificarConflito(dataInicio, dataFim, cargo) {
      dataInicio.setDate(dataInicio.getDate() - 1);
 
      // Formatar a data de volta para DD/MM/AAAA
-     let dia = ("0" + dataInicio.getDate()).slice(-2);
-     let mes = ("0" + (dataInicio.getMonth() + 1)).slice(-2);
-     let ano = dataInicio.getFullYear();
+     let diaAnterior = ("0" + dataInicio.getDate()).slice(-2);
+     let mesAnterior = ("0" + (dataInicio.getMonth() + 1)).slice(-2);
+     let anoAnterior = dataInicio.getFullYear();
  
-     let dataAnterior = `${dia}/${mes}/${ano}`;
+     let dataAnterior = `${diaAnterior}/${mesAnterior}/${anoAnterior}`;
      console.log(dataAnterior);  // Resultado
 
 
 
-    console.log("essas sao as datas de inicio e fim com -1")
-    console.log(dataInicio);
-    console.log(dataFim);
-    console.log(dataAnterior);
-    console.log(dataFim - 1);
+     
+
+     
+         dataFim.setDate(dataFim.getDate() + 1);
+     
+         // Formatar a data de volta para DD/MM/AAAA
+         let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
+         let mesPosterior = ("0" + (dataFim.getMonth() + 1)).slice(-2);
+         let anoPosterior = dataFim.getFullYear();
+     
+         let dataPosterior = `${diaPosterior}/${mesPosterior}/${anoPosterior}`;
+         console.log(dataPosterior);  // Resultado
+    
+
 
 
     for (let matricula in database) {
@@ -138,9 +147,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 
                 
 
-                if ((dataInicio   <= fimExistente && dataInicio  >= inicioExistente) ||
-                    (dataFim  <= fimExistente && dataFim   >= inicioExistente) ||
-                    (dataInicio   <= inicioExistente && dataFim  >= fimExistente)) {
+                if ((diaAnterior   <= fimExistente && diaAnterior  >= inicioExistente) ||
+                    (dataPosterior  <= fimExistente && dataPosterior   >= inicioExistente) ||
+                    (diaAnterior   <= inicioExistente && dataPosterior  >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
