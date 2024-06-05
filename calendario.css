@@ -159,9 +159,7 @@ body.dark-mode .calendario td {
         padding: 0;
     }
 
-    #anoCorrenteBtn, #proximoAnoBtn, button[onclick="window.print()"], button[onclick="toggleDarkMode()"] {
-        display: none;
-    }
+    
 
     /* Garantir que os meses sejam impressos completos na mesma página */
     .calendario, .calendario tr, .calendario td {
