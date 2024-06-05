@@ -100,7 +100,13 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountIPCplantao = 0;
     let conflitoCountEPCplantao = 0;
 
-    
+
+    console.log("essas sao as datas de inicio e fim com -1")
+    console.log(dataInicio);
+    console.log(dataFim);
+    console.log(dataInicio + 1);
+    console.log(dataFim - 1);
+
 
     for (let matricula in database) {
         let funcionario = database[matricula];
@@ -119,9 +125,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 
                 
 
-                if ((dataInicio - 1  <= fimExistente && dataInicio - 1 >= inicioExistente) ||
-                    (dataFim + 1 <= fimExistente && dataFim + 1  >= inicioExistente) ||
-                    (dataInicio - 1  <= inicioExistente && dataFim + 1  >= fimExistente)) {
+                if ((dataInicio   <= fimExistente && dataInicio  >= inicioExistente) ||
+                    (dataFim  <= fimExistente && dataFim   >= inicioExistente) ||
+                    (dataInicio   <= inicioExistente && dataFim  >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
