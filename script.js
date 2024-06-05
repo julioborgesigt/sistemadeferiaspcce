@@ -129,7 +129,6 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
 
-
     for (let matricula in database) {
         let funcionario = database[matricula];
         let periodos = [
