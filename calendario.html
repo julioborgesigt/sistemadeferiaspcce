@@ -11,9 +11,15 @@
             document.body.classList.toggle('dark-mode');
         }
     </script>
+    
 </head>
 <body>
     <div class="container">
+        <button onclick="toggleDarkMode()">Modo escuro</button>
+        <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
+        <div style="text-align: center; margin-top: -20px;">
+            <button id="toggle-dark-mode"><i ></i></button>
+        </div>
         <h2 id="tituloCalendario">Calendário de Férias - Ano Corrente - IPC</h2>
         <div id="info">
             <!-- As informações do cadastro serão exibidas aqui -->
@@ -25,7 +31,7 @@
             <button id="anoCorrenteEPCBtn">Ano Corrente - EPC</button>
             <button id="proximoAnoEPCBtn">Próximo Ano - EPC</button>
             <button onclick="window.print()">Imprimir</button>
-            <button onclick="toggleDarkMode()">Modo escuro</button>
+            
         </div>
         <div id="calendarioCorrente" class="calendario-ano"></div>
         <div id="calendarioProximo" class="calendario-ano" style="display:none;"></div>

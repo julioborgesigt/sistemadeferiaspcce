@@ -168,3 +168,22 @@ body.dark-mode .calendario td {
         page-break-inside: avoid;
     }
 }
+
+
+/* Estilo para o botão de modo escuro */
+#toggle-dark-mode {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #333;
+    transition: color 0.3s;
+}
+
+#toggle-dark-mode:focus {
+    outline: none;
+}
+
+body.dark-mode #toggle-dark-mode {
+    color: #ffffff;
+}
