@@ -101,7 +101,6 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountEPCplantao = 0;
 
 
-
      // adicionar um dia da data
      dataInicio.setDate(dataInicio.getDate() + 3);
 
@@ -112,10 +111,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
  
      let dataAnterior = `${diaAnterior}/${mesAnterior}/${anoAnterior}`;
      console.log(dataAnterior);  // Resultado
-
      
      // Subtrair um dia da data
-    dataFim.setDate(dataFim.getDate() - 3);
+    dataFim.setDate(dataFim.getDate() - 2);
      
     // Formatar a data de volta para DD/MM/AAAA
     let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
