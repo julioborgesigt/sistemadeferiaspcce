@@ -146,6 +146,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
         for (let periodo of periodos) {
+            console.log("entrou no forrrrrr")
             if (periodo.inicio && periodo.fim) {
                 let inicioExistente = new Date(periodo.inicio.split('/').reverse().join('-'));
                 let fimExistente = new Date(periodo.fim.split('/').reverse().join('-'));
@@ -214,7 +215,7 @@ function concluirCadastro() {
        
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
-        window.location.href = `conclusao.html?matricula=${matricula}`;
+        //window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
         alert("Tente novamente depois");
