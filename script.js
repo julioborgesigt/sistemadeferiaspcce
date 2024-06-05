@@ -126,8 +126,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
      
          let dataPosterior = `${diaPosterior}/${mesPosterior}/${anoPosterior}`;
          console.log(dataPosterior);  // Resultado
-         
-    
+
 
 
 
