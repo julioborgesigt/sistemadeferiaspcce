@@ -101,10 +101,23 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     let conflitoCountEPCplantao = 0;
 
 
+     // Subtrair um dia da data
+     dataInicio.setDate(dataInicio.getDate() - 1);
+
+     // Formatar a data de volta para DD/MM/AAAA
+     let dia = ("0" + dataInicio.getDate()).slice(-2);
+     let mes = ("0" + (dataInicio.getMonth() + 1)).slice(-2);
+     let ano = dataInicio.getFullYear();
+ 
+     let dataAnterior = `${dia}/${mes}/${ano}`;
+     console.log(dataAnterior);  // Resultado
+
+
+
     console.log("essas sao as datas de inicio e fim com -1")
     console.log(dataInicio);
     console.log(dataFim);
-    console.log(dataInicio + 1);
+    console.log(dataAnterior);
     console.log(dataFim - 1);
 
 
