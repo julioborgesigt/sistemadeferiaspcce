@@ -117,15 +117,16 @@ function verificarConflito(dataInicio, dataFim, cargo) {
      
 
      
-         dataFim.setDate(dataFim.getDate() + 1);
+         dataFim2.setDate(dataFim.getDate() + 1);
      
          // Formatar a data de volta para DD/MM/AAAA
-         let diaPosterior = ("0" + dataFim.getDate()).slice(-2);
-         let mesPosterior = ("0" + (dataFim.getMonth() + 1)).slice(-2);
-         let anoPosterior = dataFim.getFullYear();
+         let diaPosterior = ("0" + dataFim2.getDate()).slice(-2);
+         let mesPosterior = ("0" + (dataFim2.getMonth() + 1)).slice(-2);
+         let anoPosterior = dataFim2.getFullYear();
      
          let dataPosterior = `${diaPosterior}/${mesPosterior}/${anoPosterior}`;
          console.log(dataPosterior);  // Resultado
+         
     
 
 
@@ -147,9 +148,9 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 
                 
 
-                if ((dataAnterior   <= fimExistente && dataInicio  >= inicioExistente) ||
-                    (dataFim  <= fimExistente && dataPosterior   >= inicioExistente) ||
-                    (dataAnterior   <= inicioExistente && dataPosterior  >= fimExistente)) {
+                if ((dataInicio   <= fimExistente && dataInicio  >= inicioExistente) ||
+                    (dataFim  <= fimExistente && dataFim   >= inicioExistente) ||
+                    (dataInicio   <= inicioExistente && dataFim  >= fimExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
