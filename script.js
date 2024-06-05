@@ -102,12 +102,12 @@ function verificarConflito(dataInicio, dataFim, cargo) {
 
 
      // Subtrair um dia da data
-     dataInicio.setDate(dataInicio.getDate() - 1);
+     let dataInicio2 = dataInicio.setDate(dataInicio.getDate() - 1);
 
      // Formatar a data de volta para DD/MM/AAAA
-     let diaAnterior = ("0" + dataInicio.getDate()).slice(-2);
-     let mesAnterior = ("0" + (dataInicio.getMonth() + 1)).slice(-2);
-     let anoAnterior = dataInicio.getFullYear();
+     let diaAnterior = ("0" + dataInicio2.getDate()).slice(-2);
+     let mesAnterior = ("0" + (dataInicio2.getMonth() + 1)).slice(-2);
+     let anoAnterior = dataInicio2.getFullYear();
  
      let dataAnterior = `${diaAnterior}/${mesAnterior}/${anoAnterior}`;
      console.log(dataAnterior);  // Resultado
@@ -117,7 +117,7 @@ function verificarConflito(dataInicio, dataFim, cargo) {
      
 
      
-         dataFim2.setDate(dataFim.getDate() + 1);
+        let dataFim2 = dataFim.setDate(dataFim.getDate() + 1);
      
          // Formatar a data de volta para DD/MM/AAAA
          let diaPosterior = ("0" + dataFim2.getDate()).slice(-2);
