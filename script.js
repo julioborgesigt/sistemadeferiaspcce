@@ -125,7 +125,8 @@ function verificarConflito(dataInicio, dataFim, cargo) {
     let dataPosterior = `${diaPosterior}/${mesPosterior}/${anoPosterior}`;
     console.log(dataPosterior);  // Resultado
     
-
+    let dataAnteriorObj = new Date(anoAnterior, mesAnterior - 1, diaAnterior);
+    let dataPosteriorObj = new Date(anoPosterior, mesPosterior - 1, diaPosterior);
 
 
     for (let matricula in database) {
@@ -153,8 +154,8 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 console.log("data inicioExistente", inicioExistente);
                 console.log("data fimExistente", fimExistente);
                  // verifica se a data escolhida para início e para fim estão entre alguma data de início ou fim já existente
-                if ((dataAnterior   <= fimExistente && dataAnterior  >= inicioExistente) ||
-                    (dataPosterior  <= fimExistente && dataPosterior   >= inicioExistente)) {
+                if ((dataAnteriorObj   <= fimExistente && dataAnteriorObj  >= inicioExistente) ||
+                    (dataPosteriorObj  <= fimExistente && dataPosteriorObj   >= inicioExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
