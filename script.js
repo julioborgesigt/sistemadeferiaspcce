@@ -117,7 +117,6 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                  // Adicionar 5 dias de margem
                
                 
-                
                 if ((dataInicio - 1  <= fimExistente && dataInicio  >= inicioExistente) ||
                     (dataFim  <= fimExistente && dataFim + 1  >= inicioExistente) ||
                     (dataInicio - 1  <= inicioExistente && dataFim + 1  >= fimExistente)) {
