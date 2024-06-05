@@ -153,8 +153,8 @@ function verificarConflito(dataInicio, dataFim, cargo) {
                 
                 
 
-                if ((dataAnterior   <= fimExistente && dataInicio  >= inicioExistente) ||
-                    (dataFim  <= fimExistente && dataPosterior   >= inicioExistente)) {
+                if ((dataAnterior   <= fimExistente && dataAnterior  >= inicioExistente) ||
+                    (dataPosterior  <= fimExistente && dataPosterior   >= inicioExistente)) {
                     if (funcionario.cargo === 'IPC') {
                         conflitoCountIPC++;
                     } else if (funcionario.cargo === 'EPC') {
