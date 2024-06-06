@@ -2,6 +2,7 @@
 .login-background {
     background: url('papel de parede.jpg') no-repeat center center fixed;
     background-size: cover;
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -18,6 +19,7 @@ body, html {
     justify-content: center;
     align-items: center;
 }
+
 
 .login-container {
     width: 100%;
