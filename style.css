@@ -228,25 +228,6 @@ h3 {
 
 
 
-#escolhadeferias {
-    text-align: center;
-    font-size: 18px; /* Aumenta o tamanho da fonte */
-    
-    color: rgb(255, 0, 0); /* Letras brancas */
-    padding-top: 5%;
-    background-color: transparent; /* Fundo transparente */
-}
-
-/* Estilo para o modo escuro */
-.dark-mode #escolhadeferias {
-    background-color: #1e1e1e;
-    ;
-    border-color: #555;
-    color: #f9f9f9;
-}
-
-
-
 #dados {
     background-color: #f9f9f9;
     /*border: 1px solid #ddd;*/
