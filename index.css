@@ -21,13 +21,14 @@ body, html {
 
 .login-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     text-align: center;
     box-sizing: border-box;
+    height: 450px; /* Altura fixa para o contêiner */
 }
 
 .toggle-buttons {
@@ -46,9 +47,9 @@ body, html {
 }
 
 .toggle-buttons .active {
-    background-color: #007aff;
+    background-color: #0351a5;
     color: #fff;
-    border-radius: 15px;
+    
 }
 
 .login-container h2 {
@@ -65,7 +66,7 @@ body.dark-mode .login-container h2 {
 .login-container button {
     width: calc(100% - 40px);
     padding: 10px;
-    margin: 10px 20px;
+    margin: 10px 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 1em;
@@ -89,5 +90,6 @@ body.dark-mode .login-container h2 {
         height: 100%;
         border-radius: 0;
         padding: 20px 10px;
+        max-height: none; /* Remove a altura máxima em dispositivos móveis */
     }
 }
