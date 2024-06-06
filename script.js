@@ -1174,7 +1174,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Pontuação Férias Não Escolar">${dados.pontuacaoferiasNaoescolar || 0}</td>
                 <td data-label="Filhos em idade escolar">${dados.possuiFilho}</td>
                 <td data-label="Casado com prof.?">${dados.ecasadoComPofessor === "1" ? 'Sim' : 'Não'}</td>
-                <td data-label="Estudante ou aluno de ACADEPOL?">${dados.estudanteOUaluno === "1" ? 'Sim' : 'Não'}</td>
+                <td data-label="Estudante ou aluno de ACADEPOL?" "1" ? 'Sim' : 'Não'}</td>
                      
             </tr>`;
     });

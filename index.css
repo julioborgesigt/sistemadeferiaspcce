@@ -28,7 +28,7 @@ body, html {
     border-radius: 15px;
     text-align: center;
     box-sizing: border-box;
-    height: 450px; /* Altura fixa para o contêiner */
+    color: #ffffff;
 }
 
 .toggle-buttons {
@@ -96,7 +96,7 @@ body.dark-mode .login-container h2 {
         max-width: none;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 20px;
-        color: #ccc;
+        color: #ffffff;
     }
 
     .login-container input[type="text"],
