@@ -1463,5 +1463,5 @@ function consultaferiasmarcadas() {
 }
 
 function alterardata() {
-    window.open(`alterardata.html?matricula=${matricula}`);
+    window.open(`alterardata.html`);
 }
