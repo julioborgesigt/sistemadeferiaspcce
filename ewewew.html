@@ -1,107 +1,220 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro e Consulta de Férias</title>
+    <title>Login e Cadastro</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script>
+        let database = {};
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarBancoDados();
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('cadastroForm').style.display = 'none';
+                document.getElementById('loginBtn').classList.add('active');
+                document.getElementById('cadastroBtn').classList.remove('active');
+            });
+
+            document.getElementById('cadastroBtn').addEventListener('click', () => {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('cadastroForm').style.display = 'block';
+                document.getElementById('loginBtn').classList.remove('active');
+                document.getElementById('cadastroBtn').classList.add('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarBancoDados();
+        });
+
+        // Verifica se a página foi carregada a partir do cache do navegador
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.href = 'index.html';
+            }
+        });
+
+        function carregarBancoDados() {
+            const url = 'banco_dados.json';
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao carregar o arquivo.');
+                    }
+                    return response.text();
+                })
+                .then(jsonData => {
+                    database = JSON.parse(jsonData);
+                    console.log("Banco de dados carregado:", database);
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
+        }
+
+
+        function salvarBancoDados() {
+            const url = 'banco_dados.json';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(database),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao salvar os dados.');
+                }
+                alert("Dados salvos com sucesso!");
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        }
+
+        function generateToken() {
+            return Math.random().toString(36).substr(2);
+        }
+
+        function validarMatricula(input) {
+            const anoCorrente = new Date().getFullYear();
+            const matricula = input.value.trim();
+
+            // Verifica se a matrícula já contém um ponto seguido de quatro dígitos no final
+            if (!matricula.match(/\.\d{4}$/)) {
+                input.value = `${matricula}.${anoCorrente}`;
+            }
+        }
+        let feriasescolarounao = 3 ;
+        function login() {
+            const matricula = document.getElementById('loginMatricula').value;
+            const senha = document.getElementById('loginSenha').value;
+            const isAdmin = document.getElementById('adminCheckbox').checked;
+
+            console.log("Tentando login:", { matricula, senha, isAdmin });
+
+            if (database[matricula] && database[matricula].senha === senha) {
+                console.log("Credenciais verificadas no banco de dados.");
+                
+                const token = generateToken();
+                const expirationTime = new Date().getTime() + 10 * 60 * 1000; // 10 minutos em milissegundos
+                const loginData = { token, expirationTime };
+
+                localStorage.setItem('loginToken', JSON.stringify(loginData));
+
+                if (isAdmin) {
+                    if (senha === '25081990') {
+                        alert("Bem-vindo, Administrador!");
+                        window.location.href = 'adm.html';
+                    } else {
+                        alert("Você não é um administrador.");
+                    }
+                } else {
+                    alert("Login bem-sucedido!");
+                    window.location.href = `cadastro.html?matricula=${matricula}`; 
+                }
+            } else {
+                alert("Matrícula ou senha incorreta.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.cargo-checkbox');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        checkboxes.forEach(box => {
+                            if (box !== this) {
+                                box.checked = false;
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        function cadastrar() {
+            const matricula = document.getElementById('cadastroMatricula').value;
+            const senha = document.getElementById('cadastroSenha').value;
+            const confirmacaoSenha = document.getElementById('cadastroConfirmacaoSenha').value;
+
+            if (senha.length < 8 || senha.length > 8 || matricula.length < 13 || matricula.length > 13) {
+                alert("Confira a Matrícula ou verifique se a senha tem exatamente 8 caracteres.");
+                return;
+            }
+
+            if (senha !== confirmacaoSenha) {
+                alert("As senhas não coincidem.");
+                return;
+            }
+
+            if (database[matricula] && database[matricula].senha.length === 8) {
+                alert("Matrícula já cadastrada com uma senha.");
+                return;
+            }
+            
+            if (database[matricula]) {
+                // Se a matrícula já existir, adicione os dados aos existentes
+                Object.assign(database[matricula], {
+                    senha: senha,
+                    feriasescolarounao: feriasescolarounao
+                    
+                });
+                console.log('pre cad');
+            } else {
+                // Se a matrícula não existir, crie um novo registro
+                database[matricula] = {
+                    senha,
+                    matricula,
+                    feriasescolarounao: feriasescolarounao
+                };
+                console.log('novo cad');
+            }
+            console.log('novo cad veja');
+            console.log(database[matricula]);
+            console.log(matricula);
+
+            salvarBancoDados();
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-
-       
-        <h1>Cadastro e Consulta de Férias</h1>
-
-
-         <!-- Botão para alternar entre modos claro e escuro -->
-   <div style="text-align: center; margin-bottom: -60px; margin-left:90%">
-    <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
-</div>
-   
+    <div class="login-background"></div>
+    <div class="login-container">
+        <div class="toggle-buttons">
+            <button id="loginBtn" class="active">Sign in</button>
+            <button id="cadastroBtn">Sign up</button>
+        </div>
         
-        <div class="form-container">
-            <h2>Cadastre-se abaixo:</h2>
-            <form id="cadastroForm">
-
-                <label for="matriculaCadastro">Matrícula:</label>
-                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)">
-
-                <label for="dataIngresso">Data de ingresso na instituição (formato DD/MM/AAAA):</label>
-                <input type="text" id="dataIngresso" name="dataIngresso">
-
-                <label for="paquisitivoinicio">Início do seu período aquisitivo (formato DD/MM/AAAA):</label>
-                <input type="text" id="paquisitivoinicio" name="paquisitivoinicio">
-
-                <label for="paquisitivofim">Fim do seu período aquisitivo (formato DD/MM/AAAA):</label>
-                <input type="text" id="paquisitivofim" name="paquisitivofim">
-
-                <label for="seraferiasEscolar">
-                    <input type="checkbox" id="seraferiasEscolar" name="seraferiasEscolar">
-                    Algum dos períodos será em dezembro, janeiro ou julho? Marque caso sim
-                </label>
-
-                <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
-                <input type="text" id="qtdperiodos" name="qtdperiodos">
-
-                <label for="dataNascimento">Qual sua data de nacimento? (formato DD/MM/AAAA)</label>
-                <input type="text" id="dataNascimento" name="dataNascimento">
-
-                <label for="qtdfilhosmenores">Possui filhos menores em idade escolar? quantos? Caso não possua, deixar em branco</label>
-                <input type="text" id="qtdfilhosmenores" name="qtdfilhosmenores">
-
-                <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo11" name="periodo11">
-
-                <label for="periodo12">Qual o fim do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo12" name="periodo12">
-
-                <label for="periodo21">Qual o início do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo21" name="periodo21">
-
-                <label for="periodo22">Qual o fim do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo22" name="periodo22">
-
-                <label for="periodo31">Qual o início do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo31" name="periodo31">
-
-                <label for="periodo32">Qual o fim do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
-                <input type="text" id="periodo32" name="periodo32">
-
-                <button type="button" onclick="cadastroInicial()">Cadastrar</button>
-            </form>
+        <div id="loginForm">
+            <h2>Login</h2>
+            <label for="loginMatricula">Matrícula:</label>
+            <input type="text" id="loginMatricula" name="loginMatricula" required onblur="validarMatricula(this)">
+            <label for="loginSenha">Senha:</label>
+            <input type="password" id="loginSenha" name="loginSenha" required>
+            <label for="adminCheckbox">
+                <input type="checkbox" id="adminCheckbox" name="admin">
+                Sou Administrador
+            </label>
+            <button onclick="login()">Entrar</button>
         </div>
 
-        <div id="dados"></div>
-
-        <div class="consulta-container">
-            <h2>Consultas</h2>
-            <input type="text" id="matriculaConsulta" placeholder="Matrícula">
-            <button onclick="exibirDados()">Consulta por matrícula</button>  
-            <button onclick="exibirListaFinalFerias()">Consultar todos os cadastros</button>
-            <button onclick="exibirListaFinalFeriasSelecionados()">Consultar selecionados para férias escolar</button>
-            <button onclick="exibirListaFinalFeriasNaoEscolar()">Consultar lista final de férias não escolar</button>
+        <div id="cadastroForm" style="display: none;">
+            <h2>Cadastro</h2>
+            <label for="cadastroMatricula">Matrícula:</label>
+            <input type="text" id="cadastroMatricula" name="cadastroMatricula" required onblur="validarMatricula(this)">
+            <label for="cadastroSenha">Senha:</label>
+            <input type="password" id="cadastroSenha" name="cadastroSenha" required>
+            <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
+            <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
+            <button onclick="cadastrar()">Cadastrar</button>
         </div>
-
-        <div id="dados2">
-
-            
-        </div>
-
-        
     </div>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- jQuery UI -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- JavaScript do flatpickr -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- Arquivo de localização do flatpickr -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-    <!-- Seu script personalizado -->
-    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,93 @@
+/* Estilos específicos para a página de login */
+.login-background {
+    background: url('papel de parede.png') no-repeat center center fixed;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.toggle-buttons .active {
+    background-color: #007aff;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.login-container h2 {
+    color: #007aff;
+    margin-bottom: 20px;
+}
+
+body.dark-mode .login-container h2 {
+    color: #ffffff;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.login-container button {
+    background-color: #007aff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #005bb5;
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 20px 10px;
+    }
+}

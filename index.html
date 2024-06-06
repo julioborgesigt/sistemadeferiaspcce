@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login e Cadastro</title>
-    <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="index.css">
     <script>
         let database = {};
         
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarBancoDados();
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('cadastroForm').style.display = 'none';
+                document.getElementById('loginBtn').classList.add('active');
+                document.getElementById('cadastroBtn').classList.remove('active');
+            });
+
+            document.getElementById('cadastroBtn').addEventListener('click', () => {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('cadastroForm').style.display = 'block';
+                document.getElementById('loginBtn').classList.remove('active');
+                document.getElementById('cadastroBtn').classList.add('active');
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             carregarBancoDados();
         });
@@ -39,7 +55,6 @@
                 });
         }
 
-        carregarBancoDados();
 
         function salvarBancoDados() {
             const url = 'banco_dados.json';
@@ -101,20 +116,6 @@
                     }
                 } else {
                     alert("Login bem-sucedido!");
-                    
-                  
-                // Se a matrícula já existir, adicione os dados aos existentes
-                Object.assign(database[matricula], {
-                    senha: senha,
-                    feriasescolarounao: feriasescolarounao
-                    
-                });
-                console.log('pre cad');
-            
-
-
-
-
                     window.location.href = `cadastro.html?matricula=${matricula}`; 
                 }
             } else {
@@ -157,23 +158,6 @@
                 alert("Matrícula já cadastrada com uma senha.");
                 return;
             }
-
-           /* const cargoIpc = document.getElementById("cargoIpc").checked;
-            const cargoEpc = document.getElementById("cargoEpc").checked;
-            const cargoIpcPlantao = document.getElementById("cargoIpcPlantao").checked;
-            const cargoEpcPlantao = document.getElementById("cargoEpcPlantao").checked;
-
-            if (!cargoIpc && !cargoEpc && !cargoEpcPlantao && !cargoEpcPlantao) {
-                alert("Por favor, selecione pelo menos uma opção de cargo.");
-                return;
-            }
-
-            let cargo = "";
-            if (cargoIpc) cargo = "IPC";
-            if (cargoEpc) cargo = "EPC";
-            if (cargoIpcPlantao) cargo = "IPCplantao";
-            if (cargoEpcPlantao) cargo = "EPCplantao";
-*/
             
             if (database[matricula]) {
                 // Se a matrícula já existir, adicione os dados aos existentes
@@ -203,27 +187,34 @@
 <body>
     <div class="login-background"></div>
     <div class="login-container">
-        <h2>Login</h2>
-        <label for="loginMatricula">Matrícula:</label>
-        <input type="text" id="loginMatricula" name="loginMatricula" required onblur="validarMatricula(this)">
-        <label for="loginSenha">Senha:</label>
-        <input type="password" id="loginSenha" name="loginSenha" required>
-        <label for="adminCheckbox">
-            <input type="checkbox" id="adminCheckbox" name="admin">
-            Sou Administrador
-        </label>
-        <button onclick="login()">Entrar</button>
-    </div>
-    <div class="login-container">
-        <h2>Cadastro</h2>
-        <label for="cadastroMatricula">Matrícula:</label>
-        <input type="text" id="cadastroMatricula" name="cadastroMatricula" required onblur="validarMatricula(this)">
-        <label for="cadastroSenha">Senha:</label>
-        <input type="password" id="cadastroSenha" name="cadastroSenha" required>
-        <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
-        <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
+        <div class="toggle-buttons">
+            <button id="loginBtn" class="active">Sign in</button>
+            <button id="cadastroBtn">Sign up</button>
+        </div>
         
-        <button onclick="cadastrar()">Cadastrar</button>
+        <div id="loginForm">
+            <h2>Login</h2>
+            <label for="loginMatricula">Matrícula:</label>
+            <input type="text" id="loginMatricula" name="loginMatricula" required onblur="validarMatricula(this)">
+            <label for="loginSenha">Senha:</label>
+            <input type="password" id="loginSenha" name="loginSenha" required>
+            <label for="adminCheckbox">
+                <input type="checkbox" id="adminCheckbox" name="admin">
+                Sou Administrador
+            </label>
+            <button onclick="login()">Entrar</button>
+        </div>
+
+        <div id="cadastroForm" style="display: none;">
+            <h2>Cadastro</h2>
+            <label for="cadastroMatricula">Matrícula:</label>
+            <input type="text" id="cadastroMatricula" name="cadastroMatricula" required onblur="validarMatricula(this)">
+            <label for="cadastroSenha">Senha:</label>
+            <input type="password" id="cadastroSenha" name="cadastroSenha" required>
+            <label for="cadastroConfirmacaoSenha">Confirme a Senha:</label>
+            <input type="password" id="cadastroConfirmacaoSenha" name="cadastroConfirmacaoSenha" required>
+            <button onclick="cadastrar()">Cadastrar</button>
+        </div>
     </div>
 </body>
 </html>
