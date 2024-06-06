@@ -1461,3 +1461,7 @@ function consultaferiasmarcadas() {
     const matricula = document.getElementById("matriculaCadastro").value;
     window.open(`consultaferiasmarcadas.html?matricula=${matricula}`);
 }
+
+function alterardata() {
+    window.open(`alterardata.html?matricula=${matricula}`);
+}

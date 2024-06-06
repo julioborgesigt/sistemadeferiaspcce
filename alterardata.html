@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro e Consulta de Férias</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            // Verifica se a sessão expirou
+            const loginData = JSON.parse(localStorage.getItem('loginToken'));
+
+            if (!loginData || new Date().getTime() > loginData.expirationTime) {
+                alert("Sua sessão expirou. Faça login novamente.");
+                window.location.href = 'index.html';
+                return;  // Adicionado para garantir que o resto do script não será executado se a sessão expirou
+            }
+
+            // Muda a cor do botão ao ser clicado
+            /*
+            const button = document.querySelector('button');
+            button.addEventListener('click', function() {
+                button.style.backgroundColor = 'white';
+            });
+            */
+
+
+        });
+
+       
+
+    </script>
+    
+    
+
+
+</head>
+
+
+<body>
+    <div class="container">
+        
+        <div id="loading" style="display: none;">Carregando...</div>
+
+        
+        <div style="text-align: center; margin-top: -20px;">
+            <button id="toggle-dark-mode"><i class="fas fa-moon"></i></button>
+        </div>
+        <h1>Cadastro e Consulta de Férias</h1>
+
+
+        <div >
+            <button id="botaoqueroferiasescolar">férias escolar</button>
+            <button id="botaoqueroferiasnaoescolar">férias não escolar</button>
+            <button onclick="openCalendar()">Ver Datas disponíveis</button>
+            <button onclick="consultaferiasmarcadas()">Ver suas férias marcadas</button>
+           
+
+        </div>
+        
+        
+
+       
+          
+       
+
+
+
+        <div class="form-container">
+            <h2>Cadastre-se abaixo:</h2>
+            <form id="cadastroForm">
+                
+                
+                
+                <label for="matriculaCadastro">Matrícula:</label>
+                <input type="text" id="matriculaCadastro" name="matriculaCadastro" maxlength="8" onblur="validarMatricula(this)" readonly>
+                
+
+
+
+              
+
+
+
+                <label for="qtdperiodos">Quantos períodos de férias (1, 2 ou 3)?</label>
+                <input type="checkbox" id="periodo1" name="qtdperiodos" value="1"> 1
+                <input type="checkbox" id="periodo2" name="qtdperiodos" value="2"> 2
+                <input type="checkbox" id="periodo3" name="qtdperiodos" value="3"> 3
+
+                
+
+                <div id="periodo1-container">
+                    <label for="periodo11">Qual o início do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
+                    <input type="text" id="periodo11" name="periodo11">
+                    <label for="periodo12">Qual o fim do seu primeiro periodo de férias? (formato DD/MM/AAAA)</label>
+                    <input type="text" id="periodo12" name="periodo12">
+                </div>
+
+                <div id="periodo2-container">
+                    <label for="periodo21">Qual o início do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
+                    <input type="text" id="periodo21" name="periodo21">
+                    <label for="periodo22">Qual o fim do seu segundo periodo de férias? (formato DD/MM/AAAA)</label>
+                    <input type="text" id="periodo22" name="periodo22">
+                </div>
+
+                <div id="periodo3-container">
+                    <label for="periodo31">Qual o início do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
+                    <input type="text" id="periodo31" name="periodo31">
+                    <label for="periodo32">Qual o fim do seu terceiro periodo de férias? (formato DD/MM/AAAA)</label>
+                    <input type="text" id="periodo32" name="periodo32">
+                </div>
+
+                <button type="button" onclick="cadastroInicial()">Alterar</button>
+            
+            </form>
+        </div>
+        
+
+        <div class="consulta-container">
+            <h2>Consultas</h2>
+            <input type="text" id="matriculaConsulta" placeholder="Matrícula">
+            <button onclick="exibirDadosPorMatricula()">Consulta por matrícula</button>  
+           
+        </div>
+
+        
+        <div class="logout-container">
+            <!-- Botão logout -->
+        <button onclick="logout()">Encerrar o acesso</button>
+        </div>
+        
+
+        
+        <div id="dados2"></div>
+
+        
+
+    </div>
+
+    
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- JavaScript do flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Arquivo de localização do flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    <!-- Seu script personalizado -->
+    <script src="script.js"></script>
+
+<script>
+    document.getElementById('botaoqueroferiasescolar').addEventListener('click', function() {
+        queroferiasescolar();
+        mostrarDiv();
+    });
+
+    document.getElementById('botaoqueroferiasnaoescolar').addEventListener('click', function() {
+        queroferiasnaoescolar();
+        mostrarDiv();
+    });
+</script>
+
+
+</body>
+</html>
