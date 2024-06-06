@@ -21,7 +21,7 @@ body {
     width: 100%;
     max-width: 800px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -338,8 +338,8 @@ body.dark-mode {
 }
 
 body.dark-mode .container {
-    background-color: #1e1e1e;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color:rgba(0, 0, 0, 0.5);;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode h1,
@@ -450,7 +450,7 @@ body.dark-mode .flatpickr-day.today {
 
 /* Estilos específicos para a página de login */
 .login-background {
-    background: url('papel de parede.png') no-repeat center center fixed;
+    background: url('papel de parede.jpg') no-repeat center center fixed;
     background-size: cover;
     position: absolute;
     top: 0;
