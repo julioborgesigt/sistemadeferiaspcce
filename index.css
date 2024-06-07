@@ -90,7 +90,7 @@ body.dark-mode .login-container h2 {
     background-color: #005bb5;
 }
 
-@media (max-width: 240px) {
+@media (max-width: 220px) {
     .login-container {
         
         
