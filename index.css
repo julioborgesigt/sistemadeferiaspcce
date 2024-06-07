@@ -90,14 +90,15 @@ body.dark-mode .login-container h2 {
     background-color: #005bb5;
 }
 
-@media (max-width: 120px) {
+@media  {
     .login-container {
+        width: 100%;
+        max-width: 240px;
         
-        
-        border-radius: 0;
+    
         padding-top: 10px ;
         padding-left: 10px;
-        padding-right: 12px;
+        padding-right: 18px;
        /* max-height: none; /* Remove a altura máxima em dispositivos móveis */
        /* max-width: none;*/
         background: rgba(255, 255, 255, 0.5);
