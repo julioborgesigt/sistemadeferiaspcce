@@ -478,7 +478,7 @@ function queroferiasescolar() {
         
         // Ocultar o indicador de carregamento após o carregamento do banco de dados
         document.getElementById("loading").style.display = "none";
-    }, 3000); // 3000 milissegundos = 3 segundos
+    }, 1000); // 1000 milissegundos = 1 segundos
 }
 
 
@@ -518,7 +518,7 @@ function queroferiasnaoescolar() {
         
         // Ocultar o indicador de carregamento após o carregamento do banco de dados
         document.getElementById("loading").style.display = "none";
-    }, 3000); // 3000 milissegundos = 3 segundos
+    }, 1000); // 1000 milissegundos = 1 segundos
 }
 
 /*
