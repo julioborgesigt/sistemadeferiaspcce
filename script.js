@@ -337,6 +337,10 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     }
 
 
+    alert("pontuacaoUsuario", pontuacaoUsuario);
+    lert("maiorPontuacao", maiorPontuacao);
+    lert("pontuacaoUsuarioNaoescolar", pontuacaoUsuarioNaoescolar);
+    lert("maiorPontuacaoNaoescolar", maiorPontuacaoNaoescolar);
 
 
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
