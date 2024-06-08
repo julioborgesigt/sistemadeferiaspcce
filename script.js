@@ -339,7 +339,6 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
 
 
 
-
     // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
     if (pontuacaoUsuario < maiorPontuacao) {
         alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar}. Cadastro não permitido.`);
