@@ -210,16 +210,16 @@ function concluirCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
 
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
-    if (verificarPontuacaoUsuario(matricula)) {
+    if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         console.log("Cadastro concluído com sucesso!");
        
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
-        //window.location.href = `conclusao.html?matricula=${matricula}`;
+        window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
-        alert("Tente novamente depois");
+        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
         
     }
@@ -323,16 +323,16 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     }
 
     if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 1) {
-        alert("Entrou na rotina EPC");
+        //alert("Entrou na rotina EPC");
         verificarMaiorPontuacao(["EPC", "EPCplantao"], apenasVerificar);
     } else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 1) {
-        alert("Entrou na rotina IPC");
+        //alert("Entrou na rotina IPC");
         verificarMaiorPontuacao(["IPC", "IPCplantao"], apenasVerificar);
     }else if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 0) {
-        alert("Entrou na rotina EPC não escolar");
+        //alert("Entrou na rotina EPC não escolar");
         verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"], apenasVerificar);
     }else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 0 ) {
-        alert("Entrou na rotina IPC não escolar");
+        //alert("Entrou na rotina IPC não escolar");
         verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"], apenasVerificar);
     }
 
@@ -707,15 +707,15 @@ function cadastroInicial() {
 
     
     let escolhaotipodeferias =  database[matricula].feriasescolarounao
-    alert(`este é seu tipo de ferias escolhido2" ${escolhaotipodeferias}`);
+    //alert(`este é seu tipo de ferias escolhido2" ${escolhaotipodeferias}`);
 
     if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
-        alert("concluiu o cadastro");
+        //alert("concluiu o cadastro");
         concluirCadastro(); // Salvar o banco de dados
 
     }else{
-        alert("verifique sua escolha de ferias");
-        alert(escolhaotipodeferias);
+        //alert("verifique sua escolha de ferias");
+        //alert(escolhaotipodeferias);
         alert("escolha qual o tipo de férias você deseja cadastrar")
         carregarBancoDados();
 
@@ -738,7 +738,7 @@ let alertaExibido = false;
 function validarMatricula(input) {
     if (input.value.length < 13 && !alertaExibido) {
         alertaExibido = true;
-        alert("A matrícula deve ter pelo menos 13 caracteres.");
+        alert("A matrícula deve ter pelo menos 13 caracteres e o final é .ano corrente(ex: .2024).");
         input.focus();
     } else {
         alertaExibido = false;
