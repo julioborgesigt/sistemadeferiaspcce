@@ -209,13 +209,6 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 function concluirCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
 
-if (cadastrado == 1) {
-    salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
-    window.location.href = `conclusao.html?matricula=${matricula}`;
-
-} else {
-
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
     if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
@@ -230,7 +223,6 @@ if (cadastrado == 1) {
         carregarBancoDados();
         
     }
-}
 }
 
 
