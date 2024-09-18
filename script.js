@@ -214,7 +214,8 @@ function concluirCadastro() {
 
     if (cadastrado === 1){
 
-        console.log("Cadastro alterado com sucesso!");
+        
+        alert("Cadastro alterado com sucesso!");
        
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
@@ -226,14 +227,14 @@ function concluirCadastro() {
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
     if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
-        console.log("Cadastro concluído com sucesso!");
+        alert("Cadastro inicial concluído com sucesso!");
        
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
         window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
-        //alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
+        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
         
     }
