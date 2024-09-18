@@ -317,7 +317,7 @@ function concluirCadastro() {
         window.location.href = `conclusao.html?matricula=${matricula}`;
     } 
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
-    else if (verificarPontuacaoUsuario(matricula, false)) {
+    else if (verificarPontuacaoUsuario(matricula, true)) {
         alert("Cadastro inicial concluído com sucesso!");
         // Atualizar o status do cadastro diretamente
         database[matricula].cadastrado = 1;
@@ -340,6 +340,7 @@ function verificarPontuacao() {
     const matricula = document.getElementById("matriculaCadastro").value;
     let escolhaotipodeferias =  database[matricula].feriasescolarounao
     if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
+        alert("você escolheu o seu tipo de férias corretamente")
         const matricula = document.getElementById("matriculaCadastro").value;
         verificarPontuacaoUsuario(matricula, true);
 
