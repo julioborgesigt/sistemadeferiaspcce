@@ -206,7 +206,7 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 
 
 // Função para conclusão do cadastro
-function concluirCadastro() {
+/*function concluirCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
 
 
@@ -238,7 +238,7 @@ function concluirCadastro() {
 
        /* database[matricula] = {
            cadastrado: cadastrado
-        };*/
+        };
 
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
@@ -251,7 +251,48 @@ function concluirCadastro() {
     }
 
 }
+}*/
+
+function concluirCadastro() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+
+
+    let cadastrado =  database[matricula].cadastrado
+
+    if (cadastrado === 1){
+
+        
+        alert("Cadastro alterado com sucesso!");
+       
+        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        
+        window.location.href = `conclusao.html?matricula=${matricula}`;
+
+
+    } else{
+
+    // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
+    if (verificarPontuacaoUsuario(matricula, false)) {
+        // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
+        alert("Cadastro inicial concluído com sucesso!");
+        // Atualizar o status do cadastro diretamente
+        database[matricula].cadastrado = 1;
+
+
+        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        
+        window.location.href = `conclusao.html?matricula=${matricula}`;
+        
+    } else {
+        console.log("cadastrado é =" , cadastrado);
+        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
+        carregarBancoDados();
+        
+    }
+
 }
+}
+
 
 
 // Função para o botão de verificação de pontuação
