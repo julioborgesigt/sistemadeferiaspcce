@@ -229,9 +229,16 @@ function concluirCadastro() {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         alert("Cadastro inicial concluído com sucesso!");
         let cadastrado = 1;
-        database[matricula] = {
+        Object.assign(database[matricula], {
+
+            cadastrado: cadastrado
+            
+            
+            });
+
+       /* database[matricula] = {
            cadastrado: cadastrado
-        };
+        };*/
 
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
@@ -714,7 +721,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-            cadastrado: cadastrado
+           // cadastrado: cadastrado
             
         });
     } else {
@@ -731,7 +738,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-            cadastrado: cadastrado
+           // cadastrado: cadastrado
         };
     }
 
