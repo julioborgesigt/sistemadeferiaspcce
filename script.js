@@ -706,6 +706,7 @@ function cadastroInicial() {
 
     
     
+    let cadastrado = 0
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
@@ -721,7 +722,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-           // cadastrado: cadastrado
+            cadastrado: cadastrado
             
         });
     } else {
@@ -738,7 +739,7 @@ function cadastroInicial() {
             periodo22: periodo22,
             periodo31: periodo31,
             periodo32: periodo32,
-           // cadastrado: cadastrado
+            cadastrado: cadastrado
         };
     }
 
