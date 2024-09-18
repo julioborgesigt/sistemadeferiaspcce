@@ -253,6 +253,7 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 }
 }*/
 
+/*
 function concluirCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
 
@@ -272,7 +273,7 @@ function concluirCadastro() {
     } 
 
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
-    if (verificarPontuacaoUsuario(matricula, false)) {
+    else if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         alert("Cadastro inicial concluído com sucesso!");
         // Atualizar o status do cadastro diretamente
@@ -285,7 +286,7 @@ function concluirCadastro() {
         
     } 
     
-    if (verificarPontuacaoUsuario(matricula, true))  {
+    else if (verificarPontuacaoUsuario(matricula, true))  {
         console.log("cadastrado é =" , cadastrado);
         alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
@@ -294,7 +295,44 @@ function concluirCadastro() {
 
 
 }
+*/
 
+
+function concluirCadastro() {
+    const matricula = document.getElementById("matriculaCadastro").value;
+
+    // Verificar se a matrícula existe no banco de dados
+    if (!database[matricula]) {
+        alert("Matrícula não encontrada.");
+        return;
+    }
+
+    let cadastrado = database[matricula].cadastrado;
+
+    if (cadastrado === 1) {
+        alert("Cadastro alterado com sucesso!");
+
+        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        
+        window.location.href = `conclusao.html?matricula=${matricula}`;
+    } 
+    // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
+    else if (verificarPontuacaoUsuario(matricula, false)) {
+        alert("Cadastro inicial concluído com sucesso!");
+        // Atualizar o status do cadastro diretamente
+        database[matricula].cadastrado = 1;
+
+        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
+        
+        window.location.href = `conclusao.html?matricula=${matricula}`;
+    } 
+    // Verificar se a pontuação é insuficiente, mas o usuário ainda precisa aguardar
+    else {
+        console.log("cadastrado é =", cadastrado);
+        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
+        carregarBancoDados();
+    }
+}
 
 
 // Função para o botão de verificação de pontuação

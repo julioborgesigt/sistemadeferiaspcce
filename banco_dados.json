@@ -1068,5 +1068,25 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0"
+    },
+    "66666666.2024": {
+        "matricula": "66666666.2024",
+        "nome": "chico6",
+        "dataNascimento": "01/09/2017",
+        "idadeDias": 2574,
+        "idade": 7,
+        "paquisitivoinicio": "01/09/2024",
+        "paquisitivofim": "01/09/2025",
+        "dataIngresso": "01/09/2024",
+        "antiguidade": 17,
+        "qtdfilhosmenores": "10",
+        "senha": "12341234",
+        "cargo": "EPC",
+        "cadastrado": 0,
+        "pontuacaoferiasescolar": 93000,
+        "possuiFilho": "10",
+        "ecasadoComPofessor": "1",
+        "estudanteOUaluno": "1",
+        "feriasescolarounao": 1
     }
 }
