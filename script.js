@@ -228,7 +228,11 @@ function concluirCadastro() {
     if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         alert("Cadastro inicial concluído com sucesso!");
-       
+        let cadastrado = 1;
+        database[matricula] = {
+           cadastrado: cadastrado
+        };
+
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
         window.location.href = `conclusao.html?matricula=${matricula}`;
@@ -694,7 +698,7 @@ function cadastroInicial() {
     }
 
     
-    let cadastrado = 1;
+    
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
