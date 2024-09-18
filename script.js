@@ -269,7 +269,7 @@ function concluirCadastro() {
         window.location.href = `conclusao.html?matricula=${matricula}`;
 
 
-    } else{
+    } 
 
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
     if (verificarPontuacaoUsuario(matricula, false)) {
@@ -283,14 +283,16 @@ function concluirCadastro() {
         
         window.location.href = `conclusao.html?matricula=${matricula}`;
         
-    } else {
+    } 
+    
+    if (verificarPontuacaoUsuario(matricula, true))  {
         console.log("cadastrado é =" , cadastrado);
         alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
         
     }
 
-}
+
 }
 
 
