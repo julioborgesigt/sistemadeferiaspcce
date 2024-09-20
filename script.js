@@ -216,7 +216,7 @@ function concluirCadastro() {
 
     let cadastrado = database[matricula].cadastrado;
 
-    if (cadastrado === 1) {
+    if (cadastrado === 3) {
         alert("Cadastro alterado com sucesso!");
         
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
