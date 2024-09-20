@@ -788,7 +788,7 @@ function cadastroInicial() {
 
     
     
-    let cadastrado = 0
+    let cadastrado = 1
 
     // Salvar os dados no banco de dados
     if (matricula in database) {

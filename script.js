@@ -317,7 +317,7 @@ function concluirCadastro() {
         window.location.href = `conclusao.html?matricula=${matricula}`;
     } 
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
-    else if (verificarPontuacaoUsuario(matricula, true)) {
+    else if (verificarPontuacaoUsuario(matricula, false)) {
         alert("Cadastro inicial concluído com sucesso!");
         // Atualizar o status do cadastro diretamente
         database[matricula].cadastrado = 3;
