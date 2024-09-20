@@ -206,131 +206,22 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 
 
 // Função para conclusão do cadastro
-/*function concluirCadastro() {
+function concluirCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
-
-
-    let cadastrado =  database[matricula].cadastrado
-
-    if (cadastrado === 1){
-
-        
-        alert("Cadastro alterado com sucesso!");
-       
-        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
-        window.location.href = `conclusao.html?matricula=${matricula}`;
-
-
-    } else{
 
     // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
     if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
-        alert("Cadastro inicial concluído com sucesso!");
-        let cadastrado = 1;
-        Object.assign(database[matricula], {
-
-            cadastrado: cadastrado
-            
-            
-            });
-
-       /* database[matricula] = {
-           cadastrado: cadastrado
-        };
-
+        console.log("Cadastro concluído com sucesso!");
+       
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
         
         window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
-        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
+        //alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
         
-    }
-
-}
-}*/
-
-/*
-function concluirCadastro() {
-    const matricula = document.getElementById("matriculaCadastro").value;
-
-
-    let cadastrado =  database[matricula].cadastrado
-
-    if (cadastrado === 1){
-
-        
-        alert("Cadastro alterado com sucesso!");
-       
-        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
-        window.location.href = `conclusao.html?matricula=${matricula}`;
-
-
-    } 
-
-    // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
-    else if (verificarPontuacaoUsuario(matricula, false)) {
-        // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
-        alert("Cadastro inicial concluído com sucesso!");
-        // Atualizar o status do cadastro diretamente
-        database[matricula].cadastrado = 1;
-
-
-        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
-        window.location.href = `conclusao.html?matricula=${matricula}`;
-        
-    } 
-    
-    else if (verificarPontuacaoUsuario(matricula, true))  {
-        console.log("cadastrado é =" , cadastrado);
-        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
-        carregarBancoDados();
-        
-    }
-
-
-}
-*/
-
-
-function concluirCadastro() {
-    const matricula = document.getElementById("matriculaCadastro").value;
-
-    // Verificar se a matrícula existe no banco de dados
-    if (!database[matricula]) {
-        alert("Matrícula não encontrada.");
-        return;
-    }
-
-    let cadastrado = database[matricula].cadastrado;
-
-    if (cadastrado === 3) {
-        alert("Cadastro alterado com sucesso!");
-
-        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
-        window.location.href = `conclusao.html?matricula=${matricula}`;
-    } 
-    // Verificar a pontuação do usuário antes de permitir a conclusão do cadastro
-    else if (verificarPontuacaoUsuario(matricula, false)) {
-        alert("Cadastro inicial concluído com sucesso!");
-        // Atualizar o status do cadastro diretamente
-        database[matricula].cadastrado = 3;
-
-        salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
-        window.location.href = `conclusao.html?matricula=${matricula}`;
-    } 
-    // Verificar se a pontuação é insuficiente, mas o usuário ainda precisa aguardar
-    else {
-        console.log("cadastrado é =", cadastrado);
-        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
-        carregarBancoDados();
     }
 }
 
@@ -340,7 +231,6 @@ function verificarPontuacao() {
     const matricula = document.getElementById("matriculaCadastro").value;
     let escolhaotipodeferias =  database[matricula].feriasescolarounao
     if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
-        alert("você escolheu o seu tipo de férias corretamente")
         const matricula = document.getElementById("matriculaCadastro").value;
         verificarPontuacaoUsuario(matricula, true);
 
@@ -787,8 +677,7 @@ function cadastroInicial() {
     }
 
     
-    
-    let cadastrado = 1
+    let cadastrado = 1;
 
     // Salvar os dados no banco de dados
     if (matricula in database) {
@@ -845,7 +734,9 @@ function cadastroInicial() {
 
     }  
 
-       
+    
+   
+        
     
 }
 
