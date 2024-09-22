@@ -645,7 +645,6 @@ function cadastroInicial() {
         Object.assign(database[matricula], {
             numeroDePeriodos: qtdperiodos,
            
-            
            
             periodo11: periodo11,
             periodo12: periodo12,
