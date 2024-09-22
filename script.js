@@ -285,9 +285,9 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
         }
         if (apenasVerificar) {
             if (pontuacaoUsuario >= maiorPontuacao) {
-                alert(`Você possui a maior pontuação escolar. ${pontuacaoUsuario}`);
+                alert(`De acordo com a consulta, você possui a maior pontuação escolar: ${pontuacaoUsuario}`);
             } else {
-                alert(`A maior pontuação escolar é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar} Pontuação ${maiorPontuacao}.`);
+                alert(`De acordo com a consulta, a maior pontuação escolar é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar} Pontuação ${maiorPontuacao}.`);
             }
             return; // Não continuar com o cadastro
         }
@@ -297,7 +297,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
             alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar}. Aguarde que ele escolha as datas.`);
             return false; // Não permitir a conclusão do cadastro
         }else {
-            
+            alert(`Você possui a maior pontuação escolar e será permitido o cadastro. ${pontuacaoUsuario}`);
             return true; // Permitir a conclusão do cadastro  
 
         }
