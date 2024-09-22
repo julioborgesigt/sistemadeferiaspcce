@@ -208,7 +208,7 @@ function verificarConflitoPorCargo(cargo, conflitoCountIPC, conflitoCountEPC, co
 // Função para conclusão do cadastro
 function concluirCadastro() {
     const matricula = document.getElementById("matriculaCadastro").value;
-
+    let cadastrado = database[matricula].cadastrado;
 
     if (cadastrado === 3) {
         alert("Cadastro alterado com sucesso!");
