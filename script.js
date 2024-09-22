@@ -213,65 +213,40 @@ function concluirCadastro() {
     if (verificarPontuacaoUsuario(matricula, false)) {
         // Se a pontuação do usuário for a maior, permitir a conclusão do cadastro
         console.log("Cadastro concluído com sucesso!");
-       
         salvarBancoDados(); // Salvar o banco de dados após a conclusão do cadastro
-        
         window.location.href = `conclusao.html?matricula=${matricula}`;
-        
     } else {
         alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
-        
     }
 }
-
 
 // Função para o botão de verificação de pontuação
 function verificarPontuacao() {
     const matricula = document.getElementById("matriculaCadastro").value;
-    let escolhaotipodeferias =  database[matricula].feriasescolarounao
-    if(escolhaotipodeferias === 1 || escolhaotipodeferias === 0 ){
-        const matricula = document.getElementById("matriculaCadastro").value;
-        verificarPontuacaoUsuario(matricula, true);
-
-    }else if(escolhaotipodeferias !== 1 && escolhaotipodeferias !== 0 ){
-        alert("escolha primeiro para qual tipo de férias você deseja consultar")
-        carregarBancoDados();
-        
-    } else{
-        alert("escolha primeiro para qual tipo de férias você deseja consultar")
-        carregarBancoDados();
-        
-    } 
-
-
-
+    let escolhaotipodeferias = database[matricula].feriasescolarounao;
     
+    if (escolhaotipodeferias === 1 || escolhaotipodeferias === 0) {
+        verificarPontuacaoUsuario(matricula, true);
+    } else {
+        alert("Escolha primeiro para qual tipo de férias você deseja consultar");
+        carregarBancoDados();
+    }
 }
 
-
-
+// Função para verificar a pontuação do usuário
 function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     const pontuacaoUsuario = database[matricula].pontuacaoferiasescolar || 0;
     const pontuacaoUsuarioNaoescolar = database[matricula].pontuacaoferiasNaoescolar || 0;
     const cargoUsuario = database[matricula].cargo;
     const tipodeferias = database[matricula].feriasescolarounao;
-    let maiorPontuacao = 0;
-    let matriculaMaiorPontuacao = '';
-    let maiorPontuacaoNaoescolar = 0;
-    let matriculaMaiorPontuacaoNaoescolar = '';
-    let nomeMaiorPontuacaoescolar = '';
-    let nomeMaiorPontuacaoNaoescolar = '';
-    
-    console.log("Este é o cargo em cadastramento", cargoUsuario);
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes
-    function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
-
+    function verificarMaiorPontuacao(cargosEquivalentes) {
         let maiorPontuacao = 0;
         let matriculaMaiorPontuacao = '';
         let nomeMaiorPontuacaoescolar = '';
-        
+
         for (let key in database) {
             if (database[key].cadastrado === 0 && 
                 cargosEquivalentes.includes(database[key].cargo) && 
@@ -283,32 +258,21 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
                 nomeMaiorPontuacaoescolar = database[key].nome;
             }
         }
+
         if (apenasVerificar) {
             if (pontuacaoUsuario >= maiorPontuacao) {
                 alert(`De acordo com a consulta, você possui a maior pontuação escolar: ${pontuacaoUsuario}`);
             } else {
                 alert(`De acordo com a consulta, a maior pontuação escolar é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar} Pontuação ${maiorPontuacao}.`);
             }
-            return; // Não continuar com o cadastro
+            return false;
         }
 
-            // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
-        if (pontuacaoUsuario < maiorPontuacao) {
-            alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoescolar}. Aguarde que ele escolha as datas.`);
-            return false; // Não permitir a conclusão do cadastro
-        }else {
-            alert(`Você possui a maior pontuação escolar e será permitido o cadastro. ${pontuacaoUsuario}`);
-            return true; // Permitir a conclusão do cadastro  
-
-        }
-
-
+        return pontuacaoUsuario >= maiorPontuacao;
     }
 
-
-    
-    // Função para verificar a maior pontuação considerando os cargos equivalentes e ferias não escolar
-    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes,  apenasVerificar = false) {
+    // Função para verificar a maior pontuação considerando os cargos equivalentes e férias não escolares
+    function verificarMaiorPontuacaoNaoEscolar(cargosEquivalentes) {
         let maiorPontuacaoNaoescolar = 0;
         let matriculaMaiorPontuacaoNaoescolar = '';
         let nomeMaiorPontuacaoNaoescolar = '';
@@ -320,50 +284,36 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
                 database[key].pontuacaoferiasNaoescolar > maiorPontuacaoNaoescolar) {
                 
                 maiorPontuacaoNaoescolar = database[key].pontuacaoferiasNaoescolar;
-                matriculaMaiorPontuacaoNaoescolar  = key;
-                nomeMaiorPontuacaoNaoescolar  = database[key].nome;
+                matriculaMaiorPontuacaoNaoescolar = key;
+                nomeMaiorPontuacaoNaoescolar = database[key].nome;
             }
         }
+
         if (apenasVerificar) {
             if (pontuacaoUsuarioNaoescolar >= maiorPontuacaoNaoescolar) {
-                alert(`Você possui a maior pontuação não escolar. ${pontuacaoUsuarioNaoescolar}`);
+                alert(`Você possui a maior pontuação não escolar: ${pontuacaoUsuarioNaoescolar}`);
             } else {
-                alert(`A maior pontuação não escolar é da matrícula ${matriculaMaiorPontuacaoNaoescolar } - Nome: ${nomeMaiorPontuacaoNaoescolar } Pontuação ${maiorPontuacaoNaoescolar }.`);
+                alert(`A maior pontuação não escolar é da matrícula ${matriculaMaiorPontuacaoNaoescolar} - Nome: ${nomeMaiorPontuacaoNaoescolar} Pontuação ${maiorPontuacaoNaoescolar}.`);
             }
-            return; // Não continuar com o cadastro
+            return false;
         }
 
-
-
-        // Verificar se a pontuação do usuário é maior ou igual à maior pontuação encontrada
-        if (pontuacaoUsuarioNaoescolar < maiorPontuacaoNaoescolar) {
-            alert(`A pontuação de férias escolares do usuário não é a maior do banco de dados. A maior pontuação é da matrícula ${matriculaMaiorPontuacao} - Nome: ${nomeMaiorPontuacaoNaoescolar}. Aguarde que ele escolha as datas..`);
-            return false; // Não permitir a conclusão do cadastro
-        }else {
-
-            return true; // Permitir a conclusão do cadastro  
-
-        }
-
-        
+        return pontuacaoUsuarioNaoescolar >= maiorPontuacaoNaoescolar;
     }
 
     if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 1) {
-        //alert("Entrou na rotina EPC");
-        verificarMaiorPontuacao(["EPC", "EPCplantao"], apenasVerificar);
+        return verificarMaiorPontuacao(["EPC", "EPCplantao"]);
     } else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 1) {
-        //alert("Entrou na rotina IPC");
-        verificarMaiorPontuacao(["IPC", "IPCplantao"], apenasVerificar);
-    }else if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 0) {
-        //alert("Entrou na rotina EPC não escolar");
-        verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"], apenasVerificar);
-    }else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 0 ) {
-        //alert("Entrou na rotina IPC não escolar");
-        verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"], apenasVerificar);
+        return verificarMaiorPontuacao(["IPC", "IPCplantao"]);
+    } else if ((cargoUsuario === "EPC" || cargoUsuario === "EPCplantao") && tipodeferias === 0) {
+        return verificarMaiorPontuacaoNaoEscolar(["EPC", "EPCplantao"]);
+    } else if ((cargoUsuario === "IPC" || cargoUsuario === "IPCplantao") && tipodeferias === 0) {
+        return verificarMaiorPontuacaoNaoEscolar(["IPC", "IPCplantao"]);
     }
 
-
+    return false; // Caso nenhuma condição seja atendida
 }
+
 
 
 function preCadastro() {
