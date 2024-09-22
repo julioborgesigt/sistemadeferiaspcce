@@ -219,7 +219,7 @@ function concluirCadastro() {
         window.location.href = `conclusao.html?matricula=${matricula}`;
         
     } else {
-        //alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
+        alert("Veja a sequência de cadastro de usuários e aguarde sua vez");
         carregarBancoDados();
         
     }
@@ -266,7 +266,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     console.log("Este é o cargo em cadastramento", cargoUsuario);
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes
-    function verificarMaiorPontuacao(cargosEquivalentes) {
+    function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
 
         let maiorPontuacao = 0;
         let matriculaMaiorPontuacao = '';
