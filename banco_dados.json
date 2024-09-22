@@ -1088,5 +1088,30 @@
         "ecasadoComPofessor": "1",
         "estudanteOUaluno": "1",
         "feriasescolarounao": 1
+    },
+    "77777777.2024": {
+        "matricula": "77777777.2024",
+        "nome": "chico7",
+        "dataNascimento": "01/09/2017",
+        "idadeDias": 2578,
+        "idade": 7,
+        "paquisitivoinicio": "01/09/2024",
+        "paquisitivofim": "01/09/2025",
+        "dataIngresso": "01/09/2024",
+        "antiguidade": 21,
+        "qtdfilhosmenores": "11",
+        "senha": "12341234",
+        "cargo": "EPC",
+        "cadastrado": 0,
+        "pontuacaoferiasescolar": 111858.14,
+        "possuiFilho": "11",
+        "ecasadoComPofessor": "1",
+        "estudanteOUaluno": "1",
+        "pontuacaoferiasNaoescolar": 10858.14,
+        "gestante": "1",
+        "estudante": "1",
+        "DoisEmpregos": "1",
+        "ConjugeMesmoPeriodo": "1",
+        "feriasescolarounao": 1
     }
 }
