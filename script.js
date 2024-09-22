@@ -266,7 +266,7 @@ function verificarPontuacaoUsuario(matricula, apenasVerificar = false) {
     console.log("Este é o cargo em cadastramento", cargoUsuario);
 
     // Função para verificar a maior pontuação considerando os cargos equivalentes
-    function verificarMaiorPontuacao(cargosEquivalentes,  apenasVerificar = false) {
+    function verificarMaiorPontuacao(cargosEquivalentes) {
 
         let maiorPontuacao = 0;
         let matriculaMaiorPontuacao = '';
