@@ -31,6 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['EPC', 'EPCplantao']);
             });
 
+            document.getElementById('2026EPCBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'none';
+                document.getElementById('calendarioProximo').style.display = 'block';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                criarCalendario(database, new Date().getFullYear() + 2, 'calendarioProximo', ['EPC', 'EPCplantao']);
+            });
+
             // Inicializa com o calendário corrente IPC
             criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['IPC', 'IPCplantao']);
         })
