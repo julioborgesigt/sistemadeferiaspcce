@@ -876,7 +876,7 @@ function exibirDadosPorMatricula() {
             
             <tr><th>Gestante?</th><td>${dados.gestante === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Qtd de Filhos de idade escolar</th><td>${dados.qtdfilhosmenores}</td></tr>
-            <tr><th>Estudante?</th><td>${dados.estudante === 1 ? 'Sim' : 'Não'}</td></tr>
+            <tr><th>Estudante?</th><td>${dados.estudante === "1" ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Dois vínculos com mesmo periodo</th><td>${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Conj. com mesmo periodo</th><td>${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td></tr>
             <tr><th>Antiguidade</th><td>${dados.antiguidade}</td></tr>
@@ -1316,7 +1316,7 @@ let dataArray = Object.values(database).filter(dados =>
                 <td data-label="Cargo">${dados.pontuacaoferiasNaoescolar}</td> 
                 <td data-label="Gestante?">${dados.gestante === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Qtd Filho Men.">${dados.qtdfilhosmenores}</td>
-                <td data-label="Estudante?">${dados.estudante === 1 ? 'Sim' : 'Não'}</td>
+                <td data-label="Estudante?">${dados.estudante === "1" ? 'Sim' : 'Não'}</td>
                 <td data-label="2 vinc. mesmo periodo">${dados.DoisEmpregos === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Conj. com mesmo periodo">${dados.ConjugeMesmoPeriodo === 1 ? 'Sim' : 'Não'}</td>
                 <td data-label="Antig.">${dados.antiguidade}</td>
