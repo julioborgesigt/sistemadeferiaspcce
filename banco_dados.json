@@ -1,0 +1,38 @@
+{
+    "11111111.2023": {
+        "senha": "25081990",
+        "matricula": "11111111.2023"
+    },
+    "19878813.2023": {
+        "matricula": "19878813.2023",
+        "nome": "Márcio",
+        "idade": 47,
+        "idadeDias": "",
+        "paquisitivoinicio": "10/01/2023",
+        "paquisitivofim": "09/01/2024",
+        "antiguidade": 4887,
+        "senha": "11111111",
+        "cargo": "EPCplantao",
+        "numeroDePeriodos": 2,
+        "feriasescolarounao": 1,
+        "qtdfilhosmenores": "2",
+        "periodo11": "17/01/2024",
+        "periodo12": "31/01/2024",
+        "periodo21": "14/02/2024",
+        "periodo22": "28/02/2024",
+        "periodo31": "",
+        "periodo32": "",
+        "pontuacaoferiasNaoescolar": 18,
+        "dataNascimento": "26/07/1976",
+        "pontuacaoferiasescolar": 28,
+        "possuiFilho": "1",
+        "ecasadoComPofessor": "0",
+        "estudanteOUaluno": "0",
+        "gestante": "0",
+        "estudante": "0",
+        "DoisEmpregos": "0",
+        "ConjugeMesmoPeriodo": "0",
+        "dataIngresso": "10/01/2011",
+        "cadastrado": 1
+    }
+}
