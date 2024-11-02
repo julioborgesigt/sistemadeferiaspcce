@@ -809,7 +809,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPCplantao",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8520.96,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -819,7 +819,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 1
+        "feriasescolarounao": 1,
+        "numeroDePeriodos": 2,
+        "periodo11": "15/08/2025",
+        "periodo12": "29/08/2025",
+        "periodo21": "25/11/2025",
+        "periodo22": "09/12/2025",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30070615.2024": {
         "matricula": "30070615.2024",
