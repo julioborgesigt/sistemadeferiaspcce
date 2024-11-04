@@ -592,7 +592,7 @@
         "qtdfilhosmenores": "0",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 36.69,
         "possuiFilho": "0",
         "ecasadoComPofessor": "0",
@@ -602,7 +602,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 2,
+        "periodo11": "16/10/2025",
+        "periodo12": "30/10/2025",
+        "periodo21": "18/02/2026",
+        "periodo22": "04/03/2026",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30000412.2024": {
         "matricula": "30000412.2024",
@@ -841,7 +848,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8516.49,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -851,7 +858,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 1,
+        "periodo11": "29/08/2025",
+        "periodo12": "27/09/2025",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30096118.2024": {
         "matricula": "30096118.2024",
@@ -866,7 +880,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8515.97,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -876,7 +890,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 1,
+        "numeroDePeriodos": 3,
+        "periodo11": "04/02/2026",
+        "periodo12": "13/02/2026",
+        "periodo21": "01/07/2026",
+        "periodo22": "10/07/2026",
+        "periodo31": "14/12/2026",
+        "periodo32": "23/12/2026"
     },
     "30102819.2024": {
         "matricula": "30102819.2024",
@@ -923,7 +944,7 @@
         "qtdfilhosmenores": "0",
         "senha": "12345678",
         "cargo": "IPCplantao",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 143.38,
         "possuiFilho": "0",
         "ecasadoComPofessor": "0",
@@ -933,7 +954,14 @@
         "estudante": "0",
         "DoisEmpregos": "1",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 1,
+        "periodo11": "02/04/2025",
+        "periodo12": "01/05/2025",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": ""
     },
     "3012359X.2024": {
         "matricula": "3012359X.2024",
@@ -948,7 +976,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8512.87,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -958,7 +986,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 1,
+        "periodo11": "04/08/2025",
+        "periodo12": "02/09/2025",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": ""
     },
     "3012393X.2024": {
         "matricula": "3012393X.2024",
@@ -973,7 +1008,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPCplantao",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8512.86,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -983,7 +1018,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 2,
+        "periodo11": "31/07/2025",
+        "periodo12": "14/08/2025",
+        "periodo21": "18/09/2025",
+        "periodo22": "02/10/2025",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30120477.2024": {
         "matricula": "30120477.2024",
@@ -998,7 +1040,7 @@
         "qtdfilhosmenores": "0",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 12.88,
         "possuiFilho": "0",
         "ecasadoComPofessor": "0",
@@ -1008,7 +1050,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 1,
+        "periodo11": "01/04/2026",
+        "periodo12": "30/04/2026",
+        "periodo21": "",
+        "periodo22": "",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30121244.2024": {
         "matricula": "30121244.2024",
@@ -1023,7 +1072,7 @@
         "qtdfilhosmenores": "0",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 12.88,
         "possuiFilho": "0",
         "ecasadoComPofessor": "0",
@@ -1033,7 +1082,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 2,
+        "periodo11": "31/10/2025",
+        "periodo12": "09/11/2025",
+        "periodo21": "11/05/2026",
+        "periodo22": "30/05/2026",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30005856.2024": {
         "matricula": "30005856.2024",
@@ -1048,7 +1104,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPCplantao",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8504.63,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -1058,7 +1114,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 2,
+        "periodo11": "16/02/2026",
+        "periodo12": "25/02/2026",
+        "periodo21": "20/04/2026",
+        "periodo22": "09/05/2026",
+        "periodo31": "",
+        "periodo32": ""
     },
     "30121430.2024": {
         "matricula": "30121430.2024",
@@ -1105,7 +1168,7 @@
         "qtdfilhosmenores": "1",
         "senha": "12345678",
         "cargo": "IPCplantao",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 8512.91,
         "possuiFilho": "1",
         "ecasadoComPofessor": "0",
@@ -1115,7 +1178,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 2,
+        "periodo11": "01/10/2025",
+        "periodo12": "15/10/2025",
+        "periodo21": "02/03/2026",
+        "periodo22": "16/03/2026",
+        "periodo31": "",
+        "periodo32": ""
     },
     "02574012.2024": {
         "matricula": "02574012.2024",
@@ -1162,7 +1232,7 @@
         "qtdfilhosmenores": "0",
         "senha": "12345678",
         "cargo": "IPCplantao",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 21.94,
         "possuiFilho": "0",
         "ecasadoComPofessor": "0",
@@ -1172,7 +1242,14 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "1",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 0,
+        "numeroDePeriodos": 2,
+        "periodo11": "03/11/2025",
+        "periodo12": "17/11/2025",
+        "periodo21": "16/03/2026",
+        "periodo22": "30/03/2026",
+        "periodo31": "",
+        "periodo32": ""
     },
     "16782610.2024": {
         "matricula": "16782610.2024",
