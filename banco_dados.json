@@ -230,7 +230,7 @@
         "qtdfilhosmenores": "2",
         "senha": "12345678",
         "cargo": "IPC",
-        "cadastrado": 0,
+        "cadastrado": 1,
         "pontuacaoferiasescolar": 17005.42,
         "possuiFilho": "2",
         "ecasadoComPofessor": "0",
@@ -240,6 +240,13 @@
         "estudante": "0",
         "DoisEmpregos": "0",
         "ConjugeMesmoPeriodo": "0",
-        "feriasescolarounao": 3
+        "feriasescolarounao": 1,
+        "numeroDePeriodos": 3,
+        "periodo11": "23/06/2025",
+        "periodo12": "02/07/2025",
+        "periodo21": "14/07/2025",
+        "periodo22": "23/07/2025",
+        "periodo31": "05/01/2026",
+        "periodo32": "14/01/2026"
     }
 }
