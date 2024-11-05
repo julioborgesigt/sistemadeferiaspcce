@@ -896,8 +896,8 @@
         "periodo12": "13/02/2026",
         "periodo21": "01/07/2026",
         "periodo22": "10/07/2026",
-        "periodo31": "14/12/2026",
-        "periodo32": "23/12/2026"
+        "periodo31": "25/11/2026",
+        "periodo32": "04/12/2026"
     },
     "30102819.2024": {
         "matricula": "30102819.2024",
@@ -956,8 +956,8 @@
         "ConjugeMesmoPeriodo": "0",
         "feriasescolarounao": 0,
         "numeroDePeriodos": 1,
-        "periodo11": "02/04/2025",
-        "periodo12": "01/05/2025",
+        "periodo11": "26/03/2025",
+        "periodo12": "24/04/2025",
         "periodo21": "",
         "periodo22": "",
         "periodo31": "",
