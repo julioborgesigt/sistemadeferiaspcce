@@ -445,12 +445,12 @@
             "ConjugeMesmoPeriodo": "0",
             "feriasescolarounao": 1,
             "numeroDePeriodos": 3,
-            "periodo11": "",
-            "periodo12": "",
-            "periodo21": "",
-            "periodo22": "",
-            "periodo31": "",
-            "periodo32": ""
+            "periodo11": "24/03/2025",
+            "periodo12": "02/04/2025",
+            "periodo21": "04/08/2025",
+            "periodo22": "13/08/2025",
+            "periodo31": "22/12/2025",
+            "periodo32": "31/12/2025"
         },
         "79111589.2024": {
             "matricula": "79111589.2024",
