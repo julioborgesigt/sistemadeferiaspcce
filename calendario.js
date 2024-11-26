@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['IPC', 'IPCplantao']);
             });
 
-            document.getElementById('2026IPCBtn').addEventListener('click', () => {
+            document.getElementById('anoCorrentemais2IPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
                 document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - IPC';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['EPC', 'EPCplantao']);
             });
 
-            document.getElementById('2026EPCBtn').addEventListener('click', () => {
+            document.getElementById('anoCorrentemais2EPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
                 document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
