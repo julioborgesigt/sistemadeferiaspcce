@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const anoAtual = new Date().getFullYear();
             const anoAtualMaisUm = anoAtual + 1;
-            const anoAtualMaisDois = nanoAtual + 2;
+            const anoAtualMaisDois = anoAtual + 2;
 
             // Adiciona eventos aos botões
             document.getElementById('anoCorrenteIPCBtn').addEventListener('click', () => {
