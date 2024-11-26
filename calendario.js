@@ -181,7 +181,7 @@ function criarCalendario(database, ano, containerId, cargos) {
     }
 }
 
-
+/*
 document.getElementById('toggle-dark-mode').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
     const icon = this.querySelector('i');
@@ -193,3 +193,5 @@ document.getElementById('toggle-dark-mode').addEventListener('click', function (
         icon.classList.add('fa-moon');
     }
 });
+
+*/
