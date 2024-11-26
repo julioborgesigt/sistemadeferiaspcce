@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('anoCorrenteIPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'block';
                 document.getElementById('calendarioProximo').style.display = 'none';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente - IPC';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente - IPC', new Date().getFullYear();
                 criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['IPC', 'IPCplantao']);
             });
 
