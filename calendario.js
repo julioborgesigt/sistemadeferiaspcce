@@ -32,21 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('anoCorrenteEPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'block';
                 document.getElementById('calendarioProximo').style.display = 'none';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente - EPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtual} - EPC`;
                 criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['EPC', 'EPCplantao']);
             });
 
             document.getElementById('proximoAnoEPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtualMaisUm} - EPC`;
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['EPC', 'EPCplantao']);
             });
 
             document.getElementById('anoCorrentemais2EPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtualMaisDois} - EPC`;
                 criarCalendario(database, new Date().getFullYear() + 2, 'calendarioProximo', ['EPC', 'EPCplantao']);
             });
 
@@ -54,21 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('anoCorrenteDPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'block';
                 document.getElementById('calendarioProximo').style.display = 'none';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente - EPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtual} - DPC`;
                 criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['DPC', 'DPCplantao']);
             });
 
             document.getElementById('proximoAnoDPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtualMaisUm} - DPC`;
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['DPC', 'DPCplantao']);
             });
 
             document.getElementById('anoCorrentemais2DPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtualMaisDois} - DPC`;
                 criarCalendario(database, new Date().getFullYear() + 2, 'calendarioProximo', ['DPC', 'DPCplantao']);
             });
 
