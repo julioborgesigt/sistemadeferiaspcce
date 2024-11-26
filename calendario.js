@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['DPC', 'DPCplantao']);
             });
 
-            document.getElementById('2026DPCBtn').addEventListener('click', () => {
+            document.getElementById('anoCorrentemais2DPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
                 document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
