@@ -2,25 +2,30 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('banco_dados.json')
         .then(response => response.json())
         .then(database => {
+
+            const anoAtual = new Date().getFullYear();
+            const anoAtualMaisUm = anoAtual + 1;
+            const anoAtualMaisDois = nanoAtual + 2;
+
             // Adiciona eventos aos botões
             document.getElementById('anoCorrenteIPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'block';
                 document.getElementById('calendarioProximo').style.display = 'none';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente - IPC', new Date().getFullYear();
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtual} - IPC` ;
                 criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['IPC', 'IPCplantao']);
             });
 
             document.getElementById('proximoAnoIPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - IPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtualMaisUm} - IPC`;
                 criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['IPC', 'IPCplantao']);
             });
 
             document.getElementById('anoCorrentemais2IPCBtn').addEventListener('click', () => {
                 document.getElementById('calendarioCorrente').style.display = 'none';
                 document.getElementById('calendarioProximo').style.display = 'block';
-                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - IPC';
+                document.getElementById('tituloCalendario').innerText = `Calendário de Férias - Ano ${anoAtualMaisDois} - IPC`
                 criarCalendario(database, new Date().getFullYear() + 2, 'calendarioProximo', ['IPC', 'IPCplantao']);
             });
 
