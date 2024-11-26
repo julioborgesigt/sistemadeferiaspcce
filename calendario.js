@@ -45,6 +45,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 criarCalendario(database, new Date().getFullYear() + 2, 'calendarioProximo', ['EPC', 'EPCplantao']);
             });
 
+
+            document.getElementById('anoCorrenteDPCBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'block';
+                document.getElementById('calendarioProximo').style.display = 'none';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Ano Corrente - EPC';
+                criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['DPC', 'DPCplantao']);
+            });
+
+            document.getElementById('proximoAnoDPCBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'none';
+                document.getElementById('calendarioProximo').style.display = 'block';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                criarCalendario(database, new Date().getFullYear() + 1, 'calendarioProximo', ['DPC', 'DPCplantao']);
+            });
+
+            document.getElementById('2026DPCBtn').addEventListener('click', () => {
+                document.getElementById('calendarioCorrente').style.display = 'none';
+                document.getElementById('calendarioProximo').style.display = 'block';
+                document.getElementById('tituloCalendario').innerText = 'Calendário de Férias - Próximo Ano - EPC';
+                criarCalendario(database, new Date().getFullYear() + 2, 'calendarioProximo', ['DPC', 'DPCplantao']);
+            });
+
             // Inicializa com o calendário corrente IPC
             criarCalendario(database, new Date().getFullYear(), 'calendarioCorrente', ['IPC', 'IPCplantao']);
         })
