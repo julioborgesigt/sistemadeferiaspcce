@@ -357,7 +357,15 @@
             "estudante": "0",
             "DoisEmpregos": "0",
             "ConjugeMesmoPeriodo": "0",
-            "feriasescolarounao": 3
+            "feriasescolarounao": 3,
+            "numeroDePeriodos": 2,
+            "periodo11": "04/08/2025",
+            "periodo12": "18/08/2025",
+            "periodo21": "06/03/2026",
+            "periodo22": "20/03/2026",
+            "periodo31": "",
+            "periodo32": ""
+
         },
         
         "30057317.2024": {
